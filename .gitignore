@@ -1,4 +1,4 @@
 .idea
 .vscode
 .DS_store
-src/data/*.json
+src/data/*.js

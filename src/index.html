@@ -2,9 +2,43 @@
 <html>
     <head>
         <title>Visa Planner</title>
+        <style>
+            form {
+                margin: 0.8em 0.2em;
+            }
+        </style>
     </head>
     <body>
-        Hello
+        <div>
+            <form class="passports">
+                <div>
+                    What passport do you have?
+                </div>
+            </form>
+
+            <form class="needs">
+                <div>
+                    What activity do you want to do?
+                </div>
+            </form>
+
+            <form class="wants">
+                <div>
+                    What kind of place do you like?
+                    <br /><strong>Not implemented. Will always show Canada</strong>
+                </div>
+            </form>
+
+            <button class="button_search">Search</button>
+        </div>
+
+        <script>
+          let data = {};
+        </script>
+        <script src="./data/common.js"></script>
+        <script src="./data/region.js"></script>
+        <script src="./data/canada.js"></script>
+        <script src="./data/eu.js"></script>
         <script src="./main.js"></script>
     </body>
 </html>
