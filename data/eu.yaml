@@ -1,0 +1,30 @@
+status:
+
+    citizen: 
+        name:
+            en: Citizenship
+        rights: 
+            #todo
+
+    permanent:
+        name:
+            en: 'Permanent Residence'
+        rights: 
+            #todo
+
+    tourist_visa_exempted: 
+        rights: 
+            #todo
+
+    alien:
+
+transitions:
+
+    eu_member_citizenship:
+      type: automatic
+      name:
+        en: EU Member Citizenship
+      from:
+        - uk citizen
+      to: 
+        eu citizen
