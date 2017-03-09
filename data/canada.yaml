@@ -8,13 +8,13 @@ definitions:
         "from a designated employer in an Atlantic province (New Brunswick, Newfoundland and Labrador, Nova Scotia, or Prince Edward Island)",
         AND, full-time,
         AND, non-seasonal,
-        AND, reviewed by the province (details on the endorsement process will be available in early March 2017)
+        AND, "reviewed by the province (details on the endorsement process will be available in early March 2017)"
     ]
 
     atlantic_workers_job: [
-        You must have worked at least one year (1,560 hours total or 30 hours per week) within the last three years.,
+        "You must have worked at least one year (1,560 hours total or 30 hours per week) within the last three years.",
         AND,
-        The work must be in one occupation (but can be with different employers) and paid (volunteering or unpaid internships do not count),
+        "The work must be in one occupation (but can be with different employers) and paid (volunteering or unpaid internships do not count)",
     ]
 
     atlantic_workers_education: [
