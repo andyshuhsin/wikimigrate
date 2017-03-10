@@ -34,9 +34,15 @@ function main() {
                             if (transition.to === `${country.id} ${status.id}`) {
                                 message += `<h4>${transition.name[LANG]}</h4>`;
                                 message += '<em>Prerequisites:</em><br />';
-                                for (let prerequisite of transition.prerequisites) {
-                                    console.log(prerequisite);
-                                    message += stringifyPrerequisite(prerequisite);
+                                if (typeof transition.prerequisites === 'object') {
+                                    for (let prerequisite of transition.prerequisites.value) {
+                                        message += stringifyPrerequisite(prerequisite);
+                                    }
+                                    message += ` Except ${transition.prerequisites.exception}`;
+                                } else {
+                                    for (let prerequisite of transition.prerequisites) {
+                                        message += stringifyPrerequisite(prerequisite);
+                                    }
                                 }
                             }
                         }

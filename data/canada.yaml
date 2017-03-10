@@ -66,8 +66,10 @@ transitions:
           - romania citizen
       to:
           canada tourist_visa_exempted
-      requirements:
-          name: eTA
+      prerequisites:
+          value: [
+              eTA
+          ]
           exception: usa citizen
 
     - id: express_entry
