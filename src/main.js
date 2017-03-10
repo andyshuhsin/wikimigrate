@@ -1,13 +1,6 @@
+const LANG = 'en';
+
 function main() {
-    const passportsDom = document.querySelector('.passports');
-    for (let region of Object.keys(data.region)) {
-        passportsDom.innerHTML += `
-            <label>
-              <input type="radio" name="passports" value="${region}" />
-              ${region}
-            </label>
-        `;
-    }
 
     const needsDom = document.querySelector('.needs');
     for (let right of data.common.rights) {
@@ -21,11 +14,20 @@ function main() {
 
     document.querySelector('.button_search').onclick = () => {
 
-        const passport = needsDom.querySelector(':checked');
         const need = needsDom.querySelector(':checked').value;
 
         const statusSuitableByCountry = getSuitableStatusByCountry(need);
-        console.log(statusSuitableByCountry);
+
+        let message = '';
+
+        for (let countryName of Object.keys(statusSuitableByCountry)) {
+            message += `You can go to ${countryName} and `;
+            message += `get one of these status: ${statusSuitableByCountry[countryName].map(node => node.name[LANG]).join(', ')} `;
+            message += `Here's how.`;
+        }
+
+
+        document.querySelector('.message').innerHTML = message;
 
     };
 }
