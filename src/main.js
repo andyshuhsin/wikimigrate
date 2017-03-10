@@ -24,22 +24,27 @@ function main() {
         const passport = needsDom.querySelector(':checked');
         const need = needsDom.querySelector(':checked').value;
 
-        const statusSuitableByCountry = {};
-        for (let countryName of Object.keys(data.region)) {
-            const country = data.region[countryName];
-            const statusSuitable = [];
-            for (let statusName of Object.keys(country.status)) {
-                const status = country.status[statusName];
-                if (status.rights.includes(need)) {
-                    statusSuitable.push(status);
-                }
-            }
-            statusSuitableByCountry[countryName] = statusSuitable;
-        }
-
+        const statusSuitableByCountry = getSuitableStatusByCountry(need);
         console.log(statusSuitableByCountry);
 
     };
+}
+
+function getSuitableStatusByCountry(need) {
+    const statusSuitableByCountry = {};
+    for (let countryName of Object.keys(data.region)) {
+        const country = data.region[countryName];
+        const statusSuitable = [];
+        for (let statusName of Object.keys(country.status)) {
+            const status = country.status[statusName];
+            if (status.rights.includes(need)) {
+                statusSuitable.push(status);
+            }
+        }
+        statusSuitableByCountry[countryName] = statusSuitable;
+    }
+
+    return statusSuitableByCountry;
 }
 
 main();
