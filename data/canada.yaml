@@ -42,6 +42,7 @@ status:
         duration: [T 6 month]
 
     alien:
+        rights:
 
 transitions:
 
@@ -217,4 +218,3 @@ transitions:
 
     caregiver:
     #todo
-        
