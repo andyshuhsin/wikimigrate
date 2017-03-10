@@ -22,7 +22,7 @@ function main() {
 
         for (let countryName of Object.keys(statusSuitableByCountry)) {
             message += `You can go to ${countryName} and `;
-            message += `get one of these status: ${statusSuitableByCountry[countryName].map(node => node.name[LANG]).join(', ')} `;
+            message += `get one of these status: ${statusSuitableByCountry[countryName].map(node => node.name[LANG]).join(', ')}. `;
             message += `Here's how.`;
         }
 
