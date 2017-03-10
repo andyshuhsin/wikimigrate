@@ -34,7 +34,7 @@ function main() {
                             if (transition.to === `${country.id} ${status.id}`) {
                                 message += `<h4>${transition.name[LANG]}</h4>`;
                                 message += '<em>Prerequisites:</em><br />';
-                                if (typeof transition.prerequisites === 'object') {
+                                if (transition.prerequisites.value) {
                                     for (let prerequisite of transition.prerequisites.value) {
                                         message += stringifyPrerequisite(prerequisite);
                                     }
