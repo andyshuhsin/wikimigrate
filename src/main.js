@@ -1,4 +1,6 @@
 const LANG = 'en';
+const AND = 'AND';
+const OR = 'OR';
 
 function main() {
 
@@ -16,14 +18,32 @@ function main() {
 
         const need = needsDom.querySelector(':checked').value;
 
-        const statusSuitableByCountry = getSuitableStatusByCountry(need);
+        const countryData = getSuitableStatus(need);
 
         let message = '';
 
-        for (let countryName of Object.keys(statusSuitableByCountry)) {
-            message += `You can go to ${countryName} and `;
-            message += `get one of these status: ${statusSuitableByCountry[countryName].map(node => node.name[LANG]).join(', ')}. `;
-            message += `Here's how.`;
+        for (let country of countryData) {
+            message += `<h2>For ${country.id}</h2>`;
+            for (let status of country.status) {
+                message += `<h3>${status.name[LANG]}</h3>`;
+
+                let transition = {};
+                for (let region of data.region) {
+                    if (region.id === country.id) {
+                        for (let transition of region.transitions) {
+                            if (transition.to === `${country.id} ${status.id}`) {
+                                message += `<h4>${transition.name[LANG]}</h4>`;
+                                message += '<em>Prerequisites:</em><br />';
+                                for (let prerequisite of transition.prerequisites) {
+                                    console.log(prerequisite);
+                                    message += stringifyPrerequisite(prerequisite);
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
         }
 
 
@@ -32,10 +52,9 @@ function main() {
     };
 }
 
-function getSuitableStatusByCountry(need) {
-    const statusSuitableByCountry = {};
-    for (let countryName of Object.keys(data.region)) {
-        const country = data.region[countryName];
+function getSuitableStatus(need) {
+    const result = [];
+    for (let country of data.region) {
         const statusSuitable = [];
         for (let statusName of Object.keys(country.status)) {
             const status = country.status[statusName];
@@ -43,10 +62,30 @@ function getSuitableStatusByCountry(need) {
                 statusSuitable.push(status);
             }
         }
-        statusSuitableByCountry[countryName] = statusSuitable;
+        result.push({
+            id: country.id,
+            status: statusSuitable
+        });
     }
 
-    return statusSuitableByCountry;
+    return result;
+}
+
+function stringifyPrerequisite(prerequisite) {
+    let result = '';
+    if (prerequisite === AND) {
+        result += `<strong>and</strong> <br/>`;
+    } else if (prerequisite === OR) {
+        result += `<strong>or</strong> <br />`;
+    } else if (Array.isArray(prerequisite)) {
+        result += `<blockquote>
+                       ${prerequisite.map(p => stringifyPrerequisite(p)).join('\n')}
+                   </blockquote>`;
+    } else {
+        result += prerequisite;
+    }
+
+    return result;
 }
 
 main();
