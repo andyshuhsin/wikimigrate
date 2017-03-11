@@ -1,15 +1,15 @@
 {
     "compilerOptions": {
-        "module": "system",
+        "module": "commonjs",
         "noImplicitAny": true,
+        "jsx": "react",
         "strictNullChecks": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        "outFile": "",
         "sourceMap": true
     },
     "include": [
-        "src/**/*"
+        "**/*.ts?"
     ],
     "exclude": [
         "node_modules",

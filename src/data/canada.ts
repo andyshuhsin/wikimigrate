@@ -485,3 +485,5 @@ const canada: CountryData =
                 atlanticInternationalGraduate,
             ]
         }
+
+export default canada

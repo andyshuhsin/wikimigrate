@@ -1,0 +1,23 @@
+{
+  "name": "visaplanner-fe",
+  "version": "0.0.1",
+  "description": "",
+  "main": "bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "@types/react": "^15.0.16",
+    "@types/react-dom": "^0.14.23",
+    "copy-webpack-plugin": "^4.0.1",
+    "ts-loader": "^2.0.1",
+    "typescript": "^2.2.1"
+  }
+}
