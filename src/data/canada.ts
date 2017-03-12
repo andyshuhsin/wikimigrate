@@ -5,6 +5,14 @@ import {
     allOf,
     oneOf,
     ns,
+    money,
+    Combination,
+    LanguageBenchamrkPrereq,
+    WorkExperiencePrereq,
+    EducationPrereq,
+    FundPrereq,
+    offerPrereq,
+    rightPrereq,
  } from './common'
 
 // Status
@@ -40,6 +48,14 @@ const touristVisaExempted: Status = {
     duration: {
         "month": 6
     }
+}
+
+const expressEntryCandidate: Status = {
+    id: "express_entry_candidate",
+    name: {
+        en: "Express Entry Candidate"
+    },
+    rights: [],
 }
 
 const alien: Status = {
@@ -104,23 +120,35 @@ const visaExemption: Transition = {
             ]
         }
     ],
+    referenceList: [
+        {
+            url: "http://www.cic.gc.ca/english/visit/visas.asp",
+            title: {
+                en: "Find out if you need an Electronic Travel Authorization (eTA) or a visitor visa"
+            }
+        }
+    ]
 }
+
+// Express Entry programms
 
 const expressEntry: Transition = {
     id: "express_entry",
-    acquireBy: "application",
+    acquireBy: "invitation",
     name: {
-        en: "Canada Express Entry"
+        en: "Express Entry",
+        'zh-hans': "快速移民通道——Express Entry(EE)"
     },
-    from: ns("canada", "alien"),
+    from: ns("canada", "express_entry_candidate"),
     to: ns("canada", "permanent"),
-    prerequisiteList: allOf([]),
+    prerequisiteList: oneOf([
+
+    ]),
     procedureList: [
         {
             name: {
                 en: "Application",
-                "zh-hans": "申请",
-                "zh-hant": "申請"
+                "zh-hans": "填表申请",
             }
         }
     ],
@@ -129,6 +157,144 @@ const expressEntry: Transition = {
             url: "http://www.cic.gc.ca/english/express-entry/",
             title: {
                 en: "Official Website"
+            }
+        }
+    ]
+}
+
+const federalSkilledWorker: Transition = {
+    id: "federal_skilled_worker",
+    acquireBy: "application",
+    name: {
+        en: "Federal Skilled Worker Program",
+        "zh-hans": "联邦技术移民(Federal Skilled Worker Program, FSW)"
+    },
+    from: ns("canada", "alien"),
+    to: ns("canada", "express_entry_candidate"),
+    prerequisiteList: allOf([
+
+        // Language Requirement
+        oneOf([
+            {
+                property: "language_test",
+                benchmark: "clb",
+                requirements: [
+                    {value: 7}
+                ]
+            } as LanguageBenchamrkPrereq,
+            {
+                property: "language_test",
+                benchmark: "nclc",
+                requirements: [
+                    {value: 7}
+                ]
+            } as LanguageBenchamrkPrereq
+        ]),
+
+        // Working Experience
+        {
+            property: "work_experience",
+            length: { year: 1 },
+            withinLast: { year: 10 },
+            workHoursPerWeek: { hour: 30 },
+            jobType: {
+                description: {
+                    en: "at skill type 0, or skill levels A or B"
+                }
+            }
+        } as WorkExperiencePrereq,
+
+        // Education
+        oneOf([
+
+            // Canadian
+            {
+                property: "education",
+                stage: "secondary",
+                regionId: 'canada'
+            } as EducationPrereq,
+            {
+                property: "education",
+                stage: "post-secondary",
+                regionId: 'canada'
+            } as EducationPrereq,
+
+            // Foreign, need Educational Credential Assessment
+            {
+                property: "education",
+                stage: "secondary",
+                regionId: undefined,
+                certification: "eca"
+            } as EducationPrereq,
+            {
+                property: "education",
+                stage: "post-secondary",
+                regionId: undefined,
+                certification: "eca"
+            } as EducationPrereq,
+        ]),
+
+        // Fund
+        oneOf([
+            {
+                property: "fund",
+                type: "possess",
+                schemes: [
+                    { 
+                        condition: { familyMember: 1 },
+                        fund: money(12300, "cad")
+                    },
+                    { 
+                        condition: { familyMember: 2 },
+                        fund: money(15312, "cad")
+                    },
+                    { 
+                        condition: { familyMember: 3 },
+                        fund: money(18825, "cad")
+                    },
+                    { 
+                        condition: { familyMember: 4 },
+                        fund: money(22856, "cad")
+                    },
+                    { 
+                        condition: { familyMember: 5 },
+                        fund: money(25923, "cad")
+                    },
+                    { 
+                        condition: { familyMember: 6 },
+                        fund: money(29236, "cad")
+                    },
+                    { 
+                        condition: { familyMember: 7 },
+                        fund: money(32550, "cad")
+                    },
+                ]
+            } as FundPrereq,
+
+            // You don't need to prove fund if you can already work in Canada and has an offer
+            allOf([
+                {
+                    property: "right",
+                    regionId: "canada",
+                    rightId: "work"
+                } as rightPrereq,
+                {
+                    property: "offer",
+                    employer: {
+                        regionId: "canada"
+                    }
+                } as offerPrereq,
+            ])
+        ])
+    ]),
+    procedureList: [
+
+    ],
+    referenceList: [
+        {
+            url: "http://www.cic.gc.ca/english/immigrate/skilled/apply-who.asp",
+            title: {
+                en: "Determine your eligibility – Federal skilled workers"
             }
         }
     ]
@@ -193,7 +359,7 @@ const iivc: Transition = {
     },
     acquireBy: "application",
     stage: {
-        comment: {
+        description: {
             en: "closed"
         }
     },
@@ -214,24 +380,24 @@ const selfEmployedVisa: Transition = {
     prerequisiteList: oneOf([
         allOf([
             {
-                comment: {
+                description: {
                     en: "Have relevant experience in cultural activities or athletics",
                 }
             },
             {
-                comment: {
+                description: {
                     en: "Intend and be able to make a significant contribution to the cultural or athletic life of Canada"
                 }
             }
         ]),
         allOf([
             {
-                comment: {
+                description: {
                     en: "Have experience in farm management"
                 }
             },
             {
-                comment: {
+                description: {
                     en: "Intend and be able to buy and manage a farm in Canada"
                 }
             }
@@ -251,24 +417,24 @@ const familySponsorship: Transition = {
     prerequisiteList: oneOf([
         allOf([
             {
-                comment: {
+                description: {
                     en: "You are under 18"
                 },
             },
             {
-                comment: {
+                description: {
                     en: "You are orphaned"
                 }
             },
             {
-                comment: {
+                description: {
                     en: "You do not have a spouse common law partner or conjugal partner"
                 }
             }
         ]),
         allOf([
             {
-                comment: {
+                description: {
                     en: "You are related by blood of adoption of a Canadian citizen or permanent residnet aged 18 or older"
                 }
             }
@@ -283,9 +449,9 @@ const familySponsorship: Transition = {
     ]
 }
 
-const provinceNomineeProgram = {
+const provinceNomineeProgram: Transition = {
     id: "provincial_nominees",
-    acquireBy: "by_application",
+    acquireBy: "application",
     name: {
         en: "Provincial Nominee Program"
     },
@@ -301,7 +467,7 @@ const provinceNomineeProgram = {
             }
         }
     ],
-    references: {
+    referenceList: {
         en: {
             Homepage: "http://www.cic.gc.ca/english/immigrate/provincial/index.asp"
         }
@@ -312,22 +478,22 @@ const provinceNomineeProgram = {
 
 const atlanticJobOfferCommon = allOf([
     {
-        comment: {
+        description: {
             en: "from a designated employer in an Atlantic province (New Brunswick, Newfoundland and Labrador, Nova Scotia, or Prince Edward Island)"
         }
     },
     {
-        comment: {
+        description: {
             en: "full-time"
         }
     },
     {
-        comment: {
+        description: {
             en: "non-seasonal"
         }
     },
     {
-        comment: {
+        description: {
             en: "reviewed by the province (details on the endorsement process will be available in early March 2017)"
         }
     }
@@ -335,12 +501,12 @@ const atlanticJobOfferCommon = allOf([
 
 const atlanticWorkersJob = allOf([
     {
-        comment: {
+        description: {
             en: "You must have worked at least one year (1,560 hours total or 30 hours per week) within the last three years.",
         }
     },
     {
-        comment: {
+        description: {
             en: "The work must be in one occupation (but can be with different employers) and paid (volunteering or unpaid internships do not count)"
         }
     }
@@ -348,12 +514,12 @@ const atlanticWorkersJob = allOf([
 
 const atlanticWorkersEducation = oneOf([
     {
-        comment: {
+        description: {
             en: "a Canadian secondary (high school) or post-secondary certificate, diploma or degree"
         }
     },
     {
-        comment: {
+        description: {
             en: "a foreign degree, diploma, certificate, or trade or apprenticeship education credential. You need an Educational Credential Assessment (ECA) report to make sure it is valid and equal to a Canadian credential"
         }
     }
@@ -371,12 +537,12 @@ const atlanticHighSkilledWorker: Transition = {
         atlanticJobOfferCommon,
         atlanticWorkersJob,
         {
-            comment: {
+            description: {
                 en: "Have work experience at NOC skill type/level 0 A or B.",
             }
         },
         {
-            comment: {
+            description: {
                 en: "Have a job offer that is"
             }
         },
@@ -402,12 +568,12 @@ const atlanticIntermediateSkilledWorker: Transition = {
         atlanticJobOfferCommon,
         atlanticWorkersJob,
         {
-            comment: {
+            description: {
                 en: "Have work experience at NOC skill type/level C",  // TODO: Double check level
             }
         },
         {
-            comment: {
+            description: {
                 en: "Have a job offer that is",
             }
         }
@@ -431,27 +597,27 @@ const atlanticInternationalGraduate: Transition = {
     },
     prerequisiteList: allOf([
         {
-            comment: {
+            description: {
                 en: "a minimum 2 year degree, diploma, certificate, or trade or apprenticeship credential from a recognized publicly-funded institution in an Atlantic province",
             }
         },
         {
-            comment: {
+            description: {
                 en: "been a full-time student in Canada for at least two years",
             }
         },
         {
-            comment: {
+            description: {
                 en: "graduated in the last 12 months when you apply",
             }
         },
         {
-            comment: {
+            description: {
                 en: "lived in one of the Atlantic provinces for at least 16 months in the last 2 years before you graduated",
             }
         },
         {
-            comment: {
+            description: {
                 en: "had the visa or permit needed to work, study or train in Canada"
             }
         }
@@ -477,12 +643,22 @@ const canada: CountryData =
             transitionList: [
                 visaExemption,
                 expressEntry,
+                federalSkilledWorker,
                 quebecSkilled,
                 startupVisa,
                 iivc,
                 selfEmployedVisa,
                 atlanticHighSkilledWorker,
                 atlanticInternationalGraduate,
+            ],
+            referenceList: [
+                {
+                    url: "http://www.cic.gc.ca/english/immigrate/apply.asp",
+                    title: {
+                        en: "Apply to immigrate to Canada",
+                        fr: "Présenter une demande d’immigration au Canada"
+                    }
+                }
             ]
         }
 
