@@ -663,3 +663,5 @@ const canada: CountryData =
         }
 
 export default canada
+
+//TODO: Include admissibility http://www.cic.gc.ca/english/information/inadmissibility/index.asp
