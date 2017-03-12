@@ -121,7 +121,7 @@ export function money(value: number, currencyId: CurrencyId): Money {
     }
 }
 
-export interface offerPrereq extends Prerequisite {
+export interface OfferPrereq extends Prerequisite {
     property: "offer"
     employer: {
         regionId: string | undefined
@@ -132,6 +132,11 @@ export interface rightPrereq extends Prerequisite {
     property: "right"
     regionId: string
     rightId: string
+}
+
+export interface CertificationPrereq extends Prerequisite {
+    property: "certification"
+    description: MultiLang<string>
 }
 
 
