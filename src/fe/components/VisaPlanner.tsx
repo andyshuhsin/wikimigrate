@@ -1,10 +1,10 @@
-import countries from './countries'
+import data from '../../data'
 import * as React from 'react'
 
 class VisaPlanner extends React.Component<{}, {}> {
 
     render() {
-        return <div> {JSON.stringify(countries)} </div>;
+        return <div> {JSON.stringify(data)} </div>;
     }
 
 }

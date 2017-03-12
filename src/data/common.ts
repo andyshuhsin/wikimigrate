@@ -172,7 +172,7 @@ export interface Transition {
         description: MultiLang<string>
         date?: Date
     }
-    prerequisiteList: Combination<any> //TODO: Should refer to Prerequisite
+    prerequisiteList: Combination<any> | any //TODO: Should refer to Prerequisite
     procedureList: Procedure[]
     exceptionList?: Array<Exception>
     referenceList?:  URLDatum[]
