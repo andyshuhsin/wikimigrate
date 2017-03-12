@@ -56,11 +56,38 @@ const federalSkilledTrade: Transition = {
                 year: 5
             },
             workHoursPerWeek: {hour: 30},
-            jobType: {
-                description: {
-                    en: "Your trade"
-                }
-            }
+            jobTypes: oneOf([
+                {
+                    description: {
+                        en: "Major Group 72, industrial, electrical and construction trades"
+                    }
+                },
+                {
+                    description: {
+                        en: "Major Group 73, maintenance and equipment operation trades"
+                    }
+                },
+                {
+                    description: {
+                        en: "Major Group 82, supervisors and technical jobs in natural resources, agriculture and related production"
+                    }
+                },
+                {
+                    description: {
+                        en: "Major Group 92, processing, manufacturing and utilities supervisors and central control operators"
+                    }
+                },
+                {
+                    description: {
+                        en: "Minor Group 632, chefs and cooks"
+                    }
+                },
+                {
+                    description: {
+                        en: "Minor Group 633, butchers and bakers"
+                    }
+                },
+            ])
         } as WorkExperiencePrereq,
 
         oneOf([
@@ -80,7 +107,9 @@ const federalSkilledTrade: Transition = {
 
     ],
 
-    procedureList: []
+    procedureList: [
+
+    ]
 }
 
 export default federalSkilledTrade

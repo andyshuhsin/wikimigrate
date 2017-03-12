@@ -47,11 +47,11 @@ const federalSkilledWorker: Transition = {
             length: { year: 1 },
             withinLast: { year: 10 },
             workHoursPerWeek: { hour: 30 },
-            jobType: {
+            jobTypes: oneOf([{
                 description: {
                     en: "at skill type 0, or skill levels A or B"
                 }
-            }
+            }]),
         } as WorkExperiencePrereq,
 
         // Education
