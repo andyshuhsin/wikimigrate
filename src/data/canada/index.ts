@@ -11,6 +11,7 @@ import visaExemption from './transitions/visaExemption'
 import expressEntry from './transitions/express/expressEntry'
 import federalSkilledWorker from './transitions/express/federalSkilledWorker'
 import federalSkilledTrade from './transitions/express/federalSkilledTrade'
+import canadianExperience from './transitions/express/canadianExperience'
 import quebecSkilled from './transitions/quebecSkilled'
 import startupVisa from './transitions/startupVisa'
 import iivc from './transitions/iivc'
@@ -35,6 +36,7 @@ const canada: CountryData =
                 expressEntry,
                 federalSkilledWorker,
                 federalSkilledTrade,
+                canadianExperience,
                 quebecSkilled,
                 startupVisa,
                 iivc,

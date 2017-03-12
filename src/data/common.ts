@@ -83,7 +83,8 @@ export interface WorkExperiencePrereq extends Prerequisite {
     length: Duration
     withinLast: Duration
     workHoursPerWeek: Duration
-    jobTypes: Combination<any> //TODO: Clarify
+    regionId?: string
+    jobTypes?: Combination<any> //TODO: Clarify
 }
 
 export interface EducationPrereq extends Prerequisite {
