@@ -154,6 +154,7 @@ export interface URLDatum {
 
 export interface Procedure {
     name: MultiLang<string>
+    description?: MultiLang<string>
 }
 
 export interface Transition {
