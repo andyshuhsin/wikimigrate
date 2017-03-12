@@ -2,6 +2,7 @@ import {
     Transition,
     ns,
     money,
+    duration,
     allOf,
     oneOf,
     LanguageBenchamrkPrereq,
@@ -44,9 +45,9 @@ const federalSkilledWorker: Transition = {
         // Working Experience
         {
             property: "work_experience",
-            length: { year: 1 },
-            withinLast: { year: 10 },
-            workHoursPerWeek: { hour: 30 },
+            length: duration(1, "year"),
+            withinLast: duration(10, "year"),
+            workHoursPerWeek: duration(30, "hour"),
             jobTypes: oneOf([{
                 description: {
                     en: "at skill type 0, or skill levels A or B"

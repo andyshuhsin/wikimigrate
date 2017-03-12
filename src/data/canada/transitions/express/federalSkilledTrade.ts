@@ -1,6 +1,7 @@
 import {
     Transition,
     ns,
+    duration,
     allOf,
     oneOf,
     LanguageBenchamrkPrereq,
@@ -49,13 +50,9 @@ const federalSkilledTrade: Transition = {
         // Work experience
         {
             property: "work_experience",
-            length: {
-                year: 2
-            },
-            withinLast: {
-                year: 5
-            },
-            workHoursPerWeek: {hour: 30},
+            length: duration(2, "year"),
+            withinLast: duration(5, "year"),
+            workHoursPerWeek: duration(30, "hour"),
             jobTypes: oneOf([
                 {
                     description: {

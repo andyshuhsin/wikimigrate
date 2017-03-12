@@ -9,8 +9,18 @@ export interface MultiLang<T> {
     [lang: string]: T
 }
 
+type DurationUnit = "year" | "month" | "week" | "day" | "hour"
+
 export type Duration = {
-    [unit: string]: number
+    unit: DurationUnit
+    value: number
+}
+
+export function duration(value: number, unit: DurationUnit): Duration {
+    return {
+        unit,
+        value,
+    }
 }
 
 export interface Status {

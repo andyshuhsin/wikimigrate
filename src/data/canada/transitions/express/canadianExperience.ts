@@ -5,6 +5,7 @@ import {
     oneOf,
     WorkExperiencePrereq,
     LanguageBenchamrkPrereq,
+    duration,
 } from '../../../common'
 
 const canadianExperience: Transition = {
@@ -25,9 +26,9 @@ const canadianExperience: Transition = {
             allOf([
                 {
                     property: "work_experience",
-                    length: {month: 12},
-                    withinLast: {year: 3},
-                    workHoursPerWeek: {hours: 30},
+                    length: duration(12, "month"),
+                    withinLast: duration(3, "year"),
+                    workHoursPerWeek: duration(30, "hour"),
                     regionId: 'canada',
                     jobTypes: oneOf([
                         {
@@ -65,9 +66,9 @@ const canadianExperience: Transition = {
             allOf([
                 {
                     property: "work_experience",
-                    length: {month: 12},
-                    withinLast: {year: 3},
-                    workHoursPerWeek: {hours: 30},
+                    length: duration(12, "month"),
+                    withinLast: duration(3, "year"),
+                    workHoursPerWeek: duration(30, "hour"),
                     regionId: 'canada',
                     jobTypes: oneOf([
                         {

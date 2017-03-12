@@ -1,6 +1,7 @@
 import {
     Transition,
-    allOf
+    allOf,
+    ns,
 } from '../../common'
 
 const startupVisa: Transition = {
@@ -11,8 +12,8 @@ const startupVisa: Transition = {
         "zh-hans": "创业签证",
         "zh-hant": "創業簽證"
     },
-    from: {countryId: "canada", statusId: "alien"},
-    to: {countryId: "canada", statusId: "permanent"},
+    from: ns("canada", "alien"),
+    to: ns("canada", "permanent"),
     prerequisiteList: allOf([
     ]),
     procedureList: [

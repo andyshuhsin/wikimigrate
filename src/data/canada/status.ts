@@ -1,4 +1,7 @@
-import { Status } from '../common'
+import { 
+    Status,
+    duration
+ } from '../common'
 
 export const citizenship: Status = {
     id: "citizen",
@@ -28,9 +31,7 @@ export const touristVisaExempted: Status = {
     rights: [
         "visit"
     ],
-    duration: {
-        "month": 6
-    }
+    duration: duration(6, "month")
 }
 
 export const expressEntryCandidate: Status = {
