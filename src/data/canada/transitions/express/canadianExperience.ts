@@ -104,23 +104,23 @@ const canadianExperience: Transition = {
         {
             name: {
                 en: "Check eligiblility",
-                "zh-hans": "Á°ÆËÆ§ÊúâÊùÉÁî≥ËØ∑"
+                "zh-hans": "确认有权申请"
             },
             description: {
                 en: "Go to http://www.cic.gc.ca/ctc-vac/ee-start.asp and check your eligibility",
-                "zh-hans": "ËÆøÈóÆhttp://www.cic.gc.ca/ctc-vac/ee-start.aspÔºåÁ°ÆËÆ§ÊÇ®ÊúâÊùÉÁî≥ËØ∑"
+                "zh-hans": "访问http://www.cic.gc.ca/ctc-vac/ee-start.asp，确认您有权申请"
             }
         },
         {
             name: {
                 en: "Create Express Entry Profile",
-                "zh-hans": "ËÆæÁ´ãExpress EntryÊ°£Ê°à"
+                "zh-hans": "设立Express Entry档案"
             },
         },
         {
             name: {
                 en: "Wait for invitation",
-                "zh-hans": "Á≠âÂæÖÈÇÄËØ∑"
+                "zh-hans": "等待邀请"
             }
         }
     ],
