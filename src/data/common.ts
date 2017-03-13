@@ -104,9 +104,9 @@ export interface JobType {
 
 export interface WorkExperiencePrereq extends Prerequisite {
     property: "work_experience"
-    length: Duration
-    withinLast: Duration
-    workHoursPerWeek: Duration
+    length?: Duration
+    withinLast?: Duration
+    workHoursPerWeek?: Duration
     regionId?: string
     jobTypes?: Combination<any> //TODO: Clarify
 }
@@ -162,6 +162,7 @@ export interface OfferPrereq extends Prerequisite {
     property: "offer"
     employer: {
         regionId: string | undefined
+        status?: "approved"
     }
 }
 
