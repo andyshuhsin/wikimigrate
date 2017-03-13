@@ -6,8 +6,8 @@ import {
     alien
 } from "./status"
 
-import skilledIndependent from "./transitions/skilledIndependent"
-import skilledNominated from "./transitions/skilledNominated"
+import skilledIndependent from "./transitions/skillSelect/skilledIndependent"
+import skilledNominated from "./transitions/skillSelect/skilledNominated"
 
 const australia: CountryData = {
     id: "australia",

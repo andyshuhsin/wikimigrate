@@ -5,30 +5,30 @@ import {
     duration,
     oneOf,
     allOf,
-    LanguageBenchamrkPrereq,
     rightPrereq,
-} from '../../common'
+} from '../../../common'
 
 import {
     alien,
-    visa189holder,
-} from '../status'
+    visa190holder,
+} from '../../status'
 
 import {
     competentEnglish,
     below50,
 } from './skillSelectCommon'
 
-const skilledIndependent: Transition = {
-    id: "skilled_independent",
+const skilledNominated: Transition = {
+    id: "skilled_nominated",
     acquireBy: "application",
     name: {
-        en: "Skilled Independent visa (subclass 189)",
-        "zh-hans": "独立技术移民(189)"
+        en: "Skilled Nominated visa (subclass 190)",
+        "zh-hans": "州担保技术移民(190)"
     },
     from: alien,
-    to: visa189holder,
+    to: visa190holder,
     prerequisiteList: allOf([
+
         competentEnglish,
         below50,
         {
@@ -43,6 +43,11 @@ const skilledIndependent: Transition = {
         } as WorkExperiencePrereq,
     ]),
     procedureList: [
+        {
+            name: {
+                en: "Be nominated by an Australian state or territory government agency"
+            }
+        },
         {
             name: {
                 en: "Obtain a suitable skills assessment for that occupation"
@@ -61,7 +66,7 @@ const skilledIndependent: Transition = {
     ],
     referenceList: [
         {
-            url: "https://www.border.gov.au/Trav/Visa-1/189-",
+            url: "https://www.border.gov.au/Trav/Visa-1/190-",
             title: {
                 en: "Official Webpage"
             }
@@ -69,4 +74,4 @@ const skilledIndependent: Transition = {
     ]
 }
 
-export default skilledIndependent
+export default skilledNominated

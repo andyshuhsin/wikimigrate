@@ -4,7 +4,7 @@ import {
     rightPrereq,
     AgePrereq,
     duration,
-} from '../../common'
+} from '../../../common'
 
 // English requirements; see http://www.border.gov.au/Lega/Lega/Form/Immi-FAQs/how-can-i-prove-i-have-competent-english
 
