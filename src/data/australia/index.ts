@@ -1,10 +1,12 @@
-import { CountryData } from '../common'
+import { CountryData } from "../common"
 
 import {
     citizenship,
     pr,
     alien
-} from './status'
+} from "./status"
+
+import skilledIndependent from "./transitions/skilledIndependent"
 
 const australia: CountryData = {
     id: "australia",
@@ -12,6 +14,9 @@ const australia: CountryData = {
         citizenship,
         pr,
         alien
+    ],
+    transitionList: [
+        skilledIndependent,
     ],
     referenceList: [
         {
