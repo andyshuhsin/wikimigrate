@@ -8,6 +8,7 @@ import {
 
 import skilledIndependent from "./transitions/skillSelect/skilledIndependent"
 import skilledNominated from "./transitions/skillSelect/skilledNominated"
+import skilledRegional from "./transitions/skillSelect/skilledRegional"
 
 const australia: CountryData = {
     id: "australia",
@@ -19,6 +20,7 @@ const australia: CountryData = {
     transitionList: [
         skilledIndependent,
         skilledNominated,
+        skilledRegional,
     ],
     referenceList: [
         {
