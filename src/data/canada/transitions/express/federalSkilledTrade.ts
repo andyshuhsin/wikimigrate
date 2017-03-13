@@ -1,6 +1,5 @@
 import {
     Transition,
-    ns,
     duration,
     allOf,
     oneOf,
@@ -10,6 +9,11 @@ import {
     CertificationPrereq,
 } from '../../../common'
 
+import {
+    alien,
+    expressEntryCandidate
+} from '../../status'
+
 const federalSkilledTrade: Transition = {
     id: "federal_skilled_trade",
     acquireBy: "application",
@@ -17,8 +21,8 @@ const federalSkilledTrade: Transition = {
         en: "Federal Skilled Trade Program",
         "zh-hans": "联邦技工移民(Federal Skilled Trade Program, FSTP)"
     },
-    from: ns("canada", "alien"),
-    to: ns("canada", "express_entry_candidate"),
+    from: alien,
+    to: expressEntryCandidate,
     prerequisiteList: [
 
         // Language Requirements

@@ -5,7 +5,7 @@ import {
 
 import {
     alien,
-    permanent
+    pr
 } from '../status'
 
 const iivc: Transition = {
@@ -13,6 +13,8 @@ const iivc: Transition = {
     name: {
         en: "Immigrant Investor Venture Capital Pilot Program"
     },
+    from: alien,
+    to: pr,
     acquireBy: "application",
     stage: {
         description: {
@@ -21,8 +23,6 @@ const iivc: Transition = {
     },
     prerequisiteList: allOf([]),
     procedureList: [],
-    from: alien,
-    to: permanent,
 }
 
 export default iivc

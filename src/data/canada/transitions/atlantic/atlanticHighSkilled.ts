@@ -1,6 +1,5 @@
 import {
     Transition,
-    ns,
     allOf
 } from '../../../common'
 
@@ -9,14 +8,19 @@ import {
     atlanticWorkersJob
 } from './atlanticCommon'
 
+import {
+    alien,
+    pr
+} from '../../status'
+
 const atlanticHighSkilled: Transition = {
     id: "atlantic_high_skilled",
     acquireBy: "application",
     name: {
         en: "Atlantic High-Skilled Program"
     },
-    from: ns("canada", "alien"),
-    to: ns("canada", "permanent"),
+    from: alien,
+    to: pr,
     prerequisiteList: allOf([
         atlanticJobOfferCommon,
         atlanticWorkersJob,
