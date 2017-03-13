@@ -7,12 +7,12 @@ import {
     BusinessPrereq,
     FundPrereq,
     money,
-} from '../../../common'
+} from '../../common'
 
 import {
     alien,
     visa188holder,
-} from '../../status'
+} from '../status'
 
 const businessInnovation: Transition = {
     id: "business_innovation",
