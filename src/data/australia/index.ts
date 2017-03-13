@@ -7,6 +7,7 @@ import {
 } from "./status"
 
 import skilledIndependent from "./transitions/skilledIndependent"
+import skilledNominated from "./transitions/skilledNominated"
 
 const australia: CountryData = {
     id: "australia",
@@ -17,6 +18,7 @@ const australia: CountryData = {
     ],
     transitionList: [
         skilledIndependent,
+        skilledNominated,
     ],
     referenceList: [
         {

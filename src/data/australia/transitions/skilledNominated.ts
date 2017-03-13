@@ -74,4 +74,4 @@ const skilledNominated: Transition = {
     ]
 }
 
-export default skilledIndependent
+export default skilledNominated
