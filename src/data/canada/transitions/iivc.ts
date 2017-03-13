@@ -1,8 +1,12 @@
 import {
     Transition,
     allOf,
-    ns,
 } from '../../common'
+
+import {
+    alien,
+    permanent
+} from '../status'
 
 const iivc: Transition = {
     id: "iivc",
@@ -17,8 +21,8 @@ const iivc: Transition = {
     },
     prerequisiteList: allOf([]),
     procedureList: [],
-    from: ns("canada", "alien"),
-    to: ns("canada", "permanent")
+    from: alien,
+    to: permanent,
 }
 
 export default iivc

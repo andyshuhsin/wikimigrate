@@ -1,6 +1,5 @@
 import {
     Transition,
-    ns,
     money,
     duration,
     allOf,
@@ -13,6 +12,11 @@ import {
     OfferPrereq,
 } from '../../../common'
 
+import {
+    alien,
+    expressEntryCandidate
+} from '../../status'
+
 const federalSkilledWorker: Transition = {
     id: "federal_skilled_worker",
     acquireBy: "application",
@@ -20,8 +24,8 @@ const federalSkilledWorker: Transition = {
         en: "Federal Skilled Worker Program",
         "zh-hans": "联邦技术移民(Federal Skilled Worker Program, FSW)"
     },
-    from: ns("canada", "alien"),
-    to: ns("canada", "express_entry_candidate"),
+    from: alien,
+    to: expressEntryCandidate,
     prerequisiteList: allOf([
 
         // Language Requirement

@@ -1,8 +1,12 @@
 import {
     Transition,
-    ns,
     oneOf,
 } from '../../../common'
+
+import {
+    alien,
+    expressEntryCandidate
+} from '../../status'
 
 const expressEntry: Transition = {
     id: "express_entry",
@@ -11,8 +15,8 @@ const expressEntry: Transition = {
         en: "Express Entry",
         'zh-hans': "快速移民通道——Express Entry(EE)"
     },
-    from: ns("canada", "express_entry_candidate"),
-    to: ns("canada", "permanent"),
+    from: alien,
+    to: expressEntryCandidate,
     prerequisiteList: oneOf([
 
     ]),

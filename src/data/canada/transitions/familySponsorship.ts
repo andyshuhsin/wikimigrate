@@ -1,9 +1,13 @@
 import {
     Transition,
-    ns,
     oneOf,
     allOf,
 } from '../../common'
+
+import {
+    alien,
+    pr
+} from '../status'
 
 const familySponsorship: Transition = {
     id: "family_sponsorship",
@@ -11,8 +15,8 @@ const familySponsorship: Transition = {
     name: {
         en: "Family Sponsorship"
     },
-    from: ns("canada", "alien"),
-    to: ns("canada", "permanent"),
+    from: alien,
+    to: pr,
     prerequisiteList: oneOf([
         allOf([
             {

@@ -1,14 +1,18 @@
 import {
     Transition,
-    ns,
     allOf,
 } from '../../../common'
+
+import {
+    alien,
+    pr,
+} from '../../status'
 
 const atlanticInternationalGraduate: Transition = {
     id: "atlantic_international_graduate",
     acquireBy: "application",
-    from: ns("canada", "alien"),
-    to: ns("canada", "permanent"),
+    from: alien,
+    to: pr,
     name: {
         en: "Atlantic International Graduate Program"
     },

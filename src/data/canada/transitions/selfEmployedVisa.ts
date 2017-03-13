@@ -1,9 +1,13 @@
 import {
     Transition,
-    ns,
     oneOf,
     allOf,
 } from '../../common'
+
+import {
+    alien,
+    pr
+} from '../status'
 
 const selfEmployedVisa: Transition = {
     id: "self_employed",
@@ -11,8 +15,8 @@ const selfEmployedVisa: Transition = {
     name: {
         en: "Self Employed"
     },
-    from: ns("canada", "alien"),
-    to: ns("canada", "permanent"),
+    from: alien,
+    to: pr,
     prerequisiteList: oneOf([
         allOf([
             {

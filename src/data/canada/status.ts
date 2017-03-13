@@ -5,6 +5,7 @@ import {
 
 export const citizenship: Status = {
     id: "citizen",
+    regionId: "canada",
     name: {
         en: "Citizenship"
     },
@@ -15,6 +16,7 @@ export const citizenship: Status = {
 
 export const pr: Status = {
     id: "permanent",
+    regionId: "canada",
     name: {
         en: "Permanent Residence"
     },
@@ -25,6 +27,7 @@ export const pr: Status = {
 
 export const touristVisaExempted: Status = {
     id: "tourist_visa_exempted",
+    regionId: "canada",
     name: {
         en: "Visa Exemption"
     },
@@ -36,6 +39,7 @@ export const touristVisaExempted: Status = {
 
 export const expressEntryCandidate: Status = {
     id: "express_entry_candidate",
+    regionId: "canada",
     name: {
         en: "Express Entry Candidate"
     },
@@ -44,6 +48,7 @@ export const expressEntryCandidate: Status = {
 
 export const alien: Status = {
     id: "alien",
+    regionId: "canada",
     name: {
         en: "Alien"
     },

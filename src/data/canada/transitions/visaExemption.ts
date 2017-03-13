@@ -1,8 +1,10 @@
 import {
     Transition,
-    ns,
     allOf
 } from '../../common'
+
+// TODO: complete country profiles to add proper object-based status
+const ns = () => ({})
 
 const visaExemption: Transition = {
     id: "visa_exemption",

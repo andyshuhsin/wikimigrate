@@ -1,12 +1,16 @@
 import {
     Transition,
-    ns,
     allOf,
     oneOf,
     WorkExperiencePrereq,
     LanguageBenchamrkPrereq,
     duration,
 } from '../../../common'
+
+import {
+    alien,
+    expressEntryCandidate
+} from '../../status'
 
 const canadianExperience: Transition = {
     id: "canadian_experience",
@@ -15,8 +19,8 @@ const canadianExperience: Transition = {
         en: "Canadian Experience Class",
         "zh-hans": "加拿大经验移民"
     },
-    from: ns("canada", "alien"),
-    to: ns("canada", "express_entry_candidate"),
+    from: alien,
+    to: expressEntryCandidate,
     prerequisiteList: allOf([
 
         // Language

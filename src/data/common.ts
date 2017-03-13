@@ -25,21 +25,10 @@ export function duration(value: number, unit: DurationUnit): Duration {
 
 export interface Status {
     id: string
+    regionId: string
     name: MultiLang<string>
     rights: string[]
     duration?: Duration
-}
-
-export type NationalStatus = {
-    countryId: string
-    statusId: string
-}
-
-export function ns(countryId: string, statusId: string): NationalStatus {
-    return {
-        countryId,
-        statusId,
-    }
 }
 
 export interface Prerequisite {
@@ -53,7 +42,7 @@ export interface AgePrereq extends Prerequisite {
     operator: "<" | "<=" | ">" | ">="
 }
 
-type LanguageBenchmarkId = "clb" | "nclc" | "ielts" | "toefl"
+type LanguageBenchmarkId = "clb" | "nclc" | "ielts" | "toefl" | "oet" | "pte-academic" | "cae"
 
 type LanguageBenchmarkProfile = {
     id: LanguageBenchmarkId
@@ -72,6 +61,30 @@ const languageBenchmarkProfiles: LanguageBenchmarkProfile[] = [
         title: {
             fr: "Niveaux de compétence linguistique canadiens"
         }
+    },
+    {
+        id: "ielts",
+        title: {
+            en: "International English Language Testing System"
+        }
+    },
+    {
+        id: "toefl",
+        title: {
+            en: "Test of English as a Foreign Language"
+        }
+    },
+    {
+        id: "pte-academic",
+        title: {
+            en: "Pearson Test of English"
+        }
+    },
+    {
+        id: "cae",
+        title: {
+            en: "Cambridge English: Advanced"
+        }
     }
 ]
 
@@ -81,6 +94,7 @@ export interface LanguageBenchamrkPrereq extends Prerequisite {
     property: "language_test"
     benchmark: LanguageBenchmarkId
     requirements: any[] //TODO: Use proper type
+    // TODO: Add time limits
 }
 
 export interface JobType {
@@ -159,7 +173,7 @@ export interface Effect {
 }
 
 export interface Exception {
-    appliedTo: NationalStatus[]
+    appliedTo: Status[]
     effects: Effect[]
 }
 
@@ -177,8 +191,8 @@ export interface Transition {
     id: string
     name: MultiLang<string>
     acquireBy: "application" | "invitation" | "automatic"
-    from: NationalStatus | NationalStatus[]
-    to: NationalStatus
+    from: Status | Status[]
+    to: Status
     stage?: {
         description: MultiLang<string>
         date?: Date
