@@ -119,7 +119,7 @@ export interface EducationPrereq extends Prerequisite {
     certification?: "eca"  //TODO: Elaborate on Educational Credential Assessment
 }
 
-export type CurrencyId = "cad" | "usd"
+export type CurrencyId = "cad" | "usd" | "aud"
 
 export type Money = {
     value: number
@@ -128,13 +128,25 @@ export type Money = {
 
 export interface FundPrereq extends Prerequisite {
     property: "fund"
-    type: "possess" | "invest" | "donate"
+    type: "possess" | "invest" | "donate" | "venture"
     schemes: [
         {
-            condition: {
+            condition?: {
                 familyMember?: number
             }
             fund: Money
+        }
+    ]
+}
+
+export interface BusinessPrereq extends Prerequisite {
+    property: "business"
+    schemes: [
+        {
+            condition: {
+                turnover?: Money
+                duration: Duration
+            }
         }
     ]
 }

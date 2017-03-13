@@ -57,6 +57,22 @@ export const visa489holder: Status = {
 
 }
 
+export const visa132holder: Status = {
+    id: "132",
+    regionId: "australia",
+    name: {
+        en: "Visa 132 Holder"
+    },
+    rights: [
+        "work",
+        "study",
+        "medicare",
+    ],
+    duration: duration(5, "year"),
+
+}
+
+
 export const pr: Status = {
     id: "permanent",
     regionId: "australia",
