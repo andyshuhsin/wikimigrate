@@ -9,6 +9,14 @@ import {
 import skilledIndependent from "./transitions/skillSelect/skilledIndependent"
 import skilledNominated from "./transitions/skillSelect/skilledNominated"
 import skilledRegional from "./transitions/skillSelect/skilledRegional"
+import businessInnovation from './transitions/businessInnovation'
+import {
+    employerNominationDirectEntry,
+    employerNominationTemporaryResidenceTransition,
+    employerNominationAgreement,
+} from './transitions/employerNomination'
+import temporaryWorkSkilled from './transitions/temporaryWorkSkilled'
+import businessTalent from './transitions/skillSelect/businessTalent'
 
 const australia: CountryData = {
     id: "australia",
@@ -21,6 +29,13 @@ const australia: CountryData = {
         skilledIndependent,
         skilledNominated,
         skilledRegional,
+        businessTalent,
+
+        employerNominationDirectEntry,
+        employerNominationTemporaryResidenceTransition,
+        employerNominationAgreement,
+
+        temporaryWorkSkilled,
     ],
     referenceList: [
         {

@@ -204,7 +204,7 @@ export interface Transition {
     id: string
     name: MultiLang<string>
     acquireBy: "application" | "invitation" | "automatic"
-    from: Status | Status[]
+    from: Status | Status[] | null
     to: Status
     stage?: {
         description: MultiLang<string>
