@@ -1,7 +1,9 @@
 import canada from './canada'
+import australia from './australia'
 
 const countries = [
-    canada
+    canada,
+    australia,
 ]
 
 const data = {
