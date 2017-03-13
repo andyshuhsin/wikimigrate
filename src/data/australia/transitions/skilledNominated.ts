@@ -66,7 +66,7 @@ const skilledNominated: Transition = {
     ],
     referenceList: [
         {
-            url: "https://www.border.gov.au/Trav/Visa-1/189-",
+            url: "https://www.border.gov.au/Trav/Visa-1/190-",
             title: {
                 en: "Official Webpage"
             }
