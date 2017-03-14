@@ -10,7 +10,8 @@ interface PathShowcaseProps {
 
 const boxStyle = {
     boxSizing: "border-box",
-    marginBottom: "1em",
+    margin: "0 0.5em 0.5em 0",
+    display: "inline-block",
 
     width: "10em",
     height: "10em",
@@ -21,7 +22,7 @@ const boxStyle = {
     background: "#ffccbc",
     wordWrap: "break-work",
     overflow: "hidden",
-}
+} as React.CSSProperties
 
 class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {

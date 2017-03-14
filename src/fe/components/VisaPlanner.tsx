@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import TopBar from './TopBar'
 import Title from './Title'
-import PathBox from './PathBox'
+import PathShowcase from './PathShowcase'
 
 import {
     Path
@@ -14,14 +14,6 @@ const style = {
     color: "#212121",
     fontFamily: "sans-serif",
     padding: "0.1em"
-} as React.CSSProperties
-
-const pathShowcaseStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    maxHeight: "50vh",
-    overflow: "scroll",
 } as React.CSSProperties
 
 function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {
@@ -43,16 +35,7 @@ class VisaPlanner extends React.Component<{}, {}> {
             <div style={style}>
                 <TopBar brandName={data.app.brandName[data.app.lang]}/>
                 <Title text={"近期最火的移民项目"} />
-                <div style={pathShowcaseStyle}>
-                    {
-                        this.getFilteredPaths().map((path: Path) =>
-                            <PathBox
-                                path={path}
-                                key={path.transitions.map(transition => transition.id).join('')}
-                            />
-                        )
-                    }
-                </div>
+                <PathShowcase paths={this.getFilteredPaths()} />
             </div>
         );
     }

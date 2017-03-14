@@ -1,0 +1,32 @@
+import * as React from 'react'
+import PathBox from './PathBox'
+
+import {
+    Path
+} from '../utils/definitions'
+
+interface PathShowcaseProps {
+    paths: Path[]
+}
+
+const pathShowcaseStyle = {
+    justifyContent: "space-around",
+    maxHeight: "50vh",
+    overflow: "scroll",
+} as React.CSSProperties
+
+
+// Ensure the last box is aligned to the left
+const PathShowcase = (props: PathShowcaseProps) =>
+    <div style={pathShowcaseStyle}>
+        {
+            props.paths.map((path: Path) =>
+                <PathBox
+                    path={path}
+                    key={path.transitions.map(transition => transition.id).join('')}
+                />
+            )
+        }
+    </div>
+
+export default PathShowcase
