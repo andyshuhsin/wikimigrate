@@ -21,6 +21,7 @@
     "file-loader": "^0.10.1",
     "image-webpack-loader": "^3.2.0",
     "ts-loader": "^2.0.1",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.1",
+    "url-loader": "^0.5.8"
   }
 }

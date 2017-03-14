@@ -19,7 +19,8 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-            'file-loader?name=[sha1:hash:hex:32].[ext]',
+            // 'file-loader?name=[sha1:hash:hex:32].[ext]',
+            'url-loader?limit=10240&name=[sha1:hash:hex:32].[ext]',
             'image-webpack-loader'
         ]
       }
