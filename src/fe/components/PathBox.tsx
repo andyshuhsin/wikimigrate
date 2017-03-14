@@ -13,8 +13,8 @@ const boxStyle = {
     margin: "0 0.5em 0.5em 0",
     display: "inline-block",
 
-    width: "calc(49vw - 1em)", //TODO: Need work
-    height: "calc(49vw - 1em)",
+    width: "calc(50vw - 2em)", //TODO: Need work
+    height: "calc(50vw - 2em)",
 
     borderRadius: "5px",
     padding: "1em",

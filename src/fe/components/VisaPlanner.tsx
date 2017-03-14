@@ -14,7 +14,8 @@ const style = {
     fontSize: 14,
     color: "#212121",
     fontFamily: "sans-serif",
-    padding: "0.1em"
+    padding: "0.1em",
+    height: "100vh"
 } as React.CSSProperties
 
 function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {
@@ -37,7 +38,6 @@ class VisaPlanner extends React.Component<{}, {}> {
                 <TopBar brandName={data.app.brandName[data.app.lang]}/>
                 <Title text={"近期最火的移民项目"} />
                 <PathShowcase paths={this.getFilteredPaths()} />
-                <Title text={"筛选项目"} />
                 <FilterPanel />
             </div>
         );
