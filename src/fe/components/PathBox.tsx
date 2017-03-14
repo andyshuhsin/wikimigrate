@@ -25,20 +25,14 @@ const boxStyle = {
 
 class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
+        const transitions = this.props.path.transitions
         return (
             <div style={boxStyle}>
-                {this.props.path.transitions.map(transition => 
-                    <div>
-                        <h2 style={{fontSize: 10}}>
-                            {transition}
-                        </h2>
-                        <h1 style={{fontSize: 14}}>
-                            {transition.name["en"]}
-                        </h1>
-
-                    </div>
-                  )
-                }
+                <div>
+                    <h1 style={{fontSize: 14}}>
+                        {transitions[0].name["en"]}
+                    </h1>
+                </div>
             </div>
         )
     }
