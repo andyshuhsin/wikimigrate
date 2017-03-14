@@ -4,6 +4,7 @@ import * as React from 'react'
 import TopBar from './TopBar'
 import Title from './Title'
 import PathShowcase from './PathShowcase'
+import FilterPanel from './FilterPanel'
 
 import {
     Path
@@ -36,6 +37,8 @@ class VisaPlanner extends React.Component<{}, {}> {
                 <TopBar brandName={data.app.brandName[data.app.lang]}/>
                 <Title text={"近期最火的移民项目"} />
                 <PathShowcase paths={this.getFilteredPaths()} />
+                <Title text={"筛选项目"} />
+                <FilterPanel />
             </div>
         );
     }
