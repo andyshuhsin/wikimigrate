@@ -1,8 +1,5 @@
 import * as React from "react"
 
-
-import data from "../../data"
-
 const barStyle = {
     display: "flex",
     alignItems: "center",
@@ -18,14 +15,18 @@ const nameStyle = {
     marginLeft: "0.2em"
 } as React.CSSProperties
 
-class TopBar extends React.Component<{}, {}> {
+interface TopBarProps {
+    brandName: string
+}
+
+class TopBar extends React.PureComponent<TopBarProps, {}> {
     render() {
        return (
            <div style={barStyle}>
                <img style={logoStyle}
                     src={require("../assets/logo.svg")} />
                 <span style={nameStyle} >
-                    {data.app.brandName[data.app.lang]}
+                    {this.props.brandName}
                 </span>
            </div>
        ) 

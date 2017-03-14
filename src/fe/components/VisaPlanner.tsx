@@ -14,7 +14,7 @@ class VisaPlanner extends React.Component<{}, {}> {
     render() {
         return (
             <div style={style}>
-                <TopBar />
+                <TopBar brandName={data.app.brandName[data.app.lang]}/>
             </div>
         );
     }
