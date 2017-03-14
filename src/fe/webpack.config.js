@@ -10,12 +10,19 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.svg', '.jpeg', '.png', '.gif'],
   },
 
   module: {
     rules: [
       { test: /\.tsx?$/, loader: 'ts-loader' },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack-loader?bypassOnDebug'
+        ]
+      }
     ]
   },
 
