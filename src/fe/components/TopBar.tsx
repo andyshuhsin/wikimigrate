@@ -3,6 +3,7 @@ import * as React from "react"
 const barStyle = {
     display: "flex",
     alignItems: "center",
+    marginBottom: "1.5em",
 } as React.CSSProperties
 
 const logoStyle = {
@@ -10,7 +11,6 @@ const logoStyle = {
 } as React.CSSProperties
 
 const nameStyle = {
-    color: "#212121",
     fontWeight: "bolder",
     marginLeft: "0.2em"
 } as React.CSSProperties
