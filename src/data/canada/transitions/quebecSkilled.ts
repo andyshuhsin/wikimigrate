@@ -3,6 +3,11 @@ import {
     allOf
 } from '../../common'
 
+import {
+    alien,
+    pr,
+} from '../status'
+
 const quebecSkilled: Transition = {
     id: "quebec_selected_skilled_workds",
     acquireBy: "application",
@@ -10,8 +15,8 @@ const quebecSkilled: Transition = {
         en: "Quebec-selected Skilled Workers"
     },
     prerequisiteList: allOf([]),
-    from: {countryId: "canada", statusId: "alien"},
-    to: {countryId: "canada", statusId: "permanent"},
+    from: alien,
+    to: pr,
     procedureList: [
         {
             "name": {
