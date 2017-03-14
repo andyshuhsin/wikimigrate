@@ -1,6 +1,8 @@
 import data from '../../data'
 import * as React from 'react'
 
+import TopBar from './TopBar'
+
 const style = {
     fontSize: 14,
     fontFamily: "sans-serif",
@@ -12,7 +14,7 @@ class VisaPlanner extends React.Component<{}, {}> {
     render() {
         return (
             <div style={style}>
-                {JSON.stringify(data)}
+                <TopBar />
             </div>
         );
     }
