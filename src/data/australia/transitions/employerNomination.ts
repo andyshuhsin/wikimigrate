@@ -55,6 +55,7 @@ const employerNominationTemporaryResidenceTransition: Transition =
         {}, 
         employerNominationGeneral,
         {
+            id: "employer_nomination_temporary_residence_transition",
             name: {
                 en: "Employer Nomination Scheme (subclass 186) - Temporary Residence Transition stream",
             },
@@ -67,6 +68,7 @@ const employerNominationDirectEntry: Transition =
         {}, 
         employerNominationGeneral,
         {
+            id: "employer_nomination_direct_entry",
             name: {
                 en: "Employer Nomination Scheme (subclass 186) - Direct Entry stream",
             },
@@ -79,6 +81,7 @@ const employerNominationAgreement: Transition =
         {}, 
         employerNominationGeneral,
         {
+            id: "employer_nomination_agreement",
             name: {
                 en: "Employer Nomination Scheme (subclass 186) - Agreement stream",
             },

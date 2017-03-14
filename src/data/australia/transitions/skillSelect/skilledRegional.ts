@@ -20,7 +20,7 @@ import {
 } from './skillSelectCommon'
 
 const skilledRegional: Transition = {
-    id: "skilled_independent",
+    id: "skilled_regional",
     acquireBy: "application",
     name: {
         en: "Skilled Regional (Provisional) visa (subclass 489)",
