@@ -11,11 +11,12 @@ import {
 } from '../utils/definitions'
 
 const style = {
+    padding: "0.1em",
+    height: "100vh",
+    maxWidth: 400,
     fontSize: 14,
     color: "#212121",
     fontFamily: "sans-serif",
-    padding: "0.1em",
-    height: "100vh"
 } as React.CSSProperties
 
 function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {

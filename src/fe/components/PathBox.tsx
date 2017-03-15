@@ -13,8 +13,9 @@ const boxStyle = {
     margin: "0 0.5em 0.5em 0",
     display: "inline-block",
 
-    width: "calc(50vw - 2em)", //TODO: Need work
+    width: "calc(50% - 2em)", //TODO: Need work
     height: "calc(50vw - 2em)",
+    maxHeight: "200",
 
     borderRadius: "5px",
     padding: "1em",

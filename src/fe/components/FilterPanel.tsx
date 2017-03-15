@@ -6,7 +6,8 @@ const panelStyle = {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    padding: "1em"
+    maxWidth: 400,
+    padding: "1em",
 } as React.CSSProperties
 
 const line1Style = {
