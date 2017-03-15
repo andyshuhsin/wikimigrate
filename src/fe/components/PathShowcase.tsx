@@ -7,6 +7,7 @@ import {
 
 interface PathShowcaseProps {
     paths: Path[]
+    boxClick: (event: any) => void
 }
 
 const pathShowcaseStyle = {
@@ -25,6 +26,9 @@ const PathShowcase = (props: PathShowcaseProps) =>
                 <PathBox
                     path={path}
                     key={path.transitions.map(transition => transition.id).join('')}
+                    boxClick={
+                        () => props.boxClick(path)
+                    }
                 />
             )
         }

@@ -6,6 +6,7 @@ import {
 
 interface PathShowcaseProps {
     path: Path
+    boxClick: (event: React.MouseEvent<any>) => void
 }
 
 const boxStyle = {
@@ -29,7 +30,7 @@ class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
         return (
-            <div style={boxStyle}>
+            <div style={boxStyle} onClick={this.props.boxClick}>
                 <div>
                     <h1 style={{fontSize: 14}}>
                         {transitions[0].name["en"]}
