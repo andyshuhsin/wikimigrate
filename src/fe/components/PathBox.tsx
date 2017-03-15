@@ -15,7 +15,7 @@ const boxStyle = {
 
     width: "calc(50% - 2em)", //TODO: Need work
     height: "calc(50vw - 2em)",
-    maxHeight: "200",
+    maxHeight: "200px",
 
     borderRadius: "5px",
     padding: "1em",
