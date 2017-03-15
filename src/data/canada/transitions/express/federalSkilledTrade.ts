@@ -23,7 +23,7 @@ const federalSkilledTrade: Transition = {
     },
     from: alien,
     to: expressEntryCandidate,
-    prerequisiteList: [
+    prerequisiteList: allOf([
 
         // Language Requirements
         allOf([
@@ -106,7 +106,7 @@ const federalSkilledTrade: Transition = {
             } as CertificationPrereq
         ])
 
-    ],
+    ]),
 
     procedureList: [
         {

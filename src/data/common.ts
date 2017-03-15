@@ -31,12 +31,12 @@ export interface Status {
     duration?: Duration
 }
 
-export interface Prerequisite {
+export interface BasePrerequisite {
     property: string
     description?: MultiLang<string>
 }
 
-export interface AgePrereq extends Prerequisite {
+export interface AgePrereq extends BasePrerequisite {
     property: "age"
     value: Duration
     operator: "<" | "<=" | ">" | ">="
@@ -49,7 +49,7 @@ type LanguageBenchmarkProfile = {
     title: MultiLang<string>
 }
 
-const languageBenchmarkProfiles: LanguageBenchmarkProfile[] = [
+export const languageBenchmarkProfiles: LanguageBenchmarkProfile[] = [
     {
         id: "clb",
         title: {
@@ -90,7 +90,7 @@ const languageBenchmarkProfiles: LanguageBenchmarkProfile[] = [
 
 type LanguageTestItem = "listening" | "speaking" | "reading" | "writing" 
 
-export interface LanguageBenchamrkPrereq extends Prerequisite {
+export interface LanguageBenchamrkPrereq extends BasePrerequisite {
     property: "language_test"
     benchmark: LanguageBenchmarkId
     requirements: any[] //TODO: Use proper type
@@ -102,7 +102,7 @@ export interface JobType {
     //TODO: Expand
 }
 
-export interface WorkExperiencePrereq extends Prerequisite {
+export interface WorkExperiencePrereq extends BasePrerequisite {
     property: "work_experience"
     length?: Duration
     withinLast?: Duration
@@ -111,7 +111,7 @@ export interface WorkExperiencePrereq extends Prerequisite {
     jobTypes?: Combination<any> //TODO: Clarify
 }
 
-export interface EducationPrereq extends Prerequisite {
+export interface EducationPrereq extends BasePrerequisite {
     property: "education"
     stage: "primary" | "secondary" | "post-secondary"
     regionId: string | undefined
@@ -126,7 +126,7 @@ export type Money = {
     currencyId: CurrencyId
 }
 
-export interface FundPrereq extends Prerequisite {
+export interface FundPrereq extends BasePrerequisite {
     property: "fund"
     type: "possess" | "invest" | "donate" | "venture"
     schemes: [
@@ -139,7 +139,7 @@ export interface FundPrereq extends Prerequisite {
     ]
 }
 
-export interface BusinessPrereq extends Prerequisite {
+export interface BusinessPrereq extends BasePrerequisite {
     property: "business"
     schemes: [
         {
@@ -158,7 +158,7 @@ export function money(value: number, currencyId: CurrencyId): Money {
     }
 }
 
-export interface OfferPrereq extends Prerequisite {
+export interface OfferPrereq extends BasePrerequisite {
     property: "offer"
     employer: {
         regionId: string | undefined
@@ -166,16 +166,27 @@ export interface OfferPrereq extends Prerequisite {
     }
 }
 
-export interface rightPrereq extends Prerequisite {
+export interface rightPrereq extends BasePrerequisite {
     property: "right"
     regionId: string
     rightId: string
 }
 
-export interface CertificationPrereq extends Prerequisite {
+export interface CertificationPrereq extends BasePrerequisite {
     property: "certification"
     description: MultiLang<string>
 }
+
+export type Prerequisite = 
+    AgePrereq
+    | LanguageBenchamrkPrereq
+    | WorkExperiencePrereq
+    | EducationPrereq
+    | FundPrereq
+    | BusinessPrereq
+    | OfferPrereq
+    | rightPrereq
+    | CertificationPrereq
 
 
 //TODO: Prerequisite need fixing

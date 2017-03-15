@@ -1,13 +1,9 @@
 import * as React from 'react'
+import TransitionDisplay from './TransitionDisplay'
 
 import {
     Path
 } from '../../utils/definitions'
-
-interface Props {
-    pathOnDisplay: Path | null
-    onClose: (event: any) => void
-}
 
 const style = {
     position: "absolute",
@@ -22,7 +18,19 @@ const closeButtonStyle = {
     position: "absolute",
     right: "0.3em",
     top: "0.2em",
-    fontSize: "3em"
+    fontSize: "3em",
+}
+
+interface Props {
+    pathOnDisplay: Path | null
+    onClose: (event: any) => void
+}
+
+const test = {
+    aaa: 1,
+    toString() {
+        return "FUCK YEAH"
+    }
 }
 
 class PathDetailDisplay extends React.PureComponent<Props, {}> {
@@ -31,6 +39,16 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
         if (this.props.pathOnDisplay) {
             return (
                 <div style={style}>
+
+                    {
+                        this.props.pathOnDisplay.transitions.map(
+                            transition => 
+                                <TransitionDisplay
+                                    transition={transition}
+                                    key={transition.id}
+                                />
+                        )
+                    }
 
                     <button style={closeButtonStyle}
                             onClick={this.props.onClose}>
