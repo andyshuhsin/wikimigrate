@@ -6,10 +6,7 @@ import {
 } from '../../../data/common'
 
 import PrerequisiteBox from './PrerequisiteBox'
-
-interface Props {
-    combo: Combination<any>
-}
+import JobTypeBox from './PrerequisiteBox/JobTypeBox'
 
 const comboBoxStyle = {
     border: "1px black",
@@ -26,6 +23,14 @@ function isPrerequisite(input: any): boolean {
     return !!input.property
 }
 
+function isJobType(input: any): boolean {
+    return !!input.description
+}
+
+interface Props {
+    combo: Combination<any>
+}
+
 class CombinationBox extends React.PureComponent<Props, {}> {
 
     OperandView(props: {operand: any}) {
@@ -33,6 +38,8 @@ class CombinationBox extends React.PureComponent<Props, {}> {
             return <CombinationBox combo={props.operand} />
         } else if (isPrerequisite(props.operand)) {
             return <PrerequisiteBox prereq={props.operand} />
+        } else if (isJobType(props.operand)) {
+            return <JobTypeBox jobType={props.operand} />
         } else {
             console.warn("Cannot recognize operand type:", JSON.stringify(props.operand))
             return <div />

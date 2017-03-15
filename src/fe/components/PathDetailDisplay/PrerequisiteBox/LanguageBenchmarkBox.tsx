@@ -14,14 +14,14 @@ const LanguageBenchmarkBox = (props: {prereq: LanguageBenchamrkPrereq}) => {
             {
                 prereq.requirements.map(
                     (requirement) => {
+                        const item = Object.keys(requirement)[0]
                         if (requirement.value) {
                             return (
-                                <strong style={{marginRight: "0.5em"}}>
+                                <strong style={{marginRight: "0.5em"}} key={item}>
                                     {requirement.value}
                                 </strong>
                             )
                         } else {
-                            const item = Object.keys(requirement)[0]
                             return (
                                 <div key={item}>
                                     <strong key={item}>
