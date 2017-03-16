@@ -31,16 +31,16 @@ class FilterPanel extends React.PureComponent<{}, {}> {
     render() {
         return (
             <div style={panelStyle}>
-                <Title text={"筛选项目"} />
+                <Title text={"Filter by"} />
                 <div style={line1Style}>
-                    <ConditionDropdown placeholder={"工作经历"} />
-                    <ConditionDropdown placeholder={"教育经历"} />
-                    <ConditionDropdown placeholder={"年龄"} />
+                    <ConditionDropdown placeholder={"Job offer"} />
+                    <ConditionDropdown placeholder={"Education"} />
+                    <ConditionDropdown placeholder={"English level"} />
                 </div>
                 <div style={line2Style}>
-                    © 2017 跑得快・
-                    <a href="#" style={linkStyle}>我们是谁</a>・
-                    <a href="#" style={linkStyle}>法律声明</a>
+                    © 2017 The Good Move・
+                    <a href="#" style={linkStyle}>Who We Are</a>・
+                    <a href="#" style={linkStyle}>Legal</a>
                 </div>
             </div>
         )

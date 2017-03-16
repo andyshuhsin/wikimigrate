@@ -17,6 +17,7 @@ const nameStyle = {
 
 interface TopBarProps {
     brandName: string
+    version: string
 }
 
 class TopBar extends React.PureComponent<TopBarProps, {}> {
@@ -26,7 +27,7 @@ class TopBar extends React.PureComponent<TopBarProps, {}> {
                <img style={logoStyle}
                     src={require("../assets/logo.svg")} />
                 <span style={nameStyle} >
-                    {this.props.brandName}
+                    {this.props.brandName + " " + this.props.version}
                 </span>
            </div>
        ) 
