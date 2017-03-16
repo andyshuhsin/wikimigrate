@@ -33,17 +33,17 @@ const canada: CountryData =
             ],
             transitionList: [
                 // visaExemption,
-                expressEntry,
+                // expressEntry,
                 federalSkilledWorker,
                 federalSkilledTrade,
                 canadianExperience,
-                quebecSkilled,
+                // quebecSkilled,
                 startupVisa,
                 iivc,
                 selfEmployedVisa,
-                atlanticHighSkilled,
-                atlanticIntermediateSkilled,
-                atlanticInternationalGraduate,
+                // atlanticHighSkilled,
+                // atlanticIntermediateSkilled,
+                // atlanticInternationalGraduate,
             ],
             referenceList: [
                 {
