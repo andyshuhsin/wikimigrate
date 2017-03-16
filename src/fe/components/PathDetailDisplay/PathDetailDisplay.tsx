@@ -11,6 +11,10 @@ const style = {
     right: "2em",
     top: "2em",
     bottom: "2em",
+
+    overflow: "scroll",
+    maxWidth: "90vh",
+
     background: "#ebebeb",
 }
 

@@ -35,14 +35,14 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 </h2>
 
                 <div>
-                    Prerequisites:
+                    <h5>Prerequisites:</h5>
                     {
                         <CombinationBox combo={transition.prerequisiteList} />
                     }
                 </div>
 
                 <div>
-                    Procedures:
+                    <h5>Procedures:</h5>
                     {
                         <ProcedureBox procedureList={transition.procedureList} />
                     }
