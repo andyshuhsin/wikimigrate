@@ -5,7 +5,7 @@ import {
     duration,
     oneOf,
     allOf,
-    rightPrereq,
+    RightPrereq,
 } from '../../../common'
 
 import {

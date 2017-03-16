@@ -166,7 +166,7 @@ export interface OfferPrereq extends BasePrerequisite {
     }
 }
 
-export interface rightPrereq extends BasePrerequisite {
+export interface RightPrereq extends BasePrerequisite {
     property: "right"
     regionId: string
     rightId: string
@@ -185,7 +185,7 @@ export type Prerequisite =
     | FundPrereq
     | BusinessPrereq
     | OfferPrereq
-    | rightPrereq
+    | RightPrereq
     | CertificationPrereq
 
 

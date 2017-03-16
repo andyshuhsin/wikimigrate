@@ -6,7 +6,7 @@ import {
     oneOf,
     allOf,
     LanguageBenchamrkPrereq,
-    rightPrereq,
+    RightPrereq,
 } from '../../../common'
 
 import {

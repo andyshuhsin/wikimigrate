@@ -8,7 +8,7 @@ import {
     WorkExperiencePrereq,
     EducationPrereq,
     FundPrereq,
-    rightPrereq,
+    RightPrereq,
     OfferPrereq,
 } from '../../../common'
 
@@ -132,7 +132,7 @@ const federalSkilledWorker: Transition = {
                     property: "right",
                     regionId: "canada",
                     rightId: "work"
-                } as rightPrereq,
+                } as RightPrereq,
                 {
                     property: "offer",
                     employer: {

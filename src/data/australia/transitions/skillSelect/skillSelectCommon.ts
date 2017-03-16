@@ -1,7 +1,7 @@
 import {
     LanguageBenchamrkPrereq,
     oneOf,
-    rightPrereq,
+    RightPrereq,
     AgePrereq,
     duration,
 } from '../../../common'
@@ -15,27 +15,27 @@ export const competentEnglish =  oneOf([
             property: "right",
             regionId: "uk",
             rightId: "citizen"
-        } as rightPrereq,
+        } as RightPrereq,
         {
             property: "right",
             regionId: "usa",
             rightId: "citizen"
-        } as rightPrereq,
+        } as RightPrereq,
         {
             property: "right",
             regionId: "canada",
             rightId: "citizen"
-        } as rightPrereq,
+        } as RightPrereq,
         {
             property: "right",
             regionId: "new_zealand",
             rightId: "citizen"
-        } as rightPrereq,
+        } as RightPrereq,
         {
             property: "right",
             regionId: "new_zealand",
             rightId: "ireland"
-        } as rightPrereq,
+        } as RightPrereq,
     ]),
 
     {
