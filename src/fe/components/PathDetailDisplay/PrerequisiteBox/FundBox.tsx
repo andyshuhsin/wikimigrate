@@ -29,6 +29,8 @@ const FundBox = (props: {prereq: FundPrereq}) => {
                 }
             </div>
         )
+    } else {
+        return <noscript />
     }
 }
 

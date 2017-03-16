@@ -8,6 +8,7 @@ import CombinationBox from '../CombinationBox'
 
 const WorkExperieneceBox = (props: {prereq: WorkExperiencePrereq}) => {
     const prereq = props.prereq
+    // TODO: Fix type cast at prereq.jobTypes as any
     return (
         <div>
             {
@@ -20,7 +21,7 @@ const WorkExperieneceBox = (props: {prereq: WorkExperiencePrereq}) => {
                 ? `you have worked ${prereq.length.value} ${prereq.length.unit} in`
                 : ""
             }
-            <CombinationBox combo={prereq.jobTypes} />
+            <CombinationBox combo={prereq.jobTypes as any} />
         </div>
     )
 }
