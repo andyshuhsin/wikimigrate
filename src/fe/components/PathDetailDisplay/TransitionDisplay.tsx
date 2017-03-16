@@ -7,6 +7,7 @@ import {
 } from '../../../data/common'
 
 import CombinationBox from './CombinationBox'
+import ProcedureBox from './ProcedureBox'
 
 interface Props {
     transition: Transition
@@ -37,6 +38,13 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                     Prerequisites:
                     {
                         <CombinationBox combo={transition.prerequisiteList} />
+                    }
+                </div>
+
+                <div>
+                    Procedures:
+                    {
+                        <ProcedureBox procedureList={transition.procedureList} />
                     }
                 </div>
             </div>
