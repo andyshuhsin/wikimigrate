@@ -26,6 +26,11 @@ function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {
 
 interface StateTypes {
     pathOnDisplay: Path | null
+    filterStates: {
+        offer: ''
+        education: ''
+        english: ''
+    }
 }
 
 class VisaPlanner extends React.Component<{}, StateTypes> {
@@ -33,7 +38,12 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
     constructor() {
         super()
         this.state = {
-            pathOnDisplay: null
+            pathOnDisplay: null,
+            filterStates: {
+                offer: '',
+                education: '',
+                english: '',
+            }
         }
     }
 
@@ -52,6 +62,15 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
         })
     }
 
+    filterClick(item: string, value: string) {
+        console.info(item, value)
+        this.setState({
+            filterStates: Object.assign({}, this.state.filterStates, {
+                [item]: value
+            })
+        } as any)
+    }
+
     render() {
         return (
             <div style={style}>
@@ -64,7 +83,10 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                         paths={this.getFilteredPaths()}
                         boxClick={this.boxClick.bind(this)}
                 />
-                <FilterPanel />
+                <FilterPanel
+                    filterStates={this.state.filterStates}
+                    filterClick={this.filterClick.bind(this)}
+                />
                 <PathDetailDisplay
                         pathOnDisplay={this.state.pathOnDisplay}
                         onClose={

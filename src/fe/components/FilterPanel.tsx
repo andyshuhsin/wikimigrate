@@ -26,16 +26,56 @@ const linkStyle = {
     color: "#212121"
 }
 
-class FilterPanel extends React.PureComponent<{}, {}> {
+type Props = {
+    filterStates: {
+        offer: string
+        education: string
+        english: string
+    }
+
+    filterClick: (item: string, value: string) => void
+}
+
+class FilterPanel extends React.PureComponent<Props, {}> {
 
     render() {
         return (
             <div style={panelStyle}>
                 <Title text={"Filter by"} />
                 <div style={line1Style}>
-                    <ConditionDropdown placeholder={"Job offer"} />
-                    <ConditionDropdown placeholder={"Education"} />
-                    <ConditionDropdown placeholder={"English level"} />
+                    <ConditionDropdown 
+                        item={"offer"}
+                        placeholder={"Job offer"}
+                        options={[
+                            "yes",
+                            "no"
+                        ]}
+                        chosenItem={this.props.filterStates.offer}
+                        filterClick={this.props.filterClick}
+                    />
+                    <ConditionDropdown
+                        item={"education"}
+                        placeholder={"Education"}
+                        options={[
+                            "university",
+                            "secondary",
+                            "primary",
+                        ]}
+                        chosenItem={this.props.filterStates.education}
+                        filterClick={this.props.filterClick}
+                    />
+                    <ConditionDropdown
+                        item={"english"}
+                        placeholder={"IELTS level"}
+                        options={[
+                            "9",
+                            "8",
+                            "7",
+                            "6",
+                        ]}
+                        chosenItem={this.props.filterStates.english}
+                        filterClick={this.props.filterClick}
+                    />
                 </div>
                 <div style={line2Style}>
                     © 2017 The Good Move・
