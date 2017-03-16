@@ -10,6 +10,7 @@ import LanguageBenchmarkBox from './LanguageBenchmarkBox'
 import WorkExperienceBox from './WorkExperienceBox'
 import EducationBox from './EducationBox'
 import FundBox from './FundBox'
+import RightBox from './RightBox'
 
 interface Props {
     prereq: Prerequisite
@@ -26,6 +27,8 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
             return  <EducationBox prereq={prereq} />
         } else if (prereq.property === "fund") {
             return <FundBox prereq={prereq} />
+        } else if (prereq.property === "right") {
+            return <RightBox prereq={prereq} />
         }
         else {
             console.warn("Unknown prereq:", JSON.stringify(prereq))
