@@ -68,10 +68,9 @@ class FilterPanel extends React.PureComponent<Props, {}> {
                         item={"english"}
                         placeholder={"IELTS level"}
                         options={[
-                            "9",
-                            "8",
                             "7",
                             "6",
+                            "5",
                         ]}
                         chosenItem={this.props.filterStates.english}
                         filterClick={this.props.filterClick}
