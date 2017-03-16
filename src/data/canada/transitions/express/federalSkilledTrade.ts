@@ -16,6 +16,7 @@ import {
 
 const federalSkilledTrade: Transition = {
     id: "federal_skilled_trade",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         en: "Federal Skilled Trade Program",

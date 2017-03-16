@@ -10,6 +10,7 @@ import {
 
 const quebecSkilled: Transition = {
     id: "quebec_selected_skilled_workds",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         en: "Quebec-selected Skilled Workers"

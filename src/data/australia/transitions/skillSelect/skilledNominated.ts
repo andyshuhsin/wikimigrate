@@ -20,6 +20,7 @@ import {
 
 const skilledNominated: Transition = {
     id: "skilled_nominated",
+    regionId: "australia",
     acquireBy: "application",
     name: {
         en: "Skilled Nominated visa (subclass 190)",

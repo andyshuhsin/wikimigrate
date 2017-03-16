@@ -21,6 +21,7 @@ import {
 
 const skilledRegional: Transition = {
     id: "skilled_regional",
+    regionId: "australia",
     acquireBy: "application",
     name: {
         en: "Skilled Regional (Provisional) visa (subclass 489)",

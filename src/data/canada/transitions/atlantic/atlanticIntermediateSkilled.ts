@@ -16,6 +16,7 @@ import {
 
 const atlanticIntermediateSkilled: Transition = {
     id: "atlantic_intermediate_skilled",
+    regionId: "canada",
     acquireBy: "application",
     from: alien,
     to: pr,

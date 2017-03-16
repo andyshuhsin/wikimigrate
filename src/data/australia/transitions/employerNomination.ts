@@ -16,6 +16,7 @@ import {
 
 const employerNominationGeneral: Transition = {
     id: "employer_nomination_general",
+    regionId: "australia",
     acquireBy: "application",
     name: {
         en: "Employer Nomination Scheme (subclass 186)",

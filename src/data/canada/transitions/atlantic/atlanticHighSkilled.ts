@@ -15,6 +15,7 @@ import {
 
 const atlanticHighSkilled: Transition = {
     id: "atlantic_high_skilled",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         en: "Atlantic High-Skilled Program"

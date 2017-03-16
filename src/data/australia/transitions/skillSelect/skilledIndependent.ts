@@ -21,6 +21,7 @@ import {
 
 const skilledIndependent: Transition = {
     id: "skilled_independent",
+    regionId: "australia",
     acquireBy: "application",
     name: {
         en: "Skilled Independent visa (subclass 189)",

@@ -11,6 +11,7 @@ import {
 
 const selfEmployedVisa: Transition = {
     id: "self_employed",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         en: "Self Employed"

@@ -4,6 +4,7 @@ import {
 
 const provinceNominee: Transition = {
     id: "provincial_nominees",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         en: "Provincial Nominee Program"

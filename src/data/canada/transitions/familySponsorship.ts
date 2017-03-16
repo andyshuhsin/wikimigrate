@@ -11,6 +11,7 @@ import {
 
 const familySponsorship: Transition = {
     id: "family_sponsorship",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         en: "Family Sponsorship"

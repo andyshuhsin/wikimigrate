@@ -14,6 +14,7 @@ import {
 
 const canadianExperience: Transition = {
     id: "canadian_experience",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         en: "Canadian Experience Class",

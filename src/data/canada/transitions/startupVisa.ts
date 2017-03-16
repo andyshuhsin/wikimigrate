@@ -10,6 +10,7 @@ import {
 
 const startupVisa: Transition = {
     id: "startup_visa",
+    regionId: "canada",
     acquireBy: "application",
     name: {
         "en": "Startup Visa",

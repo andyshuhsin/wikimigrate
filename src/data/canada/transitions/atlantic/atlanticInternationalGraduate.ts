@@ -10,6 +10,7 @@ import {
 
 const atlanticInternationalGraduate: Transition = {
     id: "atlantic_international_graduate",
+    regionId: "canada",
     acquireBy: "application",
     from: alien,
     to: pr,

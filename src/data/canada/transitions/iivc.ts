@@ -10,6 +10,7 @@ import {
 
 const iivc: Transition = {
     id: "iivc",
+    regionId: "canada",
     name: {
         en: "Immigrant Investor Venture Capital Pilot Program"
     },

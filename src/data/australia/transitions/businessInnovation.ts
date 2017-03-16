@@ -16,6 +16,7 @@ import {
 
 const businessInnovation: Transition = {
     id: "business_innovation",
+    regionId: "australia",
     acquireBy: "application",
     name: {
         en: "Business Innovation and Investment (Provisional) visa (subclass 188)",

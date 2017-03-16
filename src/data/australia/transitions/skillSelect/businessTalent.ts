@@ -16,6 +16,7 @@ import {
 
 const businessTalent: Transition = {
     id: "business_tablen",
+    regionId: "australia",
     acquireBy: "application",
     name: {
         en: "Business Talent (Permanent) visa (subclass 132)",

@@ -21,6 +21,7 @@ const boxStyle = {
     borderRadius: "5px",
     padding: "1em",
 
+    fontSize: "0.75em",
     background: "#ffccbc",
     wordWrap: "break-work",
     overflow: "hidden",
@@ -29,9 +30,13 @@ const boxStyle = {
 class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
+        console.log(transitions[0])
         return (
             <div style={boxStyle} onClick={this.props.boxClick}>
                 <div>
+                    <h2>
+                        {transitions[0].regionId}
+                    </h2>
                     <h1 style={{fontSize: 14}}>
                         {transitions[0].name["en"]}
                     </h1>

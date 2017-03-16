@@ -214,6 +214,7 @@ export interface Procedure {
 export interface Transition {
     id: string
     name: MultiLang<string>
+    regionId: string,
     acquireBy: "application" | "invitation" | "automatic"
     from: Status | Status[] | null
     to: Status

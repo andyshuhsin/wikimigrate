@@ -15,6 +15,7 @@ import {
 
 const temporaryWorkSkilled: Transition = {
     id: "temporary_work_skilled",
+    regionId: "australia",
     acquireBy: "application",
     name: {
         en: "Temporary Work (Skilled) visa (subclass 457)",

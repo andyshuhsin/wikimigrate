@@ -11,6 +11,7 @@ import {
 const expressEntry: Transition = {
     id: "express_entry",
     acquireBy: "invitation",
+    regionId: "canada",
     name: {
         en: "Express Entry",
         'zh-hans': "快速移民通道——Express Entry(EE)"
