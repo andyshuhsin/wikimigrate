@@ -78,8 +78,7 @@ class FilterPanel extends React.PureComponent<Props, {}> {
                 </div>
                 <div style={line2Style}>
                     © 2017 The Good Move・
-                    <a href="#" style={linkStyle}>Who We Are</a>・
-                    <a href="#" style={linkStyle}>Legal</a>
+                    <a href="./about.html" style={linkStyle}>About</a>
                 </div>
             </div>
         )

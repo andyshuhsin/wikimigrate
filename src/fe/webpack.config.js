@@ -29,7 +29,7 @@ module.exports = {
 
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'index.html', to: '.' },
+      { from: '*.html', to: '.' },
     ])
   ]
 
