@@ -154,7 +154,13 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                     brandName={data.app.brandName[data.app.lang]}
                     version={data.app.version}
                 />
-                <Title text={"Popular mobility options"} />
+                <Title text={
+                    (this.state.filterStates.education +
+                     this.state.filterStates.english +
+                     this.state.filterStates.offer)
+                    ? "Mobility options for you"
+                    : "Popular mobility options"
+                } />
                 <PathShowcase
                         paths={this.getFilteredPaths()}
                         boxClick={this.boxClick.bind(this)}
