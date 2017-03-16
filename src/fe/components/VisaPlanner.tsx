@@ -11,6 +11,10 @@ import {
     Path
 } from '../utils/definitions'
 
+import {
+    Combination
+} from '../../data/common'
+
 const style = {
     padding: "0.1em",
     height: "100vh",
@@ -22,6 +26,29 @@ const style = {
 
 function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {
     return Array.prototype.concat.apply([], arrayOfArrays)
+}
+
+// FIXME: This function is full of hack
+function findInCombination(predicate: (arg: any) => boolean, combo: Combination<any>) {
+
+    let result: any = null
+
+    if (predicate(combo)) {
+        return combo
+    } else if (combo.operands) {
+        for (let operand of combo.operands) {
+            if (predicate(operand)) {
+                return operand
+            } else if (operand["operator"]) {
+                result = findInCombination(predicate, operand)
+                if (result) {
+                    return result
+                }
+            }
+        }
+    }
+
+    return result
 }
 
 interface StateTypes {
@@ -52,11 +79,60 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
         const allPaths = allTransitions.map(transition => ({
             transitions: [transition]
         }))
+        
+        // FIXME: This whole thing is hacked together.
+        if (this.state.filterStates.english) {
+            for (let i = 0; i < allPaths.length; i += 1) {
+                const transition = allPaths[i].transitions[0]
+                const englishPrereq = findInCombination(
+                    (x) => x.property && x.property === 'language_test',
+                    transition.prerequisiteList
+                )
+
+                if (englishPrereq) {
+                    const currentScore = Number(this.state.filterStates.english)
+                    const requirementScore = englishPrereq.requirements[0].value
+                    if (currentScore < requirementScore) {
+                        allPaths.splice(i, 1)
+                        continue
+                    }
+                }
+            }
+        }
+
+        if (this.state.filterStates.offer) {
+            for (let i = 0; i < allPaths.length; i += 1) {
+                const transition = allPaths[i].transitions[0]
+                const prereq = findInCombination(
+                    (x) => x.property && x.property === 'offer',
+                    transition.prerequisiteList
+                )
+
+                if (prereq && this.state.filterStates.offer === 'no') {
+                    allPaths.splice(i, 1)
+                }
+            }
+        }
+        // FIXME: Hack end.
+
+        if (this.state.filterStates.education) {
+            for (let i = 0; i < allPaths.length; i += 1) {
+                const transition = allPaths[i].transitions[0]
+                const prereq = findInCombination(
+                    (x) => x.property && x.property === 'offer',
+                    transition.prerequisiteList
+                )
+
+                if (prereq && prereq.stage !== this.state.filterStates.education) {
+                    allPaths.splice(i, 1)
+                }
+            }
+        }
+
         return allPaths
     }
 
     boxClick(path: Path): void {
-        console.log(path)
         this.setState({
             pathOnDisplay: path
         })
