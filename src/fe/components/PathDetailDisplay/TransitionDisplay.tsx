@@ -14,7 +14,7 @@ interface Props {
 }
 
 const h1Style = {
-
+    marginTop: "2em"
 }
 
 const h2Style = {
@@ -27,12 +27,12 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
         return (
             <div>
                 <h1 style={h1Style}>
-                    {transition.id}
+                    {transition.name["en"]}
                 </h1>
-                <h2 style={h2Style}>
+                {/*<h2 style={h2Style}>
                     To {transition.to.name["en"]},
                     for rights of {transition.to.rights}
-                </h2>
+                </h2>*/}
 
                 <div>
                     <h5>Prerequisites:</h5>

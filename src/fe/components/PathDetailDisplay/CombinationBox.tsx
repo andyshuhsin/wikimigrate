@@ -9,8 +9,7 @@ import PrerequisiteBox from './PrerequisiteBox'
 import JobTypeBox from './PrerequisiteBox/JobTypeBox'
 
 const comboBoxStyle = {
-    border: "1px black",
-    padding: "1em 0 1em 1em",
+    padding: "0.3em 0 1em 1em",
 }
 
 function isCombination(input: any): boolean {

@@ -10,7 +10,7 @@ const LanguageBenchmarkBox = (props: {prereq: LanguageBenchamrkPrereq}) => {
     const test = languageBenchmarkProfiles.filter(test => test.id === prereq.benchmark)[0]
     return (
         <div>
-            {test.title["en"]}
+            {test.title["en"] || test.title["fr"]} {" "}
             {
                 prereq.requirements.map(
                     (requirement) => {
