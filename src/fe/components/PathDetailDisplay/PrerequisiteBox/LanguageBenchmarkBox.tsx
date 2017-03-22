@@ -1,4 +1,5 @@
 import * as React from 'react'
+import text from "../../../utils/text"
 
 import {
     LanguagePrereq,
@@ -12,7 +13,7 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
                     .filter(test => test.id === prereq.benchmark)[0]
     return (
         <div>
-            {test.title["en"] || test.title["fr"]} {" "}
+            {text(test.title)} {" "}
             {
                 prereq.requirements.map(
                     (requirement) => {

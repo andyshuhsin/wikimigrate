@@ -1,4 +1,5 @@
 import * as React from 'react'
+import text from "../utils/text"
 
 import {
     Path
@@ -30,7 +31,6 @@ const boxStyle = {
 class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
-        console.log(transitions[0])
         return (
             <div style={boxStyle} onClick={this.props.boxClick}>
                 <div>
@@ -38,7 +38,7 @@ class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
                         {transitions[0].regionId}
                     </h2>
                     <h1 style={{fontSize: 14}}>
-                        {transitions[0].name["en"]}
+                        {text(transitions[0].name)}
                     </h1>
                 </div>
             </div>
