@@ -2,7 +2,7 @@ import {
     Transition,
     oneOf,
     allOf,
-} from '../../common'
+} from '../../../definitions'
 
 import {
     alien,

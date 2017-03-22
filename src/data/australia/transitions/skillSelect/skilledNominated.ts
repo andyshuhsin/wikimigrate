@@ -18,6 +18,8 @@ import {
     below50,
 } from './skillSelectCommon'
 
+import jobClass from '../../jobClass'
+
 const skilledNominated: Transition = {
     id: "skilled_nominated",
     regionId: "australia",
@@ -34,12 +36,8 @@ const skilledNominated: Transition = {
         below50,
         {
             property: "work_experience",
-            jobTypes: allOf([
-                {
-                    description: {
-                        en: "Skilled Occupation List"
-                    }
-                }
+            jobNature: allOf([
+                jobClass.jobGroups.sol
             ])
         } as WorkExperiencePrereq,
     ]),

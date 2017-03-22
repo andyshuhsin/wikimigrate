@@ -1,22 +1,26 @@
 import { CountryId } from '../Country'
 import { MultiLangStringSet } from '../index'
 
-interface JobType {
+export interface JobGroup {
+    id: string
+    description?: MultiLangStringSet
+    parentGroup: JobGroup | null
+}
+
+export interface JobType {
+    jobGroup: Array<JobGroup>
     description: MultiLangStringSet
 }
 
-interface JobGroup {
-    primaryGroupLevel: string
-    secondaryGroupLevel?: string
-    jobTypes: Array<JobType>
-}
-
-interface JobClassification {
+export interface JobClassification {
     regionId: string
     title: MultiLangStringSet
     titleShort: MultiLangStringSet
     version: string
-    jobGroups: JobGroup[]
+    jobTypes?: Array<JobType>
+    jobGroups?: {
+        [groupName: string]: JobGroup
+    }
 }
 
 export default JobClassification
