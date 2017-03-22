@@ -1,6 +1,6 @@
 import {
     Transition
-} from '../../common'
+} from '../../../definitions'
 
 const provinceNominee: Transition = {
     id: "provincial_nominees",
