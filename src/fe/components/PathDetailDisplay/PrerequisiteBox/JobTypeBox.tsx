@@ -1,13 +1,13 @@
 import * as React from 'react'
 
 import {
-    JobType
+    JobGroup
 } from '../../../../definitions'
 
-const JobTypeBox = (props: {jobType: JobType}) => {
+const JobTypeBox = (props: {jobGroup: JobGroup}) => {
     return (
         <span>
-            {props.jobType.description["en"]}
+            {props.jobGroup.description["en"]}
         </span>
     )
 }
