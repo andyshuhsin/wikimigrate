@@ -1,4 +1,4 @@
-import { CountryData } from '../common'
+import { Country } from '../../definitions'
 
 import {
     citizenship,
@@ -22,7 +22,7 @@ import atlanticInternationalGraduate from './transitions/atlantic/atlanticIntern
 
 //TODO: Include admissibility http://www.cic.gc.ca/english/information/inadmissibility/index.asp
 
-const canada: CountryData =
+const canada: Country =
         {
             id: "canada",
             statusList: [ 

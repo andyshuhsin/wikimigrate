@@ -3,9 +3,9 @@ import {
     allOf,
     oneOf,
     WorkExperiencePrereq,
-    LanguageBenchamrkPrereq,
+    LanguagePrereq,
     duration,
-} from '../../../common'
+} from '../../../../definitions'
 
 import {
     alien,
@@ -56,14 +56,14 @@ const canadianExperience: Transition = {
                         requirements: [
                             {value: 7}
                         ]
-                    } as LanguageBenchamrkPrereq,
+                    } as LanguagePrereq,
                     {
                         property: "language_test",
                         benchmark: "nclc",
                         requirements: [
                             {value: 7}
                         ]
-                    } as LanguageBenchamrkPrereq
+                    } as LanguagePrereq
                 ]),
             ]),
 
@@ -91,14 +91,14 @@ const canadianExperience: Transition = {
                         requirements: [
                             {value: 5}
                         ]
-                    } as LanguageBenchamrkPrereq,
+                    } as LanguagePrereq,
                     {
                         property: "language_test",
                         benchmark: "nclc",
                         requirements: [
                             {value: 5}
                         ]
-                    } as LanguageBenchamrkPrereq
+                    } as LanguagePrereq
                 ]),
 
 

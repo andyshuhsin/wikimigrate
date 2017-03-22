@@ -1,10 +1,10 @@
 import {
-    MultiLang
-} from "../common"
+    MultiLangStringSet
+} from "../../definitions"
 
 const lang = "en"
 
-const brandName: MultiLang<string> = {
+const brandName: MultiLangStringSet = {
     en: "The Good Move",
     "zh-hans": "跑得快"
 }

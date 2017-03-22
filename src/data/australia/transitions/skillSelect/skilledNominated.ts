@@ -6,7 +6,7 @@ import {
     oneOf,
     allOf,
     RightPrereq,
-} from '../../../common'
+} from '../../../../definitions'
 
 import {
     alien,

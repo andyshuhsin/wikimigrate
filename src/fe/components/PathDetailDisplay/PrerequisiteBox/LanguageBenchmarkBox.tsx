@@ -1,13 +1,15 @@
 import * as React from 'react'
 
 import {
-    LanguageBenchamrkPrereq,
-    languageBenchmarkProfiles,
-} from '../../../../data/common'
+    LanguagePrereq,
+} from '../../../../definitions'
 
-const LanguageBenchmarkBox = (props: {prereq: LanguageBenchamrkPrereq}) => {
+import data from '../../../../data'
+
+const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     const prereq = props.prereq
-    const test = languageBenchmarkProfiles.filter(test => test.id === prereq.benchmark)[0]
+    const test = data.common.languageBenchmarkProfiles
+                    .filter(test => test.id === prereq.benchmark)[0]
     return (
         <div>
             {test.title["en"] || test.title["fr"]} {" "}

@@ -4,7 +4,7 @@ import {
     Transition,
     Prerequisite,
     Combination,
-} from '../../../data/common'
+} from '../../../definitions'
 
 import CombinationBox from './CombinationBox'
 import ProcedureBox from './ProcedureBox'

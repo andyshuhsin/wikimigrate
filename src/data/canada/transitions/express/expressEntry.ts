@@ -1,7 +1,7 @@
 import {
     Transition,
     oneOf,
-} from '../../../common'
+} from '../../../../definitions'
 
 import {
     alien,

@@ -1,7 +1,7 @@
 import { 
     Status,
     duration
- } from '../common'
+ } from '../../definitions'
 
 export const citizenship: Status = {
     id: "citizen",

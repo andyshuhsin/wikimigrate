@@ -13,7 +13,7 @@ import {
 
 import {
     Combination
-} from '../../data/common'
+} from '../../definitions'
 
 const style = {
     padding: "0.1em",
