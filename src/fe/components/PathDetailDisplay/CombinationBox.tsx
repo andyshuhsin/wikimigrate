@@ -2,7 +2,7 @@ import * as React from 'react'
 import {
     Transition,
     Prerequisite,
-    Combination,
+    Condition,
 } from '../../../definitions'
 
 import PrerequisiteBox from './PrerequisiteBox'
@@ -25,12 +25,12 @@ function isJobNature(input: any): boolean {
 }
 
 interface Props {
-    combo: Combination<any>
+    combo: Condition<any>
 }
 
 class CombinationBox extends React.PureComponent<Props, {}> {
 
-    OperandView(props: {operand: any}) {
+    OperandView(props: {operand: any}): JSX.Element {
         if (isCombination(props.operand)) {
             return <CombinationBox combo={props.operand} />
         } else if (isPrerequisite(props.operand)) {

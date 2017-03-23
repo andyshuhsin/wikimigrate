@@ -1,9 +1,11 @@
 import { MultiLangStringSet } from './auxillary/MultiLang'
 import Status from './Status'
-import Combination from './auxillary/Combination'
+import { Condition } from './auxillary/Combination'
 import Procedure from './auxillary/Procedure'
 import Exception from './auxillary/Exception'
 import URLDatum from './auxillary/URLDatum'
+
+import { Prerequisite } from './auxillary/Prerequisites'
 
 interface Transition {
     id: string
@@ -16,7 +18,7 @@ interface Transition {
         description: MultiLangStringSet
         date?: Date
     }
-    prerequisiteList: Combination<any> | any //TODO: Should refer to Prerequisite
+    prerequisiteList: Condition<Prerequisite>
     procedureList: Procedure[]
     exceptionList?: Array<Exception>
     referenceList?:  URLDatum[]

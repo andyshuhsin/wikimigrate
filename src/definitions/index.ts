@@ -19,6 +19,7 @@ import  {
 
 import {
     Combination
+    , Condition
     , allOf
     , oneOf
 } from './auxillary/Combination'
@@ -51,6 +52,7 @@ export {
     , CertificationPrereq
 
     , Combination
+    , Condition
     , allOf
     , oneOf
 

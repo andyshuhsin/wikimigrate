@@ -12,7 +12,7 @@ import {
 } from '../utils/definitions'
 
 import {
-    Combination
+    Condition
 } from '../../definitions'
 
 const style = {
@@ -29,7 +29,7 @@ function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {
 }
 
 // FIXME: This function is full of hack
-function findInCombination(predicate: (arg: any) => boolean, combo: Combination<any>) {
+function findInCombination(predicate: (arg: any) => boolean, combo: Condition<any>) {
 
     let result: any = null
 
