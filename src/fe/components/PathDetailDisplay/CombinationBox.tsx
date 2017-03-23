@@ -6,7 +6,7 @@ import {
 } from '../../../definitions'
 
 import PrerequisiteBox from './PrerequisiteBox'
-import JobTypeBox from './PrerequisiteBox/JobTypeBox'
+import JobNatureBox from './PrerequisiteBox/JobNatureBox'
 
 const comboBoxStyle = {
     padding: "0.3em 0 1em 1em",
@@ -20,7 +20,7 @@ function isPrerequisite(input: any): boolean {
     return !!input.property
 }
 
-function isJobType(input: any): boolean {
+function isJobNature(input: any): boolean {
     return !!input.description
 }
 
@@ -35,8 +35,8 @@ class CombinationBox extends React.PureComponent<Props, {}> {
             return <CombinationBox combo={props.operand} />
         } else if (isPrerequisite(props.operand)) {
             return <PrerequisiteBox prereq={props.operand} />
-        } else if (isJobType(props.operand)) {
-            return <JobTypeBox jobType={props.operand} />
+        } else if (isJobNature(props.operand)) {
+            return <JobNatureBox jobGroup={props.operand} />
         } else {
             console.warn("Cannot recognize operand type:", JSON.stringify(props.operand))
             return <div />

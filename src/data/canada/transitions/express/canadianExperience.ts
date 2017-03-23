@@ -90,10 +90,7 @@ const canadianExperience: Transition = {
                         ]
                     } as LanguagePrereq
                 ]),
-
-
             ])
-
         ])
     ]),
     procedureList: [

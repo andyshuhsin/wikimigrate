@@ -18,7 +18,7 @@ export interface JobClassification {
     titleShort: MultiLangStringSet
     version: string
     jobTypes?: Array<JobType>
-    jobGroups?: {
+    jobGroups: {
         [groupName: string]: JobGroup
     }
 }

@@ -50,7 +50,7 @@ const federalSkilledWorker: Transition = {
         ]),
 
         // Working Experience
-        {
+        oneOf([{
             property: "work_experience",
             length: duration(1, "year"),
             withinLast: duration(10, "year"),
@@ -60,7 +60,7 @@ const federalSkilledWorker: Transition = {
                 jobClass.jobGroups.nocA,
                 jobClass.jobGroups.nocB,
             ]),
-        } as WorkExperiencePrereq,
+        } as WorkExperiencePrereq]),
 
         // Education
         oneOf([

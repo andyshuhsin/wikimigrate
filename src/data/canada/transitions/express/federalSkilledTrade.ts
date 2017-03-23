@@ -29,46 +29,46 @@ const federalSkilledTrade: Transition = {
     prerequisiteList: allOf([
 
         // Language Requirements
-        allOf([
-            oneOf([
-                {
-                    property: "language_test",
-                    benchmark: "clb",
-                    requirements: [
-                        {speaking: 5},
-                        {listening: 5},
-                        {reading: 4},
-                        {writing: 4},
-                    ]
-                } as LanguagePrereq,
-                {
-                    property: "language_test",
-                    benchmark: "nclc",
-                    requirements: [
-                        {speaking: 5},
-                        {listening: 5},
-                        {reading: 4},
-                        {writing: 4},
-                    ]
-                } as LanguagePrereq
-            ]),
+        oneOf([
+            {
+                property: "language_test",
+                benchmark: "clb",
+                requirements: [
+                    {speaking: 5},
+                    {listening: 5},
+                    {reading: 4},
+                    {writing: 4},
+                ]
+            } as LanguagePrereq,
+            {
+                property: "language_test",
+                benchmark: "nclc",
+                requirements: [
+                    {speaking: 5},
+                    {listening: 5},
+                    {reading: 4},
+                    {writing: 4},
+                ]
+            } as LanguagePrereq
         ]),
 
         // Work experience
-        {
-            property: "work_experience",
-            length: duration(2, "year"),
-            withinLast: duration(5, "year"),
-            workHoursPerWeek: duration(30, "hour"),
-            jobNature: oneOf([
-                jobClass.jobGroups.noc72,
-                jobClass.jobGroups.noc73,
-                jobClass.jobGroups.noc82,
-                jobClass.jobGroups.noc92,
-                jobClass.jobGroups.noc632,
-                jobClass.jobGroups.noc633,
-            ])
-        } as WorkExperiencePrereq,
+        allOf([
+            {
+                property: "work_experience",
+                length: duration(2, "year"),
+                withinLast: duration(5, "year"),
+                workHoursPerWeek: duration(30, "hour"),
+                jobNature: oneOf([
+                    jobClass.jobGroups.noc72,
+                    jobClass.jobGroups.noc73,
+                    jobClass.jobGroups.noc82,
+                    jobClass.jobGroups.noc92,
+                    jobClass.jobGroups.noc632,
+                    jobClass.jobGroups.noc633,
+                ])
+            } as WorkExperiencePrereq
+        ]),
 
         oneOf([
             {

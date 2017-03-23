@@ -16,21 +16,25 @@ const noc0: JobGroup = {
 
 const nocA: JobGroup = {
     id: "A",
+    description: {},
     parentGroup: null
 }
 
 const nocB: JobGroup = {
     id: "B",
+    description: {},
     parentGroup: null,
 }
 
 const nocC: JobGroup = {
     id: "C",
+    description: {},
     parentGroup: null,
 }
 
 const nocD: JobGroup = {
     id: "D",
+    description: {},
     parentGroup: null
 }
 
@@ -99,6 +103,7 @@ const noc2016: JobClassification = {
         nocD,
         noc72,
         noc73,
+        noc82,
         noc92,
         noc632,
         noc633,

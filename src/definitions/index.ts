@@ -28,7 +28,7 @@ import {
 } from './auxillary/MultiLang'
 
 import Procedure from './auxillary/Procedure'
-import JobClassification from './auxillary/JobClassification'
+import {JobGroup} from './auxillary/JobClassification'
 
 import Money, { money } from './auxillary/Money'
 
@@ -56,7 +56,7 @@ export {
 
     , MultiLangStringSet
     , Procedure
-    , JobClassification
+    , JobGroup
 
     , Money
     , money
