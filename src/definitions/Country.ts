@@ -5,6 +5,7 @@ import URLDatum from './auxillary/URLDatum'
 export type CountryId =
     "canada"
     | "australia"
+    | "canada-pacific-provinces"
 
 export interface Country {
     id: CountryId

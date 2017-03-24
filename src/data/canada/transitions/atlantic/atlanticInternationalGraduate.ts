@@ -1,6 +1,12 @@
 import {
     Transition,
     allOf,
+    oneOf,
+    duration,
+    WorkExperiencePrereq,
+    EducationPrereq,
+    ResidencePrereq,
+    RightPrereq,
 } from '../../../../definitions'
 
 import {
@@ -19,30 +25,40 @@ const atlanticInternationalGraduate: Transition = {
     },
     prerequisiteList: allOf([
         {
-            description: {
-                en: "a minimum 2 year degree, diploma, certificate, or trade or apprenticeship credential from a recognized publicly-funded institution in an Atlantic province",
-            }
-        },
+            property: "education",
+            stage: "post-secondary",
+        } as EducationPrereq,
         {
-            description: {
-                en: "been a full-time student in Canada for at least two years",
-            }
-        },
+            property: "education",
+            stage: undefined,
+            regionId: "canada",
+            duration: duration(2, "year"),
+            graduateNoEarlierThan: duration(12, "month")
+        } as EducationPrereq,
         {
-            description: {
-                en: "graduated in the last 12 months when you apply",
-            }
-        },
-        {
-            description: {
-                en: "lived in one of the Atlantic provinces for at least 16 months in the last 2 years before you graduated",
-            }
-        },
-        {
-            description: {
-                en: "had the visa or permit needed to work, study or train in Canada"
-            }
-        }
+            property: "residence",
+            regionId: "canada-pacific-provinces",
+            duration: duration(16, "month"),
+            validPeriod: duration(2, "year"),
+        } as ResidencePrereq,
+
+        oneOf([
+            {
+                property: "right",
+                regionId: "canada",
+                rightId: "work"
+            } as RightPrereq,
+            {
+                property: "right",
+                regionId: "canada",
+                rightId: "study"
+            } as RightPrereq,
+            {
+                property: "right",
+                regionId: "canada",
+                rightId: "train"
+            } as RightPrereq,
+        ])
     ]),
     procedureList: [
         {

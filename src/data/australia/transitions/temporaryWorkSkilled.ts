@@ -13,6 +13,8 @@ import {
     visa457holder,
 } from '../status'
 
+import jobClass from '../jobClass'
+
 const temporaryWorkSkilled: Transition = {
     id: "temporary_work_skilled",
     regionId: "australia",
@@ -32,7 +34,7 @@ const temporaryWorkSkilled: Transition = {
         } as OfferPrereq,
         {
             property: "work_experience",
-            jobType: "required"
+            jobNature: jobClass.jobGroups.sol
         } as WorkExperiencePrereq
     ]),
     procedureList: [

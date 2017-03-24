@@ -15,6 +15,7 @@ import  {
     , OfferPrereq
     , RightPrereq
     , CertificationPrereq
+    , ResidencePrereq
 } from './auxillary/Prerequisites'
 
 import {
@@ -50,6 +51,7 @@ export {
     , OfferPrereq
     , RightPrereq
     , CertificationPrereq
+    , ResidencePrereq
 
     , Combination
     , Condition
