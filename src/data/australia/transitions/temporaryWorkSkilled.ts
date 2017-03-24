@@ -13,6 +13,8 @@ import {
     visa457holder,
 } from '../status'
 
+import jobClass from '../jobClass'
+
 const temporaryWorkSkilled: Transition = {
     id: "temporary_work_skilled",
     regionId: "australia",
@@ -32,7 +34,7 @@ const temporaryWorkSkilled: Transition = {
         } as OfferPrereq,
         {
             property: "work_experience",
-            jobType: "required"
+            jobNature: jobClass.jobGroups.sol
         } as WorkExperiencePrereq
     ]),
     procedureList: [
@@ -54,7 +56,7 @@ const temporaryWorkSkilled: Transition = {
     ],
     referenceList: [
         {
-            url: "http://www.border.gov.au/Trav/Visa-1/188-",
+            url: "http://www.border.gov.au/Trav/Visa-1/457-",
             title: {
                 en: "Official Webpage"
             }

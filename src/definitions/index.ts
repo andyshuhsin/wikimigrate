@@ -15,10 +15,12 @@ import  {
     , OfferPrereq
     , RightPrereq
     , CertificationPrereq
+    , ResidencePrereq
 } from './auxillary/Prerequisites'
 
 import {
     Combination
+    , Condition
     , allOf
     , oneOf
 } from './auxillary/Combination'
@@ -49,8 +51,10 @@ export {
     , OfferPrereq
     , RightPrereq
     , CertificationPrereq
+    , ResidencePrereq
 
     , Combination
+    , Condition
     , allOf
     , oneOf
 

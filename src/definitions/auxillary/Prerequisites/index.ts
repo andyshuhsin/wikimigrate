@@ -7,6 +7,7 @@ import BusinessPrereq from './BusinessPrereq'
 import OfferPrereq from './OfferPrereq'
 import RightPrereq from './RightPrereq'
 import CertificationPrereq from './CertificationPrereq'
+import ResidencePrereq from './ResidencePrereq'
 
 type Prerequisite = 
     AgePrereq
@@ -18,6 +19,7 @@ type Prerequisite =
     | OfferPrereq
     | RightPrereq
     | CertificationPrereq
+    | ResidencePrereq
 
 export {
     Prerequisite
@@ -30,4 +32,5 @@ export {
     , OfferPrereq
     , RightPrereq
     , CertificationPrereq
+    , ResidencePrereq
 }

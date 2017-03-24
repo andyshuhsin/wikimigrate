@@ -1,12 +1,15 @@
 import BasePrereq from './BasePrereq'
 import { MultiLangStringSet } from '../MultiLang'
 import { CertificationId } from '../Certification'
+import Duration from '../Duration'
 
 export interface EducationPrereq extends BasePrereq {
     property: "education"
-    stage: "primary" | "secondary" | "post-secondary"
+    stage: "primary" | "secondary" | "post-secondary" | undefined
     regionId: string | undefined
-    description: MultiLangStringSet
+    duration?: Duration,
+    graduateNoEarlierThan?: Duration
+    description?: MultiLangStringSet
     certification?: CertificationId
 }
 

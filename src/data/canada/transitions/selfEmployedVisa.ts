@@ -2,6 +2,7 @@ import {
     Transition,
     oneOf,
     allOf,
+    WorkExperiencePrereq,
 } from '../../../definitions'
 
 import {
@@ -21,27 +22,31 @@ const selfEmployedVisa: Transition = {
     prerequisiteList: oneOf([
         allOf([
             {
-                description: {
+                property: "work_experience",
+                jobNature: {
                     en: "Have relevant experience in cultural activities or athletics",
                 }
-            },
+            } as WorkExperiencePrereq,
             {
-                description: {
+                property: "work_experience",
+                jobNature: {
                     en: "Intend and be able to make a significant contribution to the cultural or athletic life of Canada"
                 }
-            }
+            } as WorkExperiencePrereq,
         ]),
         allOf([
             {
-                description: {
+                property: "work_experience",
+                jobNature: {
                     en: "Have experience in farm management"
                 }
-            },
+            } as WorkExperiencePrereq,
             {
-                description: {
+                property: "work_experience",
+                jobNature: {
                     en: "Intend and be able to buy and manage a farm in Canada"
                 }
-            }
+            } as WorkExperiencePrereq,
         ])
     ]),
     procedureList: [],

@@ -1,55 +1,57 @@
 import {
     allOf,
     oneOf,
+    WorkExperiencePrereq,
+    EducationPrereq,
+    OfferPrereq,
 } from '../../../../definitions'
 
 const atlanticJobOfferCommon = allOf([
     {
-        description: {
-            en: "from a designated employer in an Atlantic province (New Brunswick, Newfoundland and Labrador, Nova Scotia, or Prince Edward Island)"
-        }
-    },
-    {
-        description: {
-            en: "full-time"
-        }
-    },
-    {
-        description: {
-            en: "non-seasonal"
-        }
-    },
-    {
-        description: {
+        property: "offer",
+        employer: {
+            regionId: "canada-atlantic-provinces"  // TODO: Implement this properly
+        },
+        fulltime: true,
+        seasonal: false,
+        descrption: {
             en: "reviewed by the province (details on the endorsement process will be available in early March 2017)"
         }
-    }
+    } as OfferPrereq
 ])
 
 const atlanticWorkersJob = allOf([
     {
-        description: {
+        property: "work_experience",
+        jobNature: {
             en: "You must have worked at least one year (1,560 hours total or 30 hours per week) within the last three years.",
         }
-    },
+    } as WorkExperiencePrereq,
     {
-        description: {
+        property: "work_experience",
+        jobNature: {
             en: "The work must be in one occupation (but can be with different employers) and paid (volunteering or unpaid internships do not count)"
         }
-    }
+    } as WorkExperiencePrereq,
 ])
 
 const atlanticWorkersEducation = oneOf([
     {
-        description: {
-            en: "a Canadian secondary (high school) or post-secondary certificate, diploma or degree"
-        }
-    },
+        property: "education",
+        stage: "secondary",
+        regionId: "canada",
+    } as EducationPrereq,
     {
-        description: {
-            en: "a foreign degree, diploma, certificate, or trade or apprenticeship education credential. You need an Educational Credential Assessment (ECA) report to make sure it is valid and equal to a Canadian credential"
-        }
-    }
+        property: "education",
+        stage: "post-secondary",
+        regionId: "canada",
+    } as EducationPrereq,
+    {
+        property: "education",
+        stage: "secondary",
+        regionId: undefined,
+        certification: "eca"
+    } as EducationPrereq,
 ])
 
 export {

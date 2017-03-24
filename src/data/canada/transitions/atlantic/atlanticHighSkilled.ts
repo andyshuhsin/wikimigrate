@@ -1,6 +1,9 @@
 import {
     Transition,
-    allOf
+    allOf,
+    oneOf,
+    WorkExperiencePrereq,
+    OfferPrereq,
 } from '../../../../definitions'
 
 import {
@@ -12,6 +15,8 @@ import {
     alien,
     pr
 } from '../../status'
+
+import jobClass from '../../jobClass'
 
 const atlanticHighSkilled: Transition = {
     id: "atlantic_high_skilled",
@@ -26,15 +31,20 @@ const atlanticHighSkilled: Transition = {
         atlanticJobOfferCommon,
         atlanticWorkersJob,
         {
-            description: {
-                en: "Have work experience at NOC skill type/level 0 A or B.",
-            }
-        },
+            property: "work_experience",
+            jobNature: oneOf([
+                jobClass.jobGroups.noc0,
+                jobClass.jobGroups.nocA,
+                jobClass.jobGroups.nocB,
+            ])
+        } as WorkExperiencePrereq,
         {
-            description: {
-                en: "Have a job offer that is"
+            property: "offer",
+            employer: {
+                regionId: "canada"
             }
-        },
+            // FIXME: Complete missing words
+        } as OfferPrereq,
     ]),
     procedureList: [
         {
