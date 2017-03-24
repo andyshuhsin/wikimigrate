@@ -14,6 +14,8 @@ import {
     expressEntryCandidate
 } from '../../status'
 
+import jobClass from '../../jobClass'
+
 const federalSkilledTrade: Transition = {
     id: "federal_skilled_trade",
     regionId: "canada",
@@ -27,70 +29,46 @@ const federalSkilledTrade: Transition = {
     prerequisiteList: allOf([
 
         // Language Requirements
-        allOf([
-            oneOf([
-                {
-                    property: "language_test",
-                    benchmark: "clb",
-                    requirements: [
-                        {speaking: 5},
-                        {listening: 5},
-                        {reading: 4},
-                        {writing: 4},
-                    ]
-                } as LanguagePrereq,
-                {
-                    property: "language_test",
-                    benchmark: "nclc",
-                    requirements: [
-                        {speaking: 5},
-                        {listening: 5},
-                        {reading: 4},
-                        {writing: 4},
-                    ]
-                } as LanguagePrereq
-            ]),
+        oneOf([
+            {
+                property: "language_test",
+                benchmark: "clb",
+                requirements: [
+                    {speaking: 5},
+                    {listening: 5},
+                    {reading: 4},
+                    {writing: 4},
+                ]
+            } as LanguagePrereq,
+            {
+                property: "language_test",
+                benchmark: "nclc",
+                requirements: [
+                    {speaking: 5},
+                    {listening: 5},
+                    {reading: 4},
+                    {writing: 4},
+                ]
+            } as LanguagePrereq
         ]),
 
         // Work experience
-        {
-            property: "work_experience",
-            length: duration(2, "year"),
-            withinLast: duration(5, "year"),
-            workHoursPerWeek: duration(30, "hour"),
-            jobTypes: oneOf([
-                {
-                    description: {
-                        en: "Major Group 72, industrial, electrical and construction trades"
-                    }
-                },
-                {
-                    description: {
-                        en: "Major Group 73, maintenance and equipment operation trades"
-                    }
-                },
-                {
-                    description: {
-                        en: "Major Group 82, supervisors and technical jobs in natural resources, agriculture and related production"
-                    }
-                },
-                {
-                    description: {
-                        en: "Major Group 92, processing, manufacturing and utilities supervisors and central control operators"
-                    }
-                },
-                {
-                    description: {
-                        en: "Minor Group 632, chefs and cooks"
-                    }
-                },
-                {
-                    description: {
-                        en: "Minor Group 633, butchers and bakers"
-                    }
-                },
-            ])
-        } as WorkExperiencePrereq,
+        allOf([
+            {
+                property: "work_experience",
+                length: duration(2, "year"),
+                withinLast: duration(5, "year"),
+                workHoursPerWeek: duration(30, "hour"),
+                jobNature: oneOf([
+                    jobClass.jobGroups.noc72,
+                    jobClass.jobGroups.noc73,
+                    jobClass.jobGroups.noc82,
+                    jobClass.jobGroups.noc92,
+                    jobClass.jobGroups.noc632,
+                    jobClass.jobGroups.noc633,
+                ])
+            } as WorkExperiencePrereq
+        ]),
 
         oneOf([
             {

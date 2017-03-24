@@ -9,7 +9,7 @@ export interface WorkExperiencePrereq extends BasePrereq {
     withinLast?: Duration
     workHoursPerWeek?: Duration
     regionId?: string
-    jobTypes?: Combination<any> //TODO: Clarify
+    jobNature: Combination<any> //TODO: Clarify
 }
 
 export default WorkExperiencePrereq

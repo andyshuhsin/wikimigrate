@@ -14,4 +14,10 @@ const data = {
     common,
 }
 
+export {
+    app,
+    countries,
+    common,
+}
+
 export default data

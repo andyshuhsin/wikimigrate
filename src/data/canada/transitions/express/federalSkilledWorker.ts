@@ -17,6 +17,8 @@ import {
     expressEntryCandidate
 } from '../../status'
 
+import jobClass from '../../jobClass'
+
 const federalSkilledWorker: Transition = {
     id: "federal_skilled_worker",
     regionId: "canada",
@@ -48,17 +50,17 @@ const federalSkilledWorker: Transition = {
         ]),
 
         // Working Experience
-        {
+        oneOf([{
             property: "work_experience",
             length: duration(1, "year"),
             withinLast: duration(10, "year"),
             workHoursPerWeek: duration(30, "hour"),
-            jobTypes: oneOf([{
-                description: {
-                    en: "at skill type 0, or skill levels A or B"
-                }
-            }]),
-        } as WorkExperiencePrereq,
+            jobNature: oneOf([
+                jobClass.jobGroups.noc0,
+                jobClass.jobGroups.nocA,
+                jobClass.jobGroups.nocB,
+            ]),
+        } as WorkExperiencePrereq]),
 
         // Education
         oneOf([

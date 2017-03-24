@@ -21,7 +21,7 @@ const WorkExperieneceBox = (props: {prereq: WorkExperiencePrereq}) => {
                 ? `you have worked ${prereq.length.value} ${prereq.length.unit} in`
                 : ""
             }
-            <CombinationBox combo={prereq.jobTypes as any} />
+            <CombinationBox combo={prereq.jobNature as any} />
         </div>
     )
 }

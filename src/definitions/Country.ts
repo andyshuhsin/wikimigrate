@@ -2,8 +2,12 @@ import Status from './Status'
 import Transition from './Transition'
 import URLDatum from './auxillary/URLDatum'
 
-interface Country {
-    id: string
+export type CountryId =
+    "canada"
+    | "australia"
+
+export interface Country {
+    id: CountryId
     statusList: Status[]
     transitionList: Transition[]
     referenceList: URLDatum[]

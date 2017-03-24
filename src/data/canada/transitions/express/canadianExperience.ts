@@ -12,6 +12,8 @@ import {
     expressEntryCandidate
 } from '../../status'
 
+import jobClass from '../../jobClass'
+
 const canadianExperience: Transition = {
     id: "canadian_experience",
     regionId: "canada",
@@ -35,17 +37,9 @@ const canadianExperience: Transition = {
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
                     regionId: 'canada',
-                    jobTypes: oneOf([
-                        {
-                            description: {
-                                en: "Managerial jobs (NOC skill level 0)"
-                            }
-                        },
-                        {
-                            description: {
-                                en: "Professional jobs (NOC skill type A)"
-                            }
-                        },
+                    jobNature: oneOf([
+                        jobClass.jobGroups.noc0,
+                        jobClass.jobGroups.nocA,
                     ])
                 } as WorkExperiencePrereq,
 
@@ -75,12 +69,8 @@ const canadianExperience: Transition = {
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
                     regionId: 'canada',
-                    jobTypes: oneOf([
-                        {
-                            description: {
-                                en: "Technical jobs and skilled trades (NOC skill type B)"
-                            }
-                        }
+                    jobNature: oneOf([
+                        jobClass.jobGroups.nocB
                     ])
                 } as WorkExperiencePrereq,
 
@@ -100,10 +90,7 @@ const canadianExperience: Transition = {
                         ]
                     } as LanguagePrereq
                 ]),
-
-
             ])
-
         ])
     ]),
     procedureList: [

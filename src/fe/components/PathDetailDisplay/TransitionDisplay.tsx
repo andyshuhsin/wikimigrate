@@ -1,4 +1,5 @@
 import * as React from 'react'
+import text from "../../utils/text"
 
 import {
     Transition,
@@ -27,7 +28,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
         return (
             <div>
                 <h1 style={h1Style}>
-                    {transition.name["en"]}
+                    {text(transition.name)}
                 </h1>
                 {/*<h2 style={h2Style}>
                     To {transition.to.name["en"]},
