@@ -3,11 +3,11 @@ import {
     duration,
     allOf,
     oneOf,
-    LanguageBenchamrkPrereq,
+    LanguagePrereq,
     WorkExperiencePrereq,
     OfferPrereq,
     CertificationPrereq,
-} from '../../../common'
+} from '../../../../definitions'
 
 import {
     alien,
@@ -38,7 +38,7 @@ const federalSkilledTrade: Transition = {
                         {reading: 4},
                         {writing: 4},
                     ]
-                } as LanguageBenchamrkPrereq,
+                } as LanguagePrereq,
                 {
                     property: "language_test",
                     benchmark: "nclc",
@@ -48,7 +48,7 @@ const federalSkilledTrade: Transition = {
                         {reading: 4},
                         {writing: 4},
                     ]
-                } as LanguageBenchamrkPrereq
+                } as LanguagePrereq
             ]),
         ]),
 

@@ -3,7 +3,7 @@ import {
     Transition,
     Prerequisite,
     Combination,
-} from '../../../data/common'
+} from '../../../definitions'
 
 import PrerequisiteBox from './PrerequisiteBox'
 import JobTypeBox from './PrerequisiteBox/JobTypeBox'

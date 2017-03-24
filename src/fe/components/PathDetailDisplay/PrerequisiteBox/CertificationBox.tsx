@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {
     CertificationPrereq
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 const CertificationBox = (props: {prereq: CertificationPrereq}) => {
     return (

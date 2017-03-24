@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {
     FundPrereq
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 function stringifyCondition(condition: any) {
     if (condition.familyMember) {

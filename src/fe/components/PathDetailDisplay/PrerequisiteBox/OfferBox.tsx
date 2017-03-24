@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {
     OfferPrereq
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 const OfferBox = (props: {prereq: OfferPrereq}) => {
     return (

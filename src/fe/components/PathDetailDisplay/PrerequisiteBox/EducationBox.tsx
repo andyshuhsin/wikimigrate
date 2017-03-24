@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {
     EducationPrereq
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 const EducationBox = (props: {prereq: EducationPrereq}) => {
     const prereq = props.prereq

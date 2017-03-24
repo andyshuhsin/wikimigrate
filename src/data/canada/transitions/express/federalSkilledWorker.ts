@@ -4,13 +4,13 @@ import {
     duration,
     allOf,
     oneOf,
-    LanguageBenchamrkPrereq,
+    LanguagePrereq,
     WorkExperiencePrereq,
     EducationPrereq,
     FundPrereq,
     RightPrereq,
     OfferPrereq,
-} from '../../../common'
+} from '../../../../definitions'
 
 import {
     alien,
@@ -37,14 +37,14 @@ const federalSkilledWorker: Transition = {
                 requirements: [
                     {value: 7}
                 ]
-            } as LanguageBenchamrkPrereq,
+            } as LanguagePrereq,
             {
                 property: "language_test",
                 benchmark: "nclc",
                 requirements: [
                     {value: 7}
                 ]
-            } as LanguageBenchamrkPrereq
+            } as LanguagePrereq
         ]),
 
         // Working Experience

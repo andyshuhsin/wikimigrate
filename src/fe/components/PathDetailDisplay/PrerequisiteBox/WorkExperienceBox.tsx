@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {
     WorkExperiencePrereq
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 import CombinationBox from '../CombinationBox'
 

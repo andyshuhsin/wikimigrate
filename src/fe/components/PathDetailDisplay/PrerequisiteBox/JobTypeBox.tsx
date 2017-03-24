@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {
     JobType
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 const JobTypeBox = (props: {jobType: JobType}) => {
     return (

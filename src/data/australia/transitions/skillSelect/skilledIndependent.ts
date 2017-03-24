@@ -5,9 +5,8 @@ import {
     duration,
     oneOf,
     allOf,
-    LanguageBenchamrkPrereq,
     RightPrereq,
-} from '../../../common'
+} from '../../../../definitions'
 
 import {
     alien,

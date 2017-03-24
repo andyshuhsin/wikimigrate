@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {
     RightPrereq
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 const RightBox = (props: {prereq: RightPrereq}) => {
     return (

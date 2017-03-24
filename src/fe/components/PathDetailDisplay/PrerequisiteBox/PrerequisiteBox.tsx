@@ -4,7 +4,7 @@ import {
     Transition,
     Prerequisite,
     Combination,
-} from '../../../../data/common'
+} from '../../../../definitions'
 
 import LanguageBenchmarkBox from './LanguageBenchmarkBox'
 import WorkExperienceBox from './WorkExperienceBox'

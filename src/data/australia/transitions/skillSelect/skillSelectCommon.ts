@@ -1,10 +1,10 @@
 import {
-    LanguageBenchamrkPrereq,
+    LanguagePrereq,
     oneOf,
     RightPrereq,
     AgePrereq,
     duration,
-} from '../../../common'
+} from '../../../../definitions'
 
 // English requirements; see http://www.border.gov.au/Lega/Lega/Form/Immi-FAQs/how-can-i-prove-i-have-competent-english
 
@@ -47,7 +47,7 @@ export const competentEnglish =  oneOf([
             }
         ]
 
-    } as LanguageBenchamrkPrereq,
+    } as LanguagePrereq,
 
     {
         property: "language_test",
@@ -57,7 +57,7 @@ export const competentEnglish =  oneOf([
                 value: 'b'
             }
         ]
-    } as LanguageBenchamrkPrereq,
+    } as LanguagePrereq,
 
     {
         property: "language_test",
@@ -68,7 +68,7 @@ export const competentEnglish =  oneOf([
             { writing: 21 },
             { speaking: 18 },
         ]
-    } as LanguageBenchamrkPrereq,
+    } as LanguagePrereq,
 
     {
         property: "language_test",
@@ -79,7 +79,7 @@ export const competentEnglish =  oneOf([
             { writing: 50 },
             { speaking: 50 },
         ]
-    } as LanguageBenchamrkPrereq,
+    } as LanguagePrereq,
 
     {
         property: "language_test",
@@ -90,7 +90,7 @@ export const competentEnglish =  oneOf([
             { writing: 169 },
             { speaking: 169 },
         ]
-    } as LanguageBenchamrkPrereq,
+    } as LanguagePrereq,
 
 ]) 
 

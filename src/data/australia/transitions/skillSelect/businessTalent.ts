@@ -7,7 +7,7 @@ import {
     BusinessPrereq,
     FundPrereq,
     money,
-} from '../../../common'
+} from '../../../../definitions'
 
 import {
     alien,

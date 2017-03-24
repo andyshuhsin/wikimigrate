@@ -1,6 +1,7 @@
 import canada from './canada'
 import australia from './australia'
 import app from './app'
+import common from './common'
 
 const countries = [
     canada,
@@ -9,7 +10,8 @@ const countries = [
 
 const data = {
     app,
-    countries
+    countries,
+    common,
 }
 
 export default data

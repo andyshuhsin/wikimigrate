@@ -1,4 +1,4 @@
-import { CountryData } from "../common"
+import { Country } from "../../definitions"
 
 import {
     citizenship,
@@ -18,7 +18,7 @@ import {
 import temporaryWorkSkilled from './transitions/temporaryWorkSkilled'
 import businessTalent from './transitions/skillSelect/businessTalent'
 
-const australia: CountryData = {
+const australia: Country = {
     id: "australia",
     statusList: [
         citizenship,

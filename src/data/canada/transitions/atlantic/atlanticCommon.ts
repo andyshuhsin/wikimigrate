@@ -1,7 +1,7 @@
 import {
     allOf,
     oneOf,
-} from '../../../common'
+} from '../../../../definitions'
 
 const atlanticJobOfferCommon = allOf([
     {

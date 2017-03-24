@@ -6,7 +6,7 @@ import {
     allOf,
     OfferPrereq,
     WorkExperiencePrereq
-} from '../../common'
+} from '../../../definitions'
 
 import {
     alien,
