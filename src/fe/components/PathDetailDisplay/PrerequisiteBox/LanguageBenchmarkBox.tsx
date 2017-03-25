@@ -3,6 +3,9 @@ import text from "../../../utils/text"
 
 import {
     LanguagePrereq,
+    LanguageTestItem,
+    BenchmarkRequirementSimple,
+    BenchmarkRequirementItemized,
 } from '../../../../definitions'
 
 import data from '../../../../data'
@@ -21,14 +24,14 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     return (
         <div>
             {text(test.title)} {" "}
-            {(prereq.requirements.score)
+            {((prereq.requirements as BenchmarkRequirementSimple).score)
                 ? <span>
                     <strong>
-                        {prereq.requirements.score}
+                        {(prereq.requirements as BenchmarkRequirementSimple).score}
                     </strong>
                   </span>
                 : langRequirementKeyOrder.map(
-                      (testItemKey: string) => (
+                      (testItemKey: LanguageTestItem) => (
                           <span
                               key={testItemKey}
                               style={{marginRight: "0.8em"}}
@@ -36,7 +39,7 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
                               {text(data.common.languageBenchmarkItemNames[testItemKey])}
                               :&nbsp;
                               <strong>
-                                  {prereq.requirements[testItemKey]}
+                                  {(prereq.requirements as BenchmarkRequirementItemized)[testItemKey]}
                               </strong>
                           </span>
                       )

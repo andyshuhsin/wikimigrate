@@ -8,21 +8,18 @@ export type LanguageBenchmarkProfile = {
     title: MultiLangStringSet
 }
 
-type BenchmarkRequirementSimple = {
-    score?: number | string
+export type BenchmarkRequirementSimple = {
+    score: number | string
 }
 
-type BenchmarkRequirementItemized = {
-    listening?: number
-    speaking?: number
-    reading?: number
-    writing?: number
+export type LanguageTestItem = "listening" | "speaking" | "reading" | "writing"
+
+export type BenchmarkRequirementItemized = {
+    [key in LanguageTestItem]?: number
 }
 
 export type LanguageBenchmarkRequirement =
-    BenchmarkRequirementSimple
-    & BenchmarkRequirementItemized
-    & {[key: string]: number | string}
+    BenchmarkRequirementSimple | BenchmarkRequirementItemized
 
 export interface LanguagePrereq extends BasePrereq {
     property: "language_test"
