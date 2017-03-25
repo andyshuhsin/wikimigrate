@@ -1,4 +1,4 @@
-import { Country } from "../../definitions"
+import { Region } from "../../definitions"
 
 import {
     citizenship,
@@ -18,7 +18,7 @@ import {
 import temporaryWorkSkilled from './transitions/temporaryWorkSkilled'
 import businessTalent from './transitions/skillSelect/businessTalent'
 
-const australia: Country = {
+const australia: Region = {
     id: "australia",
     statusList: [
         citizenship,

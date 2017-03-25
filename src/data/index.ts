@@ -3,20 +3,20 @@ import australia from './australia'
 import app from './app'
 import common from './common'
 
-const countries = [
+const regions = [
     canada,
     australia,
 ]
 
 const data = {
     app,
-    countries,
+    regions,
     common,
 }
 
 export {
     app,
-    countries,
+    regions,
     common,
 }
 

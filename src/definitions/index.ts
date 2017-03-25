@@ -2,7 +2,7 @@ import { Duration, duration } from './auxillary/Duration'
 
 import Status from './Status'
 import Transition from './Transition'
-import Country from './Country'
+import Region from './Region'
 
 import  Prerequisite from './auxillary/Prerequisites'
 
@@ -36,7 +36,7 @@ import Money, { money, CurrencyId } from './auxillary/Money'
 export {
     Status
     , Transition
-    , Country
+    , Region
     , Duration
     , duration
 
