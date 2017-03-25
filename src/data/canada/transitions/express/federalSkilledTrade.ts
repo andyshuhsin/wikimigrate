@@ -4,6 +4,7 @@ import {
     allOf,
     oneOf,
     LanguagePrereq,
+    languagePrereq,
     WorkExperiencePrereq,
     OfferPrereq,
     CertificationPrereq,
@@ -30,26 +31,18 @@ const federalSkilledTrade: Transition = {
 
         // Language Requirements
         oneOf([
-            {
-                property: "language_test",
-                benchmark: "clb",
-                requirements: [
-                    {speaking: 5},
-                    {listening: 5},
-                    {reading: 4},
-                    {writing: 4},
-                ]
-            } as LanguagePrereq,
-            {
-                property: "language_test",
-                benchmark: "nclc",
-                requirements: [
-                    {speaking: 5},
-                    {listening: 5},
-                    {reading: 4},
-                    {writing: 4},
-                ]
-            } as LanguagePrereq
+            languagePrereq("clb", {
+                speaking: 5,
+                listening: 5,
+                reading: 4,
+                writing: 4,
+            }),
+            languagePrereq("nclc", {
+                speaking: 5,
+                listening: 5,
+                reading: 4,
+                writing: 4,
+            }),
         ]),
 
         // Work experience

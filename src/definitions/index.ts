@@ -4,19 +4,18 @@ import Status from './Status'
 import Transition from './Transition'
 import Country from './Country'
 
-import  {
-    Prerequisite
-    , AgePrereq
-    , LanguagePrereq
-    , WorkExperiencePrereq
-    , EducationPrereq
-    , FundPrereq
-    , BusinessPrereq
-    , OfferPrereq
-    , RightPrereq
-    , CertificationPrereq
-    , ResidencePrereq
-} from './auxillary/Prerequisites'
+import  Prerequisite from './auxillary/Prerequisites'
+
+import AgePrereq from './auxillary/Prerequisites/AgePrereq'
+import LanguagePrereq, { languagePrereq } from './auxillary/Prerequisites/LanguagePrereq'
+import WorkExperiencePrereq from './auxillary/Prerequisites/WorkExperiencePrereq'
+import EducationPrereq from './auxillary/Prerequisites/EducationPrereq'
+import FundPrereq from './auxillary/Prerequisites/FundPrereq'
+import BusinessPrereq from './auxillary/Prerequisites/BusinessPrereq'
+import OfferPrereq from './auxillary/Prerequisites/OfferPrereq'
+import RightPrereq from './auxillary/Prerequisites/RightPrereq'
+import CertificationPrereq from './auxillary/Prerequisites/CertificationPrereq'
+import ResidencePrereq from './auxillary/Prerequisites/ResidencePrereq'
 
 import {
     Combination
@@ -44,6 +43,7 @@ export {
     , Prerequisite
     , AgePrereq
     , LanguagePrereq
+    , languagePrereq
     , WorkExperiencePrereq
     , EducationPrereq
     , FundPrereq

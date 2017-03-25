@@ -7,6 +7,15 @@ import {
 
 import data from '../../../../data'
 
+const langRequirementScoreKey: string = "score"
+
+const langRequirementKeyOrder: string[] = [
+        "listening",
+        "speaking",
+        "reading",
+        "writing",
+]
+
 const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     const prereq = props.prereq
     const test = data.common.languageBenchmarkProfiles
@@ -14,28 +23,26 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     return (
         <div>
             {text(test.title)} {" "}
-            {
-                prereq.requirements.map(
-                    (requirement) => {
-                        const item = Object.keys(requirement)[0]
-                        if (requirement.value) {
-                            return (
-                                <strong style={{marginRight: "0.5em"}} key={item}>
-                                    {requirement.value}
-                                </strong>
-                            )
-                        } else {
-                            return (
-                                <div key={item}>
-                                    <strong key={item}>
-                                        {item}: {requirement[item]}
-                                    </strong>
-                                </div>
-
-                            )
-                        }
-                    }
-                )
+            {(prereq.requirements[langRequirementScoreKey])
+                ? <span>
+                    <strong>
+                        {prereq.requirements[langRequirementScoreKey]}
+                    </strong>
+                  </span>
+                : langRequirementKeyOrder.map(
+                      (testItemKey: string) => (
+                          <span
+                              key={testItemKey}
+                              style={{marginRight: "0.8em"}}
+                          >
+                              {text(data.common.languageBenchmarkItemNames[testItemKey])}
+                              :&nbsp;
+                              <strong>
+                                  {prereq.requirements[testItemKey]}
+                              </strong>
+                          </span>
+                      )
+                  )
             }
         </div>
     )

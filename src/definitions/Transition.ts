@@ -5,7 +5,7 @@ import Procedure from './auxillary/Procedure'
 import Exception from './auxillary/Exception'
 import URLDatum from './auxillary/URLDatum'
 
-import { Prerequisite } from './auxillary/Prerequisites'
+import Prerequisite from './auxillary/Prerequisites'
 
 interface Transition {
     id: string
