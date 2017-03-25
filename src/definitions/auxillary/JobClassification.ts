@@ -1,4 +1,3 @@
-import { CountryId } from '../Country'
 import { MultiLangStringSet } from '../index'
 
 export interface JobGroup {

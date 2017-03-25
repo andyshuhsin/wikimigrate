@@ -6,11 +6,12 @@ import Exception from './auxillary/Exception'
 import URLDatum from './auxillary/URLDatum'
 
 import Prerequisite from './auxillary/Prerequisites'
+import {RegionId} from "./Region"
 
 interface Transition {
     id: string
     name: MultiLangStringSet
-    regionId: string,
+    regionId: RegionId,
     acquireBy: "application" | "invitation" | "automatic"
     from: Status | Status[] | null
     to: Status

@@ -8,11 +8,12 @@ import FilterPanel from './FilterPanel'
 import PathDetailDisplay from './PathDetailDisplay'
 
 import {
-    Path
+    Path,
 } from '../utils/definitions'
 
 import {
-    Condition
+    Condition,
+    Region,
 } from '../../definitions'
 
 const style = {
@@ -75,7 +76,7 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
     }
 
     getFilteredPaths(): Path[] {
-        const allTransitions = flatten(data.countries.map(country => country.transitionList))
+        const allTransitions = flatten(data.regions.map((region: Region) => region.transitionList))
         const allPaths = allTransitions.map(transition => ({
             transitions: [transition]
         }))

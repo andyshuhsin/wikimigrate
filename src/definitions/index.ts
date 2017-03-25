@@ -2,7 +2,7 @@ import { Duration, duration } from './auxillary/Duration'
 
 import Status from './Status'
 import Transition from './Transition'
-import Country from './Country'
+import Region, { RegionId} from './Region'
 
 import  Prerequisite from './auxillary/Prerequisites'
 
@@ -31,12 +31,13 @@ import {
 import Procedure from './auxillary/Procedure'
 import {JobGroup} from './auxillary/JobClassification'
 
-import Money, { money } from './auxillary/Money'
+import Money, { money, CurrencyId } from './auxillary/Money'
 
 export {
     Status
     , Transition
-    , Country
+    , Region
+    , RegionId
     , Duration
     , duration
 
@@ -64,4 +65,5 @@ export {
 
     , Money
     , money
+    , CurrencyId
 }

@@ -1,4 +1,4 @@
-import { Country } from '../../definitions'
+import { Region } from '../../definitions'
 
 import {
     citizenship,
@@ -22,9 +22,12 @@ import atlanticInternationalGraduate from './transitions/atlantic/atlanticIntern
 
 //TODO: Include admissibility http://www.cic.gc.ca/english/information/inadmissibility/index.asp
 
-const canada: Country =
+const canada: Region =
         {
             id: "canada",
+            name: {
+                en: "Canada"
+            },
             statusList: [ 
                 citizenship,
                 pr,
