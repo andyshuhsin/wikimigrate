@@ -25,6 +25,9 @@ import atlanticInternationalGraduate from './transitions/atlantic/atlanticIntern
 const canada: Region =
         {
             id: "canada",
+            name: {
+                en: "Canada"
+            },
             statusList: [ 
                 citizenship,
                 pr,

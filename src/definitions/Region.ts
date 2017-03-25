@@ -1,6 +1,7 @@
 import Status from './Status'
 import Transition from './Transition'
 import URLDatum from './auxillary/URLDatum'
+import {MultiLangStringSet} from "./auxillary/MultiLang"
 
 export type RegionId =
     "canada"
@@ -9,6 +10,7 @@ export type RegionId =
 
 export interface Region {
     id: RegionId
+    name: MultiLangStringSet
     statusList: Status[]
     transitionList: Transition[]
     referenceList: URLDatum[]

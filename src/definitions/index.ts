@@ -2,7 +2,7 @@ import { Duration, duration } from './auxillary/Duration'
 
 import Status from './Status'
 import Transition from './Transition'
-import Region from './Region'
+import Region, { RegionId} from './Region'
 
 import  Prerequisite from './auxillary/Prerequisites'
 
@@ -37,6 +37,7 @@ export {
     Status
     , Transition
     , Region
+    , RegionId
     , Duration
     , duration
 

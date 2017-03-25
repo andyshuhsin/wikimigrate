@@ -5,6 +5,8 @@ import {
     Path
 } from '../utils/definitions'
 
+import data from '../../data'
+
 interface PathShowcaseProps {
     path: Path
     boxClick: (event: React.MouseEvent<any>) => void
@@ -31,11 +33,12 @@ const boxStyle = {
 class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
+        const targetRegion = data.getRegionById(transitions[0].regionId)
         return (
             <div style={boxStyle} onClick={this.props.boxClick}>
                 <div>
                     <h2>
-                        {transitions[0].regionId}
+                        {targetRegion && text(targetRegion.name)}
                     </h2>
                     <h1 style={{fontSize: 14}}>
                         {text(transitions[0].name)}

@@ -3,7 +3,7 @@ import { app } from '../../data'
 
 const fallbackLangList = ["en", "fr"]
 
-function text(s: MultiLangStringSet | undefined,
+function text(s: MultiLangStringSet | null | undefined,
            lang: string = app.lang,
            fallbackLangs = fallbackLangList): string {
        if (!s) {

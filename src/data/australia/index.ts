@@ -20,6 +20,9 @@ import businessTalent from './transitions/skillSelect/businessTalent'
 
 const australia: Region = {
     id: "australia",
+    name: {
+        en: "Australia"
+    },
     statusList: [
         citizenship,
         pr,
