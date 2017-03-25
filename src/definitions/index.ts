@@ -7,7 +7,13 @@ import Region, { RegionId} from './Region'
 import  Prerequisite from './auxillary/Prerequisites'
 
 import AgePrereq from './auxillary/Prerequisites/AgePrereq'
-import LanguagePrereq, { languagePrereq } from './auxillary/Prerequisites/LanguagePrereq'
+import {
+    LanguagePrereq,
+    languagePrereq,
+    LanguageTestItem,
+    BenchmarkRequirementItemized,
+    BenchmarkRequirementSimple,
+} from './auxillary/Prerequisites/LanguagePrereq'
 import WorkExperiencePrereq from './auxillary/Prerequisites/WorkExperiencePrereq'
 import EducationPrereq from './auxillary/Prerequisites/EducationPrereq'
 import FundPrereq from './auxillary/Prerequisites/FundPrereq'
@@ -45,6 +51,9 @@ export {
     , AgePrereq
     , LanguagePrereq
     , languagePrereq
+    , LanguageTestItem
+    , BenchmarkRequirementItemized
+    , BenchmarkRequirementSimple
     , WorkExperiencePrereq
     , EducationPrereq
     , FundPrereq
