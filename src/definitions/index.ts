@@ -31,7 +31,7 @@ import {
 import Procedure from './auxillary/Procedure'
 import {JobGroup} from './auxillary/JobClassification'
 
-import Money, { money } from './auxillary/Money'
+import Money, { money, CurrencyId } from './auxillary/Money'
 
 export {
     Status
@@ -64,4 +64,5 @@ export {
 
     , Money
     , money
+    , CurrencyId
 }

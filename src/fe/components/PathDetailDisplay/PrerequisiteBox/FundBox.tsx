@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import data from '../../../../data'
+
 import {
     FundPrereq
 } from '../../../../definitions'
@@ -18,7 +20,7 @@ const FundBox = (props: {prereq: FundPrereq}) => {
                 {
                     props.prereq.schemes.map((scheme, index) => 
                         <div key={index}>
-                            {scheme.fund.currencyId}
+                            {data.common.currencies[scheme.fund.currencyId].code}
                             {" "}
                             {scheme.fund.value}
                             {
