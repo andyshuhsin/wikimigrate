@@ -20,7 +20,9 @@ type BenchmarkRequirementItemized = {
 }
 
 export type LanguageBenchmarkRequirement =
-        BenchmarkRequirementSimple | BenchmarkRequirementItemized
+    BenchmarkRequirementSimple
+    & BenchmarkRequirementItemized
+    & {[key: string]: number | string}
 
 export interface LanguagePrereq extends BasePrereq {
     property: "language_test"
