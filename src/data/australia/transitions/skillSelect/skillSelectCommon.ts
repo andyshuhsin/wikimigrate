@@ -1,5 +1,5 @@
 import {
-    LanguagePrereq,
+    languagePrereq,
     oneOf,
     RightPrereq,
     AgePrereq,
@@ -38,61 +38,27 @@ export const competentEnglish =  oneOf([
         } as RightPrereq,
     ]),
 
-    {
-        property: "language_test",
-        benchmark: "ielts",
-        requirements: [
-            {
-                value: 6
-            }
-        ]
-
-    } as LanguagePrereq,
-
-    {
-        property: "language_test",
-        benchmark: "oet",
-        requirements: [
-            {
-                value: 'b'
-            }
-        ]
-    } as LanguagePrereq,
-
-    {
-        property: "language_test",
-        benchmark: "toefl",
-        requirements: [
-            { listening: 12 },
-            { reading: 12 },
-            { writing: 21 },
-            { speaking: 18 },
-        ]
-    } as LanguagePrereq,
-
-    {
-        property: "language_test",
-        benchmark: "pte-academic",
-        requirements: [
-            { listening: 50 },
-            { reading: 50 },
-            { writing: 50 },
-            { speaking: 50 },
-        ]
-    } as LanguagePrereq,
-
-    {
-        property: "language_test",
-        benchmark: "cae",
-        requirements: [
-            { listening: 169 },
-            { reading: 169 },
-            { writing: 169 },
-            { speaking: 169 },
-        ]
-    } as LanguagePrereq,
-
-]) 
+    languagePrereq("ielts", { score: 6 }),
+    languagePrereq("oet", { score: "b" }),
+    languagePrereq("toefl", {
+        listening: 12,
+        reading: 12,
+        writing: 21,
+        speaking: 18,
+    }),
+    languagePrereq("pte-academic", {
+        listening: 50,
+        reading: 50,
+        writing: 50,
+        speaking: 50,
+    }),
+    languagePrereq("cae", {
+        listening: 169,
+        reading: 169,
+        writing: 169,
+        speaking: 169,
+    }),
+])
 
 export const below50 = {
             property: "age",

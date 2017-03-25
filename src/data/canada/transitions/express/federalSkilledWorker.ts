@@ -4,7 +4,7 @@ import {
     duration,
     allOf,
     oneOf,
-    LanguagePrereq,
+    languagePrereq,
     WorkExperiencePrereq,
     EducationPrereq,
     FundPrereq,
@@ -33,20 +33,8 @@ const federalSkilledWorker: Transition = {
 
         // Language Requirement
         oneOf([
-            {
-                property: "language_test",
-                benchmark: "clb",
-                requirements: [
-                    {value: 7}
-                ]
-            } as LanguagePrereq,
-            {
-                property: "language_test",
-                benchmark: "nclc",
-                requirements: [
-                    {value: 7}
-                ]
-            } as LanguagePrereq
+            languagePrereq("clb", {score: 7}),
+            languagePrereq("nclc", {score: 7}),
         ]),
 
         // Working Experience
