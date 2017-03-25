@@ -7,8 +7,6 @@ import {
 
 import data from '../../../../data'
 
-const langRequirementScoreKey: string = "score"
-
 const langRequirementKeyOrder: string[] = [
         "listening",
         "speaking",
@@ -23,10 +21,10 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     return (
         <div>
             {text(test.title)} {" "}
-            {(prereq.requirements[langRequirementScoreKey])
+            {(prereq.requirements.score)
                 ? <span>
                     <strong>
-                        {prereq.requirements[langRequirementScoreKey]}
+                        {prereq.requirements.score}
                     </strong>
                   </span>
                 : langRequirementKeyOrder.map(
