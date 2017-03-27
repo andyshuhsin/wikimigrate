@@ -77,5 +77,5 @@ Currently, you need to manually refresh the browser.
 ## 8. Deploy
 ```
 cd visaplanner
-gulp deploy
+npm run deploy
 ```
