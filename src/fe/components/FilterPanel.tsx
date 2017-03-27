@@ -3,11 +3,9 @@ import ConditionDropdown from './ConditionDropdown'
 import Title from './Title'
 
 const panelStyle = {
-    position: "absolute",
-    bottom: 0,
     width: "100%",
-    maxWidth: 400,
     padding: "1em",
+    flex: 0,
 } as React.CSSProperties
 
 const line1Style = {
@@ -16,15 +14,15 @@ const line1Style = {
     marginBottom: "1em",
 } as React.CSSProperties
 
-const line2Style = {
-    textAlign: "center",
-    fontSize: "0.8em",
-} as React.CSSProperties
-
-const linkStyle = {
-    textDecoration: "none",
-    color: "#212121"
-}
+// const line2Style = {
+//     textAlign: "center",
+//     fontSize: "0.8em",
+// } as React.CSSProperties
+//
+// const linkStyle = {
+//     textDecoration: "none",
+//     color: "#212121"
+// }
 
 type Props = {
     filterStates: {
@@ -41,7 +39,6 @@ class FilterPanel extends React.PureComponent<Props, {}> {
     render() {
         return (
             <div style={panelStyle}>
-                <Title text={"Filter by"} />
                 <div style={line1Style}>
                     <ConditionDropdown 
                         item={"offer"}
@@ -76,10 +73,10 @@ class FilterPanel extends React.PureComponent<Props, {}> {
                         filterClick={this.props.filterClick}
                     />
                 </div>
-                <div style={line2Style}>
-                    © 2017 The Good Move・
-                    <a href="./about.html" style={linkStyle}>About</a>
-                </div>
+                {/*<div style={line2Style}>*/}
+                    {/*© 2017 The Good Move・*/}
+                    {/*<a href="./about.html" style={linkStyle}>About</a>*/}
+                {/*</div>*/}
             </div>
         )
     }

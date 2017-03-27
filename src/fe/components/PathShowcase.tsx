@@ -12,7 +12,6 @@ interface PathShowcaseProps {
 
 const pathShowcaseStyle = {
     justifyContent: "space-around",
-    maxHeight: "50vh",
     overflow: "scroll",
     padding: "1em",
 } as React.CSSProperties

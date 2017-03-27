@@ -17,9 +17,12 @@ import {
 } from '../../definitions'
 
 const style = {
+    display: "flex",
+    flexFlow: "column",
     padding: "0.1em",
     height: "100vh",
     maxWidth: 400,
+    margin: "0 auto",
     fontSize: 14,
     color: "#212121",
     fontFamily: "sans-serif",
@@ -162,21 +165,25 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                     ? "Mobility options for you"
                     : "Popular mobility options"
                 } />
-                <PathShowcase
+                <div style={{
+                    overflow: "scroll"
+                }}>
+                    <PathShowcase
                         paths={this.getFilteredPaths()}
                         boxClick={this.boxClick.bind(this)}
-                />
-                <FilterPanel
-                    filterStates={this.state.filterStates}
-                    filterClick={this.filterClick.bind(this)}
-                />
-                <PathDetailDisplay
+                    />
+                    <PathDetailDisplay
                         pathOnDisplay={this.state.pathOnDisplay}
                         onClose={
                             () => this.setState({
                                 pathOnDisplay: null
                             })
                         }
+                    />
+                </div>
+                <FilterPanel
+                    filterStates={this.state.filterStates}
+                    filterClick={this.filterClick.bind(this)}
                 />
             </div>
         );

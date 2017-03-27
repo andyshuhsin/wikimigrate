@@ -7,21 +7,25 @@ import {
 
 const style = {
     position: "absolute",
-    left: "2em",
-    right: "2em",
-    top: "2em",
-    bottom: "2em",
+    left: "1em",
+    right: 0,
+    top: 0,
+    bottom: 0,
 
     overflow: "scroll",
-    maxWidth: "90vh",
 
     background: "#ebebeb",
+    zIndex: 1,
 }
 
 const closeButtonStyle = {
     position: "absolute",
-    right: "0.3em",
-    top: "0.2em",
+    webkitAppearance: "none",
+    appearance: "none",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: "1em",
     fontSize: "3em",
 }
 
