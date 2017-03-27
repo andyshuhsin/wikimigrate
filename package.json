@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "deploy": "cd src/fe ; webpack -p ; scp built/* lax:/var/www/vp"
+    "deploy": "cd src/fe ; webpack; node node_modules/babel-cli/bin/babel built --out-dir built --presets=babili ; scp built/* lax:/var/www/vp"
   }
 }
