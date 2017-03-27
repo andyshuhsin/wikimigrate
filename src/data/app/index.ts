@@ -9,7 +9,7 @@ const brandName: MultiLangStringSet = {
     "zh-hans": "跑得快"
 }
 
-const version: string = "0.0.2"
+const version: string = "0.0.3"
 
 const app = {
     lang,
