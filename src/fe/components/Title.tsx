@@ -6,7 +6,7 @@ interface TitleProps {
 
 const titleStyle = {
     margin: "1em",
-    fontWeight: "bolder",
+    font: "1.8em sans-serif",
     textAlign: "center",
 } as React.CSSProperties
 
