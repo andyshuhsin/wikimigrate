@@ -11,8 +11,6 @@ interface PathShowcaseProps {
 }
 
 const pathShowcaseStyle = {
-    display: "flex",
-    flexWrap: "wrap",
     justifyContent: "space-around",
     maxHeight: "50vh",
     overflow: "scroll",
