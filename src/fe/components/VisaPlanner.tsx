@@ -1,5 +1,7 @@
 import data from '../../data'
+
 import * as React from 'react'
+import {connect} from 'react-redux'
 
 import TopBar from './TopBar'
 import Title from './Title'
@@ -15,6 +17,9 @@ import {
     Condition,
     Region,
 } from '../../definitions'
+
+import {VisaPlannerState} from "../reducers"
+import {FilterId, FilterState} from "../data"
 
 const style = {
     display: "flex",
@@ -55,37 +60,21 @@ function findInCombination(predicate: (arg: any) => boolean, combo: Condition<an
     return result
 }
 
-interface StateTypes {
+interface PropTypes {
+    enabledFilters: FilterState
     pathOnDisplay: Path | null
-    filterStates: {
-        offer: ''
-        education: ''
-        english: ''
-    }
 }
 
-class VisaPlanner extends React.Component<{}, StateTypes> {
+class VisaPlanner extends React.Component<PropTypes, {}> {
 
-    constructor() {
-        super()
-        this.state = {
-            pathOnDisplay: null,
-            filterStates: {
-                offer: '',
-                education: '',
-                english: '',
-            }
-        }
-    }
-
-    getFilteredPaths(): Path[] {
+    getFilteredPaths(enabledFilters: FilterState): Path[] {
         const allTransitions = flatten(data.regions.map((region: Region) => region.transitionList))
         const allPaths = allTransitions.map(transition => ({
             transitions: [transition]
         }))
-        
+
         // FIXME: This whole thing is hacked together.
-        if (this.state.filterStates.english) {
+        if (enabledFilters.english) {
             for (let i = 0; i < allPaths.length; i += 1) {
                 const transition = allPaths[i].transitions[0]
                 const englishPrereq = findInCombination(
@@ -94,17 +83,16 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                 )
 
                 if (englishPrereq) {
-                    const currentScore = Number(this.state.filterStates.english)
+                    const currentScore = Number(enabledFilters.english)
                     const requirementScore = englishPrereq.requirements[0].value
                     if (currentScore < requirementScore) {
                         allPaths.splice(i, 1)
-                        continue
                     }
                 }
             }
         }
 
-        if (this.state.filterStates.offer) {
+        if (enabledFilters.offer) {
             for (let i = 0; i < allPaths.length; i += 1) {
                 const transition = allPaths[i].transitions[0]
                 const prereq = findInCombination(
@@ -112,14 +100,14 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                     transition.prerequisiteList
                 )
 
-                if (prereq && this.state.filterStates.offer === 'no') {
+                if (prereq && enabledFilters.offer === 'no') {
                     allPaths.splice(i, 1)
                 }
             }
         }
         // FIXME: Hack end.
 
-        if (this.state.filterStates.education) {
+        if (enabledFilters.education) {
             for (let i = 0; i < allPaths.length; i += 1) {
                 const transition = allPaths[i].transitions[0]
                 const prereq = findInCombination(
@@ -127,7 +115,7 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                     transition.prerequisiteList
                 )
 
-                if (prereq && prereq.stage !== this.state.filterStates.education) {
+                if (prereq && prereq.stage !== enabledFilters.education) {
                     allPaths.splice(i, 1)
                 }
             }
@@ -142,16 +130,8 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
         })
     }
 
-    filterClick(item: string, value: string) {
-        console.info(item, value)
-        this.setState({
-            filterStates: Object.assign({}, this.state.filterStates, {
-                [item]: value
-            })
-        } as any)
-    }
-
     render() {
+        const enabledFilters = this.props.enabledFilters
         return (
             <div style={style}>
                 <TopBar
@@ -159,9 +139,9 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                     version={data.app.version}
                 />
                 <Title text={
-                    (this.state.filterStates.education +
-                     this.state.filterStates.english +
-                     this.state.filterStates.offer)
+                    (Number(enabledFilters.education) +
+                     Number(enabledFilters.english) +
+                     Number(enabledFilters.offer))
                     ? "Mobility options for you"
                     : "Popular mobility options"
                 } />
@@ -169,11 +149,11 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                     overflow: "scroll"
                 }}>
                     <PathShowcase
-                        paths={this.getFilteredPaths()}
+                        paths={this.getFilteredPaths(enabledFilters)}
                         boxClick={this.boxClick.bind(this)}
                     />
                     <PathDetailDisplay
-                        pathOnDisplay={this.state.pathOnDisplay}
+                        pathOnDisplay={this.props.pathOnDisplay}
                         onClose={
                             () => this.setState({
                                 pathOnDisplay: null
@@ -181,14 +161,17 @@ class VisaPlanner extends React.Component<{}, StateTypes> {
                         }
                     />
                 </div>
-                <FilterPanel
-                    filterStates={this.state.filterStates}
-                    filterClick={this.filterClick.bind(this)}
-                />
+                <FilterPanel />
             </div>
         );
     }
-
 }
 
-export default VisaPlanner
+function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
+    return {
+        enabledFilters: state.ui.enabledFilters,
+        pathOnDisplay: state.ui.pathOnDisplay,
+    }
+}
+
+export default connect(mapStateToProps)(VisaPlanner)

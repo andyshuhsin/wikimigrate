@@ -1,17 +1,20 @@
 import * as React from 'react'
-import ConditionDropdown from './ConditionDropdown'
-import Title from './Title'
+import {connect} from 'react-redux'
+import FilterMenu from "./FilterMenu"
+import {filterSets, Filter, FilterState, FilterId} from "../data"
+import {VisaPlannerState} from "../reducers/index"
+import {Action, menuClick, filterSelect} from "../actions"
+
 
 const panelStyle = {
     width: "100%",
-    padding: "1em",
+    padding: "0.2em",
     flex: 0,
 } as React.CSSProperties
 
 const line1Style = {
     display: "flex",
     justifyContent: "space-around",
-    marginBottom: "1em",
 } as React.CSSProperties
 
 // const line2Style = {
@@ -25,53 +28,43 @@ const line1Style = {
 // }
 
 type Props = {
-    filterStates: {
-        offer: string
-        education: string
-        english: string
-    }
+    enabledFilters: FilterState
+    expandedFilterId: FilterId | null
 
-    filterClick: (item: string, value: string) => void
+    onFilterClick: (item: string, value: string) => void
+    onMenuClick: (filterId: FilterId) => void
 }
 
-class FilterPanel extends React.PureComponent<Props, {}> {
+type State = {
+    expandedMenuTitle: string | null
+}
+
+class FilterPanel extends React.PureComponent<Props, State> {
+
+    constructor(props: Props) {
+        super(props)
+        this.state = {
+            expandedMenuTitle: null
+        }
+    }
 
     render() {
+
         return (
             <div style={panelStyle}>
                 <div style={line1Style}>
-                    <ConditionDropdown 
-                        item={"offer"}
-                        placeholder={"Job offer"}
-                        options={[
-                            "yes",
-                            "no"
-                        ]}
-                        chosenItem={this.props.filterStates.offer}
-                        filterClick={this.props.filterClick}
-                    />
-                    <ConditionDropdown
-                        item={"education"}
-                        placeholder={"Education"}
-                        options={[
-                            "university",
-                            "secondary",
-                            "primary",
-                        ]}
-                        chosenItem={this.props.filterStates.education}
-                        filterClick={this.props.filterClick}
-                    />
-                    <ConditionDropdown
-                        item={"english"}
-                        placeholder={"IELTS level"}
-                        options={[
-                            "7",
-                            "6",
-                            "5",
-                        ]}
-                        chosenItem={this.props.filterStates.english}
-                        filterClick={this.props.filterClick}
-                    />
+                    {filterSets.map((filter: Filter) => (
+                          <FilterMenu
+                              id={filter.id}
+                              key={filter.id}
+                              title={filter.title}
+                              options={filter.options}
+                              chosenItem={this.props.enabledFilters[filter.id]}
+                              onFilterClick={this.props.onFilterClick}
+                              expandedFilterId={this.props.expandedFilterId}
+                              onMenuClick={this.props.onMenuClick}
+                            />
+                    ))}
                 </div>
                 {/*<div style={line2Style}>*/}
                     {/*© 2017 The Good Move・*/}
@@ -80,7 +73,25 @@ class FilterPanel extends React.PureComponent<Props, {}> {
             </div>
         )
     }
-
 }
 
-export default FilterPanel
+function mapStateToProps(state: VisaPlannerState): Partial<Props> {
+    return {
+        enabledFilters: state.ui.enabledFilters,
+        expandedFilterId: state.ui.expandedFilterId,
+    }
+}
+
+function mapDispatchToProps(dispatch: (action: Action) => void): Partial<Props> {
+    return {
+        onFilterClick(id: FilterId, value: string) {
+            dispatch(filterSelect(id, value))
+        },
+        onMenuClick(filterId: FilterId) {
+            dispatch(menuClick(filterId))
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)
