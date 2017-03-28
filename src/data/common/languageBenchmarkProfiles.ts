@@ -1,4 +1,4 @@
-import { LanguageBenchmarkProfile } from '../../definitions/auxillary/Prerequisites/LanguagePrereq'
+import {LanguageBenchmarkProfile} from "../../definitions/Prerequisites/LanguagePrereq"
 
 const languageBenchmarkProfiles: LanguageBenchmarkProfile[] = [
     {

@@ -1,10 +1,7 @@
 import * as React from 'react'
 
-import {
-    WorkExperiencePrereq
-} from '../../../../definitions'
-
 import CombinationBox from '../CombinationBox'
+import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq"
 
 const WorkExperieneceBox = (props: {prereq: WorkExperiencePrereq}) => {
     const prereq = props.prereq

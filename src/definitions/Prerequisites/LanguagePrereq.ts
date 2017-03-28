@@ -1,4 +1,4 @@
-import { MultiLangStringSet } from '../MultiLang'
+import { MultiLangStringSet } from '../auxillary/MultiLang'
 import BasePrereq from './BasePrereq'
 
 export type LanguageBenchmarkId = "clb" | "nclc" | "ielts" | "toefl" | "oet" | "pte-academic" | "cae"
@@ -22,7 +22,7 @@ export type LanguageBenchmarkRequirement =
     BenchmarkRequirementSimple | BenchmarkRequirementItemized
 
 export interface LanguagePrereq extends BasePrereq {
-    property: "language_test"
+    prereqId: "language_test"
     benchmark: LanguageBenchmarkId
     requirements: LanguageBenchmarkRequirement
     // TODO: Add time limits
@@ -32,7 +32,7 @@ export function languagePrereq( benchmark: LanguageBenchmarkId,
                                 requirements: LanguageBenchmarkRequirement
                               ): LanguagePrereq {
     return {
-        property: "language_test",
+        prereqId: "language_test",
         benchmark,
         requirements
     }

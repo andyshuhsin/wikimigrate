@@ -1,13 +1,9 @@
-import {
-    Transition,
-    AgePrereq,
-    duration,
-    oneOf,
-    allOf,
-    BusinessPrereq,
-    FundPrereq,
-    money,
-} from '../../../../definitions'
+import Transition from "../../../../definitions/Transition"
+import {allOf} from "../../../../definitions/auxillary/Combination"
+import {money} from "../../../../definitions/auxillary/Money"
+import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq"
+import {duration} from "../../../../definitions/auxillary/Duration"
+import {BusinessPrereq} from "../../../../definitions/Prerequisites/BusinessPrereq"
 
 import {
     alien,
@@ -29,7 +25,7 @@ const businessTalent: Transition = {
         // Significant Business History
         allOf([
             {
-                property: "fund",
+                prereqId: "fund",
                 type: "possess",
                 schemes: [
                     {
@@ -38,7 +34,7 @@ const businessTalent: Transition = {
                 ]
             } as FundPrereq,
             {
-                property: "business",
+                prereqId: "business",
                 schemes: [
                     {
                         condition: {
@@ -52,7 +48,7 @@ const businessTalent: Transition = {
 
         // Venture Capital Entrepreneur
         {
-            property: "fund",
+            prereqId: "fund",
             type: "venture",
             schemes: [
                 {

@@ -13,13 +13,10 @@ import {
     Path,
 } from '../utils/definitions'
 
-import {
-    Condition,
-    Region,
-} from '../../definitions'
-
 import {VisaPlannerState} from "../reducers"
 import {FilterId, FilterState} from "../data"
+import {Condition} from "../../definitions/auxillary/Combination";
+import {Region} from "../../definitions/auxillary/Region";
 
 const style = {
     display: "flex",

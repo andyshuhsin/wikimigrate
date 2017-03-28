@@ -1,5 +1,5 @@
-import { MultiLangStringSet } from '../../definitions'
 import { app } from '../../data'
+import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 
 const fallbackLangList = ["en", "fr"]
 

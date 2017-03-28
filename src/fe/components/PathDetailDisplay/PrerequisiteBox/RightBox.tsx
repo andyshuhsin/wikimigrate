@@ -1,8 +1,5 @@
 import * as React from 'react'
-
-import {
-    RightPrereq
-} from '../../../../definitions'
+import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
 
 const RightBox = (props: {prereq: RightPrereq}) => {
     return (

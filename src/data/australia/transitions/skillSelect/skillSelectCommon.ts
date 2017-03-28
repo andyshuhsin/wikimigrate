@@ -1,10 +1,8 @@
-import {
-    languagePrereq,
-    oneOf,
-    RightPrereq,
-    AgePrereq,
-    duration,
-} from '../../../../definitions'
+import {oneOf} from "../../../../definitions/auxillary/Combination"
+import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq"
+import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq"
+import {duration} from "../../../../definitions/auxillary/Duration"
+import AgePrereq from "../../../../definitions/Prerequisites/AgePrereq"
 
 // English requirements; see http://www.border.gov.au/Lega/Lega/Form/Immi-FAQs/how-can-i-prove-i-have-competent-english
 
@@ -12,27 +10,27 @@ export const competentEnglish =  oneOf([
     // Assumed native speaker
     oneOf([
         {
-            property: "right",
+            prereqId: "right",
             regionId: "uk",
             rightId: "citizen"
         } as RightPrereq,
         {
-            property: "right",
+            prereqId: "right",
             regionId: "usa",
             rightId: "citizen"
         } as RightPrereq,
         {
-            property: "right",
+            prereqId: "right",
             regionId: "canada",
             rightId: "citizen"
         } as RightPrereq,
         {
-            property: "right",
+            prereqId: "right",
             regionId: "new_zealand",
             rightId: "citizen"
         } as RightPrereq,
         {
-            property: "right",
+            prereqId: "right",
             regionId: "new_zealand",
             rightId: "ireland"
         } as RightPrereq,
@@ -61,7 +59,7 @@ export const competentEnglish =  oneOf([
 ])
 
 export const below50 = {
-            property: "age",
+            prereqId: "age",
             operator: "<",
             value: duration(50, "year"),
 } as AgePrereq

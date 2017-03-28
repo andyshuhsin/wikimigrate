@@ -1,8 +1,5 @@
 import * as React from 'react'
-
-import {
-    OfferPrereq
-} from '../../../../definitions'
+import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq"
 
 const OfferBox = (props: {prereq: OfferPrereq}) => {
     return (

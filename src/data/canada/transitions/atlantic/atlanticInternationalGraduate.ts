@@ -1,18 +1,14 @@
-import {
-    Transition,
-    allOf,
-    oneOf,
-    duration,
-    WorkExperiencePrereq,
-    EducationPrereq,
-    ResidencePrereq,
-    RightPrereq,
-} from '../../../../definitions'
 
 import {
     alien,
     pr,
 } from '../../status'
+import Transition from "../../../../definitions/Transition";
+import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";
+import {duration} from "../../../../definitions/auxillary/Duration";
+import {ResidencePrereq} from "../../../../definitions/Prerequisites/ResidencePrereq";
+import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
 
 const atlanticInternationalGraduate: Transition = {
     id: "atlantic_international_graduate",
@@ -25,36 +21,40 @@ const atlanticInternationalGraduate: Transition = {
     },
     prerequisiteList: allOf([
         {
-            property: "education",
-            stage: "post-secondary",
+            prereqId: "education",
+            education: {
+                stage: "post-secondary",
+            }
         } as EducationPrereq,
         {
-            property: "education",
-            stage: undefined,
-            regionId: "canada",
-            duration: duration(2, "year"),
+            prereqId: "education",
+            education: {
+                stage: undefined,
+                regionId: "canada",
+                duration: duration(2, "year"),
+            },
             graduateNoEarlierThan: duration(12, "month")
         } as EducationPrereq,
         {
-            property: "residence",
-            regionId: "canada-pacific-provinces",
+            prereqId: "residence",
+            regionId: "canada_pacific_provinces",
             duration: duration(16, "month"),
             validPeriod: duration(2, "year"),
         } as ResidencePrereq,
 
         oneOf([
             {
-                property: "right",
+                prereqId: "right",
                 regionId: "canada",
                 rightId: "work"
             } as RightPrereq,
             {
-                property: "right",
+                prereqId: "right",
                 regionId: "canada",
                 rightId: "study"
             } as RightPrereq,
             {
-                property: "right",
+                prereqId: "right",
                 regionId: "canada",
                 rightId: "train"
             } as RightPrereq,

@@ -1,14 +1,4 @@
 import {
-    Transition,
-    WorkExperiencePrereq,
-    AgePrereq,
-    duration,
-    oneOf,
-    allOf,
-    RightPrereq,
-} from '../../../../definitions'
-
-import {
     alien,
     visa190holder,
 } from '../../status'
@@ -19,6 +9,9 @@ import {
 } from './skillSelectCommon'
 
 import jobClass from '../../jobClass'
+import Transition from "../../../../definitions/Transition"
+import {allOf} from "../../../../definitions/auxillary/Combination"
+import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq"
 
 const skilledNominated: Transition = {
     id: "skilled_nominated",
@@ -35,7 +28,7 @@ const skilledNominated: Transition = {
         competentEnglish,
         below50,
         {
-            property: "work_experience",
+            prereqId: "work_experience",
             jobNature: allOf([
                 jobClass.jobGroups.sol
             ])

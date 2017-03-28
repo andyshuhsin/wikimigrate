@@ -1,6 +1,4 @@
-import {
-    MultiLangStringSet
-} from "../../definitions"
+import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 
 const lang = "en"
 

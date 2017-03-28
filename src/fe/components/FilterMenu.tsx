@@ -1,7 +1,7 @@
 import * as React from 'react'
-import {MultiLangStringSet} from "../../definitions"
-import text from '../utils/text'
 import {FilterId} from "../data"
+import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import text from '../utils/text'
 
 const style = {
     position: "relative",

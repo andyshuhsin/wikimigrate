@@ -1,8 +1,8 @@
-import { Duration } from '../Duration'
+import { Duration } from '../auxillary/Duration'
 import BasePrereq from './BasePrereq'
 
 interface AgePrereq extends BasePrereq {
-    property: "age"
+    prereqId: "age"
     value: Duration
     operator: "<" | "<=" | ">" | ">="
 }

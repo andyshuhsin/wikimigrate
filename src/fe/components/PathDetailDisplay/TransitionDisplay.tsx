@@ -1,14 +1,9 @@
 import * as React from 'react'
 import text from "../../utils/text"
 
-import {
-    Transition,
-    Prerequisite,
-    Combination,
-} from '../../../definitions'
-
 import CombinationBox from './CombinationBox'
 import ProcedureBox from './ProcedureBox'
+import Transition from "../../../definitions/Transition";
 
 interface Props {
     transition: Transition
@@ -16,10 +11,6 @@ interface Props {
 
 const h1Style = {
     marginTop: "2em"
-}
-
-const h2Style = {
-
 }
 
 class TransitionDisplay extends React.PureComponent<Props, {}> {

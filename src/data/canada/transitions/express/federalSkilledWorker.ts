@@ -1,23 +1,19 @@
 import {
-    Transition,
-    money,
-    duration,
-    allOf,
-    oneOf,
-    languagePrereq,
-    WorkExperiencePrereq,
-    EducationPrereq,
-    FundPrereq,
-    RightPrereq,
-    OfferPrereq,
-} from '../../../../definitions'
-
-import {
     alien,
     expressEntryCandidate
 } from '../../status'
 
 import jobClass from '../../jobClass'
+import Transition from "../../../../definitions/Transition";
+import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {duration} from "../../../../definitions/auxillary/Duration";
+import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
+import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";
+import {money} from "../../../../definitions/auxillary/Money";
+import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq";
+import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
+import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 
 const federalSkilledWorker: Transition = {
     id: "federal_skilled_worker",
@@ -38,44 +34,55 @@ const federalSkilledWorker: Transition = {
         ]),
 
         // Working Experience
-        oneOf([{
-            property: "work_experience",
-            length: duration(1, "year"),
-            withinLast: duration(10, "year"),
-            workHoursPerWeek: duration(30, "hour"),
-            jobNature: oneOf([
-                jobClass.jobGroups.noc0,
-                jobClass.jobGroups.nocA,
-                jobClass.jobGroups.nocB,
-            ]),
-        } as WorkExperiencePrereq]),
+        oneOf([
+            {
+                prereqId: "work_experience",
+                length: duration(1, "year"),
+                withinLast: duration(10, "year"),
+                workHoursPerWeek: duration(30, "hour"),
+                jobNature: oneOf([
+                    jobClass.jobGroups.noc0,
+                    jobClass.jobGroups.nocA,
+                    jobClass.jobGroups.nocB,
+                ]),
+            } as WorkExperiencePrereq
+        ]),
 
         // Education
         oneOf([
 
             // Canadian
             {
-                property: "education",
-                stage: "secondary",
-                regionId: 'canada'
+                prereqId: "education",
+                education: {
+                    stage: "secondary",
+                    regionId: "canada"
+                }
             } as EducationPrereq,
+
             {
-                property: "education",
-                stage: "post-secondary",
-                regionId: 'canada'
+                prereqId: "education",
+                education: {
+                    stage: "post-secondary",
+                    regionId: "canada"
+                }
             } as EducationPrereq,
 
             // Foreign, need Educational Credential Assessment
             {
-                property: "education",
-                stage: "secondary",
-                regionId: undefined,
+                prereqId: "education",
+                education: {
+                    regionId: "world",
+                    stage: "secondary",
+                },
                 certification: "eca"
             } as EducationPrereq,
             {
-                property: "education",
-                stage: "post-secondary",
-                regionId: undefined,
+                prereqId: "education",
+                education: {
+                    regionId: "world",
+                    stage: "post-secondary",
+                },
                 certification: "eca"
             } as EducationPrereq,
         ]),
@@ -83,7 +90,7 @@ const federalSkilledWorker: Transition = {
         // Fund
         oneOf([
             {
-                property: "fund",
+                prereqId: "fund",
                 type: "possess",
                 schemes: [
                     { 
@@ -120,12 +127,12 @@ const federalSkilledWorker: Transition = {
             // You don't need to prove fund if you can already work in Canada and has an offer
             allOf([
                 {
-                    property: "right",
+                    prereqId: "right",
                     regionId: "canada",
                     rightId: "work"
                 } as RightPrereq,
                 {
-                    property: "offer",
+                    prereqId: "offer",
                     employer: {
                         regionId: "canada"
                     }

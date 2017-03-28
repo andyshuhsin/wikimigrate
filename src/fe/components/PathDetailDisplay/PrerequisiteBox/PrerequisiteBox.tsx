@@ -1,10 +1,6 @@
 import * as React from 'react'
 
-import {
-    Transition,
-    Prerequisite,
-    Combination,
-} from '../../../../definitions'
+import Prerequisite from "../../../../definitions/Prerequisites/index";
 
 import LanguageBenchmarkBox from './LanguageBenchmarkBox'
 import WorkExperienceBox from './WorkExperienceBox'
@@ -21,19 +17,19 @@ interface Props {
 class PrerequisiteBox extends React.PureComponent<Props, {}> {
     render() {
         const prereq = this.props.prereq
-        if (prereq.property === "language_test") {
+        if (prereq.prereqId === "language_test") {
             return <LanguageBenchmarkBox prereq={prereq}/>
-        } else if (prereq.property === "work_experience") {
+        } else if (prereq.prereqId === "work_experience") {
             return <WorkExperienceBox prereq={prereq} />
-        } else if (prereq.property === "education") {
+        } else if (prereq.prereqId === "education") {
             return  <EducationBox prereq={prereq} />
-        } else if (prereq.property === "fund") {
+        } else if (prereq.prereqId === "fund") {
             return <FundBox prereq={prereq} />
-        } else if (prereq.property === "right") {
+        } else if (prereq.prereqId === "right") {
             return <RightBox prereq={prereq} />
-        } else if (prereq.property === "offer") {
+        } else if (prereq.prereqId === "offer") {
             return <OfferBox prereq={prereq} />
-        } else if (prereq.property === "certification") {
+        } else if (prereq.prereqId === "certification") {
             return <CertificationBox prereq={prereq} />
         }
         else {

@@ -1,8 +1,10 @@
 import {Action} from "../actions"
 import {FilterId, FilterState} from "../data"
 import {Path} from "../utils/definitions";
+import {Person} from "../../definitions/Person";
 
 export interface VisaPlannerState {
+    user: Person,
     ui: {
         expandedFilterId: FilterId | null
         enabledFilters: FilterState,
@@ -11,6 +13,16 @@ export interface VisaPlannerState {
 }
 
 const INITIAL_STATE: VisaPlannerState = {
+    user: {
+        status: {
+            // TODO: Should this part be automated?
+            world: ["alien"],
+            canada: ["alien"],
+            australia: ["alien"],
+            canada_pacific_provinces: ["alien"],
+        },
+        education: undefined,
+    },
     ui: {
         expandedFilterId: null,
         enabledFilters: {

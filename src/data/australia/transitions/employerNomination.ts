@@ -1,12 +1,5 @@
-import {
-    Transition,
-    AgePrereq,
-    duration,
-    oneOf,
-    allOf,
-    OfferPrereq,
-    WorkExperiencePrereq
-} from '../../../definitions'
+import Transition from "../../../definitions/Transition";
+import {allOf} from "../../../definitions/auxillary/Combination";
 
 import {
     alien,

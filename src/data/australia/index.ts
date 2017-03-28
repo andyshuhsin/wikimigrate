@@ -1,4 +1,4 @@
-import { Region } from "../../definitions"
+import {Region} from "../../definitions/auxillary/Region";
 
 import {
     citizenship,
@@ -33,6 +33,7 @@ const australia: Region = {
         skilledNominated,
         skilledRegional,
         businessTalent,
+        businessInnovation,
 
         employerNominationDirectEntry,
         employerNominationTemporaryResidenceTransition,

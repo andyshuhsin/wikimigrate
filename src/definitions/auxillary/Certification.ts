@@ -1,5 +1,5 @@
-import { MultiLangStringSet } from '../index'
 import URLDatum from './URLDatum'
+import {MultiLangStringSet} from "./MultiLang"
 
 export type CertificationId = "eca"
 

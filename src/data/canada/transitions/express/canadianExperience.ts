@@ -1,18 +1,14 @@
 import {
-    Transition,
-    allOf,
-    oneOf,
-    WorkExperiencePrereq,
-    languagePrereq,
-    duration,
-} from '../../../../definitions'
-
-import {
     alien,
     expressEntryCandidate
 } from '../../status'
 
 import jobClass from '../../jobClass'
+import Transition from "../../../../definitions/Transition";
+import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {duration} from "../../../../definitions/auxillary/Duration";
+import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
+import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
 
 const canadianExperience: Transition = {
     id: "canadian_experience",
@@ -32,7 +28,7 @@ const canadianExperience: Transition = {
             // NOC 0 or A job
             allOf([
                 {
-                    property: "work_experience",
+                    prereqId: "work_experience",
                     length: duration(12, "month"),
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
@@ -52,7 +48,7 @@ const canadianExperience: Transition = {
             //NOC B job
             allOf([
                 {
-                    property: "work_experience",
+                    prereqId: "work_experience",
                     length: duration(12, "month"),
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),

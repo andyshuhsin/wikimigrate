@@ -1,10 +1,7 @@
 import * as React from 'react'
 
 import data from '../../../../data'
-
-import {
-    FundPrereq
-} from '../../../../definitions'
+import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq"
 
 function stringifyCondition(condition: any) {
     if (condition.familyMember) {

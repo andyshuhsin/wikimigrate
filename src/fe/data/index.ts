@@ -1,4 +1,4 @@
-import {MultiLangStringSet} from "../../definitions";
+import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 
 export type FilterId = "offer" | "education" | "english"
 

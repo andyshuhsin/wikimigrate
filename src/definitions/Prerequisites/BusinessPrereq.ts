@@ -1,9 +1,9 @@
 import BasePrereq from './BasePrereq'
-import Money from '../Money'
-import { Duration } from '../Duration'
+import Money from '../auxillary/Money'
+import { Duration } from '../auxillary/Duration'
 
 export interface BusinessPrereq extends BasePrereq {
-    property: "business"
+    prereqId: "business"
     schemes: [
         {
             condition: {

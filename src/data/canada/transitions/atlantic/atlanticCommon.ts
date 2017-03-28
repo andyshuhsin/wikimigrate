@@ -1,14 +1,11 @@
-import {
-    allOf,
-    oneOf,
-    WorkExperiencePrereq,
-    EducationPrereq,
-    OfferPrereq,
-} from '../../../../definitions'
+import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
+import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
+import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";
 
 const atlanticJobOfferCommon = allOf([
     {
-        property: "offer",
+        prereqId: "offer",
         employer: {
             regionId: "canada-atlantic-provinces"  // TODO: Implement this properly
         },
@@ -22,13 +19,13 @@ const atlanticJobOfferCommon = allOf([
 
 const atlanticWorkersJob = allOf([
     {
-        property: "work_experience",
+        prereqId: "work_experience",
         jobNature: {
             en: "You must have worked at least one year (1,560 hours total or 30 hours per week) within the last three years.",
         }
     } as WorkExperiencePrereq,
     {
-        property: "work_experience",
+        prereqId: "work_experience",
         jobNature: {
             en: "The work must be in one occupation (but can be with different employers) and paid (volunteering or unpaid internships do not count)"
         }
@@ -37,19 +34,25 @@ const atlanticWorkersJob = allOf([
 
 const atlanticWorkersEducation = oneOf([
     {
-        property: "education",
-        stage: "secondary",
-        regionId: "canada",
+        prereqId: "education",
+        education: {
+            stage: "secondary",
+            regionId: "canada",
+        }
     } as EducationPrereq,
     {
-        property: "education",
-        stage: "post-secondary",
-        regionId: "canada",
+        prereqId: "education",
+        education: {
+            stage: "post-secondary",
+            regionId: "canada",
+        }
     } as EducationPrereq,
     {
-        property: "education",
-        stage: "secondary",
-        regionId: undefined,
+        prereqId: "education",
+        education: {
+            stage: "secondary",
+            regionId: "world",
+        },
         certification: "eca"
     } as EducationPrereq,
 ])

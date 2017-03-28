@@ -1,10 +1,7 @@
-import {
-    Transition,
-    allOf,
-    oneOf,
-    WorkExperiencePrereq,
-    OfferPrereq,
-} from '../../../../definitions'
+import Transition from "../../../../definitions/Transition"
+import {allOf, oneOf} from "../../../../definitions/auxillary/Combination"
+import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq"
+import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq"
 
 import {
     atlanticJobOfferCommon,
@@ -31,13 +28,13 @@ const atlanticIntermediateSkilled: Transition = {
         atlanticJobOfferCommon,
         atlanticWorkersJob,
         {
-            property: "work_experience",
+            prereqId: "work_experience",
             jobNature: oneOf([
                 jobClass.jobGroups.nocC,
             ])
         } as WorkExperiencePrereq,
         {
-            property: "offer",
+            prereqId: "offer",
             employer: {
                 regionId: "canada"
             }

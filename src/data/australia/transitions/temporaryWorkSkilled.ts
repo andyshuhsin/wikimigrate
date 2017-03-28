@@ -1,12 +1,7 @@
-import {
-    Transition,
-    AgePrereq,
-    duration,
-    oneOf,
-    allOf,
-    OfferPrereq,
-    WorkExperiencePrereq
-} from '../../../definitions'
+import Transition from "../../../definitions/Transition";
+import {allOf} from "../../../definitions/auxillary/Combination";
+import {OfferPrereq} from "../../../definitions/Prerequisites/OfferPrereq";
+import {WorkExperiencePrereq} from "../../../definitions/Prerequisites/WorkExperiencePrereq";
 
 import {
     alien,
@@ -26,14 +21,14 @@ const temporaryWorkSkilled: Transition = {
     to: visa457holder,
     prerequisiteList: allOf([
         {
-            property: "offer",
+            prereqId: "offer",
             employer: {
                 regionId: "australia",
                 status: "approved"
             }
         } as OfferPrereq,
         {
-            property: "work_experience",
+            prereqId: "work_experience",
             jobNature: jobClass.jobGroups.sol
         } as WorkExperiencePrereq
     ]),

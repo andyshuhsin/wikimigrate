@@ -1,9 +1,5 @@
 import * as React from 'react'
-import {
-    Transition,
-    Prerequisite,
-    Condition,
-} from '../../../definitions'
+import {Condition} from "../../../definitions/auxillary/Combination";
 
 import PrerequisiteBox from './PrerequisiteBox'
 import JobNatureBox from './PrerequisiteBox/JobNatureBox'
@@ -17,7 +13,7 @@ function isCombination(input: any): boolean {
 }
 
 function isPrerequisite(input: any): boolean {
-    return !!input.property
+    return !!input.prereqId
 }
 
 function isJobNature(input: any): boolean {

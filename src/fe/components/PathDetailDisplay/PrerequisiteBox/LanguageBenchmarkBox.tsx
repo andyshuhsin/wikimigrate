@@ -1,14 +1,13 @@
 import * as React from 'react'
 import text from "../../../utils/text"
 
-import {
-    LanguagePrereq,
-    LanguageTestItem,
-    BenchmarkRequirementSimple,
-    BenchmarkRequirementItemized,
-} from '../../../../definitions'
-
 import data from '../../../../data'
+import {
+    BenchmarkRequirementItemized,
+    BenchmarkRequirementSimple,
+    LanguagePrereq,
+    LanguageTestItem
+} from "../../../../definitions/Prerequisites/LanguagePrereq"
 
 const langRequirementKeyOrder: string[] = [
         "listening",
