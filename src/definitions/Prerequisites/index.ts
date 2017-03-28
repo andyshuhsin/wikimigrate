@@ -1,5 +1,5 @@
 import AgePrereq from './AgePrereq'
-import LanguagePrereq, { languagePrereq } from './LanguagePrereq'
+import LanguagePrereq from "./LanguagePrereq"
 import WorkExperiencePrereq from './WorkExperiencePrereq'
 import EducationPrereq from './EducationPrereq'
 import FundPrereq from './FundPrereq'

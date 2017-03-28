@@ -14,6 +14,10 @@ export interface VisaPlannerState {
 
 const INITIAL_STATE: VisaPlannerState = {
     user: {
+        birth: {
+            birthday: undefined,
+            region: undefined,
+        },
         status: {
             // TODO: Should this part be automated?
             world: ["alien"],
@@ -22,6 +26,7 @@ const INITIAL_STATE: VisaPlannerState = {
             canada_pacific_provinces: ["alien"],
         },
         education: undefined,
+        languageTests: undefined,
     },
     ui: {
         expandedFilterId: null,

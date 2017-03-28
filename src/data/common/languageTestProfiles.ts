@@ -1,6 +1,6 @@
-import {LanguageBenchmarkProfile} from "../../definitions/Prerequisites/LanguagePrereq"
+import {LanguageTestProfile} from "../../definitions/auxillary/LanguageTest"
 
-const languageBenchmarkProfiles: LanguageBenchmarkProfile[] = [
+const languageTestProfiles: LanguageTestProfile[] = [
     {
         id: "clb",
         title: {
@@ -39,4 +39,4 @@ const languageBenchmarkProfiles: LanguageBenchmarkProfile[] = [
     }
 ]
 
-export default languageBenchmarkProfiles
+export default languageTestProfiles

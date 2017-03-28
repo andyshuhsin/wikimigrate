@@ -2,7 +2,7 @@ import BasePrereq from './BasePrereq'
 import { MultiLangStringSet } from '../auxillary/MultiLang'
 import { CertificationId } from '../auxillary/Certification'
 import Duration from '../auxillary/Duration'
-import {EducationQuality} from "../Qualities/EducationQuality"
+import {EducationQuality} from "../Qualities/EducationExperience"
 
 export interface EducationPrereq extends BasePrereq {
     prereqId: "education"
