@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "cd src/fe/built/; python -m SimpleHTTPServer 8000 &> /dev/null &\\open http://localhost:8000; cd ..; webpack -w",
+    "start": "mkdir -p src/fe/built/; cd src/fe/built/; python -m SimpleHTTPServer 8000 &> /dev/null &\\open http://localhost:8000; cd ..; webpack -w",
     "deploy": "cd src/fe ; webpack; node node_modules/babel-cli/bin/babel built --out-dir built --presets=babili ; scp built/* lax:/var/www/vp"
   }
 }
