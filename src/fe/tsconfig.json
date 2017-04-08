@@ -2,6 +2,8 @@
     "compilerOptions": {
         "module": "commonjs",
         "noImplicitAny": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
         "jsx": "react",
         "strictNullChecks": true,
         "removeComments": true,
@@ -10,10 +12,10 @@
         "target": "es6",
         "types": [
             "node"
-         ],
-         "typeRoots": [
+        ],
+        "typeRoots": [
             "node_modules/@types"
-         ]
+        ]
     },
     "include": [
         "**/*.ts?"

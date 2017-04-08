@@ -1,9 +1,10 @@
-import {FilterId} from "../data"
+import {FilterId, OptionId} from "../data"
 
 export interface MenuClickAction {
-    type: "MENU_CLICK"
+    type: "FILTER_OPTION_CLICK"
     payload: {
-        id: FilterId
+        filterId: FilterId
+        optionId: OptionId
     }
 }
 
@@ -15,11 +16,12 @@ export interface FilterSelectAction {
     }
 }
 
-export function menuClick(menuItemId: FilterId): MenuClickAction {
+export function filterOptionClickAction(filterId: FilterId, optionId: OptionId): MenuClickAction {
     return {
-        type: "MENU_CLICK",
+        type: "FILTER_OPTION_CLICK",
         payload: {
-            id: menuItemId,
+            filterId,
+            optionId,
         }
     }
 }

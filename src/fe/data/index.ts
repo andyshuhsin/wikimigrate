@@ -2,15 +2,18 @@ import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 
 export type FilterId = "offer" | "education" | "english"
 
-export type FilterState = {
-    [key in FilterId]: string
+export type FilterOption = {
+    id: OptionId
+    label: MultiLangStringSet
 }
 
 export type Filter = {
     id: FilterId
     title: MultiLangStringSet
-    options: MultiLangStringSet[]
+    options: FilterOption[]
 }
+
+export type OptionId = string
 
 export const filterSets: Filter[] = [
     {
@@ -20,11 +23,17 @@ export const filterSets: Filter[] = [
         },
         options: [
             {
-                en: "yes"
+                id: "yes",
+                label: {
+                    en: "Yes"
+                }
             },
             {
-                en: "no"
-            }
+                id: "no",
+                label: {
+                    en: "No"
+                }
+            },
         ]
     },
     {
@@ -34,14 +43,53 @@ export const filterSets: Filter[] = [
         },
         options: [
             {
-                en: "university",
+                id: "university",
+                label: {
+                    en: "University"
+                }
             },
             {
-                en: "secondary",
+                id: "secondary",
+                label: {
+                    en: "Secondary"
+                }
             },
             {
-                en: "primary",
+                id: "primary",
+                label: {
+                    en: "Primary"
+                }
+            },
+        ]
+    },
+    {
+        id: "english",
+        title: {
+            en: "English"
+        },
+        options: [
+            {
+                id: "so good",
+                label: {
+                    en: "Very good"
+                }
+            },
+            {
+                id: "good",
+                label: {
+                    en: "Good"
+                }
+            },
+            {
+                id: "not good",
+                label: {
+                    en: "Not good"
+                }
             }
         ]
     }
 ]
+
+export type FilterState = {
+    [filterId in FilterId]: OptionId | null
+}

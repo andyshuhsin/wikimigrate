@@ -7,8 +7,9 @@ export interface VisaPlannerState {
     user: Person,
     ui: {
         expandedFilterId: FilterId | null
-        enabledFilters: FilterState,
-        pathOnDisplay: Path | null,
+        filterState: FilterState
+        shouldDetailedFilterPanelExpand: boolean
+        pathOnDisplay: Path | null
     }
 }
 
@@ -29,12 +30,13 @@ const INITIAL_STATE: VisaPlannerState = {
         languageTests: undefined,
     },
     ui: {
-        expandedFilterId: null,
-        enabledFilters: {
-            offer: '',
-            education: '',
-            english: '',
+        shouldDetailedFilterPanelExpand: false,
+        filterState: {
+            offer: null,
+            english: null,
+            education: null,
         },
+        expandedFilterId: null,
         pathOnDisplay: null,
     }
 }
@@ -46,9 +48,13 @@ function clone<T>(obj: T): T {
 
 function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
     switch (action.type) {
-        case "MENU_CLICK": {
+        case "FILTER_OPTION_CLICK": {
             const newState = clone(state)
-            newState.ui.expandedFilterId = action.payload.id
+            if (state.ui.filterState[action.payload.filterId] === action.payload.optionId) {
+                newState.ui.filterState[action.payload.filterId] = null
+            } else {
+                newState.ui.filterState[action.payload.filterId] = action.payload.optionId
+            }
             return newState
         }
 

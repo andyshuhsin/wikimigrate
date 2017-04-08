@@ -6,17 +6,17 @@ import {connect} from 'react-redux'
 import TopBar from './TopBar'
 import Title from './Title'
 import PathShowcase from './PathShowcase'
-import FilterPanel from './FilterPanel'
+import FilterBar from './FilterBar'
 import PathDetailDisplay from './PathDetailDisplay'
+import FilterDetailedOptionPanel from './FilterDetailedOptionPanel'
 
 import {
     Path,
 } from '../utils/definitions'
 
 import {VisaPlannerState} from "../reducers"
-import {FilterId, FilterState} from "../data"
-import {Condition} from "../../definitions/auxillary/Combination";
-import {Region} from "../../definitions/auxillary/Region";
+import {Condition} from "../../definitions/auxillary/Combination"
+import {Person} from "../../definitions/Person"
 
 const style = {
     display: "flex",
@@ -58,68 +58,44 @@ function findInCombination(predicate: (arg: any) => boolean, combo: Condition<an
 }
 
 interface PropTypes {
-    enabledFilters: FilterState
+    user: Person
     pathOnDisplay: Path | null
 }
 
+function filterSuitablePaths(user: Person): Path[] {
+    // TODO: Describe $data and explicitly reference it & remove closure.
+
+    // FIXME: Use real data
+    return [
+        {
+            transitions: [
+                data.regions[0].transitionList[0],
+            ]
+        },
+        {
+            transitions: [
+                data.regions[0].transitionList[1],
+            ]
+        },
+        {
+            transitions: [
+                data.regions[0].transitionList[2],
+            ]
+        },
+        {
+            transitions: [
+                data.regions[0].transitionList[3],
+            ]
+        },
+        {
+            transitions: [
+                data.regions[0].transitionList[4],
+            ]
+        },
+    ]
+}
+
 class VisaPlanner extends React.Component<PropTypes, {}> {
-
-    getFilteredPaths(enabledFilters: FilterState): Path[] {
-        const allTransitions = flatten(data.regions.map((region: Region) => region.transitionList))
-        const allPaths = allTransitions.map(transition => ({
-            transitions: [transition]
-        }))
-
-        // FIXME: This whole thing is hacked together.
-        if (enabledFilters.english) {
-            for (let i = 0; i < allPaths.length; i += 1) {
-                const transition = allPaths[i].transitions[0]
-                const englishPrereq = findInCombination(
-                    (x) => x.property && x.property === 'language_test',
-                    transition.prerequisiteList
-                )
-
-                if (englishPrereq) {
-                    const currentScore = Number(enabledFilters.english)
-                    const requirementScore = englishPrereq.requirements[0].value
-                    if (currentScore < requirementScore) {
-                        allPaths.splice(i, 1)
-                    }
-                }
-            }
-        }
-
-        if (enabledFilters.offer) {
-            for (let i = 0; i < allPaths.length; i += 1) {
-                const transition = allPaths[i].transitions[0]
-                const prereq = findInCombination(
-                    (x) => x.property && x.property === 'offer',
-                    transition.prerequisiteList
-                )
-
-                if (prereq && enabledFilters.offer === 'no') {
-                    allPaths.splice(i, 1)
-                }
-            }
-        }
-        // FIXME: Hack end.
-
-        if (enabledFilters.education) {
-            for (let i = 0; i < allPaths.length; i += 1) {
-                const transition = allPaths[i].transitions[0]
-                const prereq = findInCombination(
-                    (x) => x.property && x.property === 'offer',
-                    transition.prerequisiteList
-                )
-
-                if (prereq && prereq.stage !== enabledFilters.education) {
-                    allPaths.splice(i, 1)
-                }
-            }
-        }
-
-        return allPaths
-    }
 
     boxClick(path: Path): void {
         this.setState({
@@ -128,7 +104,6 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
     }
 
     render() {
-        const enabledFilters = this.props.enabledFilters
         return (
             <div style={style}>
                 <TopBar
@@ -136,17 +111,13 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                     version={data.app.version}
                 />
                 <Title text={
-                    (Number(enabledFilters.education) +
-                     Number(enabledFilters.english) +
-                     Number(enabledFilters.offer))
-                    ? "Mobility options for you"
-                    : "Popular mobility options"
+                    "Popular mobility options"
                 } />
                 <div style={{
                     overflow: "scroll"
                 }}>
                     <PathShowcase
-                        paths={this.getFilteredPaths(enabledFilters)}
+                        paths={filterSuitablePaths(this.props.user)}
                         boxClick={this.boxClick.bind(this)}
                     />
                     <PathDetailDisplay
@@ -158,7 +129,8 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                         }
                     />
                 </div>
-                <FilterPanel />
+                <FilterBar />
+                <FilterDetailedOptionPanel />
             </div>
         );
     }
@@ -166,7 +138,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 
 function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
     return {
-        enabledFilters: state.ui.enabledFilters,
+        user: state.user,
         pathOnDisplay: state.ui.pathOnDisplay,
     }
 }
