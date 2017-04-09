@@ -19,10 +19,11 @@ class FilterDetailedOptionPanel extends React.PureComponent<OptionDisplayProps, 
         const style = {
             position: "absolute",
             left: 0,
-            top: 0,
+            bottom: 0,
             paddingBottom: "1em",
             width: "100%",
             transition: "transform 1s",
+            transform: "translateY(0)",
             background: "white",
         }
 
