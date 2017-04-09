@@ -6,9 +6,9 @@ import {connect} from 'react-redux'
 import TopBar from './TopBar'
 import Title from './Title'
 import PathShowcase from './PathShowcase'
-import FilterBar from './FilterBar'
+import FilterBar from './Filters/FilterBar'
 import PathDetailDisplay from './PathDetailDisplay'
-import FilterDetailedOptionPanel from './FilterDetailedOptionPanel'
+import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
 
 import {
     Path,
