@@ -10,8 +10,8 @@ interface FilterBarProps {
 const FilterBar = (props: FilterBarProps) => (
     <div
         style={{
-            fontSize: "1em",
-            padding: "0.5em",
+            fontSize: "1.3em",
+            padding: "0.5em 0.7em",
             width: "100%",
             transform: `translateY(-${Number(props.offset)}px)`,
             transition: `transform ${design.durations.slide}s`,
@@ -27,7 +27,7 @@ const FilterBar = (props: FilterBarProps) => (
         }
         <img
             style={{
-                width: "1.2em",
+                width: "1.3em",
                 verticalAlign: "middle",
                 transform: props.offset ? "rotate(0deg)" : "rotate(180deg)"
             } as React.CSSProperties}
