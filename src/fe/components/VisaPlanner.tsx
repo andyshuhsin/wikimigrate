@@ -1,7 +1,7 @@
 import data from '../../data'
 
 import * as React from 'react'
-import {connect} from 'react-redux'
+import {connect, Dispatch} from 'react-redux'
 
 import TopBar from './TopBar'
 import Title from './Title'
@@ -9,57 +9,37 @@ import PathShowcase from './PathShowcase'
 import FilterBar from './Filters/FilterBar'
 import PathDetailDisplay from './PathDetailDisplay'
 import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
+import Shade from './Shade'
 
 import {
     Path,
 } from '../utils/definitions'
 
 import {VisaPlannerState} from "../reducers"
-import {Condition} from "../../definitions/auxillary/Combination"
 import {Person} from "../../definitions/Person"
+import {filterBarClickAction} from "../actions/index"
 
 const style = {
+    position: "relative",
+    margin: 0,
+    padding: 0,
+    height: "100vh",
+
+    overflow: "hidden",
     display: "flex",
     flexFlow: "column",
-    padding: "0.1em",
-    height: "100vh",
-    maxWidth: 400,
-    margin: "0 auto",
+
     fontSize: 14,
     color: "#212121",
     fontFamily: "sans-serif",
 } as React.CSSProperties
 
-function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {
-    return Array.prototype.concat.apply([], arrayOfArrays)
-}
-
-// FIXME: This function is full of hack
-function findInCombination(predicate: (arg: any) => boolean, combo: Condition<any>) {
-
-    let result: any = null
-
-    if (predicate(combo)) {
-        return combo
-    } else if (combo.operands) {
-        for (let operand of combo.operands) {
-            if (predicate(operand)) {
-                return operand
-            } else if (operand["operator"]) {
-                result = findInCombination(predicate, operand)
-                if (result) {
-                    return result
-                }
-            }
-        }
-    }
-
-    return result
-}
-
 interface PropTypes {
     user: Person
     pathOnDisplay: Path | null
+    onFilterBarClick: () => void
+    filterPanelHeight: number | null
+    shouldDetailedFilterPanelExpand: boolean
 }
 
 function filterSuitablePaths(user: Person): Path[] {
@@ -104,6 +84,9 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
     }
 
     render() {
+
+        const shouldShadeShow = this.props.shouldDetailedFilterPanelExpand
+
         return (
             <div style={style}>
                 <TopBar
@@ -129,10 +112,18 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                         }
                     />
                 </div>
-                <FilterBar />
+                <Shade shouldShow={shouldShadeShow} />
+                <FilterBar
+                    onClick={this.props.onFilterBarClick}
+                    offset={
+                        this.props.shouldDetailedFilterPanelExpand
+                        ? this.props.filterPanelHeight
+                        : 0
+                    }
+                />
                 <FilterDetailedOptionPanel />
             </div>
-        );
+        )
     }
 }
 
@@ -140,7 +131,17 @@ function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
     return {
         user: state.user,
         pathOnDisplay: state.ui.pathOnDisplay,
+        filterPanelHeight: state.ui.filterPanelHeight,
+        shouldDetailedFilterPanelExpand: state.ui.shouldDetailedFilterPanelExpand,
     }
 }
 
-export default connect(mapStateToProps)(VisaPlanner)
+function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
+    return {
+        onFilterBarClick() {
+            dispatch(filterBarClickAction())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(VisaPlanner)

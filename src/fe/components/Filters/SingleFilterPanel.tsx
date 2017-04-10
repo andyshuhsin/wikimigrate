@@ -15,7 +15,7 @@ const styles= {
     titleStyle: {
         fontSize: "1em",
         margin: "0",
-        background: design.color.greyLight,
+        background: design.colors.greyLight,
         padding: "0.2em 1em"
     } as React.CSSProperties,
 
@@ -34,12 +34,12 @@ const styles= {
         borderWidth: "3px",
         borderRadius: "3px",
         borderStyle: "solid",
-        borderColor: design.color.greyLight,
+        borderColor: design.colors.greyLight,
     } as React.CSSProperties,
 
     optionHighlightStyle: {
-        color: design.color.brand,
-        borderColor: design.color.brand,
+        color: design.colors.brand,
+        borderColor: design.colors.brand,
     } as React.CSSProperties
 }
 

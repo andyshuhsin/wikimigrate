@@ -16,6 +16,17 @@ export interface FilterSelectAction {
     }
 }
 
+export interface FilterBarClick {
+    type: "FILTER_BAR_CLICK"
+}
+
+export interface FilterPanelRender {
+    type: "FILTER_PANEL_RENDER",
+    payload: {
+        height: number
+    }
+}
+
 export function filterOptionClickAction(filterId: FilterId, optionId: OptionId): MenuClickAction {
     return {
         type: "FILTER_OPTION_CLICK",
@@ -36,4 +47,23 @@ export function filterSelect(filterId: FilterId, value: string): FilterSelectAct
     }
 }
 
-export type Action = MenuClickAction | FilterSelectAction
+export function filterPanelRenderAction(height: number): FilterPanelRender {
+    return {
+        type: "FILTER_PANEL_RENDER",
+        payload: {
+            height
+        }
+    }
+}
+
+export function filterBarClickAction(): FilterBarClick {
+    return {
+        type: "FILTER_BAR_CLICK"
+    }
+}
+
+export type Action =
+    MenuClickAction
+    | FilterSelectAction
+    | FilterBarClick
+    | FilterPanelRender

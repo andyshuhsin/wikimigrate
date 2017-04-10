@@ -9,6 +9,7 @@ export interface VisaPlannerState {
         expandedFilterId: FilterId | null
         filterState: FilterState
         shouldDetailedFilterPanelExpand: boolean
+        filterPanelHeight: number | null
         pathOnDisplay: Path | null
     }
 }
@@ -36,6 +37,7 @@ const INITIAL_STATE: VisaPlannerState = {
             english: null,
             education: null,
         },
+        filterPanelHeight: null,
         expandedFilterId: null,
         pathOnDisplay: null,
     }
@@ -58,8 +60,20 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case "FILTER_BAR_CLICK": {
+            const newState = clone(state)
+            newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
+            return newState
+        }
+
         case "FILTER_SELECT": {
             return state
+        }
+
+        case "FILTER_PANEL_RENDER": {
+            const newState = clone(state)
+            newState.ui.filterPanelHeight = action.payload.height
+            return newState
         }
 
         default: {

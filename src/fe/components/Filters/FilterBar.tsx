@@ -1,11 +1,24 @@
 import * as React from 'react'
 import {text} from "../../utils/text"
+import design from "../../design"
 
-const FilterBar = () => (
-    <div style={{
-        fontSize: "1em",
-        padding: "0.5em"
-    }}>
+interface FilterBarProps {
+    onClick: () => void
+    offset?: number | null
+}
+
+const FilterBar = (props: FilterBarProps) => (
+    <div
+        style={{
+            fontSize: "1em",
+            padding: "0.5em",
+            width: "100%",
+            transform: `translateY(-${Number(props.offset)}px)`,
+            transition: `transform ${design.durations.slide}s`,
+            background: "white",
+        }}
+        onClick={props.onClick}
+    >
         {
             text({
                 en: "Filters",
@@ -16,6 +29,7 @@ const FilterBar = () => (
             style={{
                 width: "1.2em",
                 verticalAlign: "middle",
+                transform: props.offset ? "rotate(0deg)" : "rotate(180deg)"
             } as React.CSSProperties}
             src={require("../../assets/angle-down.svg")}
         />
