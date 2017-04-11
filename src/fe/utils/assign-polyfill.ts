@@ -1,3 +1,5 @@
+// TODO: Do we have to do this?
+
 declare global {
     interface Object {
         assign<T, U>(target: T, source: U): T & U;
