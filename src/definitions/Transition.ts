@@ -1,5 +1,5 @@
 import { MultiLangStringSet } from './auxillary/MultiLang'
-import { Condition } from './auxillary/Combination'
+import { Combination } from './auxillary/Combination'
 import Procedure from './auxillary/Procedure'
 import Exception from './auxillary/Exception'
 import URLDatum from './auxillary/URLDatum'
@@ -19,7 +19,7 @@ interface Transition {
         description: MultiLangStringSet
         date?: Date
     }
-    prerequisiteList: Condition<Prerequisite>
+    prerequisiteList: Combination<Prerequisite>
     procedureList: Procedure[]
     exceptionList?: Array<Exception>
     referenceList?:  URLDatum[]

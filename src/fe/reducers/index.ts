@@ -1,7 +1,7 @@
 import {Action} from "../actions"
-import {FilterId, FilterState} from "../data"
-import {Path} from "../utils/definitions";
-import {Person} from "../../definitions/Person";
+import {englishTestAssumptions, FilterId, FilterState} from "../data"
+import {Path} from "../utils/definitions"
+import {Person} from "../../definitions/Person"
 
 export interface VisaPlannerState {
     user: Person,
@@ -17,7 +17,7 @@ export interface VisaPlannerState {
 const INITIAL_STATE: VisaPlannerState = {
     user: {
         birth: {
-            birthday: undefined,
+            date: undefined,
             region: undefined,
         },
         status: {
@@ -52,6 +52,25 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
     switch (action.type) {
         case "FILTER_OPTION_CLICK": {
             const newState = clone(state)
+            // Person data
+            switch (action.payload.filterId) {
+                case "english": {
+                    if (action.payload.optionId === newState.ui.filterState[action.payload.filterId]) {
+                        newState.user.languageTests = undefined
+                    }
+                    else if (action.payload.optionId === "good") {
+                        newState.user.languageTests = englishTestAssumptions.good
+                    } else {
+                        newState.user.languageTests = englishTestAssumptions.bad
+                    }
+                    break
+                }
+                default: {
+                    console.warn("Unimplemented state change for filterId", action.payload.filterId)
+                }
+            }
+
+            // UI
             if (state.ui.filterState[action.payload.filterId] === action.payload.optionId) {
                 newState.ui.filterState[action.payload.filterId] = null
             } else {

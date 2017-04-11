@@ -1,5 +1,5 @@
 import Transition from "../../../definitions/Transition";
-import {allOf} from "../../../definitions/auxillary/Combination";
+import {allOf, identity} from "../../../definitions/auxillary/Combination";
 import {OfferPrereq} from "../../../definitions/Prerequisites/OfferPrereq";
 import {WorkExperiencePrereq} from "../../../definitions/Prerequisites/WorkExperiencePrereq";
 
@@ -29,7 +29,7 @@ const temporaryWorkSkilled: Transition = {
         } as OfferPrereq,
         {
             prereqId: "work_experience",
-            jobNature: jobClass.jobGroups.sol
+            jobNature: identity([jobClass.jobGroups.sol])
         } as WorkExperiencePrereq
     ]),
     procedureList: [

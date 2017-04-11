@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {connect, Dispatch} from "react-redux"
 import {VisaPlannerState} from "../../reducers/index"
-import {Filter, FilterId, filterSets, FilterState, OptionId} from "../../data"
+import {BaseFilter, FilterId, filterSets, FilterState, OptionId} from "../../data"
 import {filterOptionClickAction, filterPanelRenderAction} from "../../actions"
 import SingleFilterPanel from "./SingleFilterPanel"
 import design from "../../design"
@@ -51,7 +51,7 @@ class FilterDetailedOptionPanel extends React.PureComponent<OptionDisplayProps, 
                     }
                 }}
             >
-                {filterSets.map((filter: Filter) =>
+                {filterSets.map((filter: BaseFilter) =>
                     <SingleFilterPanel
                         key={filter.id}
                         filter={filter}

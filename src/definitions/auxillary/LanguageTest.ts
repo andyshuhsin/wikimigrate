@@ -8,21 +8,27 @@ export type LanguageTestProfile = {
 }
 
 export type LanguageTestScoreSingle = {
-    score: number | string
+    overall: number | string
 }
 
 export type LanguageTestItem = "listening" | "speaking" | "reading" | "writing"
+export const LanguageTestItemValues: LanguageTestItem[] = [
+    "listening", "speaking", "reading", "writing"
+]
 
 export type LanguageTestScoreItemized = {
-    [key in LanguageTestItem]?: number
+    [key in LanguageTestItem]: number
 }
 
-export type LanguageTestScore =
-    LanguageTestScoreSingle | LanguageTestScoreItemized
+export type LanguageTestScores = LanguageTestScoreSingle | LanguageTestScoreItemized
 
 export interface LanguageTestResult {
-    benchmark: LanguageTestId
-    score: LanguageTestScore
+    testId: LanguageTestId
+    scores: LanguageTestScores
+}
+
+export function isSingleScore(result: any): boolean {
+    return !!(result.scores && result.scores["overall"])
 }
 
 export default LanguageTestResult

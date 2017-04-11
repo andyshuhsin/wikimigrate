@@ -21,14 +21,14 @@ const langRequirementKeyOrder: string[] = [
 const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     const prereq = props.prereq
     const test = data.common.languageTestProfiles
-                    .filter(test => test.id === prereq.result.benchmark)[0]
+                    .filter(test => test.id === prereq.result.testId)[0]
     return (
         <div>
             {text(test.title)} {" "}
-            {((prereq.result.score as LanguageTestScoreSingle).score)
+            {((prereq.result.scores as LanguageTestScoreSingle).overall)
                 ? <span>
                     <strong>
-                        {(prereq.result.score as LanguageTestScoreSingle).score}
+                        {(prereq.result.scores as LanguageTestScoreSingle).overall}
                     </strong>
                   </span>
                 : langRequirementKeyOrder.map(
@@ -40,7 +40,7 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
                               {text(data.common.languageBenchmarkItemNames[testItemKey])}
                               :&nbsp;
                               <strong>
-                                  {(prereq.result.score as LanguageTestScoreItemized)[testItemKey]}
+                                  {(prereq.result.scores as LanguageTestScoreItemized)[testItemKey]}
                               </strong>
                           </span>
                       )

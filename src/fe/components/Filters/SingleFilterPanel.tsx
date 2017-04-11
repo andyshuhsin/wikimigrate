@@ -1,12 +1,12 @@
 import * as React from 'react'
 import text from '../../utils/text'
-import {Filter, FilterOption, FilterState} from "../../data"
+import {BaseFilter, FilterOption, FilterState, MultipleChoiceFilter} from "../../data"
 import {FilterOptionClickFn} from "./FilterDetailedOptionPanel"
 import design from "../../design"
 import sys from "../../sys"
 
 interface SingleFilterPanelProps {
-    filter: Filter,
+    filter: BaseFilter,
     filterState: FilterState
     filterOptionClick: FilterOptionClickFn
 }
@@ -57,7 +57,8 @@ class SingleFilterPanel extends React.Component<SingleFilterPanelProps, {}> {
                     {text(filter.title)}
                 </h1>
                 <div style={styles.optionContainerStyle}>
-                    {filter.options.map((option: FilterOption) => {
+                    {/* TODO: remove type assertion */}
+                    {(filter as MultipleChoiceFilter).options.map((option: FilterOption) => {
                         const shouldHighlight = filterState[filter.id] === option.id
                         return (
                             <span

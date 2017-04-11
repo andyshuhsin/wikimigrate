@@ -1,6 +1,5 @@
 import BasePrereq from "./BasePrereq";
-import {LanguageTestId, LanguageTestResult, LanguageTestScore} from "../auxillary/LanguageTest"
-
+import {LanguageTestId, LanguageTestResult, LanguageTestScores} from "../auxillary/LanguageTest"
 
 export interface LanguagePrereq extends BasePrereq {
     prereqId: "language_test"
@@ -8,15 +7,14 @@ export interface LanguagePrereq extends BasePrereq {
     // TODO: Add time limits
 }
 
-
-export function languagePrereq(benchmark: LanguageTestId,
-                                  score: LanguageTestScore
+export function languagePrereq(testId: LanguageTestId,
+                               scores: LanguageTestScores
 ): LanguagePrereq {
     return {
         prereqId: "language_test",
         result: {
-            benchmark,
-            score
+            testId,
+            scores,
         }
     }
 }

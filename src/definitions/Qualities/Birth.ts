@@ -1,7 +1,7 @@
 import {RegionId} from "../auxillary/Region"
 
 export interface BirthQuality {
-    birthday?: Date
+    date?: Date
     region?: RegionId
 }
 

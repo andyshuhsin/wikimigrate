@@ -16,9 +16,12 @@ import {
     Path,
 } from '../utils/definitions'
 
+import calcSuitablePaths from "../utils/calcSuitablePaths"
+
 import {VisaPlannerState} from "../reducers"
 import {Person} from "../../definitions/Person"
 import {filterBarClickAction} from "../actions/index"
+import {Region} from "../../definitions/auxillary/Region"
 
 const style = {
     position: "relative",
@@ -43,38 +46,10 @@ interface PropTypes {
     shouldDetailedFilterPanelExpand: boolean
 }
 
-function filterSuitablePaths(user: Person): Path[] {
-    // TODO: Describe $data and explicitly reference it & remove closure.
-
-    // FIXME: Use real data
-    return [
-        {
-            transitions: [
-                data.regions[0].transitionList[0],
-            ]
-        },
-        {
-            transitions: [
-                data.regions[0].transitionList[1],
-            ]
-        },
-        {
-            transitions: [
-                data.regions[0].transitionList[2],
-            ]
-        },
-        {
-            transitions: [
-                data.regions[0].transitionList[3],
-            ]
-        },
-        {
-            transitions: [
-                data.regions[0].transitionList[4],
-            ]
-        },
-    ]
-}
+const allTransitions = data.regions.map((region: Region) => region.transitionList).reduce(
+    (prev, nextArray) => prev.concat(nextArray),
+    []
+)
 
 class VisaPlanner extends React.Component<PropTypes, {}> {
 
@@ -101,7 +76,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                     overflow: "scroll"
                 }}>
                     <PathShowcase
-                        paths={filterSuitablePaths(this.props.user)}
+                        paths={calcSuitablePaths(this.props.user, allTransitions)}
                         boxClick={this.boxClick.bind(this)}
                     />
                     <PathDetailDisplay

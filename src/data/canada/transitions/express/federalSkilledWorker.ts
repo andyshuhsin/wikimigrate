@@ -29,8 +29,8 @@ const federalSkilledWorker: Transition = {
 
         // Language Requirement
         oneOf([
-            languagePrereq("clb", {score: 7}),
-            languagePrereq("nclc", {score: 7}),
+            languagePrereq("clb", {overall: 7}),
+            languagePrereq("nclc", {overall: 7}),
         ]),
 
         // Working Experience

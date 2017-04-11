@@ -1,15 +1,11 @@
 import * as React from 'react'
-import {Condition} from "../../../definitions/auxillary/Combination";
+import {Combination, isCombination} from "../../../definitions/auxillary/Combination"
 
 import PrerequisiteBox from './PrerequisiteBox'
 import JobNatureBox from './PrerequisiteBox/JobNatureBox'
 
 const comboBoxStyle = {
     padding: "0.3em 0 1em 1em",
-}
-
-function isCombination(input: any): boolean {
-    return !!input.operator
 }
 
 function isPrerequisite(input: any): boolean {
@@ -21,7 +17,7 @@ function isJobNature(input: any): boolean {
 }
 
 interface Props {
-    combo: Condition<any>
+    combo: Combination<any>
 }
 
 class CombinationBox extends React.PureComponent<Props, {}> {
@@ -41,7 +37,7 @@ class CombinationBox extends React.PureComponent<Props, {}> {
 
     render() {
         const combo = this.props.combo
-        const operatorText = combo.operator
+        const operatorText = combo.combinator
         return (
             <div style={comboBoxStyle}>
                 {

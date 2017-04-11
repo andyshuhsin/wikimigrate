@@ -40,8 +40,8 @@ const canadianExperience: Transition = {
                 } as WorkExperiencePrereq,
 
                 oneOf([
-                    languagePrereq("clb", { score: 7 }),
-                    languagePrereq("nclc", { score: 7 }),
+                    languagePrereq("clb", { overall: 7 }),
+                    languagePrereq("nclc", { overall: 7 }),
                 ]),
             ]),
 
@@ -59,8 +59,8 @@ const canadianExperience: Transition = {
                 } as WorkExperiencePrereq,
 
                 oneOf([
-                    languagePrereq("clb", { score: 5 }),
-                    languagePrereq("nclc", { score: 5 }),
+                    languagePrereq("clb", { overall: 5 }),
+                    languagePrereq("nclc", { overall: 5 }),
                 ]),
             ])
         ])

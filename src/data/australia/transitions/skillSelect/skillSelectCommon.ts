@@ -36,8 +36,8 @@ export const competentEnglish =  oneOf([
         } as RightPrereq,
     ]),
 
-    languagePrereq("ielts", { score: 6 }),
-    languagePrereq("oet", { score: "b" }),
+    languagePrereq("ielts", { overall: 6 }),
+    languagePrereq("oet", { overall: "b" }),
     languagePrereq("toefl", {
         listening: 12,
         reading: 12,

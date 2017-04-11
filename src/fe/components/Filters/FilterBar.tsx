@@ -10,6 +10,8 @@ interface FilterBarProps {
 const FilterBar = (props: FilterBarProps) => (
     <div
         style={{
+            position: "absolute",
+            bottom: "0",
             fontSize: "1.3em",
             padding: "0.5em 0.7em",
             width: "100%",
