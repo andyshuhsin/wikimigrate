@@ -10,6 +10,7 @@ import FilterBar from './Filters/FilterBar'
 import PathDetailDisplay from './PathDetailDisplay'
 import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
 import Shade from './Shade'
+import sys from '../sys'
 
 import {
     Path,
@@ -23,7 +24,7 @@ const style = {
     position: "relative",
     margin: 0,
     padding: 0,
-    height: "100vh",
+    height: sys.ua.ios_safari ? "calc(100vh - 69px)" : "100vh",
 
     overflow: "hidden",
     display: "flex",
