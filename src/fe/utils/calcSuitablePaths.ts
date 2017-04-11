@@ -14,9 +14,6 @@ import {
 // Set to true for maximal coverage
 const DEFAULT_RESULT = true
 
-// DEBUG
-console.warn = () => null
-
 function getCriticalDate(duration: Duration, today = new Date()) {
     if (duration.unit === "year") {
         return new Date(today.setFullYear(today.getFullYear() - duration.value))
@@ -149,7 +146,6 @@ function canApply(person: Person, transition: Transition): boolean {
 export function filterSuitablePaths(user: Person, allTransitions: Transition[]): Path[] {
 
     const applicableTransitions = allTransitions.filter(transition => canApply(user, transition))
-    console.info(applicableTransitions.length, applicableTransitions)
 
     // TODO: Compute from 'person'
     const desiredRights: RightPrereq[] = [
