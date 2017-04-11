@@ -22,7 +22,6 @@
     "@types/react-redux": "^4.4.38",
     "@types/redux": "^3.6.0",
     "babel-cli": "^6.24.0",
-    "babili": "^0.0.12",
     "copy-webpack-plugin": "^4.0.1",
     "file-loader": "^0.10.1",
     "image-webpack-loader": "^3.2.0",

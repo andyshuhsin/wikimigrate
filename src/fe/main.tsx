@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
 import VisaPlanner from './components/VisaPlanner'
+import './utils/assign-polyfill'
 
 const store = createStore(
     reducer,
