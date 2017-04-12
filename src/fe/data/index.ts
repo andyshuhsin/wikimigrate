@@ -109,33 +109,33 @@ export const filterSets: Filter[] = [
     //         },
     //     ]
     // },
-    {
-        id: "education",
-        filterType: "multiple-choice",
-        title: {
-            en: "Education"
-        },
-        options: [
-            {
-                id: "university",
-                label: {
-                    en: "University"
-                }
-            },
-            {
-                id: "secondary",
-                label: {
-                    en: "Secondary"
-                }
-            },
-            {
-                id: "primary",
-                label: {
-                    en: "Primary"
-                }
-            },
-        ]
-    },
+    // {
+    //     id: "education",
+    //     filterType: "multiple-choice",
+    //     title: {
+    //         en: "Education"
+    //     },
+    //     options: [
+    //         {
+    //             id: "university",
+    //             label: {
+    //                 en: "University"
+    //             }
+    //         },
+    //         {
+    //             id: "secondary",
+    //             label: {
+    //                 en: "Secondary"
+    //             }
+    //         },
+    //         {
+    //             id: "primary",
+    //             label: {
+    //                 en: "Primary"
+    //             }
+    //         },
+    //     ]
+    // },
     {
         id: "english",
         filterType: "multiple-choice",
