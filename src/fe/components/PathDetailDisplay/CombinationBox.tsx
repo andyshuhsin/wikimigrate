@@ -54,12 +54,15 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                             <div key={index}> {/* TOOD: Shouldn't use 'index' */}
                                 <this.OperandView operand={operand} level={this.props.level + 1}/>
                                 {
-                                    combo.combinator === "or"
-                                    && combo.operands.length === 2
+                                    combo.operands.length === 2
                                     && index === 0
                                     && (
-                                        <div style={{marginTop: "0.5em"}}>
-                                            or
+                                        <div style={
+                                            this.props.level === 0
+                                            ? {marginTop: "0.5em"}
+                                            : {}
+                                        }>
+                                            {combo.combinator}
                                         </div>
                                     )
                                 }
