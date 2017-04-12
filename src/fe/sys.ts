@@ -5,13 +5,16 @@ const sys = {
         width: window.innerWidth
     },
     ua: {
-        ios_safari: (
+        iosSafari: (
             (/(iPad|iPhone|iPod)/gi).test(userAgent) &&
             !(/CriOS/).test(userAgent) &&
             !(/FxiOS/).test(userAgent) &&
             !(/OPiOS/).test(userAgent) &&
             !(/mercury/).test(userAgent)
         )
+    },
+    dimensions: {
+        iosSafariBottomBarHeight: 69
     }
 }
 

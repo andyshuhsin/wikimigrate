@@ -1,5 +1,6 @@
 import * as React from 'react'
 import TransitionDisplay from './TransitionDisplay'
+import sys from '../../sys'
 
 import {
     Path
@@ -18,16 +19,38 @@ const style = {
     zIndex: 1,
 }
 
-const closeButtonStyle = {
-    position: "fixed",
+const sideLength = "1em"
+const closeButtonStyle = (() => {
+    return {
+        position: "fixed",
+        left: 0,
+        right: 0,
+        bottom: sys.ua.iosSafari
+                ? `calc(20px + ${sys.dimensions.iosSafariBottomBarHeight}px)`
+                : "20px",
+        margin: "auto",
+
+        height: sideLength,
+        width: sideLength,
+        lineHeight: sideLength,
+        borderRadius: "50%",
+
+        background: "rgba(0, 0, 0, 0.2)",
+        color: "white",
+
+        fontSize: "3em",
+        textAlign: "center",
+    }
+})()
+
+const crossStyle = {
+    position: "absolute",
     left: 0,
     right: 0,
+    top: 0,
+    bottom: 0,
     margin: "auto",
-    bottom: "1em",
-    fontSize: "3em",
-    height: "1em",
-    width: "1em",
-    textAlign: "center",
+    width: `calc(${sideLength} / 2)`
 }
 
 interface Props {
@@ -54,7 +77,10 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
 
                     <div style={closeButtonStyle}
                          onClick={this.props.onClose}>
-                        &times;
+                        <img
+                            style={crossStyle}
+                            src={require("../../assets/cross.svg")}
+                        />
                     </div>
 
                 </div>

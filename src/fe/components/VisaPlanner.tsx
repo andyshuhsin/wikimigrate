@@ -31,7 +31,9 @@ const style = {
     position: "relative",
     margin: 0,
     padding: 0,
-    height: sys.ua.ios_safari ? "calc(100vh - 69px)" : "100vh",
+    height: sys.ua.iosSafari
+            ? `calc(100vh - ${sys.dimensions.iosSafariBottomBarHeight}px)`
+            : "100vh",
 
     overflow: "hidden",
     display: "flex",
