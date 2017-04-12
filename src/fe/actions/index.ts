@@ -1,4 +1,5 @@
 import {FilterId, OptionId} from "../data"
+import {Path} from "../utils/definitions"
 
 export interface MenuClickAction {
     type: "FILTER_OPTION_CLICK"
@@ -22,6 +23,13 @@ export interface FilterBarClick {
 
 export interface ShadeClick {
     type: "SHADE_CLICK"
+}
+
+export interface PathBoxClick {
+    type: "PATH_BOX_CLICK",
+    payload: {
+        path: Path
+    }
 }
 
 export interface FilterPanelRender {
@@ -72,9 +80,20 @@ export function shadeClickAction(): ShadeClick {
     }
 }
 
+export function pathBoxClickAction(path: Path): PathBoxClick {
+    return {
+        type: "PATH_BOX_CLICK",
+        payload: {
+            path
+        }
+    }
+}
+
+
 export type Action =
     MenuClickAction
     | FilterSelectAction
     | FilterBarClick
     | FilterPanelRender
     | ShadeClick
+    | PathBoxClick

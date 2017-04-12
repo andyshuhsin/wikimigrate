@@ -143,7 +143,7 @@ function canApply(person: Person, transition: Transition): boolean {
 }
 
 
-export function filterSuitablePaths(user: Person, allTransitions: Transition[]): Path[] {
+export function calcSuitablePaths(user: Person, allTransitions: Transition[]): Path[] {
 
     const applicableTransitions = allTransitions.filter(transition => canApply(user, transition))
 
@@ -169,4 +169,4 @@ export function filterSuitablePaths(user: Person, allTransitions: Transition[]):
     return paths
 }
 
-export default filterSuitablePaths
+export default calcSuitablePaths

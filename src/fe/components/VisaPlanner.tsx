@@ -20,7 +20,7 @@ import calcSuitablePaths from "../utils/calcSuitablePaths"
 
 import {VisaPlannerState} from "../reducers"
 import {Person} from "../../definitions/Person"
-import {filterBarClickAction, shadeClickAction} from "../actions/index"
+import {filterBarClickAction, pathBoxClickAction, shadeClickAction} from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
 
 const style = {
@@ -43,6 +43,7 @@ interface PropTypes {
     pathOnDisplay: Path | null
     onFilterBarClick: () => void
     onShadeClick: () => void
+    onPathBoxClick: (path: Path) => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
 }
@@ -53,12 +54,6 @@ const allTransitions = data.regions.map((region: Region) => region.transitionLis
 )
 
 class VisaPlanner extends React.Component<PropTypes, {}> {
-
-    boxClick(path: Path): void {
-        this.setState({
-            pathOnDisplay: path
-        })
-    }
 
     render() {
 
@@ -78,7 +73,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                 }}>
                     <PathShowcase
                         paths={calcSuitablePaths(this.props.user, allTransitions)}
-                        boxClick={this.boxClick.bind(this)}
+                        onClick={this.props.onPathBoxClick}
                     />
                     <PathDetailDisplay
                         pathOnDisplay={this.props.pathOnDisplay}
@@ -123,6 +118,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         },
         onShadeClick() {
             dispatch(shadeClickAction())
+        },
+        onPathBoxClick(path: Path): void {
+            dispatch(pathBoxClickAction(path))
         }
     }
 }

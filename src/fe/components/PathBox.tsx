@@ -9,7 +9,7 @@ import data from '../../data'
 
 interface PathShowcaseProps {
     path: Path
-    boxClick: (event: React.MouseEvent<any>) => void
+    onClick: (event: React.MouseEvent<any>) => void
 }
 
 const boxStyle = {
@@ -41,7 +41,7 @@ class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
         const transitions = this.props.path.transitions
         const targetRegion = data.getRegionById(transitions[0].regionId)
         return (
-            <div style={boxStyle} onClick={this.props.boxClick}>
+            <div style={boxStyle} onClick={this.props.onClick}>
                 <div>
                     <h2 style={countryNameStyle}>
                         {targetRegion && text(targetRegion.name)}
