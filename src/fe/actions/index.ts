@@ -20,6 +20,10 @@ export interface FilterBarClick {
     type: "FILTER_BAR_CLICK"
 }
 
+export interface ShadeClick {
+    type: "SHADE_CLICK"
+}
+
 export interface FilterPanelRender {
     type: "FILTER_PANEL_RENDER",
     payload: {
@@ -62,8 +66,15 @@ export function filterBarClickAction(): FilterBarClick {
     }
 }
 
+export function shadeClickAction(): ShadeClick {
+    return {
+        type: "SHADE_CLICK"
+    }
+}
+
 export type Action =
     MenuClickAction
     | FilterSelectAction
     | FilterBarClick
     | FilterPanelRender
+    | ShadeClick

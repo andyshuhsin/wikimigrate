@@ -84,7 +84,7 @@ export const englishTestAssumptions = {
                 writing: 0,
             }
         },
-    ]
+    ] as LanguageTestResult[]
 }
 
 export const filterSets: Filter[] = [

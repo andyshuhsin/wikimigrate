@@ -20,7 +20,7 @@ import calcSuitablePaths from "../utils/calcSuitablePaths"
 
 import {VisaPlannerState} from "../reducers"
 import {Person} from "../../definitions/Person"
-import {filterBarClickAction} from "../actions/index"
+import {filterBarClickAction, shadeClickAction} from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
 
 const style = {
@@ -42,6 +42,7 @@ interface PropTypes {
     user: Person
     pathOnDisplay: Path | null
     onFilterBarClick: () => void
+    onShadeClick: () => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
 }
@@ -88,7 +89,10 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                         }
                     />
                 </div>
-                <Shade shouldShow={shouldShadeShow} />
+                <Shade
+                    shouldShow={shouldShadeShow}
+                    onClick={this.props.onShadeClick}
+                />
                 <FilterBar
                     onClick={this.props.onFilterBarClick}
                     offset={
@@ -116,6 +120,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
     return {
         onFilterBarClick() {
             dispatch(filterBarClickAction())
+        },
+        onShadeClick() {
+            dispatch(shadeClickAction())
         }
     }
 }

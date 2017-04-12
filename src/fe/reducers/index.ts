@@ -85,6 +85,12 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case "SHADE_CLICK": {
+            const newState = clone(state)
+            newState.ui.shouldDetailedFilterPanelExpand = false
+            return newState
+        }
+
         case "FILTER_SELECT": {
             return state
         }
