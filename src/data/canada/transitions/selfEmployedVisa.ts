@@ -1,9 +1,6 @@
-import {
-    Transition,
-    oneOf,
-    allOf,
-    WorkExperiencePrereq,
-} from '../../../definitions'
+import Transition from "../../../definitions/Transition";
+import {allOf, oneOf} from "../../../definitions/auxillary/Combination";
+import {WorkExperiencePrereq} from "../../../definitions/Prerequisites/WorkExperiencePrereq";
 
 import {
     alien,
@@ -22,13 +19,13 @@ const selfEmployedVisa: Transition = {
     prerequisiteList: oneOf([
         allOf([
             {
-                property: "work_experience",
+                prereqId: "work_experience",
                 jobNature: {
                     en: "Have relevant experience in cultural activities or athletics",
                 }
             } as WorkExperiencePrereq,
             {
-                property: "work_experience",
+                prereqId: "work_experience",
                 jobNature: {
                     en: "Intend and be able to make a significant contribution to the cultural or athletic life of Canada"
                 }
@@ -36,13 +33,13 @@ const selfEmployedVisa: Transition = {
         ]),
         allOf([
             {
-                property: "work_experience",
+                prereqId: "work_experience",
                 jobNature: {
                     en: "Have experience in farm management"
                 }
             } as WorkExperiencePrereq,
             {
-                property: "work_experience",
+                prereqId: "work_experience",
                 jobNature: {
                     en: "Intend and be able to buy and manage a farm in Canada"
                 }

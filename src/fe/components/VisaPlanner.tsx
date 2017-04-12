@@ -1,187 +1,131 @@
 import data from '../../data'
+
 import * as React from 'react'
+import {connect, Dispatch} from 'react-redux'
 
 import TopBar from './TopBar'
 import Title from './Title'
 import PathShowcase from './PathShowcase'
-import FilterPanel from './FilterPanel'
+import FilterBar from './Filters/FilterBar'
 import PathDetailDisplay from './PathDetailDisplay'
+import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
+import Shade from './Shade'
+import sys from '../sys'
 
 import {
     Path,
 } from '../utils/definitions'
 
+import calcSuitablePaths from "../utils/calcSuitablePaths"
+
+import {VisaPlannerState} from "../reducers"
+
+import {Person} from "../../definitions/Person"
 import {
-    Condition,
-    Region,
-} from '../../definitions'
+    filterBarClickAction, pathBoxClickAction, pathViewCloseButtonClickAction,
+    shadeClickAction
+} from "../actions/index"
+import {Region} from "../../definitions/auxillary/Region"
+import {text} from "../utils/text"
 
 const style = {
-    padding: "0.1em",
-    height: "100vh",
-    maxWidth: 400,
+    position: "relative",
+    margin: 0,
+    padding: 0,
+    height: sys.ua.iosSafari
+            ? `calc(100vh - ${sys.dimensions.iosSafariBottomBarHeight}px)`
+            : "100vh",
+
+    overflow: "hidden",
+    display: "flex",
+    flexFlow: "column",
+
     fontSize: 14,
     color: "#212121",
     fontFamily: "sans-serif",
 } as React.CSSProperties
 
-function flatten<T>(arrayOfArrays: Array<Array<T>>): Array<T> {
-    return Array.prototype.concat.apply([], arrayOfArrays)
-}
-
-// FIXME: This function is full of hack
-function findInCombination(predicate: (arg: any) => boolean, combo: Condition<any>) {
-
-    let result: any = null
-
-    if (predicate(combo)) {
-        return combo
-    } else if (combo.operands) {
-        for (let operand of combo.operands) {
-            if (predicate(operand)) {
-                return operand
-            } else if (operand["operator"]) {
-                result = findInCombination(predicate, operand)
-                if (result) {
-                    return result
-                }
-            }
-        }
-    }
-
-    return result
-}
-
-interface StateTypes {
+interface PropTypes {
+    user: Person
     pathOnDisplay: Path | null
-    filterStates: {
-        offer: ''
-        education: ''
-        english: ''
-    }
+    onFilterBarClick: () => void
+    onShadeClick: () => void
+    onPathBoxClick: (path: Path) => void
+    onPathViewCloseButtonClick: () => void
+    filterPanelHeight: number | null
+    shouldDetailedFilterPanelExpand: boolean
 }
 
-class VisaPlanner extends React.Component<{}, StateTypes> {
+const allTransitions = data.regions.map((region: Region) => region.transitionList).reduce(
+    (prev, nextArray) => prev.concat(nextArray),
+    []
+)
 
-    constructor() {
-        super()
-        this.state = {
-            pathOnDisplay: null,
-            filterStates: {
-                offer: '',
-                education: '',
-                english: '',
-            }
-        }
-    }
-
-    getFilteredPaths(): Path[] {
-        const allTransitions = flatten(data.regions.map((region: Region) => region.transitionList))
-        const allPaths = allTransitions.map(transition => ({
-            transitions: [transition]
-        }))
-        
-        // FIXME: This whole thing is hacked together.
-        if (this.state.filterStates.english) {
-            for (let i = 0; i < allPaths.length; i += 1) {
-                const transition = allPaths[i].transitions[0]
-                const englishPrereq = findInCombination(
-                    (x) => x.property && x.property === 'language_test',
-                    transition.prerequisiteList
-                )
-
-                if (englishPrereq) {
-                    const currentScore = Number(this.state.filterStates.english)
-                    const requirementScore = englishPrereq.requirements[0].value
-                    if (currentScore < requirementScore) {
-                        allPaths.splice(i, 1)
-                        continue
-                    }
-                }
-            }
-        }
-
-        if (this.state.filterStates.offer) {
-            for (let i = 0; i < allPaths.length; i += 1) {
-                const transition = allPaths[i].transitions[0]
-                const prereq = findInCombination(
-                    (x) => x.property && x.property === 'offer',
-                    transition.prerequisiteList
-                )
-
-                if (prereq && this.state.filterStates.offer === 'no') {
-                    allPaths.splice(i, 1)
-                }
-            }
-        }
-        // FIXME: Hack end.
-
-        if (this.state.filterStates.education) {
-            for (let i = 0; i < allPaths.length; i += 1) {
-                const transition = allPaths[i].transitions[0]
-                const prereq = findInCombination(
-                    (x) => x.property && x.property === 'offer',
-                    transition.prerequisiteList
-                )
-
-                if (prereq && prereq.stage !== this.state.filterStates.education) {
-                    allPaths.splice(i, 1)
-                }
-            }
-        }
-
-        return allPaths
-    }
-
-    boxClick(path: Path): void {
-        this.setState({
-            pathOnDisplay: path
-        })
-    }
-
-    filterClick(item: string, value: string) {
-        console.info(item, value)
-        this.setState({
-            filterStates: Object.assign({}, this.state.filterStates, {
-                [item]: value
-            })
-        } as any)
-    }
+class VisaPlanner extends React.Component<PropTypes, {}> {
 
     render() {
+
+        const shouldShadeShow = this.props.shouldDetailedFilterPanelExpand
+
         return (
             <div style={style}>
                 <TopBar
-                    brandName={data.app.brandName[data.app.lang]}
+                    brandName={text(data.app.brandName)}
                     version={data.app.version}
                 />
                 <Title text={
-                    (this.state.filterStates.education +
-                     this.state.filterStates.english +
-                     this.state.filterStates.offer)
-                    ? "Mobility options for you"
-                    : "Popular mobility options"
+                    "Popular mobility options"
                 } />
                 <PathShowcase
-                        paths={this.getFilteredPaths()}
-                        boxClick={this.boxClick.bind(this)}
-                />
-                <FilterPanel
-                    filterStates={this.state.filterStates}
-                    filterClick={this.filterClick.bind(this)}
+                    paths={calcSuitablePaths(this.props.user, allTransitions)}
+                    onClick={this.props.onPathBoxClick}
                 />
                 <PathDetailDisplay
-                        pathOnDisplay={this.state.pathOnDisplay}
-                        onClose={
-                            () => this.setState({
-                                pathOnDisplay: null
-                            })
-                        }
+                    pathOnDisplay={this.props.pathOnDisplay}
+                    onClose={this.props.onPathViewCloseButtonClick}
                 />
+                <Shade
+                    shouldShow={shouldShadeShow}
+                    onClick={this.props.onShadeClick}
+                />
+                <FilterBar
+                    onClick={this.props.onFilterBarClick}
+                    offset={
+                        this.props.shouldDetailedFilterPanelExpand
+                        ? this.props.filterPanelHeight
+                        : 0
+                    }
+                />
+                <FilterDetailedOptionPanel />
             </div>
-        );
+        )
     }
-
 }
 
-export default VisaPlanner
+function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
+    return {
+        user: state.user,
+        pathOnDisplay: state.ui.pathOnDisplay,
+        filterPanelHeight: state.ui.filterPanelHeight,
+        shouldDetailedFilterPanelExpand: state.ui.shouldDetailedFilterPanelExpand,
+    }
+}
+
+function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
+    return {
+        onFilterBarClick() {
+            dispatch(filterBarClickAction())
+        },
+        onShadeClick() {
+            dispatch(shadeClickAction())
+        },
+        onPathBoxClick(path: Path) {
+            dispatch(pathBoxClickAction(path))
+        },
+        onPathViewCloseButtonClick() {
+            dispatch(pathViewCloseButtonClickAction())
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(VisaPlanner)

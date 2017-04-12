@@ -1,10 +1,7 @@
 import * as React from 'react'
 
 import data from '../../../../data'
-
-import {
-    FundPrereq
-} from '../../../../definitions'
+import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq"
 
 function stringifyCondition(condition: any) {
     if (condition.familyMember) {
@@ -16,7 +13,7 @@ const FundBox = (props: {prereq: FundPrereq}) => {
     if (props.prereq.type === "possess") {
         return (
             <div>
-                You must have
+                You have
                 {
                     props.prereq.schemes.map((scheme, index) => 
                         <div key={index}>

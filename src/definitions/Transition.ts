@@ -1,12 +1,12 @@
 import { MultiLangStringSet } from './auxillary/MultiLang'
-import Status from './Status'
-import { Condition } from './auxillary/Combination'
+import { Combination } from './auxillary/Combination'
 import Procedure from './auxillary/Procedure'
 import Exception from './auxillary/Exception'
 import URLDatum from './auxillary/URLDatum'
 
-import Prerequisite from './auxillary/Prerequisites'
-import {RegionId} from "./Region"
+import {RegionId} from "./auxillary/Region"
+import Status from "./Qualities/Status"
+import Prerequisite from "./Prerequisites/index"
 
 interface Transition {
     id: string
@@ -19,7 +19,7 @@ interface Transition {
         description: MultiLangStringSet
         date?: Date
     }
-    prerequisiteList: Condition<Prerequisite>
+    prerequisiteList: Combination<Prerequisite>
     procedureList: Procedure[]
     exceptionList?: Array<Exception>
     referenceList?:  URLDatum[]

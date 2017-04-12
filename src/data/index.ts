@@ -2,8 +2,7 @@ import canada from './canada'
 import australia from './australia'
 import app from './app'
 import common from './common'
-
-import { Region, RegionId } from '../definitions'
+import {Region, RegionId} from "../definitions/auxillary/Region"
 
 const regions = [
     canada,

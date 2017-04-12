@@ -1,8 +1,8 @@
 import BasePrereq from './BasePrereq'
-import { MultiLangStringSet } from '../MultiLang'
+import { MultiLangStringSet } from '../auxillary/MultiLang'
 
 export interface OfferPrereq extends BasePrereq {
-    property: "offer"
+    prereqId: "offer"
     employer: {
         regionId: string | undefined
         status?: "approved"

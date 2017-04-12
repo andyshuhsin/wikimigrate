@@ -1,33 +1,35 @@
-import { MultiLangStringSet } from '../../definitions'
 import { app } from '../../data'
+import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 
-const fallbackLangList = ["en", "fr"]
+const fallbackLangList: LangId[] = ["en", "fr"]
 
-function text(s: MultiLangStringSet | null | undefined,
-           lang: string = app.lang,
-           fallbackLangs = fallbackLangList): string {
-       if (!s) {
+export function text(
+    s: MultiLangStringSet | string | null | undefined,
+    lang: LangId = app.lang,
+    fallbackLangs = fallbackLangList): string {
+       if (s === null || typeof s === "undefined") {
            return ''
        }
-       else if (s[lang]) {
-           return s[lang]
-       } else {
-           for (let lang of fallbackLangs) {
-               if (s[lang]) {
-                   return s[lang]
-               }
-           }
-
-            // Last resort
-            const fallbackLang = Object.keys(s)[0]
-            if (s[fallbackLang]) {
-                return s[fallbackLang]
-            } else {
-                console.warn("Can not turn into text:", s)
-                return ''
-            }
+       else if (typeof s === "string") {
+           console.warn("Getting raw without multilang support:", s)
+           return s
        }
-
+       else {
+           const translation = s[lang]
+           if (translation) {
+               return translation
+           }
+           else {
+               for (let lang of fallbackLangs) {
+                   let translation = s[lang]
+                   if (translation) {
+                       return translation
+                   }
+                }
+           }
+       }
+       console.warn("Cannot convert to text: ", s)
+       return ''
 }
 
 export default text

@@ -1,4 +1,4 @@
-import { MultiLangStringSet } from '../index'
+import {MultiLangStringSet} from "./MultiLang"
 
 export interface JobGroup {
     id: string

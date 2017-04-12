@@ -1,33 +1,32 @@
 import * as React from 'react'
 import text from "../../utils/text"
 
-import {
-    Transition,
-    Prerequisite,
-    Combination,
-} from '../../../definitions'
-
 import CombinationBox from './CombinationBox'
 import ProcedureBox from './ProcedureBox'
+import Transition from "../../../definitions/Transition";
 
 interface Props {
     transition: Transition
 }
 
-const h1Style = {
-    marginTop: "2em"
+const transitionNameStyle = {
+    margin: 0,
 }
 
-const h2Style = {
+const sectionTitleStyle = {
+    margin: "0.5em",
+    marginLeft: 0,
 
-}
+    fontWeight: "lighter",
+    fontSize: "1.4em",
+} as React.CSSProperties
 
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
         const transition = this.props.transition
         return (
             <div>
-                <h1 style={h1Style}>
+                <h1 style={transitionNameStyle}>
                     {text(transition.name)}
                 </h1>
                 {/*<h2 style={h2Style}>
@@ -35,19 +34,22 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                     for rights of {transition.to.rights}
                 </h2>*/}
 
-                <div>
-                    <h5>Prerequisites:</h5>
+                <section>
+                    <h3 style={sectionTitleStyle}>Prerequisites</h3>
                     {
-                        <CombinationBox combo={transition.prerequisiteList} />
+                        <CombinationBox
+                            combo={transition.prerequisiteList}
+                            level={0}
+                        />
                     }
-                </div>
+                </section>
 
-                <div>
-                    <h5>Procedures:</h5>
+                <section>
+                    <h3 style={sectionTitleStyle}>Application</h3>
                     {
                         <ProcedureBox procedureList={transition.procedureList} />
                     }
-                </div>
+                </section>
             </div>
         )
     }

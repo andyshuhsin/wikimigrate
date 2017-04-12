@@ -1,8 +1,5 @@
 import * as React from 'react'
-
-import {
-    CertificationPrereq
-} from '../../../../definitions'
+import {CertificationPrereq} from "../../../../definitions/Prerequisites/CertificationPrereq"
 
 const CertificationBox = (props: {prereq: CertificationPrereq}) => {
     return (

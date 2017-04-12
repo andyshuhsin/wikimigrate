@@ -1,8 +1,8 @@
 import BasePrereq from './BasePrereq'
-import Money from '../Money'
+import Money from '../auxillary/Money'
 
 export interface FundPrereq extends BasePrereq {
-    property: "fund"
+    prereqId: "fund"
     type: "possess" | "invest" | "donate" | "venture"
     schemes: [
         {

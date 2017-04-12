@@ -11,14 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "@types/node": "^7.0.8",
-    "@types/react": "^15.0.16",
+    "@types/react": "15.0.1",
     "@types/react-dom": "^0.14.23",
+    "@types/react-redux": "^4.4.38",
+    "@types/redux": "^3.6.0",
     "babel-cli": "^6.24.0",
-    "babili": "^0.0.12",
     "copy-webpack-plugin": "^4.0.1",
     "file-loader": "^0.10.1",
     "image-webpack-loader": "^3.2.0",

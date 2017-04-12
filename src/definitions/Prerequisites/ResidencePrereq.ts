@@ -1,9 +1,9 @@
 import BasePrereq from './BasePrereq'
-import Duration from '../Duration'
-import { RegionId } from '../../Region'
+import Duration from '../auxillary/Duration'
+import {RegionId} from "../auxillary/Region"
 
 export interface ResidencePrereq extends BasePrereq {
-    property: "residence"
+    prereqId: "residence"
     regionId: RegionId | undefined
 
     duration: Duration,

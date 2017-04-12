@@ -5,9 +5,10 @@ interface TitleProps {
 }
 
 const titleStyle = {
-    margin: "1em",
-    fontWeight: "bolder",
+    padding: "0.3em 0",
+    font: "1.8em sans-serif",
     textAlign: "center",
+    flex: 0,
 } as React.CSSProperties
 
 const Title = (props: TitleProps) => (

@@ -1,26 +1,36 @@
+import {MultiLangStringSet} from "./MultiLang"
+
+export type CombinationMeta = Partial<{
+    title: MultiLangStringSet
+}>
+
 export interface Combination<T> {
-    type: "combination",
-    operator: 'and' | 'or',
+    combinator: "and" | "or",
     operands: Array<T | Combination<T>>
+    meta?: CombinationMeta
 }
 
-// If there is only one requirement, user should be be forced to use combination 
-export type Condition<T> = Combination<T> | T
-
-export function allOf<T>(args: T[]): Combination<T> {
+export function allOf<T>(args: T[], meta?: CombinationMeta): Combination<T> {
     return {
-        type: "combination",
-        operator: 'and',
-        operands: args
+        combinator: 'and',
+        operands: args,
+        meta,
     }
 }
 
-export function oneOf<T>(args: T[]): Combination<T> {
+export function oneOf<T>(args: T[], meta?: CombinationMeta): Combination<T> {
     return {
-        type: "combination",
-        operator: 'or',
-        operands: args
+        combinator: 'or',
+        operands: args,
+        meta
     }
+}
+
+// For syntactical benefit; Really just a special case of `and` and `or`
+export const identity = allOf
+
+export function isCombination(args: any): boolean {
+    return !!(args["combinator"] && args["operands"])
 }
 
 export default Combination

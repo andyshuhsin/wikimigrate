@@ -9,25 +9,31 @@ import data from '../../data'
 
 interface PathShowcaseProps {
     path: Path
-    boxClick: (event: React.MouseEvent<any>) => void
+    onClick: (event: React.MouseEvent<any>) => void
 }
 
 const boxStyle = {
-    boxSizing: "border-box",
-    margin: "0 0.5em 0.5em 0",
-    display: "inline-block",
+    marginBottom: "0.625em",
 
-    width: "calc(50% - 2em)", //TODO: Need work
-    height: "calc(50vw - 2em)",
     maxHeight: "200px",
+    padding: "1.7em 1em",
 
-    borderRadius: "5px",
-    padding: "1em",
-
-    fontSize: "0.75em",
+    fontSize: "1.2em",
+    textAlign: "center",
     background: "#ffccbc",
     wordWrap: "break-work",
     overflow: "hidden",
+} as React.CSSProperties
+
+const countryNameStyle = {
+    font: "normal 1.2em sans-serif",
+    margin: 0,
+    marginBottom: "0.3em",
+} as React.CSSProperties
+
+const pathNameStyle = {
+    font: "normal 1.2em sans-serif",
+    margin: 0
 } as React.CSSProperties
 
 class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
@@ -35,12 +41,12 @@ class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
         const transitions = this.props.path.transitions
         const targetRegion = data.getRegionById(transitions[0].regionId)
         return (
-            <div style={boxStyle} onClick={this.props.boxClick}>
+            <div style={boxStyle} onClick={this.props.onClick}>
                 <div>
-                    <h2>
+                    <h2 style={countryNameStyle}>
                         {targetRegion && text(targetRegion.name)}
                     </h2>
-                    <h1 style={{fontSize: 14}}>
+                    <h1 style={pathNameStyle}>
                         {text(transitions[0].name)}
                     </h1>
                 </div>

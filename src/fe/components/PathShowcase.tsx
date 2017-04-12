@@ -7,14 +7,11 @@ import {
 
 interface PathShowcaseProps {
     paths: Path[]
-    boxClick: (event: any) => void
+    onClick: (event: any) => void
 }
 
 const pathShowcaseStyle = {
-    display: "flex",
-    flexWrap: "wrap",
     justifyContent: "space-around",
-    maxHeight: "50vh",
     overflow: "scroll",
     padding: "1em",
 } as React.CSSProperties
@@ -28,8 +25,8 @@ const PathShowcase = (props: PathShowcaseProps) =>
                 <PathBox
                     path={path}
                     key={path.transitions.map(transition => transition.id).join('')}
-                    boxClick={
-                        () => props.boxClick(path)
+                    onClick={
+                        () => props.onClick(path)
                     }
                 />
             )

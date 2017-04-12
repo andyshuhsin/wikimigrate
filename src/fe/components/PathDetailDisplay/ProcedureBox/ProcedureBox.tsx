@@ -1,6 +1,5 @@
 import * as React from 'react'
-
-import { Procedure } from "../../../../definitions"
+import Procedure from "../../../../definitions/auxillary/Procedure"
 
 interface Props {
     procedureList: Procedure[]

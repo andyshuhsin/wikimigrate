@@ -1,5 +1,6 @@
 import * as React from 'react'
 import TransitionDisplay from './TransitionDisplay'
+import sys from '../../sys'
 
 import {
     Path
@@ -7,34 +8,53 @@ import {
 
 const style = {
     position: "absolute",
-    left: "2em",
-    right: "2em",
-    top: "2em",
-    bottom: "2em",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
 
+    padding: "0.5em",
     overflow: "scroll",
-    maxWidth: "90vh",
 
     background: "#ebebeb",
+    zIndex: 1,
 }
 
-const closeButtonStyle = {
+const sideLength = "1em"
+const closeButtonStyle = (() => {
+    return {
+        position: "fixed",
+        left: 0,
+        right: 0,
+        bottom: "20px",
+        margin: "auto",
+
+        height: sideLength,
+        width: sideLength,
+        lineHeight: sideLength,
+        borderRadius: "50%",
+
+        background: "rgba(0, 0, 0, 0.2)",
+        color: "white",
+
+        fontSize: "3em",
+        textAlign: "center",
+    }
+})()
+
+const crossStyle = {
     position: "absolute",
-    right: "0.3em",
-    top: "0.2em",
-    fontSize: "3em",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    margin: "auto",
+    width: `calc(${sideLength} / 2)`
 }
 
 interface Props {
     pathOnDisplay: Path | null
     onClose: (event: any) => void
-}
-
-const test = {
-    aaa: 1,
-    toString() {
-        return "FUCK YEAH"
-    }
 }
 
 class PathDetailDisplay extends React.PureComponent<Props, {}> {
@@ -54,10 +74,13 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
                         )
                     }
 
-                    <button style={closeButtonStyle}
-                            onClick={this.props.onClose}>
-                        &times;
-                    </button>
+                    <div style={closeButtonStyle}
+                         onClick={this.props.onClose}>
+                        <img
+                            style={crossStyle}
+                            src={require("../../assets/cross.svg")}
+                        />
+                    </div>
 
                 </div>
             )

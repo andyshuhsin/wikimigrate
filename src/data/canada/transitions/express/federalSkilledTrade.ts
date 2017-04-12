@@ -1,14 +1,10 @@
-import {
-    Transition,
-    duration,
-    allOf,
-    oneOf,
-    languagePrereq,
-    LanguageTestItem,
-    WorkExperiencePrereq,
-    OfferPrereq,
-    CertificationPrereq,
-} from '../../../../definitions'
+import Transition from "../../../../definitions/Transition";
+import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {duration} from "../../../../definitions/auxillary/Duration";
+import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
+import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
+import {CertificationPrereq} from "../../../../definitions/Prerequisites/CertificationPrereq";
 
 import {
     alien,
@@ -48,7 +44,7 @@ const federalSkilledTrade: Transition = {
         // Work experience
         allOf([
             {
-                property: "work_experience",
+                prereqId: "work_experience",
                 length: duration(2, "year"),
                 withinLast: duration(5, "year"),
                 workHoursPerWeek: duration(30, "hour"),
@@ -65,13 +61,13 @@ const federalSkilledTrade: Transition = {
 
         oneOf([
             {
-                property: "offer",
+                prereqId: "offer",
                 employer: {
                     regionId: "canada"
                 },
             } as OfferPrereq,
             {
-                property: "certification",
+                prereqId: "certification",
                 description: {
                     en: "a certificate of qualification in that skilled trade issued by a Canadian provincial or territorial authority"
                 }

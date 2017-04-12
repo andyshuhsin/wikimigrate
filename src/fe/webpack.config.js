@@ -15,7 +15,11 @@ module.exports = {
 
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'ts-loader' },
+      { test: /\.tsx?$/, loader: 'ts-loader', options: {
+        compilerOptions: (process.env.NODE_ENV === 'production') ? {
+          target: "es5"
+        } : null
+      }},
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [

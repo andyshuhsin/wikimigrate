@@ -1,9 +1,9 @@
-import languageBenchmarkProfiles from './languageBenchmarkProfiles'
-import languageBenchmarkItemNames from './languageBenchmarkItemNames'
+import languageTestProfiles from './languageTestProfiles'
+import languageBenchmarkItemNames from './languageTestItemNames'
 import currencies from './currencies'
 
 const common = {
-    languageBenchmarkProfiles,
+    languageTestProfiles,
     languageBenchmarkItemNames,
     currencies,
 }

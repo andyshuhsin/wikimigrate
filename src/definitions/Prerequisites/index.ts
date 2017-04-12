@@ -1,5 +1,5 @@
 import AgePrereq from './AgePrereq'
-import LanguagePrereq, { languagePrereq } from './LanguagePrereq'
+import LanguagePrereq from "./LanguagePrereq"
 import WorkExperiencePrereq from './WorkExperiencePrereq'
 import EducationPrereq from './EducationPrereq'
 import FundPrereq from './FundPrereq'
@@ -9,7 +9,7 @@ import RightPrereq from './RightPrereq'
 import CertificationPrereq from './CertificationPrereq'
 import ResidencePrereq from './ResidencePrereq'
 
-type Prerequisite =
+export type Prerequisite =
     AgePrereq
     | LanguagePrereq
     | WorkExperiencePrereq
@@ -20,5 +20,9 @@ type Prerequisite =
     | RightPrereq
     | CertificationPrereq
     | ResidencePrereq
+
+export function isPrerequisite(arg: any): boolean {
+    return !!arg["prereqId"]
+}
 
 export default Prerequisite

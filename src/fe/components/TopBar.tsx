@@ -2,17 +2,19 @@ import * as React from "react"
 
 const barStyle = {
     display: "flex",
+    flex: 0,
     alignItems: "center",
-    marginBottom: "1.5em",
+    padding: "2em 0.2em",
+    marginBottom: "0.2em",
 } as React.CSSProperties
 
 const logoStyle = {
-    maxWidth: 42,
+    maxWidth: "3em",
 } as React.CSSProperties
 
 const nameStyle = {
-    fontWeight: "bolder",
-    marginLeft: "0.2em"
+    fontSize: "1.2em",
+    marginLeft: "0.3em"
 } as React.CSSProperties
 
 interface TopBarProps {
