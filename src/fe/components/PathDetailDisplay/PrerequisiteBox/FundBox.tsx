@@ -13,7 +13,7 @@ const FundBox = (props: {prereq: FundPrereq}) => {
     if (props.prereq.type === "possess") {
         return (
             <div>
-                You must have
+                You have
                 {
                     props.prereq.schemes.map((scheme, index) => 
                         <div key={index}>

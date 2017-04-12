@@ -4,16 +4,12 @@ import {Combination, isCombination} from "../../../definitions/auxillary/Combina
 import PrerequisiteBox from './PrerequisiteBox'
 import JobNatureBox from './PrerequisiteBox/JobNatureBox'
 import CombinationSubhead from "./CombinationSubhead"
+import {text} from "../../utils/text"
 
 const embeddedCombinationBoxStyle = {
-    padding: "0.6em 0.3em",
+    margin: "0.8em 0",
     background: "rgba(0, 0, 0, 0.05)",
 }
-
-const combinatorStyle = {
-    textAlign: "center",
-    fontWeight: "bolder",
-} as React.CSSProperties
 
 function isPrerequisite(input: any): boolean {
     return !!input.prereqId
@@ -28,28 +24,49 @@ interface Props {
     level: number
 }
 
+const branchStyle = {
+    or: {
+        marginLeft: "1em"
+    } as React.CSSProperties,
+
+    and: {
+
+    } as React.CSSProperties,
+}
+
 class CombinationBox extends React.PureComponent<Props, {}> {
 
     render() {
         const combo = this.props.combo
-        const operatorText = combo.combinator
         return (
             <div style={this.props.level > 0 ? embeddedCombinationBoxStyle : {}}>
                 <CombinationSubhead combo={combo} />
-                {combo.operands.map(
-                    (operand: any, index: number) => (
-                        <div key={index}> {/* TOOD: Shouldn't use 'index' */}
-                            <this.OperandView operand={operand} level={this.props.level + 1}/>
-                            <div style={combinatorStyle}>
+                {
+                    combo.combinator === "or" && combo.operands.length >= 3
+                    ? text({
+                        en: "One of"
+                    })
+                    : ''
+                }
+                <div style={branchStyle[combo.combinator]}>
+                    {combo.operands.map(
+                        (operand: any, index: number) => (
+                            <div key={index}> {/* TOOD: Shouldn't use 'index' */}
+                                <this.OperandView operand={operand} level={this.props.level + 1}/>
                                 {
-                                    index === combo.operands.length - 1
-                                        ? ''
-                                        : operatorText
+                                    combo.combinator === "or"
+                                    && combo.operands.length === 2
+                                    && index === 0
+                                    && (
+                                        <div style={{marginTop: "0.5em"}}>
+                                            or
+                                        </div>
+                                    )
                                 }
                             </div>
-                        </div>
-                    )
-                )}
+                        )
+                    )}
+                </div>
             </div>
         )
     }

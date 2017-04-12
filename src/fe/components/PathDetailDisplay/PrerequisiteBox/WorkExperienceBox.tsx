@@ -8,6 +8,7 @@ const WorkExperienceBox = (props: {prereq: WorkExperiencePrereq}) => {
     // TODO: Fix type cast at prereq.jobTypes as any
     return (
         <div>
+            <div style={{marginBottom: "0.5em"}}>
             {
                 prereq.withinLast
                 ? `Within the last ${prereq.withinLast.value} ${prereq.withinLast.unit}, `
@@ -18,7 +19,9 @@ const WorkExperienceBox = (props: {prereq: WorkExperiencePrereq}) => {
                 ? `you have worked ${prereq.length.value} ${prereq.length.unit} in`
                 : ""
             }
-            <CombinationBox combo={prereq.jobNature as any} level={0} />
+            :
+            </div>
+            <CombinationBox combo={prereq.jobNature as any} level={1} />
         </div>
     )
 }
