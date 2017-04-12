@@ -7,7 +7,7 @@ import {
 
 const style = {
     position: "absolute",
-    left: "1em",
+    left: "0",
     right: 0,
     top: 0,
     bottom: 0,
@@ -19,26 +19,20 @@ const style = {
 }
 
 const closeButtonStyle = {
-    position: "absolute",
-    webkitAppearance: "none",
-    appearance: "none",
+    position: "fixed",
     left: 0,
     right: 0,
-    top: 0,
+    margin: "auto",
     bottom: "1em",
     fontSize: "3em",
+    height: "1em",
+    width: "1em",
+    textAlign: "center",
 }
 
 interface Props {
     pathOnDisplay: Path | null
     onClose: (event: any) => void
-}
-
-const test = {
-    aaa: 1,
-    toString() {
-        return "FUCK YEAH"
-    }
 }
 
 class PathDetailDisplay extends React.PureComponent<Props, {}> {
@@ -58,10 +52,10 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
                         )
                     }
 
-                    <button style={closeButtonStyle}
-                            onClick={this.props.onClose}>
+                    <div style={closeButtonStyle}
+                         onClick={this.props.onClose}>
                         &times;
-                    </button>
+                    </div>
 
                 </div>
             )

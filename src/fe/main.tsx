@@ -5,8 +5,9 @@ import { createStore } from 'redux'
 import reducer from './reducers'
 import VisaPlanner from './components/VisaPlanner'
 import './utils/assign-polyfill'
+import {VisaPlannerState} from "./reducers/reducer"
 
-const store = createStore(
+const store = createStore<VisaPlannerState>(
     reducer,
     // TODO: Remove under product mode
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()

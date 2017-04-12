@@ -19,8 +19,12 @@ import {
 import calcSuitablePaths from "../utils/calcSuitablePaths"
 
 import {VisaPlannerState} from "../reducers"
+
 import {Person} from "../../definitions/Person"
-import {filterBarClickAction, pathBoxClickAction, shadeClickAction} from "../actions/index"
+import {
+    filterBarClickAction, pathBoxClickAction, pathViewCloseButtonClickAction,
+    shadeClickAction
+} from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
 
 const style = {
@@ -44,6 +48,7 @@ interface PropTypes {
     onFilterBarClick: () => void
     onShadeClick: () => void
     onPathBoxClick: (path: Path) => void
+    onPathViewCloseButtonClick: () => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
 }
@@ -68,22 +73,14 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                 <Title text={
                     "Popular mobility options"
                 } />
-                <div style={{
-                    overflow: "scroll"
-                }}>
-                    <PathShowcase
-                        paths={calcSuitablePaths(this.props.user, allTransitions)}
-                        onClick={this.props.onPathBoxClick}
-                    />
-                    <PathDetailDisplay
-                        pathOnDisplay={this.props.pathOnDisplay}
-                        onClose={
-                            () => this.setState({
-                                pathOnDisplay: null
-                            })
-                        }
-                    />
-                </div>
+                <PathShowcase
+                    paths={calcSuitablePaths(this.props.user, allTransitions)}
+                    onClick={this.props.onPathBoxClick}
+                />
+                <PathDetailDisplay
+                    pathOnDisplay={this.props.pathOnDisplay}
+                    onClose={this.props.onPathViewCloseButtonClick}
+                />
                 <Shade
                     shouldShow={shouldShadeShow}
                     onClick={this.props.onShadeClick}
@@ -119,8 +116,11 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         onShadeClick() {
             dispatch(shadeClickAction())
         },
-        onPathBoxClick(path: Path): void {
+        onPathBoxClick(path: Path) {
             dispatch(pathBoxClickAction(path))
+        },
+        onPathViewCloseButtonClick() {
+            dispatch(pathViewCloseButtonClickAction())
         }
     }
 }

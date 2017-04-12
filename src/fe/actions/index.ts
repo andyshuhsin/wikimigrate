@@ -32,12 +32,25 @@ export interface PathBoxClick {
     }
 }
 
+export interface PathViewCloseButtonClick {
+    type: "PATH_VIEW_CLOSE_BUTTON_CLICK"
+}
+
 export interface FilterPanelRender {
     type: "FILTER_PANEL_RENDER",
     payload: {
         height: number
     }
 }
+
+export type Action =
+    MenuClickAction
+    | FilterSelectAction
+    | FilterBarClick
+    | FilterPanelRender
+    | ShadeClick
+    | PathBoxClick
+    | PathViewCloseButtonClick
 
 export function filterOptionClickAction(filterId: FilterId, optionId: OptionId): MenuClickAction {
     return {
@@ -89,11 +102,9 @@ export function pathBoxClickAction(path: Path): PathBoxClick {
     }
 }
 
+export function pathViewCloseButtonClickAction(): PathViewCloseButtonClick {
+    return {
+        type: "PATH_VIEW_CLOSE_BUTTON_CLICK",
+    }
+}
 
-export type Action =
-    MenuClickAction
-    | FilterSelectAction
-    | FilterBarClick
-    | FilterPanelRender
-    | ShadeClick
-    | PathBoxClick
