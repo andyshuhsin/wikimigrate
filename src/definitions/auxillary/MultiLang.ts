@@ -1,7 +1,9 @@
-interface MultiLangStringSet {
-    [lang: string]: string
-}
+export type LangId =
+    "en"
+    | "zh-hans"
+    | "zh-hant"
+    | "fr"
 
-export { 
-    MultiLangStringSet
+export type MultiLangStringSet = {
+    [lang in LangId]?: string
 }

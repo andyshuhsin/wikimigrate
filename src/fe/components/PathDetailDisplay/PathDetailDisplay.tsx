@@ -8,11 +8,12 @@ import {
 
 const style = {
     position: "absolute",
-    left: "0",
+    left: 0,
     right: 0,
     top: 0,
     bottom: 0,
 
+    padding: "0.5em",
     overflow: "scroll",
 
     background: "#ebebeb",
@@ -25,9 +26,7 @@ const closeButtonStyle = (() => {
         position: "fixed",
         left: 0,
         right: 0,
-        bottom: sys.ua.iosSafari
-                ? `calc(20px + ${sys.dimensions.iosSafariBottomBarHeight}px)`
-                : "20px",
+        bottom: "20px",
         margin: "auto",
 
         height: sideLength,

@@ -1,6 +1,6 @@
 import { MultiLangStringSet } from "../auxillary/MultiLang"
 
-type PrereqId =
+export type PrereqId =
     "education"
     | "age"
     | "business"

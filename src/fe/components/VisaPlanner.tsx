@@ -26,6 +26,7 @@ import {
     shadeClickAction
 } from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
+import {text} from "../utils/text"
 
 const style = {
     position: "relative",
@@ -69,7 +70,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
         return (
             <div style={style}>
                 <TopBar
-                    brandName={data.app.brandName[data.app.lang]}
+                    brandName={text(data.app.brandName)}
                     version={data.app.version}
                 />
                 <Title text={

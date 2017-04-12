@@ -5,7 +5,7 @@ import {
 
 import jobClass from '../../jobClass'
 import Transition from "../../../../definitions/Transition";
-import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
 import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
@@ -14,6 +14,7 @@ import {money} from "../../../../definitions/auxillary/Money";
 import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq";
 import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
+import {prereqTitleDict} from "../../../../fe/data/index"
 
 const federalSkilledWorker: Transition = {
     id: "federal_skilled_worker",
@@ -27,14 +28,14 @@ const federalSkilledWorker: Transition = {
     to: expressEntryCandidate,
     prerequisiteList: allOf([
 
-        // Language Requirement
         oneOf([
             languagePrereq("clb", {overall: 7}),
             languagePrereq("nclc", {overall: 7}),
-        ]),
+        ], {
+            title: prereqTitleDict.language_test
+        }),
 
-        // Working Experience
-        oneOf([
+        identity([
             {
                 prereqId: "work_experience",
                 length: duration(1, "year"),
@@ -46,12 +47,13 @@ const federalSkilledWorker: Transition = {
                     jobClass.jobGroups.nocB,
                 ]),
             } as WorkExperiencePrereq
-        ]),
+        ], {
+            title: prereqTitleDict.work_experience
+        }),
 
         // Education
         oneOf([
 
-            // Canadian
             {
                 prereqId: "education",
                 education: {
@@ -68,7 +70,6 @@ const federalSkilledWorker: Transition = {
                 }
             } as EducationPrereq,
 
-            // Foreign, need Educational Credential Assessment
             {
                 prereqId: "education",
                 education: {
@@ -85,7 +86,10 @@ const federalSkilledWorker: Transition = {
                 },
                 certification: "eca"
             } as EducationPrereq,
-        ]),
+        ],
+        {
+            title: prereqTitleDict.education
+        }),
 
         // Fund
         oneOf([
@@ -138,7 +142,10 @@ const federalSkilledWorker: Transition = {
                     }
                 } as OfferPrereq,
             ])
-        ])
+        ],
+        {
+            title: prereqTitleDict.fund
+        })
     ]),
     procedureList: [
         {

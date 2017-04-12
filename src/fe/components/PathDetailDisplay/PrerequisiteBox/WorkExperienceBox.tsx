@@ -3,7 +3,7 @@ import * as React from 'react'
 import CombinationBox from '../CombinationBox'
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq"
 
-const WorkExperieneceBox = (props: {prereq: WorkExperiencePrereq}) => {
+const WorkExperienceBox = (props: {prereq: WorkExperiencePrereq}) => {
     const prereq = props.prereq
     // TODO: Fix type cast at prereq.jobTypes as any
     return (
@@ -18,9 +18,9 @@ const WorkExperieneceBox = (props: {prereq: WorkExperiencePrereq}) => {
                 ? `you have worked ${prereq.length.value} ${prereq.length.unit} in`
                 : ""
             }
-            <CombinationBox combo={prereq.jobNature as any} />
+            <CombinationBox combo={prereq.jobNature as any} level={0} />
         </div>
     )
 }
 
-export default WorkExperieneceBox
+export default WorkExperienceBox

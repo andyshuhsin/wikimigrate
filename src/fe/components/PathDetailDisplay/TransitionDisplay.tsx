@@ -9,16 +9,24 @@ interface Props {
     transition: Transition
 }
 
-const h1Style = {
-    marginTop: "2em"
+const transitionNameStyle = {
+    margin: 0,
 }
+
+const subheadStyle = {
+    margin: "0.5em",
+    marginLeft: 0,
+
+    fontWeight: "lighter",
+    fontSize: "1.4em",
+} as React.CSSProperties
 
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
         const transition = this.props.transition
         return (
             <div>
-                <h1 style={h1Style}>
+                <h1 style={transitionNameStyle}>
                     {text(transition.name)}
                 </h1>
                 {/*<h2 style={h2Style}>
@@ -27,14 +35,17 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 </h2>*/}
 
                 <div>
-                    <h5>Prerequisites:</h5>
+                    <h5 style={subheadStyle}>Prerequisites</h5>
                     {
-                        <CombinationBox combo={transition.prerequisiteList} />
+                        <CombinationBox
+                            combo={transition.prerequisiteList}
+                            level={0}
+                        />
                     }
                 </div>
 
                 <div>
-                    <h5>Procedures:</h5>
+                    <h5 style={subheadStyle}>Application</h5>
                     {
                         <ProcedureBox procedureList={transition.procedureList} />
                     }
