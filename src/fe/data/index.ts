@@ -88,27 +88,27 @@ export const englishTestAssumptions = {
 }
 
 export const filterSets: Filter[] = [
-    {
-        id: "offer",
-        filterType: "multiple-choice",
-        title: {
-            en: "Job Offer"
-        },
-        options: [
-            {
-                id: "yes",
-                label: {
-                    en: "Yes"
-                }
-            },
-            {
-                id: "no",
-                label: {
-                    en: "No"
-                }
-            },
-        ]
-    },
+    // {
+    //     id: "offer",
+    //     filterType: "multiple-choice",
+    //     title: {
+    //         en: "Job Offer"
+    //     },
+    //     options: [
+    //         {
+    //             id: "yes",
+    //             label: {
+    //                 en: "Yes"
+    //             }
+    //         },
+    //         {
+    //             id: "no",
+    //             label: {
+    //                 en: "No"
+    //             }
+    //         },
+    //     ]
+    // },
     {
         id: "education",
         filterType: "multiple-choice",
