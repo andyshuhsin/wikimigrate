@@ -63,6 +63,10 @@ const allTransitions = data.regions.map((region: Region) => region.transitionLis
 
 class VisaPlanner extends React.Component<PropTypes, {}> {
 
+    componentDidMount() {
+        document.title = text(data.app.brandName)
+    }
+
     render() {
 
         const shouldShadeShow = this.props.shouldDetailedFilterPanelExpand
