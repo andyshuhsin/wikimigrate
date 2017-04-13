@@ -3,6 +3,7 @@ import text from "../../utils/text"
 
 import CombinationBox from './CombinationBox'
 import ProcedureBox from './ProcedureBox'
+import ReferenceBox from './ReferenceBox'
 import Transition from "../../../definitions/Transition";
 import {RegionId} from "../../../definitions/auxillary/Region"
 
@@ -70,6 +71,16 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                         <ProcedureBox procedureList={transition.procedureList} />
                     }
                 </section>
+
+                {
+                    transition.referenceList &&
+                    <section>
+                        <h3 style={sectionTitleStyle}>References</h3>
+                        {
+                            <ReferenceBox referenceList={transition.referenceList} />
+                        }
+                    </section>
+                }
             </div>
         )
     }
