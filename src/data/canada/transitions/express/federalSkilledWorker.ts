@@ -175,7 +175,7 @@ const federalSkilledWorker: Transition = {
         {
             url: "http://www.cic.gc.ca/english/immigrate/skilled/apply-who.asp",
             title: {
-                en: "Determine your eligibility – Federal skilled workers"
+                en: "Official Page"
             }
         }
     ]
