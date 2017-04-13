@@ -31,6 +31,10 @@ const branchStyle = {
     } as React.CSSProperties,
 }
 
+const operandViewStyle = {
+    marginBottom: "0.2em",
+} as React.CSSProperties
+
 class CombinationBox extends React.PureComponent<Props, {}> {
 
     render() {
@@ -48,7 +52,10 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                 <div style={branchStyle[combo.combinator]}>
                     {combo.operands.map(
                         (operand: any, index: number) => (
-                            <div key={index}> {/* TOOD: Shouldn't use 'index' */}
+                            <div
+                                style={operandViewStyle}
+                                key={JSON.stringify(operand) /* FIXME: Excessive? */}
+                            >
                                 <this.OperandView operand={operand} level={this.props.level + 1}/>
                                 {
                                     combo.operands.length === 2
