@@ -53,6 +53,15 @@ function clone<T>(obj: T): T {
 function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
     const newState = clone(state)
     switch (action.type) {
+
+        case "KEY_DOWN": {
+            if (action.payload.keyCode === ESC_KEY_CODE) {
+                newState.ui.pathOnDisplay = null
+                return newState
+            }
+            return state
+        }
+
         case "FILTER_OPTION_CLICK": {
             // Person data
             switch (action.payload.filterId) {
@@ -109,15 +118,6 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             newState.ui.filterPanelHeight = action.payload.height
             return newState
         }
-
-        case "KEY_DOWN": {
-            if (action.payload.keyCode === ESC_KEY_CODE) {
-                newState.ui.pathOnDisplay = null
-                return newState
-            }
-            return state
-        }
-
         default: {
             return state
         }
