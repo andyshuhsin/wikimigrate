@@ -3,7 +3,6 @@ const path = require("path")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 
-
 module.exports = {
     entry: {
         app: path.join(__dirname, "main.tsx"),
@@ -16,7 +15,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, "built"),
-        filename: "[name].[chunkhash].js"
+        filename: '[chunkhash].js',
     },
 
     resolve: {
@@ -45,9 +44,7 @@ module.exports = {
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'external',
-            minChunks: Infinity,
-            filename: '[name].[chunkhash].js',
+            names: ['external', 'manifest']
         }),
         new CopyWebpackPlugin([
             {from: 'about.html', to: '.'},
