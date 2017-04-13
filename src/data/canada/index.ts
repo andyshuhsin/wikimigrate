@@ -20,6 +20,8 @@ import atlanticHighSkilled from './transitions/atlantic/atlanticHighSkilled'
 import atlanticIntermediateSkilled from './transitions/atlantic/atlanticIntermediateSkilled'
 import atlanticInternationalGraduate from './transitions/atlantic/atlanticInternationalGraduate'
 
+import noc2016 from './jobClass/noc2016'
+
 //TODO: Include admissibility http://www.cic.gc.ca/english/information/inadmissibility/index.asp
 
 const canada: Region =
@@ -56,7 +58,8 @@ const canada: Region =
                         fr: "Présenter une demande d’immigration au Canada"
                     }
                 }
-            ]
+            ],
+            jobClassification: noc2016,
         }
 
 export default canada

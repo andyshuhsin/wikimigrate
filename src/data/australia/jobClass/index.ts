@@ -1,11 +1,12 @@
 import {
     JobClassification,
     JobGroup,
-    JobType,
 } from '../../../definitions/auxillary/JobClassification'
 
 const sol: JobGroup = {
-    id: "sol",
+    jobGroupId: "sol",
+    parentClassificationSystemId: "aus-job-class",
+    specification: "",
     description: {
         en: "Skilled Occupations List"
     },
@@ -13,14 +14,17 @@ const sol: JobGroup = {
 }
 
 const csol: JobGroup = {
-    id: "csol",
+    jobGroupId: "csol",
+    parentClassificationSystemId: "aus-job-class",
+    specification: "",
     description: {
         en: "Consolidated Sponsored Occupations List"
     },
     parentGroup: null,
 }
 
-const skilledOcupationLists: JobClassification = {
+const australiaJobClassification: JobClassification = {
+    classificationSystemId: "aus-job-class",
     regionId: "australia",
     title: {
         en: "Skilled Occupations List"
@@ -30,8 +34,9 @@ const skilledOcupationLists: JobClassification = {
     },
     version: "2016",
     jobGroups: {
-        sol
+        sol,
+        csol,
     }
 }
 
-export default skilledOcupationLists
+/**/export default australiaJobClassification

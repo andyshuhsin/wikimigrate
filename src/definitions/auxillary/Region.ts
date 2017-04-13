@@ -2,6 +2,7 @@ import Status from "../Qualities/Status"
 import Transition from '../Transition'
 import URLDatum from '../auxillary/URLDatum'
 import {MultiLangStringSet} from "./MultiLang"
+import {JobClassification} from "./JobClassification"
 
 export type RegionId =
     "world"
@@ -15,6 +16,7 @@ export interface Region {
     statusList: Status[]
     transitionList: Transition[]
     referenceList: URLDatum[]
+    jobClassification?: JobClassification
 }
 
 export default Region
