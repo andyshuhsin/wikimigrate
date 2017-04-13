@@ -23,6 +23,26 @@ const testNameStyle = {
     margin: 0,
 } as React.CSSProperties
 
+const LanguageTestItemBox = (props: {testItemKey: LanguageTestItem, score: number}) => (
+    <div
+        style={{
+            display: "inline-block",
+            marginRight: "0.8em",
+        }}
+    >
+        <span style={{
+            marginRight: "0.1em",
+        }}>
+            {text(data.common.languageBenchmarkItemNames[props.testItemKey])}
+        </span>
+        <span style={{
+            fontWeight: "bolder",
+        }}>
+            {props.score}
+        </span>
+    </div>
+)
+
 const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     const prereq = props.prereq
     const test = data.common.languageTestProfiles
@@ -37,18 +57,12 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
                     Overall score: {(prereq.result.scores as LanguageTestScoreSingle).overall}
                   </div>
                 : langRequirementKeyOrder.map(
-                      (testItemKey: LanguageTestItem) => (
-                          <span
-                              key={testItemKey}
-                              style={{marginRight: "0.8em"}}
-                          >
-                              {text(data.common.languageBenchmarkItemNames[testItemKey])}
-                              :&nbsp;
-                              <strong>
-                                  {(prereq.result.scores as LanguageTestScoreItemized)[testItemKey]}
-                              </strong>
-                          </span>
-                      )
+                      (testItemKey: LanguageTestItem) =>
+                      <LanguageTestItemBox
+                          testItemKey={testItemKey}
+                          score={(prereq.result.scores as LanguageTestScoreItemized)[testItemKey]}
+                          key={testItemKey}
+                      />
                   )
             }
         </div>
