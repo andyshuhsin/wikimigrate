@@ -6,6 +6,7 @@ import {
 } from '../utils/definitions'
 
 import data from '../../data'
+import design from "../design"
 
 interface PathShowcaseProps {
     path: Path
@@ -20,7 +21,7 @@ const boxStyle = {
 
     fontSize: "1.2em",
     textAlign: "center",
-    background: "#ffccbc",
+    background: design.colors.brandLighter,
     wordWrap: "break-work",
     overflow: "hidden",
 } as React.CSSProperties
