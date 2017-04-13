@@ -10,7 +10,7 @@ const noc0: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "0",
     description: {
-        en: "Management occupations"
+        en: "Management occupations",
     },
     parentGroup: null,
     reference: {
@@ -23,9 +23,12 @@ const nocA: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "A",
     description: {
-        en: ""
+        en: "Professional jobs",
     },
-    parentGroup: null
+    parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const nocB: JobGroup = {
@@ -33,25 +36,38 @@ const nocB: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "B",
     description: {
-
+        en: "Technical jobs and skilled trades",
     },
     parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const nocC: JobGroup = {
     jobGroupId: "nocC",
     parentClassificationSystemId: "noc",
     specification: "C",
-    description: {},
+    description: {
+        en: "Intermediate jobs",
+    },
     parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const nocD: JobGroup = {
     jobGroupId: "nocD",
     parentClassificationSystemId: "noc",
     specification: "D",
-    description: {},
-    parentGroup: null
+    description: {
+        en: "Labour jobs",
+    },
+    parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const noc72: JobGroup = {
