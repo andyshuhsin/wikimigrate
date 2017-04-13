@@ -1,10 +1,12 @@
 import {MultiLangStringSet} from "./MultiLang"
+import URLDatum from "./URLDatum"
 
 export type LanguageTestId = "clb" | "nclc" | "ielts" | "toefl" | "oet" | "pte-academic" | "cae"
 
 export type LanguageTestProfile = {
     id: LanguageTestId
     title: MultiLangStringSet
+    reference: URLDatum
 }
 
 export type LanguageTestScoreSingle = {
