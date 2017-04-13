@@ -19,7 +19,10 @@ const FundBox = (props: {prereq: FundPrereq}) => {
                         <div key={index}>
                             {data.common.currencies[scheme.fund.currencyId].code}
                             {" "}
-                            {scheme.fund.value}
+                            {scheme.fund.value.toLocaleString(data.app.lang, {
+                                style: "decimal",
+                                currency: scheme.fund.currencyId
+                            })}
                             {
                                 scheme.condition && stringifyCondition(scheme.condition)
                             }
