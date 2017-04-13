@@ -4,6 +4,7 @@ import text from "../../utils/text"
 import CombinationBox from './CombinationBox'
 import ProcedureBox from './ProcedureBox'
 import Transition from "../../../definitions/Transition";
+import {RegionId} from "../../../definitions/auxillary/Region"
 
 interface Props {
     transition: Transition
@@ -21,6 +22,21 @@ const sectionTitleStyle = {
     fontSize: "1.4em",
 } as React.CSSProperties
 
+const flagStyle = {
+    marginLeft: "0.3em",
+    maxWidth: "1.2em",
+} as React.CSSProperties
+
+type Package = any
+
+// Should flags live in /data dir?
+const flagSources: {[key in RegionId]: Package | null} = {
+    canada: require('../../assets/flags/canada.svg'),
+    australia: require('../../assets/flags/australia.svg'),
+    world: null,
+    canada_pacific_provinces: null,
+}
+
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
         const transition = this.props.transition
@@ -28,6 +44,10 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
             <div>
                 <h1 style={transitionNameStyle}>
                     {text(transition.name)}
+                    <img
+                        style={flagStyle}
+                        src={flagSources[transition.regionId]}
+                    />
                 </h1>
                 {/*<h2 style={h2Style}>
                     To {transition.to.name["en"]},
