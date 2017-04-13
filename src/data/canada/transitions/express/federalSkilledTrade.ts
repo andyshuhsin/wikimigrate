@@ -5,6 +5,7 @@ import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 import {CertificationPrereq} from "../../../../definitions/Prerequisites/CertificationPrereq";
+import {prereqTitleDict} from "../../../../fe/data/index"
 
 import {
     alien,
@@ -39,7 +40,10 @@ const federalSkilledTrade: Transition = {
                 reading: 4,
                 writing: 4,
             }),
-        ]),
+        ],
+        {
+            title: prereqTitleDict.language_test,
+        }),
 
         // Work experience
         allOf([
@@ -57,7 +61,9 @@ const federalSkilledTrade: Transition = {
                     jobClass.jobGroups.noc633,
                 ])
             } as WorkExperiencePrereq
-        ]),
+        ], {
+            title: prereqTitleDict.work_experience,
+        }),
 
         oneOf([
             {
@@ -72,7 +78,9 @@ const federalSkilledTrade: Transition = {
                     en: "a certificate of qualification in that skilled trade issued by a Canadian provincial or territorial authority"
                 }
             } as CertificationPrereq
-        ])
+        ], {
+            title: prereqTitleDict.offer,
+        })
 
     ]),
 
@@ -98,6 +106,15 @@ const federalSkilledTrade: Transition = {
                 en: "Wait for invitation",
                 "zh-hans": "等待邀请"
             }
+        }
+    ],
+
+    referenceList: [
+        {
+            title: {
+                en: "Official page"
+            },
+            url: "http://www.cic.gc.ca/english/immigrate/trades/apply-who.asp",
         }
     ]
 }
