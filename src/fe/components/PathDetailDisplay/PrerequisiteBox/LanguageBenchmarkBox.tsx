@@ -18,19 +18,24 @@ const langRequirementKeyOrder: string[] = [
         "writing",
 ]
 
+const testNameStyle = {
+    fontSize: "1em",
+    margin: 0,
+} as React.CSSProperties
+
 const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
     const prereq = props.prereq
     const test = data.common.languageTestProfiles
                     .filter(test => test.id === prereq.result.testId)[0]
     return (
         <div>
-            {text(test.title)} {" "}
+            <h5 style={testNameStyle}>
+                {text(test.title)} {" "}
+            </h5>
             {((prereq.result.scores as LanguageTestScoreSingle).overall)
-                ? <span>
-                    <strong>
-                        {(prereq.result.scores as LanguageTestScoreSingle).overall}
-                    </strong>
-                  </span>
+                ? <div>
+                    Overall score: {(prereq.result.scores as LanguageTestScoreSingle).overall}
+                  </div>
                 : langRequirementKeyOrder.map(
                       (testItemKey: LanguageTestItem) => (
                           <span
