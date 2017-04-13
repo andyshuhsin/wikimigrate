@@ -9,6 +9,7 @@ import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {prereqTitleDict} from "../../../common/prereqTitleDict"
 
 const canadianExperience: Transition = {
     id: "canadian_experience",
@@ -27,6 +28,11 @@ const canadianExperience: Transition = {
 
             // NOC 0 or A job
             allOf([
+                oneOf([
+                    languagePrereq("clb", { overall: 7 }),
+                    languagePrereq("nclc", { overall: 7 }),
+                ]),
+
                 {
                     prereqId: "work_experience",
                     length: duration(12, "month"),
@@ -38,15 +44,19 @@ const canadianExperience: Transition = {
                         jobClass.jobGroups.nocA,
                     ])
                 } as WorkExperiencePrereq,
-
-                oneOf([
-                    languagePrereq("clb", { overall: 7 }),
-                    languagePrereq("nclc", { overall: 7 }),
-                ]),
-            ]),
+            ], {
+                title: {
+                    en: "For NOC-0 & NOC-A Applicants"
+                }
+            }),
 
             //NOC B job
             allOf([
+                oneOf([
+                    languagePrereq("clb", { overall: 5 }),
+                    languagePrereq("nclc", { overall: 5 }),
+                ]),
+
                 {
                     prereqId: "work_experience",
                     length: duration(12, "month"),
@@ -57,13 +67,14 @@ const canadianExperience: Transition = {
                         jobClass.jobGroups.nocB
                     ])
                 } as WorkExperiencePrereq,
-
-                oneOf([
-                    languagePrereq("clb", { overall: 5 }),
-                    languagePrereq("nclc", { overall: 5 }),
-                ]),
-            ])
-        ])
+            ], {
+                title: {
+                    en: "For NOC-0 & NOC-A Applicants"
+                }
+            }),
+        ], {
+            title: prereqTitleDict.language_test
+        })
     ]),
     procedureList: [
         {
