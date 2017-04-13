@@ -63,8 +63,13 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                                     && (
                                         <div style={
                                             this.props.level === 0
-                                            ? {marginTop: "0.5em"}
-                                            : {}
+                                            ? {
+                                                marginTop: "0.5em",
+                                                fontVariant: "small-caps",
+                                            }
+                                            : {
+                                                fontVariant: "small-caps",
+                                            }
                                         }>
                                             {combo.combinator}
                                         </div>
