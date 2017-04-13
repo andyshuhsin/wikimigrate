@@ -24,6 +24,7 @@ const boxStyle = {
     background: design.colors.brandLighter,
     wordWrap: "break-work",
     overflow: "hidden",
+    cursor: "pointer",
 } as React.CSSProperties
 
 const countryNameStyle = {
