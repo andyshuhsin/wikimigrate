@@ -15,7 +15,7 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, "built"),
-        filename: '[chunkhash].js',
+        filename: '[name].[chunkhash].js',
     },
 
     resolve: {
