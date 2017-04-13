@@ -45,34 +45,20 @@ git clone git@github.com:andyshuhsin/visaplanner.git
 
 ## 5. Install necessary packages 
 ```
-cd visaplanner
-yarn install
-
 cd src/fe
 yarn install
 ```
 
-## 6. Install `webpack` (bundler) and `gulp` (automation) globally
-```
-npm install --global webpack
-npm install --global gulp
-```
-
-## 7. Build & Run server
+## 6. Build & Run server
 
 ```
-cd src/fe
-webpack --watch
+cd ..  # to /src dir
+npm run start
 ```
 
-```
-cd src/fe/built
-python -m SimpleHTTPServer
-```
 
-Then visit `http://localhost:8000`. You should see the UI.
+Then visit `http://localhost:8080`. You should see the UI.
 Make changes to the code, then `webpack` will automatically recompile the JS output.
-Currently, you need to manually refresh the browser.
 
 ## 8. Deploy
 ```
