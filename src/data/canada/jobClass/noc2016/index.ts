@@ -138,6 +138,9 @@ const noc2016: JobClassification = {
         noc633,
     },
     jobTypes: [],
+    reference: {
+        url: "http://noc.esdc.gc.ca/English/NOC/OccupationIndex.aspx?ver=16"
+    }
 }
 
 export default noc2016

@@ -31,6 +31,7 @@ export interface JobClassification {
     jobGroups: {
         [groupName: string]: JobGroup
     }
+    reference: URLDatum
 }
 
 export default JobClassification

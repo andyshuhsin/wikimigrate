@@ -27,7 +27,7 @@ const australiaJobClassification: JobClassification = {
     classificationSystemId: "aus-job-class",
     regionId: "australia",
     title: {
-        en: "Skilled Occupations List"
+        en: "Skilled occupations"
     },
     titleShort: {
         en: "SOL"
@@ -36,6 +36,9 @@ const australiaJobClassification: JobClassification = {
     jobGroups: {
         sol,
         csol,
+    },
+    reference: {
+        url: "https://www.border.gov.au/Trav/Work/Work/Skills-assessment-and-assessing-authorities/skilled-occupations-lists"
     }
 }
 
