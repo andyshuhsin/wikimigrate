@@ -51,9 +51,9 @@ function clone<T>(obj: T): T {
 
 
 function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
+    const newState = clone(state)
     switch (action.type) {
         case "FILTER_OPTION_CLICK": {
-            const newState = clone(state)
             // Person data
             switch (action.payload.filterId) {
                 case "english": {
@@ -82,25 +82,21 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case "PATH_BOX_CLICK": {
-            const newState = clone(state)
             newState.ui.pathOnDisplay = action.payload.path
             return newState
         }
 
         case "PATH_VIEW_CLOSE_BUTTON_CLICK": {
-            const newState = clone(state)
             newState.ui.pathOnDisplay = null
             return newState
         }
 
         case "FILTER_BAR_CLICK": {
-            const newState = clone(state)
             newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
             return newState
         }
 
         case "SHADE_CLICK": {
-            const newState = clone(state)
             newState.ui.shouldDetailedFilterPanelExpand = false
             return newState
         }
@@ -110,14 +106,12 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case "FILTER_PANEL_RENDER": {
-            const newState = clone(state)
             newState.ui.filterPanelHeight = action.payload.height
             return newState
         }
 
         case "KEY_DOWN": {
             if (action.payload.keyCode === ESC_KEY_CODE) {
-                const newState = clone(state)
                 newState.ui.pathOnDisplay = null
                 return newState
             }
