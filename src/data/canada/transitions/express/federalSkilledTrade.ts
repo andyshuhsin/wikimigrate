@@ -5,7 +5,7 @@ import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 import {CertificationPrereq} from "../../../../definitions/Prerequisites/CertificationPrereq";
-import {prereqTitleDict} from "../../../../fe/data/index"
+import {prereqTitleDict} from "../../../common/prereqTitleDict"
 
 import {
     alien,
