@@ -44,9 +44,11 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                 <CombinationSubhead combo={combo} />
                 {
                     combo.combinator === "or" && combo.operands.length >= 3
-                    ? text({
-                        en: "One of"
-                    })
+                    ? <span style={{fontVariant: "small-caps"}}>
+                        {text({
+                            en: "One of"
+                        })}
+                    </span>
                     : ''
                 }
                 <div style={branchStyle[combo.combinator]}>
