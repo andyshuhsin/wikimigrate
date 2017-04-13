@@ -7,10 +7,10 @@ import VisaPlanner from './components/VisaPlanner'
 import './utils/assign-polyfill'
 import {VisaPlannerState} from "./reducers/reducer"
 
+const reduxDevToolsPlugin = (window as any).__REDUX_DEVTOOLS_EXTENSION__
 const store = createStore<VisaPlannerState>(
     reducer,
-    // TODO: Remove under product mode
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+    (typeof reduxDevToolsPlugin === "function") && reduxDevToolsPlugin()
 )
 
 ReactDom.render(
