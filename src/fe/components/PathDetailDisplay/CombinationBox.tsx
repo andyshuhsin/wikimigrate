@@ -2,9 +2,10 @@ import * as React from 'react'
 import {Combination, isCombination} from "../../../definitions/auxillary/Combination"
 
 import PrerequisiteBox from './PrerequisiteBox'
-import JobNatureBox from './PrerequisiteBox/JobNatureBox'
+import JobGroupBox from './PrerequisiteBox/JobGroupBox'
 import CombinationSubhead from "./CombinationSubhead"
 import {text} from "../../utils/text"
+import {isJobGroup} from "../../../definitions/auxillary/JobClassification"
 
 const embeddedCombinationBoxStyle = {
     margin: "0.8em 0",
@@ -13,10 +14,6 @@ const embeddedCombinationBoxStyle = {
 
 function isPrerequisite(input: any): boolean {
     return !!input.prereqId
-}
-
-function isJobNature(input: any): boolean {
-    return !!input.description
 }
 
 interface Props {
@@ -79,8 +76,8 @@ class CombinationBox extends React.PureComponent<Props, {}> {
             return <CombinationBox combo={props.operand} level={props.level} />
         } else if (isPrerequisite(props.operand)) {
             return <PrerequisiteBox prereq={props.operand} />
-        } else if (isJobNature(props.operand)) {
-            return <JobNatureBox jobGroup={props.operand} />
+        } else if (isJobGroup(props.operand)) {
+            return <JobGroupBox jobGroup={props.operand} />
         } else {
             console.warn("Cannot recognize operand type:", JSON.stringify(props.operand))
             return <div />

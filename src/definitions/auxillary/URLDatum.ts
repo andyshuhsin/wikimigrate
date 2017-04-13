@@ -1,7 +1,7 @@
 import { MultiLangStringSet } from './MultiLang'
 
 interface URLDatum {
-    title: MultiLangStringSet
+    title?: MultiLangStringSet
     url: string
 }
 

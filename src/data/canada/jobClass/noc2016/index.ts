@@ -1,45 +1,79 @@
 import {
     JobClassification,
     JobGroup,
-    JobType,
 } from '../../../../definitions/auxillary/JobClassification'
 
 // See: http://noc.esdc.gc.ca/English/noc/Introduction.aspx?ver=16#struc
 
 const noc0: JobGroup = {
-    id: "0",
+    jobGroupId: "noc0",
+    parentClassificationSystemId: "noc",
+    specification: "0",
     description: {
-        en: "Management occupations"
+        en: "Management occupations",
     },
-    parentGroup: null
+    parentGroup: null,
+    reference: {
+        url: "http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314244&CPV=0&CST=01012016&CLV=1&MLV=4"
+    }
 }
 
 const nocA: JobGroup = {
-    id: "A",
-    description: {},
-    parentGroup: null
+    jobGroupId: "nocA",
+    parentClassificationSystemId: "noc",
+    specification: "A",
+    description: {
+        en: "Professional jobs",
+    },
+    parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const nocB: JobGroup = {
-    id: "B",
-    description: {},
+    jobGroupId: "nocB",
+    parentClassificationSystemId: "noc",
+    specification: "B",
+    description: {
+        en: "Technical jobs and skilled trades",
+    },
     parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const nocC: JobGroup = {
-    id: "C",
-    description: {},
+    jobGroupId: "nocC",
+    parentClassificationSystemId: "noc",
+    specification: "C",
+    description: {
+        en: "Intermediate jobs",
+    },
     parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const nocD: JobGroup = {
-    id: "D",
-    description: {},
-    parentGroup: null
+    jobGroupId: "nocD",
+    parentClassificationSystemId: "noc",
+    specification: "D",
+    description: {
+        en: "Labour jobs",
+    },
+    parentGroup: null,
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/noc.asp",
+    },
 }
 
 const noc72: JobGroup = {
-    id: "72",
+    jobGroupId: "noc72",
+    parentClassificationSystemId: "noc",
+    specification: "72",
     description: {
         en: "Major Group 72, industrial, electrical and construction trades"
     },
@@ -47,7 +81,9 @@ const noc72: JobGroup = {
 }
 
 const noc73: JobGroup = {
-    id: "73",
+    jobGroupId: "noc73",
+    parentClassificationSystemId: "noc",
+    specification: "73",
     description: {
         en: "Major Group 73, maintenance and equipment operation trades"
     },
@@ -55,7 +91,9 @@ const noc73: JobGroup = {
 }
 
 const noc82: JobGroup = {
-    id: "82",
+    jobGroupId: "noc82",
+    parentClassificationSystemId: "noc",
+    specification: "74",
     description: {
         en: "Major Group 82, supervisors and technical jobs in natural resources, agriculture and related production"
     },
@@ -63,7 +101,9 @@ const noc82: JobGroup = {
 }
 
 const noc92: JobGroup = {
-    id: "92",
+    jobGroupId: "noc92",
+    parentClassificationSystemId: "noc",
+    specification: "92",
     description: {
         en: "Major Group 92, processing, manufacturing and utilities supervisors and central control operators"
     },
@@ -71,15 +111,19 @@ const noc92: JobGroup = {
 }
 
 const noc632: JobGroup = {
-    id: "632",
+    jobGroupId: "noc632",
+    parentClassificationSystemId: "noc",
+    specification: "632",
     description: {
-        en: "Major Group 92, processing, manufacturing and utilities supervisors and central control operators"
+        en: "Monior Group 92, chefs and cooks"
     },
     parentGroup: nocB
 }
 
 const noc633: JobGroup = {
-    id: "633",
+    jobGroupId: "noc633",
+    parentClassificationSystemId: "noc",
+    specification: "633",
     description: {
         en: "Minor Group 633, butchers and bakers"
     },
@@ -87,6 +131,7 @@ const noc633: JobGroup = {
 }
 
 const noc2016: JobClassification = {
+    classificationSystemId: "noc",
     regionId: "canada",
     title: {
         en: "National Occupational Classification"
@@ -109,6 +154,9 @@ const noc2016: JobClassification = {
         noc633,
     },
     jobTypes: [],
+    reference: {
+        url: "http://noc.esdc.gc.ca/English/NOC/OccupationIndex.aspx?ver=16"
+    }
 }
 
 export default noc2016

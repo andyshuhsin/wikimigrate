@@ -18,6 +18,8 @@ import {
 import temporaryWorkSkilled from './transitions/temporaryWorkSkilled'
 import businessTalent from './transitions/skillSelect/businessTalent'
 
+import jobClass from './jobClass'
+
 const australia: Region = {
     id: "australia",
     name: {
@@ -48,7 +50,8 @@ const australia: Region = {
                 en: "Immigration and Visas"
             }
         }
-    ]
+    ],
+    jobClassification: jobClass,
 }
 
 export default australia
