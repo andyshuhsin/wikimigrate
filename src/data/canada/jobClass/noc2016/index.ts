@@ -75,7 +75,7 @@ const noc72: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "72",
     description: {
-        en: "Major Group 72, industrial, electrical and construction trades"
+        en: "Industrial, electrical and construction trades"
     },
     parentGroup: nocB
 }
@@ -85,7 +85,7 @@ const noc73: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "73",
     description: {
-        en: "Major Group 73, maintenance and equipment operation trades"
+        en: "Maintenance and equipment operation trades"
     },
     parentGroup: nocB
 }
@@ -95,7 +95,7 @@ const noc82: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "74",
     description: {
-        en: "Major Group 82, supervisors and technical jobs in natural resources, agriculture and related production"
+        en: "Supervisors and technical jobs in natural resources, agriculture and related production"
     },
     parentGroup: nocB
 }
@@ -105,7 +105,7 @@ const noc92: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "92",
     description: {
-        en: "Major Group 92, processing, manufacturing and utilities supervisors and central control operators"
+        en: "Processing, manufacturing and utilities supervisors and central control operators"
     },
     parentGroup: nocB
 }
@@ -115,7 +115,7 @@ const noc632: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "632",
     description: {
-        en: "Monior Group 92, chefs and cooks"
+        en: "Chefs and cooks"
     },
     parentGroup: nocB
 }
@@ -125,7 +125,7 @@ const noc633: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "633",
     description: {
-        en: "Minor Group 633, butchers and bakers"
+        en: "Butchers and bakers"
     },
     parentGroup: nocB
 }
