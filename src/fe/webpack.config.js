@@ -1,12 +1,21 @@
+const webpack = require('webpack')
 const path = require("path")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
-    entry: './main.tsx',
+    entry: {
+        app: path.join(__dirname, "main.tsx"),
+        external: [
+            "react",
+            "react-dom",
+            "redux",
+        ],
+    },
 
     output: {
-        path: path.resolve(__dirname, 'built'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, "built"),
+        filename: '[chunkhash].js',
     },
 
     resolve: {
@@ -34,9 +43,17 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['external', 'manifest']
+        }),
         new CopyWebpackPlugin([
-            {from: '*.html', to: '.'},
+            {from: 'about.html', to: '.'},
         ]),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'index.html'),
+            filename: 'index.html',
+            inject: 'body',
+        }),
     ],
 
 }
