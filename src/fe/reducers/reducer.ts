@@ -3,6 +3,8 @@ import {englishTestAssumptions, FilterId, FilterState} from "../data"
 import {Path} from "../utils/definitions"
 import {Person} from "../../definitions/Person"
 
+const ESC_KEY_CODE = 27
+
 export interface VisaPlannerState {
     user: Person,
     ui: {
@@ -111,6 +113,15 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             const newState = clone(state)
             newState.ui.filterPanelHeight = action.payload.height
             return newState
+        }
+
+        case "KEY_DOWN": {
+            if (action.payload.keyCode === ESC_KEY_CODE) {
+                const newState = clone(state)
+                newState.ui.pathOnDisplay = null
+                return newState
+            }
+            return state
         }
 
         default: {
