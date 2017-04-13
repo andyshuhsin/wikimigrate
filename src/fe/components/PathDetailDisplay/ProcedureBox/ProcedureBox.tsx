@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Procedure from "../../../../definitions/auxillary/Procedure"
+import {text} from "../../../utils/text"
 
 interface Props {
     procedureList: Procedure[]
@@ -11,10 +12,22 @@ class ProcedureBox extends React.PureComponent<Props, {}> {
             <div>
                 {this.props.procedureList.map(
                     (procedure: Procedure, index: number) => (
-                        <div key={procedure.name['en']}>
+                        <div
+                            key={text(procedure.name)}
+                            style={{
+                                marginBottom: "0.5em",
+                            }}
+                        >
                             {index + 1}
                             {'. '}
-                            {procedure.name['en']}
+                            {text(procedure.name)}
+                            {procedure.description &&
+                                <div style={{
+                                    marginLeft: "2em"
+                                }}>
+                                    {text(procedure.description)}
+                                </div>
+                            }
                         </div>
                     )
                 )}
