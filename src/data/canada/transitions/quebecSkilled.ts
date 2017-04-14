@@ -7,7 +7,7 @@ import {
 } from '../status'
 
 const quebecSkilled: Transition = {
-    id: "quebec_selected_skilled_workds",
+    id: "quebec_selected_skilled_workers",
     regionId: "canada",
     acquireBy: "application",
     name: {
