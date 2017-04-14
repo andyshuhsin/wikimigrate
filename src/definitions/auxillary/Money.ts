@@ -4,18 +4,18 @@ import {MultiLangStringSet} from "./MultiLang"
 export type CurrencyId = "cad" | "usd" | "aud"
 
 export type FundSourceId =
-    // Canada
+    // Canada venture capitals
     "bdc"
     | "relay"
     | "celtic"
     | "dri"
     | "extreme"
-    | "golden"
+    | "golden-opportunities"
     | "inovia"
     | "lumira"
     | "mobio"
     | "new-brunswick"
-    | "oak-mason"
+    | "oak-mason" // also angel
     | "omers"
     | "pangaea"
     | "priveq"
@@ -31,6 +31,14 @@ export type FundSourceId =
     | "wellington"
     | "westcap"
     | "yaletown"
+
+    // Canada angels
+    | "angel-one"
+    | "first-angel"
+    | "golden-triangle"
+    | "oak-mason"  // also venture
+    | "tenx-angel"
+    | "vantec-angel"
 
 export interface FundSource {
     fundSourceId: FundSourceId

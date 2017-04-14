@@ -20,7 +20,7 @@ import atlanticIntermediateSkilled from './transitions/atlantic/atlanticIntermed
 import atlanticInternationalGraduate from './transitions/atlantic/atlanticInternationalGraduate'
 
 import noc2016 from './jobClass/noc2016'
-import {designatedVentureCapitalFunds} from "./fundSources"
+import {designatedAngelInvestors, designatedVentureCapitalFunds} from "./fundSources"
 
 //TODO: Include admissibility http://www.cic.gc.ca/english/information/inadmissibility/index.asp
 
@@ -60,6 +60,7 @@ const canada: Region = {
     jobClassification: noc2016,
     fundSourceGroupList: [
         designatedVentureCapitalFunds,
+        designatedAngelInvestors,
     ],
 }
 

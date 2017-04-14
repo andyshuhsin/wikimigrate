@@ -49,7 +49,7 @@ export const designatedVentureCapitalFunds: FundSourceGroup = {
             }
         },
         {
-            fundSourceId: "golden",
+            fundSourceId: "golden-opportunities",
             name: {
                 "en": "Golden Opportunities Fund Inc."
             },
@@ -235,6 +235,69 @@ export const designatedVentureCapitalFunds: FundSourceGroup = {
             },
             reference: {
                 "url": "http://www.yaletown.com/"
+            }
+        }
+    ],
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/business/start-up/eligibility/entities.asp"
+    }
+}
+
+export const designatedAngelInvestors: FundSourceGroup = {
+    fundSourceGroupId: "canada-designated-angel-investor-groups",
+    sources: [
+        {
+            "fundSourceId": "angel-one",
+            "name": {
+                "en": "Angel One Network Inc."
+            },
+            "reference": {
+                "url": "http://www.angelonenetwork.ca/"
+            }
+        },
+        {
+            "fundSourceId": "first-angel",
+            "name": {
+                "en": "First Angel Network Association"
+            },
+            "reference": {
+                "url": "http://www.firstangelnetwork.ca/"
+            }
+        },
+        {
+            "fundSourceId": "golden-triangle",
+            "name": {
+                "en": "Golden Triangle Angel Network"
+            },
+            "reference": {
+                "url": "http://www.goldentriangleangelnet.ca/"
+            }
+        },
+        {
+            "fundSourceId": "oak-mason",
+            "name": {
+                "en": "Oak Mason Investments Inc."
+            },
+            "reference": {
+                "url": "http://www.oakmason.com/"
+            }
+        },
+        {
+            "fundSourceId": "tenx-angel",
+            "name": {
+                "en": "TenX Angel Investors Inc."
+            },
+            "reference": {
+                "url": "http://tenx.biz/"
+            }
+        },
+        {
+            "fundSourceId": "vantec-angel",
+            "name": {
+                "en": "VANTEC Angel Network Inc."
+            },
+            "reference": {
+                "url": "http://vantec.ca/cpages/homepage"
             }
         }
     ],
