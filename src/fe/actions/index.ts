@@ -43,6 +43,13 @@ export interface FilterPanelRender {
     }
 }
 
+export interface KeyDown {
+    type: "KEY_DOWN",
+    payload: {
+        keyCode :number
+    }
+}
+
 export type Action =
     MenuClickAction
     | FilterSelectAction
@@ -51,6 +58,7 @@ export type Action =
     | ShadeClick
     | PathBoxClick
     | PathViewCloseButtonClick
+    | KeyDown
 
 export function filterOptionClickAction(filterId: FilterId, optionId: OptionId): MenuClickAction {
     return {
@@ -105,6 +113,15 @@ export function pathBoxClickAction(path: Path): PathBoxClick {
 export function pathViewCloseButtonClickAction(): PathViewCloseButtonClick {
     return {
         type: "PATH_VIEW_CLOSE_BUTTON_CLICK",
+    }
+}
+
+export function keyDownAction(keyCode: number): KeyDown {
+    return {
+        type: "KEY_DOWN",
+        payload: {
+            keyCode
+        }
     }
 }
 

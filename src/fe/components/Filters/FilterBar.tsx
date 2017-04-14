@@ -18,7 +18,8 @@ const FilterBar = (props: FilterBarProps) => (
             transform: `translateY(-${Number(props.offset)}px)`,
             transition: `transform ${design.durations.slide}s`,
             background: "white",
-        }}
+            cursor: "pointer",
+        } as React.CSSProperties}
         onClick={props.onClick}
     >
         {

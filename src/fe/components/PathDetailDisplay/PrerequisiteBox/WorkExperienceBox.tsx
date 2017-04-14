@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import CombinationBox from '../CombinationBox'
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq"
+import inflect from "../../../utils/inflect"
 
 const WorkExperienceBox = (props: {prereq: WorkExperiencePrereq}) => {
     const prereq = props.prereq
@@ -11,12 +12,12 @@ const WorkExperienceBox = (props: {prereq: WorkExperiencePrereq}) => {
             <div style={{marginBottom: "0.5em"}}>
             {
                 prereq.withinLast
-                ? `Within the last ${prereq.withinLast.value} ${prereq.withinLast.unit}, `
+                ? `Within the last ${prereq.withinLast.value} ${inflect(prereq.withinLast.unit, {number: prereq.withinLast.value})}, `
                 : ""
             }
             {
                 prereq.length
-                ? `you have worked ${prereq.length.value} ${prereq.length.unit} in`
+                ? `you have worked ${prereq.length.value} ${inflect(prereq.length.unit, {number: prereq.length.value})} in`
                 : ""
             }
             :

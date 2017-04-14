@@ -49,7 +49,7 @@ const businessInnovation: Transition = {
         // Venture Capital Entrepreneur
         {
             prereqId: "fund",
-            type: "venture",
+            type: "investee",
             schemes: [
                 {
                     fund: money(1000000, "aud")

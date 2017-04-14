@@ -1,15 +1,18 @@
 import BasePrereq from './BasePrereq'
-import Money from '../auxillary/Money'
+import Money, {FundSourceGroup} from "../auxillary/Money"
+
+export interface FundPrereqCondition {
+    familyMember: number
+    source: FundSourceGroup
+}
 
 export interface FundPrereq extends BasePrereq {
     prereqId: "fund"
-    type: "possess" | "invest" | "donate" | "venture"
+    type: "possess" | "investor" | "investee" | "donate"
     schemes: [
         {
-            condition?: {
-                familyMember?: number
-            }
-            fund: Money
+            fund: Money | null
+            condition?: Partial<FundPrereqCondition>
         }
     ]
 }

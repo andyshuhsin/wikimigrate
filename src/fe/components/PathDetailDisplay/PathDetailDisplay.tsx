@@ -39,6 +39,8 @@ const closeButtonStyle = (() => {
 
         fontSize: "3em",
         textAlign: "center",
+
+        cursor: "pointer",
     }
 })()
 

@@ -1,13 +1,14 @@
 import * as React from "react"
 import {Combination} from "../../../definitions/auxillary/Combination"
 import {text} from "../../utils/text"
+import design from "../../design"
 
 const style = {
     marginBottom: "0.4em",
     padding: "0.2em 0",
     fontFamily: "monospace",
     fontWeight: "bolder",
-    background: "rgba(255, 204, 188, 0.8)"
+    background: design.colors.brandLighter
 } as React.CSSProperties
 
 const CombinationSubhead = (props: {combo: Combination<any>}) => (

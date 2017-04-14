@@ -35,6 +35,7 @@ const styles= {
         borderRadius: "3px",
         borderStyle: "solid",
         borderColor: design.colors.greyLight,
+        cursor: "pointer",
     } as React.CSSProperties,
 
     optionHighlightStyle: {

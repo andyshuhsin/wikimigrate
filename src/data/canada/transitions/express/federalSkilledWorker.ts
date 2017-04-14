@@ -14,7 +14,7 @@ import {money} from "../../../../definitions/auxillary/Money";
 import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq";
 import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
-import {prereqTitleDict} from "../../../../fe/data/index"
+import {prereqTitleDict} from "../../../common/prereqTitleDict"
 
 const federalSkilledWorker: Transition = {
     id: "federal_skilled_worker",
@@ -175,7 +175,7 @@ const federalSkilledWorker: Transition = {
         {
             url: "http://www.cic.gc.ca/english/immigrate/skilled/apply-who.asp",
             title: {
-                en: "Determine your eligibility – Federal skilled workers"
+                en: "Official Page"
             }
         }
     ]

@@ -160,56 +160,6 @@ export const filterSets: Filter[] = [
     },
 ]
 
-type PrereqTitleDict = {
-    [id in PrereqId]: MultiLangStringSet
-}
-
-/*
- "education"
- | "age"
- | "business"
- | "language_test"
- | "right"
- | "work_experience"
- | "residence"
- | "fund"
- | "certification"
- | "offer"
- */
-
-export const prereqTitleDict: PrereqTitleDict = {
-    education: {
-        en: "Education"
-    },
-    age: {
-        en: "Age"
-    },
-    business: {
-        en: "business"
-    },
-    language_test: {
-        en: "Language"
-    },
-    right: {
-        en: "Right"
-    },
-    residence: {
-        en: "Residence"
-    },
-    work_experience: {
-        en: "Work Experience"
-    },
-    fund: {
-        en: "Fund"
-    },
-    certification: {
-        en: "Certification"
-    },
-    offer: {
-        en: "Offer"
-    },
-}
-
 export type FilterState = {
     [filterId in FilterId]: OptionId | null
 }

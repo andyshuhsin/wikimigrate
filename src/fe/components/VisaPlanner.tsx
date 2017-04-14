@@ -22,8 +22,8 @@ import {VisaPlannerState} from "../reducers"
 
 import {Person} from "../../definitions/Person"
 import {
-    filterBarClickAction, pathBoxClickAction, pathViewCloseButtonClickAction,
-    shadeClickAction
+    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction,
+    shadeClickAction,
 } from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
 import {text} from "../utils/text"
@@ -52,6 +52,7 @@ interface PropTypes {
     onShadeClick: () => void
     onPathBoxClick: (path: Path) => void
     onPathViewCloseButtonClick: () => void
+    onKeyDown: (keyCode: number) => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
 }
@@ -62,6 +63,12 @@ const allTransitions = data.regions.map((region: Region) => region.transitionLis
 )
 
 class VisaPlanner extends React.Component<PropTypes, {}> {
+
+    componentDidMount() {
+        document.title = text(data.app.brandName)
+        window.onkeydown = (event: KeyboardEvent) =>
+            this.props.onKeyDown(event.keyCode)
+    }
 
     render() {
 
@@ -124,6 +131,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         },
         onPathViewCloseButtonClick() {
             dispatch(pathViewCloseButtonClickAction())
+        },
+        onKeyDown(keyCode: number) {
+            dispatch(keyDownAction(keyCode))
         }
     }
 }

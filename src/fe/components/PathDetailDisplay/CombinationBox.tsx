@@ -31,6 +31,10 @@ const branchStyle = {
     } as React.CSSProperties,
 }
 
+const operandViewStyle = {
+    marginBottom: "0.2em",
+} as React.CSSProperties
+
 class CombinationBox extends React.PureComponent<Props, {}> {
 
     render() {
@@ -40,15 +44,20 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                 <CombinationSubhead combo={combo} />
                 {
                     combo.combinator === "or" && combo.operands.length >= 3
-                    ? text({
-                        en: "One of"
-                    })
+                    ? <span style={{fontVariant: "small-caps"}}>
+                        {text({
+                            en: "One of"
+                        })}
+                    </span>
                     : ''
                 }
                 <div style={branchStyle[combo.combinator]}>
                     {combo.operands.map(
                         (operand: any, index: number) => (
-                            <div key={index}> {/* TOOD: Shouldn't use 'index' */}
+                            <div
+                                style={operandViewStyle}
+                                key={JSON.stringify(operand) /* FIXME: Excessive? */}
+                            >
                                 <this.OperandView operand={operand} level={this.props.level + 1}/>
                                 {
                                     combo.operands.length === 2
@@ -56,8 +65,13 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                                     && (
                                         <div style={
                                             this.props.level === 0
-                                            ? {marginTop: "0.5em"}
-                                            : {}
+                                            ? {
+                                                marginTop: "0.5em",
+                                                fontVariant: "small-caps",
+                                            }
+                                            : {
+                                                fontVariant: "small-caps",
+                                            }
                                         }>
                                             {combo.combinator}
                                         </div>
