@@ -9,7 +9,7 @@ export type FundSourceId =
     | "relay"
     | "celtic"
     | "dri"
-    | "extreme"
+    | "extreme-venture"
     | "golden-opportunities"
     | "inovia"
     | "lumira"
@@ -20,7 +20,7 @@ export type FundSourceId =
     | "pangaea"
     | "priveq"
     | "quorum"
-    | "real"
+    | "real-ventures"
     | "rho-canada"
     | "rogers"
     | "summerhill"
@@ -39,6 +39,23 @@ export type FundSourceId =
     | "oak-mason"  // also venture
     | "tenx-angel"
     | "vantec-angel"
+
+    // Canada incubators
+    | "highline"
+    | "communitech"
+    | "empowered"
+    | "extreme-innovations"
+    | "incubes"
+    | "innovacorp"
+    | "innovate"
+    | "interactive"
+    | "knowledge"
+    | "launchpad"
+    | "real-investment"
+    | "ryerson"
+    | "toronto"
+    | "waterloo"
+
 
 export interface FundSource {
     fundSourceId: FundSourceId

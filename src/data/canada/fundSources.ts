@@ -40,7 +40,7 @@ export const designatedVentureCapitalFunds: FundSourceGroup = {
             }
         },
         {
-            fundSourceId: "extreme",
+            fundSourceId: "extreme-venture",
             name: {
                 "en": "Extreme Venture Partners LLP"
             },
@@ -139,7 +139,7 @@ export const designatedVentureCapitalFunds: FundSourceGroup = {
             }
         },
         {
-            fundSourceId: "real",
+            fundSourceId: "real-ventures",
             name: {
                 "en": "Real Ventures"
             },
@@ -298,6 +298,141 @@ export const designatedAngelInvestors: FundSourceGroup = {
             },
             "reference": {
                 "url": "http://vantec.ca/cpages/homepage"
+            }
+        }
+    ],
+    reference: {
+        url: "http://www.cic.gc.ca/english/immigrate/business/start-up/eligibility/entities.asp"
+    }
+}
+
+export const designatedBusinessIncubators: FundSourceGroup = {
+    fundSourceGroupId: "canada-designated-business-incubators",
+    sources: [
+        {
+            "fundSourceId": "highline",
+            "name": {
+                "en": "HIGHLINE"
+            },
+            "reference": {
+                "url": "http://www.highline.vc/"
+            }
+        },
+        {
+            "fundSourceId": "communitech",
+            "name": {
+                "en": "Communitech"
+            },
+            "reference": {
+                "url": "https://www.communitech.ca/"
+            }
+        },
+        {
+            "fundSourceId": "empowered",
+            "name": {
+                "en": "Empowered Startups Ltd."
+            },
+            "reference": {
+                "url": "http://www.empoweredstartups.com/"
+            }
+        },
+        {
+            "fundSourceId": "extreme-innovations",
+            "name": {
+                "en": "Extreme Innovations"
+            },
+            "reference": {
+                "url": "http://suv.extremeinnovations.com/"
+            }
+        },
+        {
+            "fundSourceId": "incubes",
+            "name": {
+                "en": "INcubes Inc."
+            },
+            "reference": {
+                "url": "http://www.incubes.ca/"
+            }
+        },
+        {
+            "fundSourceId": "innovacorp",
+            "name": {
+                "en": "Innovacorp"
+            },
+            "reference": {
+                "url": "http://innovacorp.ca/"
+            }
+        },
+        {
+            "fundSourceId": "innovate",
+            "name": {
+                "en": "Innovate Calgary"
+            },
+            "reference": {
+                "url": "http://www.innovatecalgary.com/"
+            }
+        },
+        {
+            "fundSourceId": "interactive",
+            "name": {
+                "en": "Interactive Niagara Media Cluster o/a Innovate Niagara"
+            },
+            "reference": {
+                "url": "http://innovateniagara.com/news/article/exciting-news-for-foreign-entrepreneurs"
+            }
+        },
+        {
+            "fundSourceId": "knowledge",
+            "name": {
+                "en": "Knowledge Park o/a Planet Hatch"
+            },
+            "reference": {
+                "url": "http://www.planethatch.com/"
+            }
+        },
+        {
+            "fundSourceId": "launchpad",
+            "name": {
+                "en": "LaunchPad PEI Inc."
+            },
+            "reference": {
+                "url": "http://www.launchpadpei.com/"
+            }
+        },
+        {
+            "fundSourceId": "real-investment",
+            "name": {
+                "en": "Real Investment Fund III L.P. o/a FounderFuel"
+            },
+            "reference": {
+                "url": "http://founderfuel.com/"
+            }
+        },
+        {
+            "fundSourceId": "ryerson",
+            "name": {
+                "en": "Ryerson Futures Inc."
+            },
+            "reference": {
+                "url": "http://www.ryersonfutures.ca/startup-visa-program"
+            }
+        },
+        {
+            "fundSourceId": "toronto",
+            "name": {
+                "en": "Toronto Business Development Centre"
+            },
+            "reference": {
+                "url": "http://www.tbdc.com/"
+            }
+        },
+        {
+            "fundSourceId": "waterloo",
+            "name": {
+                "en": "Waterloo Accelerator Centre"
+            },
+            "reference": {
+                "url": "http://www.acceleratorcentre.com/"
             }
         }
     ],
