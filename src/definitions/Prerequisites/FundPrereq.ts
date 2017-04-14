@@ -3,7 +3,7 @@ import Money from '../auxillary/Money'
 
 export interface FundPrereq extends BasePrereq {
     prereqId: "fund"
-    type: "possess" | "invest" | "donate" | "venture"
+    type: "possess" | "investor" | "investee" | "donate"
     schemes: [
         {
             condition?: {
