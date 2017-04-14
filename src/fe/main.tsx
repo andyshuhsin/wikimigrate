@@ -7,6 +7,9 @@ import VisaPlanner from './components/VisaPlanner'
 import './utils/assign-polyfill'
 import {VisaPlannerState} from "./reducers/reducer"
 
+import "./utils/global.css"
+import "./utils/normalize.css"
+
 let enhancer: StoreEnhancer<VisaPlannerState> | undefined
 
 const reduxDevToolsPlugin = (window as any).__REDUX_DEVTOOLS_EXTENSION__
