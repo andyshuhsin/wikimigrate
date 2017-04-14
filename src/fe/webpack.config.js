@@ -38,6 +38,10 @@ module.exports = {
                     'url-loader?limit=10240&name=[sha1:hash:hex:32].[ext]',
                     'image-webpack-loader'
                 ]
+            },
+            {
+                test: /\.css$/,
+                loaders: ['style-loader', 'css-loader']
             }
         ]
     },
