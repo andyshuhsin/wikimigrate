@@ -8,7 +8,11 @@ import {
 import {prereqTitleDict} from "../../common/prereqTitleDict"
 import {FundPrereq} from "../../../definitions/Prerequisites/FundPrereq"
 import {money} from "../../../definitions/auxillary/Money"
-import {designatedVentureCapitalFunds} from "../fundSources"
+import {
+    designatedVentureCapitalFunds,
+    designatedAngelInvestors,
+    designatedBusinessIncubators,
+} from "../fundSources"
 
 const startupVisa: Transition = {
     id: "startup_visa",
@@ -32,11 +36,37 @@ const startupVisa: Transition = {
                         condition: {
                             source: designatedVentureCapitalFunds
                         }
+                    },
+                ]
+            } as FundPrereq,
+            {
+                prereqId: "fund",
+                type: "investee",
+                schemes: [
+                    {
+                        fund: money(75000, "cad"),
+                        condition: {
+                            source: designatedVentureCapitalFunds
+                        }
+                    },
+                ]
+            } as FundPrereq,
+            {
+                prereqId: "fund",
+                type: "investee",
+                schemes: [
+                    {
+                        fund: null,
+                        condition: {
+                            source: designatedBusinessIncubators
+                        }
                     }
                 ]
-            } as FundPrereq
+            } as FundPrereq,
         ], {
-            title: prereqTitleDict.fund
+            title: {
+                en: "Venture investment"
+            }
         })
     ]),
     procedureList: [

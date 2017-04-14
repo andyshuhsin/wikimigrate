@@ -70,6 +70,7 @@ export type FundSourceGroupId =
 
 export interface FundSourceGroup {
     fundSourceGroupId: FundSourceGroupId
+    name: MultiLangStringSet
     sources: FundSource[]
     reference: URLDatum
 }

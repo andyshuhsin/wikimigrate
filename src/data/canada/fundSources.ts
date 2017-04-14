@@ -2,6 +2,9 @@ import {FundSourceGroup} from "../../definitions/auxillary/Money"
 
 export const designatedVentureCapitalFunds: FundSourceGroup = {
     fundSourceGroupId: "canada-designated-venture-capital-funds",
+    name: {
+        en: "designated venture capital funds",
+    },
     sources: [
         {
             fundSourceId: "bdc",
@@ -245,6 +248,9 @@ export const designatedVentureCapitalFunds: FundSourceGroup = {
 
 export const designatedAngelInvestors: FundSourceGroup = {
     fundSourceGroupId: "canada-designated-angel-investor-groups",
+    name: {
+        en: "designated angel investor groups",
+    },
     sources: [
         {
             "fundSourceId": "angel-one",
@@ -308,6 +314,9 @@ export const designatedAngelInvestors: FundSourceGroup = {
 
 export const designatedBusinessIncubators: FundSourceGroup = {
     fundSourceGroupId: "canada-designated-business-incubators",
+    name: {
+        en: "designated business incubators",
+    },
     sources: [
         {
             "fundSourceId": "highline",
