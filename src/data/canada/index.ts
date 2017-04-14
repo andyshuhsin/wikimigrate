@@ -40,7 +40,7 @@ const canada: Region =
                 federalSkilledWorker,
                 federalSkilledTrade,
                 canadianExperience,
-                quebecSkilled,
+                // quebecSkilled,
                 startupVisa,
                 iivc,
                 selfEmployedVisa,
