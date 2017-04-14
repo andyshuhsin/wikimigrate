@@ -8,7 +8,6 @@ import {
 } from './status'
 
 // import visaExemption from './transitions/visaExemption'
-import expressEntry from './transitions/express/expressEntry'
 import federalSkilledWorker from './transitions/express/federalSkilledWorker'
 import federalSkilledTrade from './transitions/express/federalSkilledTrade'
 import canadianExperience from './transitions/express/canadianExperience'
@@ -38,7 +37,6 @@ const canada: Region =
             ],
             transitionList: [
                 // visaExemption,
-                expressEntry,
                 federalSkilledWorker,
                 federalSkilledTrade,
                 canadianExperience,
