@@ -38,15 +38,15 @@ const canada: Region = {
     transitionList: [
         // visaExemption,
         federalSkilledWorker,
-        federalSkilledTrade,
-        canadianExperience,
+        // federalSkilledTrade,
+        // canadianExperience,
         // quebecSkilled,
         startupVisa,
-        iivc,
-        selfEmployedVisa,
-        atlanticHighSkilled,
-        atlanticIntermediateSkilled,
-        atlanticInternationalGraduate,
+        // iivc,
+        // selfEmployedVisa,
+        // atlanticHighSkilled,
+        // atlanticIntermediateSkilled,
+        // atlanticInternationalGraduate,
     ],
     referenceList: [
         {
