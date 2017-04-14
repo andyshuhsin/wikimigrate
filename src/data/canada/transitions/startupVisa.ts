@@ -25,6 +25,14 @@ const startupVisa: Transition = {
                 en: "Apply"
             }
         }
+    ],
+    referenceList: [
+        {
+            title: {
+                en: "Official homepage"
+            },
+            url: "http://www.cic.gc.ca/english/immigrate/business/start-up/",
+        }
     ]
 }
 
