@@ -24,44 +24,43 @@ import {designatedVentureCapitalFunds} from "./fundSources"
 
 //TODO: Include admissibility http://www.cic.gc.ca/english/information/inadmissibility/index.asp
 
-const canada: Region =
+const canada: Region = {
+    id: "canada",
+    name: {
+        en: "Canada"
+    },
+    statusList: [
+        citizenship,
+        pr,
+        touristVisaExempted,
+        alien,
+    ],
+    transitionList: [
+        // visaExemption,
+        federalSkilledWorker,
+        federalSkilledTrade,
+        canadianExperience,
+        // quebecSkilled,
+        startupVisa,
+        iivc,
+        selfEmployedVisa,
+        atlanticHighSkilled,
+        atlanticIntermediateSkilled,
+        atlanticInternationalGraduate,
+    ],
+    referenceList: [
         {
-            id: "canada",
-            name: {
-                en: "Canada"
-            },
-            statusList: [ 
-                citizenship,
-                pr,
-                touristVisaExempted,
-                alien,
-            ],
-            transitionList: [
-                // visaExemption,
-                federalSkilledWorker,
-                federalSkilledTrade,
-                canadianExperience,
-                // quebecSkilled,
-                startupVisa,
-                iivc,
-                selfEmployedVisa,
-                atlanticHighSkilled,
-                atlanticIntermediateSkilled,
-                atlanticInternationalGraduate,
-            ],
-            referenceList: [
-                {
-                    url: "http://www.cic.gc.ca/english/immigrate/apply.asp",
-                    title: {
-                        en: "Apply to immigrate to Canada",
-                        fr: "Présenter une demande d’immigration au Canada"
-                    }
-                }
-            ],
-            jobClassification: noc2016,
-            fundSourceGroupList: [
-                designatedVentureCapitalFunds,
-            ],
+            url: "http://www.cic.gc.ca/english/immigrate/apply.asp",
+            title: {
+                en: "Apply to immigrate to Canada",
+                fr: "Présenter une demande d’immigration au Canada"
+            }
         }
+    ],
+    jobClassification: noc2016,
+    fundSourceGroupList: [
+        designatedVentureCapitalFunds,
+    ],
+}
 
 export default canada
