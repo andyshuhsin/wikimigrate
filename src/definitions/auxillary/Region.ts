@@ -4,6 +4,7 @@ import URLDatum from '../auxillary/URLDatum'
 import {MultiLangStringSet} from "./MultiLang"
 import {JobClassification} from "./JobClassification"
 import {FundSourceGroup} from "./Money"
+import {ScoreSystem} from "../ScoreSystem"
 
 export type RegionId =
     "world"
@@ -19,6 +20,7 @@ export interface Region {
     referenceList: URLDatum[]
     jobClassification?: JobClassification
     fundSourceGroupList?: FundSourceGroup[]
+    scoreSystems?: ScoreSystem[]
 }
 
 export default Region

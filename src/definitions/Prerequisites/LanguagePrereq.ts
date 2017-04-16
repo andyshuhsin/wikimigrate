@@ -4,17 +4,36 @@ import {LanguageTestId, LanguageTestResult, LanguageTestScores} from "../auxilla
 export interface LanguagePrereq extends BasePrereq {
     prereqId: "language_test"
     result: LanguageTestResult
+    resultSecond?: LanguageTestResult  // e.g. English + French for Canada
     // TODO: Add time limits
 }
 
-export function languagePrereq(testId: LanguageTestId,
-                               scores: LanguageTestScores
+export function languagePrereq(
+    testId: LanguageTestId,
+    scores: LanguageTestScores,
+    testIdSecond?: LanguageTestId,
+    scoresSecond?: LanguageTestScores
 ): LanguagePrereq {
-    return {
-        prereqId: "language_test",
-        result: {
-            testId,
-            scores,
+    if (testIdSecond && scoresSecond) {
+        return {
+            prereqId: "language_test",
+            result: {
+                testId,
+                scores,
+            },
+            resultSecond: {
+                testId: testIdSecond,
+                scores: scoresSecond,
+            }
+        }
+    }
+    else {
+        return {
+            prereqId: "language_test",
+            result: {
+                testId,
+                scores,
+            },
         }
     }
 }

@@ -8,6 +8,8 @@ import OfferPrereq from './OfferPrereq'
 import RightPrereq from './RightPrereq'
 import CertificationPrereq from './CertificationPrereq'
 import ResidencePrereq from './ResidencePrereq'
+import UnionPrereq from "./UnionPrereq"
+import SpousePrereq from "./SpousePrereq"
 
 export type Prerequisite =
     AgePrereq
@@ -20,6 +22,8 @@ export type Prerequisite =
     | RightPrereq
     | CertificationPrereq
     | ResidencePrereq
+    | UnionPrereq
+    | SpousePrereq
 
 export function isPrerequisite(arg: any): boolean {
     return !!arg["prereqId"]
