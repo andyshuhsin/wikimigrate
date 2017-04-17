@@ -41,6 +41,9 @@ export const prereqTitleDict: PrereqTitleDict = {
     },
     spouse: {
         en: "Spouse"
+    },
+    nomination: {
+        en: "Nomination"
     }
 }
 

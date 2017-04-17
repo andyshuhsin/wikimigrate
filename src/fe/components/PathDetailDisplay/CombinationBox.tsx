@@ -29,6 +29,10 @@ const branchStyle = {
     and: {
 
     } as React.CSSProperties,
+
+    not: {
+
+    } as React.CSSProperties,
 }
 
 const operandViewStyle = {
