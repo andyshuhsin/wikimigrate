@@ -1,6 +1,6 @@
 {
   "name": "visaplanner-fe",
-  "version": "0.5dev",
+  "version": "0.6dev",
   "description": "",
   "main": "bundle.js",
   "scripts": {
