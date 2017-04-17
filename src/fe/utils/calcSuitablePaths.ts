@@ -9,6 +9,10 @@ import {
     isSingleScore, LanguageTestItem, LanguageTestItemValues, LanguageTestScoreItemized,
     LanguageTestScoreSingle
 } from "../../definitions/auxillary/LanguageTest"
+import {
+    LanguagePrereq, LanguagePrereqScoreItemized,
+    LanguagePrereqScoreSingle,
+} from "../../definitions/Prerequisites/LanguagePrereq"
 
 // Applicability of a program when user didn't specify a condition;
 // Set to true for maximal coverage
@@ -75,14 +79,16 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
                     }
                     else if (isSingleScore(actualResult) && isSingleScore(expectedResult)) {
                         const actualScores = actualResult.scores as LanguageTestScoreSingle
-                        const expectedScores = expectedResult.scores as LanguageTestScoreSingle
-                        return actualScores.overall > expectedScores.overall
+                        const expectedScores = expectedResult.scores as LanguagePrereqScoreSingle
+                        // TODO: Use overall[0] as operator, rather than hard-coding ">"
+                        return actualScores.overall > expectedScores.overall[1]
                     }
                     else if (!isSingleScore(actualResult) && !isSingleScore(expectedResult)) {
                         const actualScores = actualResult.scores as LanguageTestScoreItemized
-                        const expectedScores = expectedResult.scores as LanguageTestScoreItemized
+                        const expectedScores = expectedResult.scores as LanguagePrereqScoreItemized
                         for (const item of LanguageTestItemValues) {
-                            if (actualScores[item] < expectedScores[item]) {
+                            // TODO: Use item[0] as operator
+                            if (actualScores[item] < expectedScores[item][1]) {
                                 return false
                             }
                         }
@@ -117,9 +123,14 @@ function satisfyPrerequisiteCombination(
         const isTrue = (x: any) => !!x
         switch (prereqCombo.combinator)  {
             case "and": {
-                return prereqCombo.operands.map(
-                    operand => satisfyPrerequisiteCombination(person, operand)
-                ).every(isTrue)
+                if (prereqCombo.meta && prereqCombo.meta.bijective) {
+                    throw new Error("Unimplemented: bijective `and`")
+                }
+                else {
+                    return prereqCombo.operands.map(
+                        operand => satisfyPrerequisiteCombination(person, operand)
+                    ).every(isTrue)
+                }
             }
             case "or": {
                 return prereqCombo.operands.map(

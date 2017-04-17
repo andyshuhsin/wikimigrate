@@ -13,7 +13,10 @@ export interface ScoreSystem {
     scoreSystemId: ScoreSystemId
     name: MultiLangStringSet
     conditionGroups: {
-        [key: string]: ScoreCondition[]
+        [key: string]: {
+            maxScore: number
+            conditions: ScoreCondition[]
+        }
     }
     reference: URLDatum
 }

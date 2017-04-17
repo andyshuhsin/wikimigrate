@@ -22,18 +22,14 @@ const atlanticInternationalGraduate: Transition = {
     prerequisiteList: allOf([
         {
             prereqId: "education",
-            education: {
-                stage: "post-secondary",
-            }
+            stage: [">=", "secondary"],
         } as EducationPrereq,
         {
             prereqId: "education",
-            education: {
-                stage: undefined,
-                regionId: "canada",
-                duration: duration(2, "year"),
-            },
-            graduateNoEarlierThan: duration(12, "month")
+            stage: null,
+            region: "canada",
+            duration: [">=", duration(2, "year")],
+            graduateWithin: duration(12, "month")
         } as EducationPrereq,
         {
             prereqId: "residence",

@@ -13,6 +13,7 @@ export type PrereqId =
     | "offer"
     | "union"
     | "spouse"
+    | "nomination"
 
 interface BasePrereq {
     prereqId: PrereqId

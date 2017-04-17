@@ -1,39 +1,55 @@
 import BasePrereq from "./BasePrereq";
-import {LanguageTestId, LanguageTestResult, LanguageTestScores} from "../auxillary/LanguageTest"
+import {
+    LanguageTestId, LanguageTestItem, LanguageTestItemValues, LanguageTestResult, LanguageTestScoreItemized,
+    LanguageTestScores,
+    LanguageTestScoreSingle,
+} from "../auxillary/LanguageTest"
+import {ArithmeticComparisonOperator, Interval} from "../auxillary/Operator"
+
+export type LanguagePrereqScoreSingle = {
+    overall: [ArithmeticComparisonOperator, (number | string)]
+}
+
+export type LanguagePrereqScoreItemized = {
+    [key in LanguageTestItem]: Interval<number>
+}
+
+export type LanguagePrereqScores = LanguagePrereqScoreSingle | LanguagePrereqScoreItemized
 
 export interface LanguagePrereq extends BasePrereq {
     prereqId: "language_test"
-    result: LanguageTestResult
-    resultSecond?: LanguageTestResult  // e.g. English + French for Canada
+    result: {
+        testId: LanguageTestId
+        scores: LanguagePrereqScores
+    }
     // TODO: Add time limits
 }
 
-export function languagePrereq(
-    testId: LanguageTestId,
-    scores: LanguageTestScores,
-    testIdSecond?: LanguageTestId,
-    scoresSecond?: LanguageTestScores
-): LanguagePrereq {
-    if (testIdSecond && scoresSecond) {
+function transformMinScores(scores: LanguageTestScores): LanguagePrereqScores {
+    if ((scores as LanguageTestScoreSingle).overall) {
         return {
-            prereqId: "language_test",
-            result: {
-                testId,
-                scores,
-            },
-            resultSecond: {
-                testId: testIdSecond,
-                scores: scoresSecond,
-            }
+            overall: [">=", (scores as LanguageTestScoreSingle).overall]
         }
     }
     else {
-        return {
-            prereqId: "language_test",
-            result: {
-                testId,
-                scores,
-            },
+        let result: any = {}
+        scores = scores as LanguageTestScoreItemized
+        for (const key of LanguageTestItemValues) {
+            result[key] = [">=", scores[key]]
+        }
+        return result
+    }
+}
+
+export function languagePrereqMinScore(
+    testId: LanguageTestId,
+    scores: LanguageTestScores,
+): LanguagePrereq {
+    return {
+        prereqId: "language_test",
+        result: {
+            testId,
+            scores: transformMinScores(scores),
         }
     }
 }

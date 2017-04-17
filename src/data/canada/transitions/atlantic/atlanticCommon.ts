@@ -35,24 +35,13 @@ const atlanticWorkersJob = allOf([
 const atlanticWorkersEducation = oneOf([
     {
         prereqId: "education",
-        education: {
-            stage: "secondary",
-            regionId: "canada",
-        }
+        stage: [">=", "secondary"],
+        region: "canada",
     } as EducationPrereq,
     {
         prereqId: "education",
-        education: {
-            stage: "post-secondary",
-            regionId: "canada",
-        }
-    } as EducationPrereq,
-    {
-        prereqId: "education",
-        education: {
-            stage: "secondary",
-            regionId: "world",
-        },
+        stage: [">=", "secondary"],
+        region: "world",
         certification: "eca"
     } as EducationPrereq,
 ])

@@ -6,7 +6,7 @@ import {
 import jobClass from '../../jobClass'
 import Transition from "../../../../definitions/Transition";
 import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
-import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";
@@ -29,8 +29,8 @@ const federalSkilledWorker: Transition = {
     prerequisiteList: allOf([
 
         oneOf([
-            languagePrereq("clb", {overall: 7}),
-            languagePrereq("nclc", {overall: 7}),
+            languagePrereqMinScore("clb", {overall: 7}),
+            languagePrereqMinScore("nclc", {overall: 7}),
         ], {
             title: prereqTitleDict.language_test
         }),
@@ -38,7 +38,7 @@ const federalSkilledWorker: Transition = {
         identity([
             {
                 prereqId: "work_experience",
-                length: duration(1, "year"),
+                length: [">=", duration(1, "year")],
                 withinLast: duration(10, "year"),
                 workHoursPerWeek: duration(30, "hour"),
                 jobNature: oneOf([
@@ -56,36 +56,17 @@ const federalSkilledWorker: Transition = {
 
             {
                 prereqId: "education",
-                education: {
-                    stage: "secondary",
-                    regionId: "canada"
-                }
+                stage: [">=", "secondary"],
+                region: "canada"
             } as EducationPrereq,
 
             {
                 prereqId: "education",
-                education: {
-                    stage: "post-secondary",
-                    regionId: "canada"
-                }
+                region: "world",
+                stage: [">=", "secondary"],
+                certification: "eca"
             } as EducationPrereq,
 
-            {
-                prereqId: "education",
-                education: {
-                    regionId: "world",
-                    stage: "secondary",
-                },
-                certification: "eca"
-            } as EducationPrereq,
-            {
-                prereqId: "education",
-                education: {
-                    regionId: "world",
-                    stage: "post-secondary",
-                },
-                certification: "eca"
-            } as EducationPrereq,
         ],
         {
             title: prereqTitleDict.education

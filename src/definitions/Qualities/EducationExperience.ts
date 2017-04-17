@@ -5,7 +5,6 @@ import {RegionId} from "../auxillary/Region"
 export type EducationStage =
     "primary"
     | "secondary"
-    | "post-secondary"
     | "bachelor"
     | "master"
     | "phd"

@@ -8,7 +8,7 @@ import Transition from "../../../../definitions/Transition";
 import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
-import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {prereqTitleDict} from "../../../common/prereqTitleDict"
 
 const canadianExperience: Transition = {
@@ -29,13 +29,13 @@ const canadianExperience: Transition = {
             // NOC 0 or A job
             allOf([
                 oneOf([
-                    languagePrereq("clb", { overall: 7 }),
-                    languagePrereq("nclc", { overall: 7 }),
+                    languagePrereqMinScore("clb", { overall: 7 }),
+                    languagePrereqMinScore("nclc", { overall: 7 }),
                 ]),
 
                 {
                     prereqId: "work_experience",
-                    length: duration(12, "month"),
+                    length: [">=", duration(12, "month")],
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
                     regionId: 'canada',
@@ -53,13 +53,13 @@ const canadianExperience: Transition = {
             //NOC B job
             allOf([
                 oneOf([
-                    languagePrereq("clb", { overall: 5 }),
-                    languagePrereq("nclc", { overall: 5 }),
+                    languagePrereqMinScore("clb", { overall: 5 }),
+                    languagePrereqMinScore("nclc", { overall: 5 }),
                 ]),
 
                 {
                     prereqId: "work_experience",
-                    length: duration(12, "month"),
+                    length: [">=", duration(12, "month")],
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
                     regionId: 'canada',

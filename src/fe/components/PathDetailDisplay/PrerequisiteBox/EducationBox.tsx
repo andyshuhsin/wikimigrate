@@ -6,9 +6,9 @@ const EducationBox = (props: {prereq: EducationPrereq}) => {
     return (
         <span>
             {
-                prereq.education.regionId
-                ? `You were educated in ${prereq.education.regionId} on ${prereq.education.stage} level.`
-                : `You were educated anywhere on ${prereq.education.stage} level.`
+                prereq.region
+                ? `You were educated in ${prereq.region} on ${prereq.stage && prereq.stage[1]} level.`
+                : `You were educated anywhere on ${prereq.stage && prereq.stage[1]} level.`
             }
             {
                 prereq.certification

@@ -1,11 +1,18 @@
 import {ScoreCondition, ScoreSystem} from "../../definitions/ScoreSystem"
 import AgePrereq from "../../definitions/Prerequisites/AgePrereq"
-import {allOf} from "../../definitions/auxillary/Combination"
+import {allOf, Combination, identity, oneOf} from "../../definitions/auxillary/Combination"
 import {UnionPrereq} from "../../definitions/Prerequisites/UnionPrereq"
 import {duration, Duration} from "../../definitions/auxillary/Duration"
 import {EducationStage} from "../../definitions/Qualities/EducationExperience"
 import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
 import {LanguagePrereq} from "../../definitions/Prerequisites/LanguagePrereq"
+import {SpousePrereq} from "../../definitions/Prerequisites/SpousePrereq"
+import {Interval} from "../../definitions/auxillary/Operator"
+import {WorkExperiencePrereq} from "../../definitions/Prerequisites/WorkExperiencePrereq"
+import {CertificationPrereq} from "../../definitions/Prerequisites/CertificationPrereq"
+import {OfferPrereq} from "../../definitions/Prerequisites/OfferPrereq"
+import {noc0, noc00, nocA, nocB} from "./jobClass/noc2016/index"
+import {NominationPrereq} from "../../definitions/Prerequisites/NominationPrereq"
 
 type MarriedScore = number
 type SingleScore = number
@@ -85,81 +92,153 @@ function getConditionsFromAgeTable(table: AgeTable): ScoreCondition[] {
     return result
 }
 
-type EducationTableEntry = {
-    stage: EducationStage
+type EducationTableEntry<T> = {
+    stage: Interval<EducationStage>
     minDuration?: Duration
     // two degrees at the same time
-    stageSecond?: EducationStage
+    stageSecond?: Interval<EducationStage>
     minDurationSecond?: Duration
 
-    scores: [MarriedScore, SingleScore, SpouseBonusScore]
+    scores: T
 }
 
-type EducationTable = EducationTableEntry[]
+type EducationTable = EducationTableEntry<[MarriedScore, SingleScore]>[]
+type EducationTableSpouseBonusTable = EducationTableEntry<SpouseBonusScore>[]
 
 const educationTable: EducationTable = [
     {
-        stage: "secondary",
-        scores: [28, 30, 2]
+        stage: ["=", "secondary"],
+        scores: [28, 30]
     },
     {
-        stage: "post-secondary",
+        stage: [">", "secondary"],
         minDuration: duration(1, "year"),
-        scores: [84, 90, 6]
+        scores: [84, 90]
     },
     {
-        stage: "post-secondary",
+        stage: [">", "secondary"],
         minDuration: duration(2, "year"),
-        scores: [91, 98, 6]
+        scores: [91, 98]
     },
     {
-        stage: "bachelor",
-        scores: [112, 120, 7]
+        stage: ["=", "bachelor"],
+        scores: [112, 120]
     },
     {
-        stage: "post-secondary",
+        stage: [">", "secondary"],
         minDuration: duration(3, "year"),
-        scores: [112, 120, 8]
+        scores: [112, 120]
     },
     {
-        stage: "post-secondary",
+        stage: [">", "secondary"],
         minDuration: duration(3, "year"),
-        stageSecond: "post-secondary",
+        stageSecond: [">", "secondary"],
         minDurationSecond: undefined,
-        scores: [119, 128, 9],
+        scores: [119, 128],
     },
     {
-        stage: "master",
-        scores: [126, 135, 10],
+        stage: ["=", "master"],
+        scores: [126, 135],
     },
     {
-        stage: "professional",
-        scores: [126, 135, 10],
+        stage: ["=", "professional"],
+        scores: [126, 135],
     },
     {
-        stage: "phd",
-        scores: [140, 150, 10],
+        stage: ["=", "phd"],
+        scores: [140, 150],
     }
 ]
 
-function getConditionsFromEducationTable(table: EducationTable): ScoreCondition[] {
+const educationTableSpouseBonusTable: EducationTableSpouseBonusTable = [
+    {
+        stage: ["=", "secondary"],
+        scores: 2
+    },
+    {
+        stage: [">", "secondary"],
+        minDuration: duration(1, "year"),
+        scores: 6
+    },
+    {
+        stage: [">", "secondary"],
+        minDuration: duration(2, "year"),
+        scores: 6
+    },
+    {
+        stage: ["=", "bachelor"],
+        scores: 7
+    },
+    {
+        stage: [">", "secondary"],
+        minDuration: duration(3, "year"),
+        scores: 8
+    },
+    {
+        stage: [">", "secondary"],
+        minDuration: duration(3, "year"),
+        stageSecond: [">", "secondary"],
+        minDurationSecond: undefined,
+        scores: 9,
+    },
+    {
+        stage: ["=", "master"],
+        scores: 10,
+    },
+    {
+        stage: ["=", "professional"],
+        scores: 10,
+    },
+    {
+        stage: ["=", "phd"],
+        scores: 10,
+    }
+
+]
+
+function getConditionsFromEducationTable(
+    table: EducationTable,
+    tableSpouse: EducationTableSpouseBonusTable,
+): ScoreCondition[] {
+
+    function makePrereq(educationStage: Interval<EducationStage>, minDuration?: Duration): EducationPrereq {
+        return {
+            prereqId: "education",
+            stage: educationStage,
+            duration: minDuration && [">=", minDuration],
+            region: "world",
+        }
+    }
+
+    function singleOrDualDegreePrerequisites(
+        educationStage: Interval<EducationStage>,
+        minDuration?: Duration,
+        educationStageSecond?: Interval<EducationStage>,
+        minDurationSecond?: Duration
+    ): Combination<EducationPrereq> | EducationPrereq {
+        return educationStageSecond
+                ? allOf([
+                    makePrereq(educationStage, minDuration),
+                    makePrereq(educationStageSecond, minDurationSecond)
+                ], {bijective: true})
+                : makePrereq(educationStage, minDuration)
+    }
 
     function makeCondition(
         score: number,
         isMarried: boolean,
-        education: EducationStage,
+        educationStage: Interval<EducationStage>,
         minDuration?: Duration,
+
+        educationStageSecond?: Interval<EducationStage>,
+        minDurationSecond?: Duration
     ): ScoreCondition {
         return {
             score: score,
             prerequisites: allOf([
-                {
-                    prereqId: "education",
-                    education: {
-                        stage: education
-                    },
-                    minDuration: minDuration
-                } as EducationPrereq,
+                singleOrDualDegreePrerequisites(
+                    educationStage, minDuration, educationStageSecond, minDurationSecond
+                ),
                 {
                     prereqId: "union",
                     unionTypes: ["marriage", "common-law-partnership"],
@@ -169,16 +248,74 @@ function getConditionsFromEducationTable(table: EducationTable): ScoreCondition[
         }
     }
 
-    const result: ScoreCondition[] = []
-    for (const entry of table) {
-        result.push(makeCondition(entry.scores[0], true, entry.stage, entry.minDuration))
-        result.push(makeCondition(entry.scores[1], false, entry.stage, entry.minDuration))
+    function makeSpouseBonusCondition(
+        crsScore: number,
+        applicantEducation: Interval<EducationStage>,
+        spouseEducation: Interval<EducationStage>,
 
-        if (entry.stageSecond) {
-            result.push(makeCondition(entry.scores[0], true, entry.stageSecond, entry.minDurationSecond))
-            result.push(makeCondition(entry.scores[1], false, entry.stageSecond, entry.minDurationSecond))
+        minDurationApplicantEducation?: Duration,
+        minDurationSpouseEducation?: Duration,
+
+        applicantEducationSecond?: Interval<EducationStage>,
+        spouseEducationSecond?: Interval<EducationStage>,
+
+        minDurationApplicantEducationSecond?: Duration,
+        minDurationSpouseEducationSecond?: Duration,
+    ): ScoreCondition {
+        return {
+            score: crsScore,
+            prerequisites: allOf([
+                singleOrDualDegreePrerequisites(
+                    applicantEducation,
+                    minDurationApplicantEducation,
+                    applicantEducationSecond,
+                    minDurationApplicantEducationSecond,
+                ),
+                {
+                    prereqId: "spouse",
+                    spousePrerequisites: identity([
+                        singleOrDualDegreePrerequisites(
+                            spouseEducation,
+                            minDurationSpouseEducation,
+                            spouseEducationSecond,
+                            minDurationSpouseEducationSecond,
+                        ),
+                    ])
+                } as SpousePrereq,
+            ])
         }
     }
+
+    const result: ScoreCondition[] = []
+    for (const entry of table) {
+        result.push(makeCondition(
+            entry.scores[0], true,
+            entry.stage, entry.minDuration,
+            entry.stageSecond, entry.minDurationSecond)
+        )
+        result.push(makeCondition(
+            entry.scores[1], false,
+            entry.stage, entry.minDuration,
+            entry.stageSecond, entry.minDurationSecond)
+        )
+    }
+
+    for (const applicantEntry of table) {
+        for (const spouseEntry of tableSpouse) {
+            result.push(makeSpouseBonusCondition(
+                applicantEntry.scores[0] + spouseEntry.scores,
+                applicantEntry.stage,
+                spouseEntry.stage,
+                applicantEntry.minDuration,
+                spouseEntry.minDuration,
+                applicantEntry.stageSecond,
+                spouseEntry.stageSecond,
+                applicantEntry.minDurationSecond,
+                spouseEntry.minDurationSecond,
+            ))
+        }
+    }
+
     return result
 }
 
@@ -230,7 +367,7 @@ function getConditionsFromLanguageTables(
                     result: {
                         testId: "clb",
                         scores: {
-                            overall: clbScore
+                            overall: [">=", clbScore]
                         }
                     }
                 } as LanguagePrereq,
@@ -252,21 +389,26 @@ function getConditionsFromLanguageTables(
         return {
             score: crsScore,
             prerequisites: allOf([
-                {
-                    prereqId: "language_test",
-                    result: {
-                        testId: "clb",
-                        scores: {
-                            overall: clbScore1
+                allOf([
+                    {
+                        prereqId: "language_test",
+                        result: {
+                            testId: "clb",
+                            scores: {
+                                overall: [">=", clbScore1]
+                            }
                         }
-                    },
-                    resultSecond: {
-                        testId: "clb",
-                        scores: {
-                            overall: clbScore2
+                    } as LanguagePrereq,
+                    {
+                        prereqId: "language_test",
+                        result: {
+                            testId: "clb",
+                            scores: {
+                                overall: [">=", clbScore2]
+                            }
                         }
-                    }
-                } as LanguagePrereq,
+                    } as LanguagePrereq,
+                ], {bijective: true}),
                 {
                     prereqId: "union",
                     unionTypes: ["marriage", "common-law-partnership"],
@@ -300,21 +442,454 @@ function getConditionsFromLanguageTables(
     return result
 }
 
+// "Points for CLB 7 or more on all first official language abilities, with one or more under CLB 9"
+const langPrereq7_9 = oneOf([
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 9],
+                speaking:  [">=", 7],
+                reading:   [">=", 7],
+                writing:   [">=", 7],
+            }
+        }
+    } as LanguagePrereq,
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 7],
+                speaking:  [">=", 9],
+                reading:   [">=", 7],
+                writing:   [">=", 7],
+            }
+        }
+    } as LanguagePrereq,
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 7],
+                speaking:  [">=", 7],
+                reading:   [">=", 9],
+                writing:   [">=", 7],
+            }
+        }
+    } as LanguagePrereq,
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 7],
+                speaking:  [">=", 7],
+                reading:   [">=", 7],
+                writing:   [">=", 9],
+            }
+        }
+    } as LanguagePrereq,
+])
+
+// "Points for CLB 9 or more on all four first official language abilities"
+const langPrereq9 = identity([{
+    prereqId: "language_test",
+    result: {
+        testId: "clb",
+        scores: {
+            listening: [">=", 9],
+            speaking:  [">=", 9],
+            reading:   [">=", 9],
+            writing:   [">=", 9],
+        }
+    }
+} as LanguagePrereq])
+
+const langPrereq5_7 = oneOf([
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 7],
+                speaking:  [">=", 5],
+                reading:   [">=", 5],
+                writing:   [">=", 5],
+            }
+        },
+    } as LanguagePrereq,
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 5],
+                speaking:  [">=", 7],
+                reading:   [">=", 5],
+                writing:   [">=", 5],
+            }
+        },
+    } as LanguagePrereq,
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 5],
+                speaking:  [">=", 5],
+                reading:   [">=", 7],
+                writing:   [">=", 5],
+            }
+        },
+    } as LanguagePrereq,
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 5],
+                speaking:  [">=", 5],
+                reading:   [">=", 5],
+                writing:   [">=", 7],
+            }
+        },
+    } as LanguagePrereq,
+])
+
+const langPrereq7 = identity([
+    {
+        prereqId: "language_test",
+        result: {
+            testId: "clb",
+            scores: {
+                listening: [">=", 7],
+                speaking:  [">=", 7],
+                reading:   [">=", 7],
+                writing:   [">=", 7],
+            }
+        },
+    } as LanguagePrereq,
+])
+
+// "Post-secondary program credential of one year or longer"
+const singleDegreePrereq = identity([{
+    prereqId: "education",
+    stage: [">=", "secondary"],
+    region: "world",
+    duration: [">=", duration(1, "year")],
+} as EducationPrereq])
+
+// Two or more post-secondary program credentials
+// AND at least one of these credentials was issued on
+// completion of a post-secondary program of three years or longer
+const dualDegreePrereq = allOf([
+    {
+        prereqId: "education",
+        stage: [">=", "secondary"],
+        region: "world",
+        duration: [">=", duration(3, "year")],
+
+    } as EducationPrereq,
+    {
+        prereqId: "education",
+        stage: [">=", "secondary"],
+        region: "world",
+    } as EducationPrereq
+], {bijective: true})
+
+const canadianWorkOneYear = identity([
+    {
+        prereqId: "work_experience",
+        length: [">=", duration(1, "year")],
+        region: "canada",
+    } as WorkExperiencePrereq
+])
+
+const canadianWorkTwoYear = identity([
+    {
+        prereqId: "work_experience",
+        length: [">=", duration(2, "year")],
+        region: "canada",
+    } as WorkExperiencePrereq
+])
+
+const foreignWorkOneOrTwoYears = allOf([
+    {
+        prereqId: "work_experience",
+        length: [">=", duration(1, "year")],
+        regionsExcept: "canada",
+    } as WorkExperiencePrereq,
+    {
+        prereqId: "work_experience",
+        length: ["<", duration(3, "year")],
+        regionsExcept: "canada",
+    } as WorkExperiencePrereq
+])
+
+const foreignWorkThreeYears = identity([
+    {
+        prereqId: "work_experience",
+        length: [">=", duration(3, "year")],
+        regionsExcept: "canada",
+    } as WorkExperiencePrereq
+])
+
+const tradeCertification = identity([{
+    prereqId: "certification",
+    description: {
+        en: "Trade occupation"
+    }
+} as CertificationPrereq])
+
+const transferabilityConditions: ScoreCondition[] = [
+
+    // Language + Education
+    {
+        score: 13,
+        prerequisites: allOf([
+            langPrereq7_9,
+            singleDegreePrereq,
+        ])
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            langPrereq9,
+            singleDegreePrereq,
+        ])
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            langPrereq7_9,
+            dualDegreePrereq,
+        ])
+    },
+    {
+        score: 50,
+        prerequisites: allOf([
+            langPrereq9,
+            dualDegreePrereq,
+        ])
+    },
+
+    // Canada work experience + degree
+    {
+        score: 13,
+        prerequisites: allOf([
+            canadianWorkOneYear,
+            singleDegreePrereq,
+        ])
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            canadianWorkTwoYear,
+            singleDegreePrereq,
+        ])
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            canadianWorkOneYear,
+            dualDegreePrereq,
+        ])
+    },
+    {
+        score: 50,
+        prerequisites: allOf([
+            canadianWorkTwoYear,
+            dualDegreePrereq,
+        ])
+    },
+
+    // Foreign work + language
+    {
+        score: 13,
+        prerequisites: allOf([
+            foreignWorkOneOrTwoYears,
+            langPrereq7_9,
+        ]),
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            foreignWorkOneOrTwoYears,
+            langPrereq9,
+        ]),
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            foreignWorkThreeYears,
+            langPrereq7_9,
+        ]),
+    },
+    {
+        score: 50,
+        prerequisites: allOf([
+            foreignWorkThreeYears,
+            langPrereq9,
+        ]),
+    },
+
+    // Foreign work + Canadian experience
+    {
+        score: 13,
+        prerequisites: allOf([
+            foreignWorkOneOrTwoYears,
+            canadianWorkOneYear,
+        ])
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            foreignWorkOneOrTwoYears,
+            canadianWorkTwoYear,
+        ])
+    },
+    {
+        score: 25,
+        prerequisites: allOf([
+            foreignWorkThreeYears,
+            canadianWorkOneYear,
+        ])
+    },
+    {
+        score: 50,
+        prerequisites: allOf([
+            foreignWorkThreeYears,
+            canadianWorkTwoYear,
+        ])
+    },
+
+    // Language + Certification
+    {
+        score: 25,
+        prerequisites: allOf([
+            tradeCertification,
+            langPrereq5_7,
+        ])
+    },
+
+    {
+        score: 50,
+        prerequisites: allOf([
+            tradeCertification,
+            langPrereq7,
+        ])
+    },
+]
+
+const additionalPointsTable: ScoreCondition[] = [
+    {
+        score: 15,
+        prerequisites: allOf([
+            {
+                stage: [">", "secondary"],
+                region: "canada",
+                duration: [">=", duration(1, "year")]
+            } as EducationPrereq,
+            {
+                stage: [">", "secondary"],
+                region: "canada",
+                duration: ["<", duration(3, "year")]
+            } as EducationPrereq,
+        ])
+    },
+    {
+        score: 30,
+        prerequisites: identity([
+            {
+                stage: [">", "secondary"],
+                region: "canada",
+                duration: [">", duration(2, "year")]
+            } as EducationPrereq,
+        ])
+    },
+    {
+        score: 200,
+        prerequisites: identity([
+            {
+                prereqId: "offer",
+                employer: {
+                    region: "canada"
+                },
+                jobGroup: noc00
+            } as OfferPrereq
+        ])
+    },
+    {
+        score: 50,
+        prerequisites: oneOf([
+            {
+                prereqId: "offer",
+                employer: {
+                    region: "canada"
+                },
+                jobGroup: noc0
+            } as OfferPrereq,
+            {
+                prereqId: "offer",
+                employer: {
+                    region: "canada"
+                },
+                jobGroup: nocA
+            } as OfferPrereq,
+            {
+                prereqId: "offer",
+                employer: {
+                    region: "canada"
+                },
+                jobGroup: nocB
+            } as OfferPrereq,
+        ])
+    },
+    {
+        score: 600,
+        prerequisites: identity([
+            {
+                prereqId: "nomination",
+                type: "provincial",
+                region: "canada"
+            } as NominationPrereq
+        ])
+    }
+]
+
 const crs: ScoreSystem = {
     scoreSystemId: "crs",
     name: {
         en: "Comprehensive Ranking System"
     },
     conditionGroups: {
-        age: getConditionsFromAgeTable(ageTable),
-        education: getConditionsFromEducationTable(educationTable),
-        language: getConditionsFromLanguageTables(languageTableFirst, languageTableSecond),
+        age: {
+            maxScore: Infinity,
+            conditions: getConditionsFromAgeTable(ageTable)
+        },
+        education: {
+            maxScore: Infinity,
+            conditions: getConditionsFromEducationTable(educationTable, educationTableSpouseBonusTable)
+        },
+        language: {
+            maxScore: Infinity,
+            conditions: getConditionsFromLanguageTables(languageTableFirst, languageTableSecond)
+        },
+        transferable: {
+            maxScore: 100,
+            conditions: transferabilityConditions,
+        },
+        additions: {
+            maxScore: 600,
+            conditions: additionalPointsTable,
+        }
     },
     reference: {
         url: "http://www.cic.gc.ca/english/express-entry/grid-crs.asp"
     }
 }
-
-console.log(crs)
 
 export default crs
