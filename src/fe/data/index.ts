@@ -127,12 +127,6 @@ export const filterSets: Filter[] = [
         },
         options: [
             {
-                id: "primary",
-                label: {
-                    en: "Primary"
-                }
-            },
-            {
                 id: "secondary",
                 label: {
                     en: "Secondary"
