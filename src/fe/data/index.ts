@@ -2,7 +2,9 @@ import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 import {LanguageTestResult} from "../../definitions/auxillary/LanguageTest"
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
 
-export type FilterId = "offer" | "education" | "english"
+export type FilterId =
+    "education_level"
+    | "english"
 
 export type FilterOption = {
     id: OptionId
@@ -99,7 +101,7 @@ export const englishTestAssumptions: EnglishAssumptionSet = {
 
 export const filterSets: Filter[] = [
     {
-        id: "education",
+        id: "education_level",
         filterType: "multiple-choice",
         title: {
             en: "Education: Highest Level"
