@@ -19,7 +19,7 @@ const styles= {
         padding: "0.2em 1em"
     } as React.CSSProperties,
 
-    optionContainerStyle: {
+    filterBodyContainerStyle: {
         whiteSpace: "nowrap",
         overflowX: "scroll",
         padding: sys.viewport.width < design.dimensions.narrowWidth
@@ -107,7 +107,7 @@ const FilterBody = (props: FilterContentProps) => {
     }
 
     return (
-        <div style={styles.optionContainerStyle}>
+        <div style={styles.filterBodyContainerStyle}>
             {content}
         </div>
     )
