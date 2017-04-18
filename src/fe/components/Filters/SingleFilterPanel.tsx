@@ -60,11 +60,15 @@ const styles= {
     } as React.CSSProperties,
 
     valueStyle: {
+        display: "inline-block",
+        margin: "0 0.6em",
+        minWidth: "1.2em",
+
         fontSize: "1.5em",
-        margin: "0 0.4em",
         color: design.colors.brand,
         fontWeight: "bolder",
-        verticalAlign: "top",
+        textAlign: "center",
+        verticalAlign: "bottom",
     } as React.CSSProperties
 }
 
