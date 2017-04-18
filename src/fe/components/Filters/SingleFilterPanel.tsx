@@ -43,6 +43,27 @@ const styles= {
     optionHighlightStyle: {
         color: design.colors.brand,
         borderColor: design.colors.brand,
+    } as React.CSSProperties,
+
+    valueAdjustButtonStyle: {
+        display: "inline-block",
+        width: "1.2em",
+        height: "1.2em",
+        borderRadius: "3px",
+
+        backgroundColor: design.colors.greyLight,
+        lineHeight: "1.2em",
+        fontSize: "1.5em",
+        textAlign: "center",
+        cursor: "pointer",
+    } as React.CSSProperties,
+
+    valueStyle: {
+        fontSize: "1.5em",
+        margin: "0 0.4em",
+        color: design.colors.brand,
+        fontWeight: "bolder",
+        verticalAlign: "top",
     } as React.CSSProperties
 }
 
@@ -64,10 +85,36 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
             </span>
 }
 
+interface ValueChooserProps {
+    value: number
+    onLeftClick(): void
+    onRightClick(): void
+}
+
+const ValueChooser = (props: ValueChooserProps) => (
+    <div>
+        <span
+            style={styles.valueAdjustButtonStyle}
+            onClick={props.onLeftClick}
+        >
+            &ndash;
+        </span>
+        <span style={styles.valueStyle}>
+            {props.value}
+        </span>
+        <span
+            style={styles.valueAdjustButtonStyle}
+            onClick={props.onRightClick}
+        >
+            &#43;
+        </span>
+    </div>
+)
+
 interface FilterContentProps {
     filter: Filter
     filterState: FilterState
-    filterOptionClick: (filterId: FilterId, optionId: string) => any
+    filterOptionClick: (filterId: FilterId, value: string | number) => any
 }
 
 const FilterBody = (props: FilterContentProps) => {
@@ -94,9 +141,19 @@ const FilterBody = (props: FilterContentProps) => {
             break
         }
         case "real": {
+            let value: number
+            if (filterState[filter.id]) {
+                value = Number(filterState[filter.id])
+            }
+            else {
+                value = filter.defaultValue
+            }
             content = (
-                <div>
-                </div>
+                <ValueChooser
+                    value= {value}
+                    onLeftClick={() => filterOptionClick(filter.id, value - 1)}
+                    onRightClick={() => filterOptionClick(filter.id, value + 1)}
+                />
             )
             break
         }

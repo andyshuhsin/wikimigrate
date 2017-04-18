@@ -197,5 +197,5 @@ export const filterSets: Filter[] = [
 ]
 
 export type FilterState = {
-    [filterId in FilterId]: OptionId | null
+    [filterId in FilterId]: OptionId | number | null
 }

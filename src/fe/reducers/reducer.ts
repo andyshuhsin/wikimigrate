@@ -63,10 +63,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             // Person data
             switch (action.payload.filterId) {
                 case "english": {
-                    if (action.payload.optionId === newState.ui.filterState[action.payload.filterId]) {
+                    if (action.payload.value === newState.ui.filterState[action.payload.filterId]) {
                         newState.user.languageTests = undefined
                     }
-                    else if (action.payload.optionId === "good") {
+                    else if (action.payload.value === "good") {
                         newState.user.languageTests = englishTestAssumptions.good
                     } else {
                         newState.user.languageTests = englishTestAssumptions.not_good
@@ -79,10 +79,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             }
 
             // UI
-            if (state.ui.filterState[action.payload.filterId] === action.payload.optionId) {
+            if (state.ui.filterState[action.payload.filterId] === action.payload.value) {
                 newState.ui.filterState[action.payload.filterId] = null
             } else {
-                newState.ui.filterState[action.payload.filterId] = action.payload.optionId
+                newState.ui.filterState[action.payload.filterId] = action.payload.value
             }
             return newState
         }

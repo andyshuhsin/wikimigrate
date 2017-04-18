@@ -1,11 +1,11 @@
 import {FilterId, OptionId} from "../data"
 import {Path} from "../utils/definitions"
 
-export interface MenuClickAction {
+export interface OptionClickAction {
     type: "FILTER_OPTION_CLICK"
     payload: {
         filterId: FilterId
-        optionId: OptionId
+        value: OptionId | number
     }
 }
 
@@ -51,7 +51,7 @@ export interface KeyDown {
 }
 
 export type Action =
-    MenuClickAction
+    OptionClickAction
     | FilterSelectAction
     | FilterBarClick
     | FilterPanelRender
@@ -60,12 +60,12 @@ export type Action =
     | PathViewCloseButtonClick
     | KeyDown
 
-export function filterOptionClickAction(filterId: FilterId, optionId: OptionId): MenuClickAction {
+export function filterOptionClickAction(filterId: FilterId, value: OptionId): OptionClickAction {
     return {
         type: "FILTER_OPTION_CLICK",
         payload: {
             filterId,
-            optionId,
+            value,
         }
     }
 }
