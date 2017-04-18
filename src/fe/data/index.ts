@@ -6,6 +6,7 @@ import {RegionId} from "../../definitions/auxillary/Region"
 export type FilterId =
     "education_level"
     | "education_region"
+    | "age"
     | "english"
 
 export type FilterOption = {
@@ -26,6 +27,8 @@ export interface MultipleChoiceFilter extends BaseFilter {
 
 export interface RealValueFilter extends BaseFilter {
     filterType: "real",
+    defaultValue: number
+    range: [number, number]
 }
 
 export type Filter =
@@ -160,6 +163,15 @@ export const filterSets: Filter[] = [
                 }
             },
         ]
+    },
+    {
+        id: "age",
+        filterType: "real",
+        title: {
+            en: "Age"
+        },
+        defaultValue: 35,
+        range: [18, 60],
     },
     {
         id: "english",

@@ -39,6 +39,7 @@ export const INITIAL_STATE: VisaPlannerState = {
             english: null,
             education_level: null,
             education_region: null,
+            age: null,
         },
         filterPanelHeight: null,
         expandedFilterId: null,
