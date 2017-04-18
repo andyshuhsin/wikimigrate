@@ -88,6 +88,12 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     newState.user.birth.date = date
                     break
                 }
+                case "education_level": {
+                    const education = newState.user.education
+                    if (education && education[0]) {
+                        education[0].stage = action.payload.value
+                    }
+                }
                 default: {
                     console.warn("Unimplemented state change for filterId", action.payload.filterId)
                 }
