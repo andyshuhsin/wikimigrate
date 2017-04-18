@@ -138,7 +138,7 @@ export const filterSets: Filter[] = [
         id: "education_region",
         filterType: "multiple-choice",
         title: {
-            en: "Education: Where?"
+            en: "Highest education: Where?"
         },
         options: [
             {
