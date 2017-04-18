@@ -3,6 +3,8 @@ import {englishTestAssumptions, FilterId, FilterState} from "../data"
 import {Path} from "../utils/definitions"
 import {Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
+import {duration} from "../../definitions/auxillary/Duration"
+import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
@@ -93,9 +95,20 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     if (education && education[0]) {
                         education[0].stage = action.payload.value
                     }
+                    break
                 }
                 case "work_experience_duration": {
-
+                    const works = newState.user.workExperiences
+                    if (works && works[0]) {
+                        works[0].duration = duration(action.payload.value, "year")
+                    }
+                    else {
+                        newState.user.workExperiences = [{
+                            qualityId: "work_experience",
+                            duration: duration(action.payload.value, "year"),
+                        } as WorkExperienceQuality]
+                    }
+                    break
                 }
                 default: {
                     console.warn("Unimplemented state change for filterId", action.payload.filterId)
