@@ -4,7 +4,7 @@ import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
 import {RegionId} from "../../definitions/auxillary/Region"
 
 export type FilterId =
-    "work_experience"
+    "work_experience_duration"
     | "work_experience_region"
     | "education_level"
     | "education_region"
@@ -159,7 +159,7 @@ const RegionOptions: RegionOption[] = [
 
 export const filterSets: Filter[] = [
     {
-        id: "work_experience",
+        id: "work_experience_duration",
         filterType: "real",
         title: {
             en: "Work experience in years"

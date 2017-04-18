@@ -37,7 +37,7 @@ export const INITIAL_STATE: VisaPlannerState = {
     ui: {
         shouldDetailedFilterPanelExpand: false,
         filterState: {
-            work_experience: null,
+            work_experience_duration: null,
             work_experience_region: null,
             english: null,
             education_level: null,
@@ -93,6 +93,9 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     if (education && education[0]) {
                         education[0].stage = action.payload.value
                     }
+                }
+                case "work_experience_duration": {
+
                 }
                 default: {
                     console.warn("Unimplemented state change for filterId", action.payload.filterId)

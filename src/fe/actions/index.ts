@@ -48,7 +48,7 @@ interface OptionClickAction_WorkExperienceRegion extends BaseOptionClickAction {
 
 interface OptionClickAction_WorkExperienceDuration extends BaseOptionClickAction {
     payload: {
-        filterId: "work_experience",
+        filterId: "work_experience_duration",
         value: number,
     }
 }
