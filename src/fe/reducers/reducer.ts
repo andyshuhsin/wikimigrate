@@ -5,6 +5,7 @@ import {Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
 import {duration} from "../../definitions/auxillary/Duration"
 import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
+import {EducationQuality} from "../../definitions/Qualities/EducationExperience"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
@@ -94,6 +95,12 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     const education = newState.user.education
                     if (education && education[0]) {
                         education[0].stage = action.payload.value
+                    }
+                    else {
+                        newState.user.education = [{
+                            qualityId: "education",
+                            stage: action.payload.value
+                        } as EducationQuality]
                     }
                     break
                 }
