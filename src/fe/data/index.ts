@@ -1,9 +1,11 @@
 import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 import {LanguageTestResult} from "../../definitions/auxillary/LanguageTest"
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
+import {RegionId} from "../../definitions/auxillary/Region"
 
 export type FilterId =
     "education_level"
+    | "education_region"
     | "english"
 
 export type FilterOption = {
@@ -27,8 +29,7 @@ export interface RealValueFilter extends BaseFilter {
 }
 
 export type Filter =
-    BaseFilter
-    | MultipleChoiceFilter
+    MultipleChoiceFilter
     | RealValueFilter
 
 export type OptionId = string
@@ -129,6 +130,33 @@ export const filterSets: Filter[] = [
                 id: "phd",
                 label: {
                     en: "PhD"
+                }
+            },
+        ]
+    },
+    {
+        id: "education_region",
+        filterType: "multiple-choice",
+        title: {
+            en: "Education: Where?"
+        },
+        options: [
+            {
+                id: "canada",
+                label: {
+                    en: "Canada"
+                }
+            },
+            {
+                id: "australia",
+                label: {
+                    en: "Australia"
+                }
+            },
+            {
+                id: "world",
+                label: {
+                    en: "Elsewhere"
                 }
             },
         ]
