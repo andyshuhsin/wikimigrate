@@ -18,6 +18,8 @@ import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
 import {WorkExperiencePrereq} from "../../definitions/Prerequisites/WorkExperiencePrereq"
 import {RegionId} from "../../definitions/auxillary/Region"
 import {ArithmeticComparisonOperator, Interval} from "../../definitions/auxillary/Operator"
+import {EducationQuality, EducationStage, getEducationStageRank} from "../../definitions/Qualities/EducationExperience"
+import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
 
 // Applicability of a program when user didn't specify a condition;
 // Set to true for maximal coverage
@@ -144,6 +146,33 @@ function satisfyWorkPrereq(
     }
 }
 
+function satisfyEducationPrereq(
+    education: EducationQuality,
+    prereq: EducationPrereq,
+): boolean {
+    if (prereq.stage && education.stage) {
+        const rankActual = getEducationStageRank(education.stage)
+        const rankExpected = getEducationStageRank(prereq.stage[1])
+        if (!compare(prereq.stage[0], rankActual, rankExpected)) {
+            return false
+        }
+    }
+    else if (prereq.region && education.regionId) {
+        if (!regionMatch(education.regionId, prereq.region)) {
+            return false
+        }
+    }
+    else if (prereq.duration && education.duration) {
+        if (!durationMatch(prereq.duration, education.duration)) {
+            return false
+        }
+    }
+    else if (prereq.certification) {
+        console.info("[Unimplemented] Checking prereq.certification")
+    }
+    return DEFAULT_RESULT
+}
+
 function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
 
     switch (prereq.prereqId) {
@@ -163,6 +192,7 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
             return satisfyLanguageResultRequirements(actualResults, expectedResult)
         }
 
+        // TODO: Similar shape of code in work_experience and education
         case "work_experience": {
             const actualWorks = person.workExperiences
             if (typeof actualWorks === "undefined") {
@@ -173,6 +203,18 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
                     if (satisfyWorkPrereq(work, prereq)) {
                         return true
                     }
+                }
+            }
+            return false
+        }
+
+        case "education": {
+            if (typeof person.education === "undefined") {
+                return DEFAULT_RESULT
+            }
+            for (const education of person.education) {
+                if (satisfyEducationPrereq(education, prereq)) {
+                    return true
                 }
             }
             return false

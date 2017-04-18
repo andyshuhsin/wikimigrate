@@ -10,6 +10,19 @@ export type EducationStage =
     | "phd"
     | "professional"
 
+export const educationStages: EducationStage[] = [
+    "primary"
+    , "secondary"
+    , "bachelor"
+    , "master"
+    , "phd"
+    , "professional"
+]
+
+export function getEducationStageRank(stage: EducationStage): number {
+    return educationStages.indexOf(stage)
+}
+
 export interface EducationQuality {
     qualityId: "education"
     stage: EducationStage | undefined
@@ -20,3 +33,4 @@ export interface EducationQuality {
 }
 
 export default EducationQuality
+
