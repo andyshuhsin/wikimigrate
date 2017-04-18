@@ -119,33 +119,45 @@ export const filterSets: Filter[] = [
     //         },
     //     ]
     // },
-    // {
-    //     id: "education",
-    //     filterType: "multiple-choice",
-    //     title: {
-    //         en: "Education"
-    //     },
-    //     options: [
-    //         {
-    //             id: "university",
-    //             label: {
-    //                 en: "University"
-    //             }
-    //         },
-    //         {
-    //             id: "secondary",
-    //             label: {
-    //                 en: "Secondary"
-    //             }
-    //         },
-    //         {
-    //             id: "primary",
-    //             label: {
-    //                 en: "Primary"
-    //             }
-    //         },
-    //     ]
-    // },
+    {
+        id: "education",
+        filterType: "multiple-choice",
+        title: {
+            en: "Education: Highest Level"
+        },
+        options: [
+            {
+                id: "primary",
+                label: {
+                    en: "Primary"
+                }
+            },
+            {
+                id: "secondary",
+                label: {
+                    en: "Secondary"
+                }
+            },
+            {
+                id: "bachelor",
+                label: {
+                    en: "Bachelor"
+                }
+            },
+            {
+                id: "master",
+                label: {
+                    en: "Master"
+                }
+            },
+            {
+                id: "phd",
+                label: {
+                    en: "PhD"
+                }
+            },
+        ]
+    },
     {
         id: "english",
         filterType: "multiple-choice",
