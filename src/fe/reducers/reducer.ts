@@ -81,6 +81,13 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     }
                     break
                 }
+                case "age": {
+                    const date = new Date()
+                    const age = Number(action.payload.value)
+                    date.setFullYear(date.getFullYear() - age)
+                    newState.user.birth.date = date
+                    break
+                }
                 default: {
                     console.warn("Unimplemented state change for filterId", action.payload.filterId)
                 }
