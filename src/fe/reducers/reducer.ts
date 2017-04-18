@@ -144,7 +144,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     break
                 }
                 default: {
-                    console.warn("Unimplemented state change for filterId", (action.payload as any).filterId)
+                    console.warn("Unexpected filterId:", (action.payload as any).filterId)
                 }
             }
 
