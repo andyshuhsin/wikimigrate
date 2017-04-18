@@ -36,6 +36,8 @@ export const INITIAL_STATE: VisaPlannerState = {
     ui: {
         shouldDetailedFilterPanelExpand: false,
         filterState: {
+            work_experience: null,
+            work_experience_region: null,
             english: null,
             education_level: null,
             education_region: null,

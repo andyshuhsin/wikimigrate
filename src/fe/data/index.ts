@@ -4,7 +4,9 @@ import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
 import {RegionId} from "../../definitions/auxillary/Region"
 
 export type FilterId =
-    "education_level"
+    "work_experience"
+    | "work_experience_region"
+    |"education_level"
     | "education_region"
     | "age"
     | "english"
@@ -28,7 +30,6 @@ export interface MultipleChoiceFilter extends BaseFilter {
 export interface RealValueFilter extends BaseFilter {
     filterType: "real",
     defaultValue: number
-    range: [number, number]
 }
 
 export type Filter =
@@ -130,7 +131,44 @@ export const englishTestAssumptions: EnglishAssumptionSet = {
     ] as LanguageTestResult[]
 }
 
+const RegionOptions = [
+    {
+        id: "canada",
+        label: {
+            en: "Canada"
+        }
+    },
+    {
+        id: "australia",
+        label: {
+            en: "Australia"
+        }
+    },
+    {
+        id: "world",
+        label: {
+            en: "Elsewhere"
+        }
+    },
+]
+
 export const filterSets: Filter[] = [
+    {
+        id: "work_experience",
+        filterType: "real",
+        title: {
+            en: "Work experience in years"
+        },
+        defaultValue: 1,
+    },
+    {
+        id: "work_experience_region",
+        filterType: "multiple-choice",
+        title: {
+            en: "Work experience: Where?"
+        },
+        options: RegionOptions,
+    },
     {
         id: "education_level",
         filterType: "multiple-choice",
@@ -170,26 +208,7 @@ export const filterSets: Filter[] = [
         title: {
             en: "Highest education: Where?"
         },
-        options: [
-            {
-                id: "canada",
-                label: {
-                    en: "Canada"
-                }
-            },
-            {
-                id: "australia",
-                label: {
-                    en: "Australia"
-                }
-            },
-            {
-                id: "world",
-                label: {
-                    en: "Elsewhere"
-                }
-            },
-        ]
+        options: RegionOptions,
     },
     {
         id: "age",
@@ -198,7 +217,6 @@ export const filterSets: Filter[] = [
             en: "Age"
         },
         defaultValue: 35,
-        range: [18, 60],
     },
     {
         id: "english",
