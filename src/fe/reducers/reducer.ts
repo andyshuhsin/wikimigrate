@@ -17,7 +17,7 @@ export interface VisaPlannerState {
     }
 }
 
-const INITIAL_STATE: VisaPlannerState = {
+export const INITIAL_STATE: VisaPlannerState = {
     user: {
         birth: {
             date: undefined,
