@@ -44,7 +44,10 @@ export const englishTestAssumptions: EnglishAssumptionSet = {
         {
             testId: "clb",
             scores: {
-                overall: 8,
+                listening: 9,
+                speaking: 9,
+                reading: 9,
+                writing: 9,
             }
         },
         {
