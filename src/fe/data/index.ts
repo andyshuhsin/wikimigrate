@@ -33,7 +33,13 @@ export type OptionId = string
 
 // "clb" | "nclc" | "ielts" | "toefl" | "oet" | "pte-academic" | "cae"
 
-export const englishTestAssumptions = {
+export type EnglishFilterId = "good" | "not_good"
+
+export type EnglishAssumptionSet = {
+    [key in EnglishFilterId]: LanguageTestResult[]
+}
+
+export const englishTestAssumptions: EnglishAssumptionSet = {
     good: [
         {
             testId: "clb",
@@ -60,7 +66,7 @@ export const englishTestAssumptions = {
             }
         },
     ] as LanguageTestResult[],
-    bad: [
+    not_good: [
         {
             testId: "clb",
             scores: {
@@ -151,7 +157,7 @@ export const filterSets: Filter[] = [
                 }
             },
             {
-                id: "not good",
+                id: "not_good",
                 label: {
                     en: "Not good"
                 }
