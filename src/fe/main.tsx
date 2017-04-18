@@ -24,7 +24,8 @@ const REDUX_STATE_KEY = "redux_state"
 
 let state: VisaPlannerState
 const persistedStateString = localStorage.getItem(REDUX_STATE_KEY)
-if (persistedStateString) {
+const shouldForceResetReduxState = location.href.includes('reset')
+if (persistedStateString && !shouldForceResetReduxState) {
     state = JSON.parse(persistedStateString)
 }
 else {
