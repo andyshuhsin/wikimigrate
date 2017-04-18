@@ -38,7 +38,7 @@ const canadianExperience: Transition = {
                     length: [">=", duration(12, "month")],
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
-                    regionId: 'canada',
+                    region: 'canada',
                     jobNature: oneOf([
                         jobClass.jobGroups.noc0,
                         jobClass.jobGroups.nocA,
@@ -62,7 +62,7 @@ const canadianExperience: Transition = {
                     length: [">=", duration(12, "month")],
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
-                    regionId: 'canada',
+                    region: 'canada',
                     jobNature: oneOf([
                         jobClass.jobGroups.nocB
                     ])

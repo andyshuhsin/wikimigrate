@@ -8,7 +8,7 @@ import {RegionId} from "../auxillary/Region"
 
 export interface WorkExperiencePrereq extends BasePrereq {
     prereqId: "work_experience"
-    length?: Interval<Duration>
+    duration?: Interval<Duration>
     withinLast?: Duration
     workHoursPerWeek?: Duration
     region: RegionId

@@ -16,6 +16,8 @@ import {
 import {clone} from "./clone"
 import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
 import {WorkExperiencePrereq} from "../../definitions/Prerequisites/WorkExperiencePrereq"
+import {RegionId} from "../../definitions/auxillary/Region"
+import {ArithmeticComparisonOperator, Interval} from "../../definitions/auxillary/Operator"
 
 // Applicability of a program when user didn't specify a condition;
 // Set to true for maximal coverage
@@ -79,12 +81,66 @@ function satisfyLanguageResultRequirements(
     return DEFAULT_RESULT
 }
 
+export function regionMatch(demand: RegionId, actual: RegionId | undefined): boolean {
+    return (demand === "world") || (demand === actual)
+}
+
+
+export function compare(
+    operator: ArithmeticComparisonOperator,
+    a: number,
+    b: number,
+): boolean {
+    switch (operator) {
+        case ">": {
+            return a > b
+        }
+        case ">=": {
+            return a >= b
+        }
+        case "<": {
+            return a < b
+        }
+        case "<=": {
+            return a <= b
+        }
+        case "=": {
+            return a === b
+        }
+    }
+}
+
+export function durationMatch(demand: Interval<Duration>, actual: Duration): boolean {
+    if (demand[1].unit === actual.unit) {
+        return compare(demand[0], demand[1].value, actual.value)
+    }
+    else {
+        console.warn("[Unimplemented: comparing different duration units")
+        return false
+    }
+}
+
 function satisfyWorkPrereq(
     work: WorkExperienceQuality,
     prereq: WorkExperiencePrereq
 ): boolean {
-    if (prereq.region !== "world") {
 
+    // TODO: Implement other requirements
+    if (prereq.jobNature) {
+        console.warn("[Unimplemented: prereq.jobNature")
+    }
+
+    if (!regionMatch(prereq.region, work.regionId)) {
+        return false
+    }
+    else if (!work.duration) {
+        return DEFAULT_RESULT
+    }
+    else if (prereq.duration) {
+        return durationMatch(prereq.duration, work.duration)
+    }
+    else {
+        return DEFAULT_RESULT
     }
 }
 
@@ -126,7 +182,17 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
 
         case "work_experience": {
             const actualWorks = person.workExperiences
-            const expectedWorks = prereq
+            if (typeof actualWorks === "undefined") {
+                return DEFAULT_RESULT
+            }
+            else {
+                for (const work of actualWorks) {
+                    if (satisfyWorkPrereq(work, prereq)) {
+                        return true
+                    }
+                }
+            }
+            return false
         }
 
         default: {
