@@ -131,7 +131,12 @@ export const englishTestAssumptions: EnglishAssumptionSet = {
     ] as LanguageTestResult[]
 }
 
-const RegionOptions = [
+interface RegionOption {
+    id: RegionId,
+    label: MultiLangStringSet
+}
+
+const RegionOptions: RegionOption[] = [
     {
         id: "canada",
         label: {
