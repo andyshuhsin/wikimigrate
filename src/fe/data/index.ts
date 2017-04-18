@@ -39,14 +39,14 @@ export type OptionId = string
 
 // "clb" | "nclc" | "ielts" | "toefl" | "oet" | "pte-academic" | "cae"
 
-export type EnglishFilterId = "good" | "not_good"
+export type EnglishFilterId = "proficient" | "good" | "not_good"
 
 export type EnglishAssumptionSet = {
     [key in EnglishFilterId]: LanguageTestResult[]
 }
 
 export const englishTestAssumptions: EnglishAssumptionSet = {
-    good: [
+    proficient: [
         {
             testId: "clb",
             scores: {
@@ -72,6 +72,35 @@ export const englishTestAssumptions: EnglishAssumptionSet = {
                 speaking: 28,
                 reading: 28,
                 writing: 28,
+            }
+        },
+    ] as LanguageTestResult[],
+    good: [
+        {
+            testId: "clb",
+            scores: {
+                listening: 7,
+                speaking: 7,
+                reading: 7,
+                writing: 7,
+            }
+        },
+        {
+            testId: "ielts",
+            scores: {
+                listening: 7,
+                speaking: 7,
+                reading: 7,
+                writing: 7,
+            }
+        },
+        {
+            testId: "toefl",
+            scores: {
+                listening: 22,
+                speaking: 22,
+                reading: 22,
+                writing: 22,
             }
         },
     ] as LanguageTestResult[],
@@ -181,17 +210,23 @@ export const filterSets: Filter[] = [
         },
         options: [
             {
+                id: "not_good",
+                label: {
+                    en: "Not good"
+                }
+            },
+            {
                 id: "good",
                 label: {
                     en: "Good"
                 }
             },
             {
-                id: "not_good",
+                id: "proficient",
                 label: {
-                    en: "Not good"
+                    en: "Proficient"
                 }
-            }
+            },
         ]
     },
 ]
