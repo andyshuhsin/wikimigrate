@@ -37,8 +37,6 @@ export type Filter =
 
 export type OptionId = string
 
-// "clb" | "nclc" | "ielts" | "toefl" | "oet" | "pte-academic" | "cae"
-
 export type EnglishFilterId = "proficient" | "good" | "not_good"
 
 export type EnglishAssumptionSet = {
