@@ -42,9 +42,13 @@ function getCriticalDate(duration: Duration, today = new Date()) {
 }
 
 function satisfyLanguageResultRequirements(
-    actualResults: LanguageTestResult[],
+    actualResults: LanguageTestResult[] | undefined,
     expectedResult: LanguagePrereqResult
 ): boolean {
+    if (!actualResults) {
+        return DEFAULT_RESULT
+    }
+
     for (const actualResult of actualResults) {
         if (actualResult.testId !== expectedResult.testId) {
             return false
@@ -104,13 +108,9 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
         }
 
         case "language_test": {
-            if (typeof person.languageTests !== "undefined") {
-                const actualResults = person.languageTests
-                const expectedResult = prereq.result
-                return satisfyLanguageResultRequirements(actualResults, expectedResult)
-            } else {
-                return DEFAULT_RESULT
-            }
+            const actualResults = person.languageTests
+            const expectedResult = prereq.result
+            return satisfyLanguageResultRequirements(actualResults, expectedResult)
         }
         default: {
             console.warn("Unimplemented prereqId", prereq.prereqId, "found in", prereq)
