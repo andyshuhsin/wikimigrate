@@ -14,6 +14,8 @@ import {
     LanguagePrereqScoreSingle,
 } from "../../definitions/Prerequisites/LanguagePrereq"
 import {clone} from "./clone"
+import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
+import {WorkExperiencePrereq} from "../../definitions/Prerequisites/WorkExperiencePrereq"
 
 // Applicability of a program when user didn't specify a condition;
 // Set to true for maximal coverage
@@ -77,6 +79,15 @@ function satisfyLanguageResultRequirements(
     return DEFAULT_RESULT
 }
 
+function satisfyWorkPrereq(
+    work: WorkExperienceQuality,
+    prereq: WorkExperiencePrereq
+): boolean {
+    if (prereq.region !== "world") {
+
+    }
+}
+
 function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
 
     switch (prereq.prereqId) {
@@ -112,6 +123,12 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
             const expectedResult = prereq.result
             return satisfyLanguageResultRequirements(actualResults, expectedResult)
         }
+
+        case "work_experience": {
+            const actualWorks = person.workExperiences
+            const expectedWorks = prereq
+        }
+
         default: {
             console.warn("Unimplemented prereqId", prereq.prereqId, "found in", prereq)
             return DEFAULT_RESULT
