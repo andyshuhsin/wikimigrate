@@ -68,7 +68,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     else if (action.payload.optionId === "good") {
                         newState.user.languageTests = englishTestAssumptions.good
                     } else {
-                        newState.user.languageTests = englishTestAssumptions.bad
+                        newState.user.languageTests = englishTestAssumptions.not_good
                     }
                     break
                 }
