@@ -22,7 +22,7 @@ const pathShowcaseStyle = {
 const PathShowcase = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
         <Title text={
-            "Popular mobility options"
+            "Mobility options for you"
         } />
         {
             props.paths.map((path: Path) =>
