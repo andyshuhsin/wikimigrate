@@ -6,7 +6,7 @@ import {RegionId} from "../../definitions/auxillary/Region"
 export type FilterId =
     "work_experience"
     | "work_experience_region"
-    |"education_level"
+    | "education_level"
     | "education_region"
     | "age"
     | "english"
