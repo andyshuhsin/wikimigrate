@@ -104,6 +104,19 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     }
                     break
                 }
+                case "education_region": {
+                    const education = newState.user.education
+                    if (education && education[0]) {
+                        education[0].regionId = action.payload.value
+                    }
+                    else {
+                        newState.user.education = [{
+                            qualityId: "education",
+                            regionId: action.payload.value
+                        } as EducationQuality]
+                    }
+                    break
+                }
                 case "work_experience_duration": {
                     const works = newState.user.workExperiences
                     if (works && works[0]) {
