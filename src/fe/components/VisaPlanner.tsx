@@ -28,6 +28,9 @@ import {
 import {Region} from "../../definitions/auxillary/Region"
 import {text} from "../utils/text"
 
+// import {calcScoreTest} from "../utils/calcScore"
+// calcScoreTest()
+
 const style = {
     position: "relative",
     margin: 0,

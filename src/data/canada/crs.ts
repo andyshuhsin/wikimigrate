@@ -220,7 +220,7 @@ function getConditionsFromEducationTable(
                 ? allOf([
                     makePrereq(educationStage, minDuration),
                     makePrereq(educationStageSecond, minDurationSecond)
-                ], {bijective: true})
+                ], {surjective: true})
                 : makePrereq(educationStage, minDuration)
     }
 
@@ -408,7 +408,7 @@ function getConditionsFromLanguageTables(
                             }
                         }
                     } as LanguagePrereq,
-                ], {bijective: true}),
+                ], {surjective: true}),
                 {
                     prereqId: "union",
                     unionTypes: ["marriage", "common-law-partnership"],
@@ -598,7 +598,7 @@ const dualDegreePrereq = allOf([
         stage: [">=", "secondary"],
         region: "world",
     } as EducationPrereq
-], {bijective: true})
+], {surjective: true})
 
 const canadianWorkOneYear = identity([
     {
@@ -862,6 +862,7 @@ const additionalPointsTable: ScoreCondition[] = [
 
 const crs: ScoreSystem = {
     scoreSystemId: "crs",
+    initialScore: 0,
     name: {
         en: "Comprehensive Ranking System"
     },

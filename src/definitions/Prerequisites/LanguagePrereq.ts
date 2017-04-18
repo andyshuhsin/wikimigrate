@@ -16,12 +16,14 @@ export type LanguagePrereqScoreItemized = {
 
 export type LanguagePrereqScores = LanguagePrereqScoreSingle | LanguagePrereqScoreItemized
 
+export type LanguagePrereqResult = {
+    testId: LanguageTestId
+    scores: LanguagePrereqScores
+}
+
 export interface LanguagePrereq extends BasePrereq {
     prereqId: "language_test"
-    result: {
-        testId: LanguageTestId
-        scores: LanguagePrereqScores
-    }
+    result: LanguagePrereqResult
     // TODO: Add time limits
 }
 

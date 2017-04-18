@@ -2,6 +2,7 @@ import {Action} from "../actions"
 import {englishTestAssumptions, FilterId, FilterState} from "../data"
 import {Path} from "../utils/definitions"
 import {Person} from "../../definitions/Person"
+import {clone} from "../utils/clone"
 
 const ESC_KEY_CODE = 27
 
@@ -44,11 +45,6 @@ const INITIAL_STATE: VisaPlannerState = {
         pathOnDisplay: null,
     }
 }
-
-function clone<T>(obj: T): T {
-    return JSON.parse(JSON.stringify(obj))
-}
-
 
 function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
     const newState = clone(state)

@@ -18,9 +18,9 @@ export type CombinationMeta = Partial<{
          allOf([
              post-secondary,
              post-secondary,
-         ], {bijective: true})
+         ], {surjective: true})
     */
-    bijective: boolean
+    surjective: boolean
 }>
 
 export interface Combination<T> {

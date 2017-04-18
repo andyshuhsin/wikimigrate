@@ -12,6 +12,7 @@ export interface ScoreCondition {
 export interface ScoreSystem {
     scoreSystemId: ScoreSystemId
     name: MultiLangStringSet
+    initialScore: number
     conditionGroups: {
         [key: string]: {
             maxScore: number
