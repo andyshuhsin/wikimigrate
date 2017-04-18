@@ -86,10 +86,10 @@ export function regionMatch(demand: RegionId, actual: RegionId | undefined): boo
 }
 
 
-export function compare(
+export function compare<T extends number | Date>(
     operator: ArithmeticComparisonOperator,
-    a: number,
-    b: number,
+    a: T,
+    b: T,
 ): boolean {
     switch (operator) {
         case ">": {
@@ -152,24 +152,7 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
             const birthday = person.birth.date
             if (typeof birthday !== "undefined") {
                 const criticalDate = getCriticalDate(prereq.value)
-                switch (prereq.operator) {
-                    case ">": {
-                        return birthday > criticalDate
-                    }
-                    case ">=": {
-                        return birthday >= criticalDate
-                    }
-                    case "<": {
-                        return birthday < criticalDate
-                    }
-                    case "<=": {
-                        return birthday <= criticalDate
-                    }
-                    default: {
-                        console.warn("Unknown operator", prereq.operator, "found in", prereq)
-                        return DEFAULT_RESULT
-                    }
-                }
+                return compare(prereq.operator, birthday, criticalDate)
             }
             return DEFAULT_RESULT
         }

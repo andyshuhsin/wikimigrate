@@ -40,6 +40,7 @@ const federalSkilledWorker: Transition = {
                 prereqId: "work_experience",
                 length: [">=", duration(1, "year")],
                 withinLast: duration(10, "year"),
+                region: "world",
                 workHoursPerWeek: duration(30, "hour"),
                 jobNature: oneOf([
                     jobClass.jobGroups.noc0,

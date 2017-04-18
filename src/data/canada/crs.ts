@@ -616,16 +616,17 @@ const canadianWorkTwoYear = identity([
     } as WorkExperiencePrereq
 ])
 
+// TODO: How to describe anywhere EXCEPT canada?
 const foreignWorkOneOrTwoYears = allOf([
     {
         prereqId: "work_experience",
         length: [">=", duration(1, "year")],
-        regionsExcept: "canada",
+        region: "world"
     } as WorkExperiencePrereq,
     {
         prereqId: "work_experience",
         length: ["<", duration(3, "year")],
-        regionsExcept: "canada",
+        region: "world",
     } as WorkExperiencePrereq
 ])
 
@@ -633,7 +634,7 @@ const foreignWorkThreeYears = identity([
     {
         prereqId: "work_experience",
         length: [">=", duration(3, "year")],
-        regionsExcept: "canada",
+        region: "world",
     } as WorkExperiencePrereq
 ])
 

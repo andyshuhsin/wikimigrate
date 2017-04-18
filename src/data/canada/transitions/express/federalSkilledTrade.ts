@@ -52,6 +52,7 @@ const federalSkilledTrade: Transition = {
                 length: [">=", duration(2, "year")],
                 withinLast: duration(5, "year"),
                 workHoursPerWeek: duration(30, "hour"),
+                region: "world",
                 jobNature: oneOf([
                     jobClass.jobGroups.noc72,
                     jobClass.jobGroups.noc73,

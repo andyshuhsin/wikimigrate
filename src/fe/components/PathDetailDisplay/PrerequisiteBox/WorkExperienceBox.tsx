@@ -16,8 +16,8 @@ const WorkExperienceBox = (props: {prereq: WorkExperiencePrereq}) => {
                 : ""
             }
             {
-                prereq.length
-                ? `you have worked ${prereq.length[1].value} ${inflect(prereq.length[1].unit, {number: prereq.length[1].value})} in`
+                prereq.duration
+                ? `you have worked ${prereq.duration[1].value} ${inflect(prereq.duration[1].unit, {number: prereq.duration[1].value})} in`
                 : ""
             }
             :
