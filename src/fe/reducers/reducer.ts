@@ -56,6 +56,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         case "KEY_DOWN": {
             if (action.payload.keyCode === ESC_KEY_CODE) {
                 newState.ui.pathOnDisplay = null
+                newState.ui.shouldDetailedFilterPanelExpand = false
                 return newState
             }
             return state
