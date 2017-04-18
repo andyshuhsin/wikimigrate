@@ -130,8 +130,21 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     }
                     break
                 }
+                case "work_experience_region": {
+                    const works = newState.user.workExperiences
+                    if (works && works[0]) {
+                        works[0].regionId = action.payload.value
+                    }
+                    else {
+                        newState.user.workExperiences = [{
+                            qualityId: "work_experience",
+                            region: action.payload.value,
+                        } as WorkExperienceQuality]
+                    }
+                    break
+                }
                 default: {
-                    console.warn("Unimplemented state change for filterId", action.payload.filterId)
+                    console.warn("Unimplemented state change for filterId", (action.payload as any).filterId)
                 }
             }
 
