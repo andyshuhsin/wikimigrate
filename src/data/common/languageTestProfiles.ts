@@ -54,6 +54,15 @@ const languageTestProfiles: LanguageTestProfile[] = [
         reference: {
             url: "http://www.cambridgeenglish.org/exams/advanced/",
         },
+    },
+    {
+        id: "oet",
+        title: {
+            en: " Occupational English Test"
+        },
+        reference: {
+            url: "https://www.occupationalenglishtest.org/",
+        }
     }
 ]
 
