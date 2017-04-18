@@ -5,6 +5,7 @@ import {Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
 
 const ESC_KEY_CODE = 27
+const F_KEY_CODE = 70
 
 export interface VisaPlannerState {
     user: Person,
@@ -57,6 +58,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             if (action.payload.keyCode === ESC_KEY_CODE) {
                 newState.ui.pathOnDisplay = null
                 newState.ui.shouldDetailedFilterPanelExpand = false
+                return newState
+            }
+            else if (action.payload.keyCode === F_KEY_CODE) {
+                newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
                 return newState
             }
             return state
