@@ -1,5 +1,6 @@
 import * as React from 'react'
 import PathBox from './PathBox'
+import Title from './Title'
 
 import {
     Path
@@ -20,6 +21,9 @@ const pathShowcaseStyle = {
 // Ensure the last box is aligned to the left
 const PathShowcase = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
+        <Title text={
+            "Popular mobility options"
+        } />
         {
             props.paths.map((path: Path) =>
                 <PathBox

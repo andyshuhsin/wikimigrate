@@ -4,7 +4,6 @@ import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
 
 import TopBar from './TopBar'
-import Title from './Title'
 import PathShowcase from './PathShowcase'
 import FilterBar from './Filters/FilterBar'
 import PathDetailDisplay from './PathDetailDisplay'
@@ -83,9 +82,6 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                     brandName={text(data.app.brandName)}
                     version={data.app.version}
                 />
-                <Title text={
-                    "Popular mobility options"
-                } />
                 <PathShowcase
                     paths={calcSuitablePaths(this.props.user, allTransitions)}
                     onClick={this.props.onPathBoxClick}
