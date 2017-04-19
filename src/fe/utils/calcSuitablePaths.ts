@@ -25,6 +25,8 @@ import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
 // Set to true for maximal coverage
 const DEFAULT_RESULT = true
 
+const warningFlags: any = {}
+
 function getCriticalDate(duration: Duration, today = new Date()) {
     if (duration.unit === "year") {
         return new Date(today.setFullYear(today.getFullYear() - duration.value))
@@ -221,7 +223,10 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
         }
 
         default: {
-            console.warn("Unimplemented prereqId", prereq.prereqId, "found in", prereq)
+            if (!warningFlags[prereq.prereqId]) {
+                console.warn("Unimplemented prereqId", prereq.prereqId, "found in", prereq)
+                warningFlags[prereq.prereqId] = true
+            }
             return DEFAULT_RESULT
         }
     }
