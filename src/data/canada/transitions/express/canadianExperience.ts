@@ -79,7 +79,7 @@ const canadianExperience: Transition = {
     procedureList: [
         {
             name: {
-                en: "Check eligiblility",
+                en: "Check eligibility",
                 "zh-hans": "确认有权申请"
             },
             description: {
