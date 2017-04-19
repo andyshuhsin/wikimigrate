@@ -87,6 +87,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                     onClick={this.props.onPathBoxClick}
                 />
                 <PathDetailDisplay
+                    user={this.props.user}
                     pathOnDisplay={this.props.pathOnDisplay}
                     onClose={this.props.onPathViewCloseButtonClick}
                 />

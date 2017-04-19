@@ -6,10 +6,8 @@ import ProcedureBox from './ProcedureBox'
 import ReferenceBox from './ReferenceBox'
 import Transition from "../../../definitions/Transition";
 import {RegionId} from "../../../definitions/auxillary/Region"
-
-interface Props {
-    transition: Transition
-}
+import {calcScore} from "../../utils/calcScore"
+import {Person} from "../../../definitions/Person"
 
 const transitionNameStyle = {
     margin: 0,
@@ -38,6 +36,11 @@ const flagSources: {[key in RegionId]: Package | null} = {
     canada_pacific_provinces: null,
 }
 
+interface Props {
+    transition: Transition
+    user: Person
+}
+
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
         const transition = this.props.transition
@@ -64,6 +67,13 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                         />
                     }
                 </section>
+
+                {
+                    transition.scoreSystem &&
+                    <section>
+                        {calcScore(this.props.user, transition.scoreSystem)}
+                    </section>
+                }
 
                 <section>
                     <h3 style={sectionTitleStyle}>Application</h3>

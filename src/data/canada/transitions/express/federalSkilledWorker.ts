@@ -15,6 +15,7 @@ import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq";
 import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 import {prereqTitleDict} from "../../../common/prereqTitleDict"
+import crs from "../../crs"
 
 const federalSkilledWorker: Transition = {
     id: "federal_skilled_worker",
@@ -26,6 +27,7 @@ const federalSkilledWorker: Transition = {
     },
     from: alien,
     to: expressEntryCandidate,
+    scoreSystem: crs,
     prerequisiteList: allOf([
 
         oneOf([
