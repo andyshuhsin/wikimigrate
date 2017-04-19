@@ -22,11 +22,22 @@ else {
 
 const REDUX_STATE_KEY = "redux_state"
 
+function isDateString(value: any): boolean {
+    return (typeof value === "string") && (!!Date.parse(value))
+}
+
 let state: VisaPlannerState
 const persistedStateString = localStorage.getItem(REDUX_STATE_KEY)
 const shouldForceResetReduxState = location.href.indexOf("reset") > -1
 if (persistedStateString && !shouldForceResetReduxState) {
-    state = JSON.parse(persistedStateString)
+    state = JSON.parse(
+        persistedStateString,
+        (key: any, value: any) =>
+            isDateString(value)
+            // ? new Date(value)
+            ? {}
+            : value
+    )
 }
 else {
     state = INITIAL_STATE
@@ -38,9 +49,12 @@ const store = createStore<VisaPlannerState>(
     enhancer,
 )
 
+
 store.subscribe(() => {
     localStorage.setItem(REDUX_STATE_KEY, JSON.stringify(store.getState()))
 })
+
+;(window as any).store = store
 
 ReactDom.render(
     <Provider store={store}>

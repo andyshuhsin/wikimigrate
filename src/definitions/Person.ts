@@ -10,6 +10,7 @@ export interface Person {
         [key in RegionId]: string[]
     },
     birth: BirthQuality
+    inUnion: boolean | undefined
     education?: EducationQuality[],
     languageTests?: LanguageTestResult[]
     workExperiences?: WorkExperienceQuality[]

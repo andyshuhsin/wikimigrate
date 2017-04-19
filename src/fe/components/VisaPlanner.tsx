@@ -26,6 +26,8 @@ import {
 } from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
 import {text} from "../utils/text"
+import {calcScore} from "../utils/calcScore"
+import crs from "../../data/canada/crs"
 
 // import {calcScoreTest} from "../utils/calcScore"
 // calcScoreTest()

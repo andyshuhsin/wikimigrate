@@ -1,5 +1,5 @@
 import {Action} from "../actions"
-import {englishTestAssumptions, FilterId, FilterState} from "../data"
+import {DEFAULT_AGE, englishTestAssumptions, FilterId, FilterState} from "../data"
 import {Path} from "../utils/definitions"
 import {Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
@@ -24,7 +24,9 @@ export interface VisaPlannerState {
 export const INITIAL_STATE: VisaPlannerState = {
     user: {
         birth: {
-            date: undefined,
+            date: {
+                year: new Date().getFullYear() - DEFAULT_AGE
+            },
             region: undefined,
         },
         status: {
@@ -36,6 +38,7 @@ export const INITIAL_STATE: VisaPlannerState = {
         },
         education: undefined,
         languageTests: undefined,
+        inUnion: undefined,
     },
     ui: {
         shouldDetailedFilterPanelExpand: false,
@@ -87,8 +90,9 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 case "age": {
                     const date = new Date()
                     const age = Number(action.payload.value)
-                    date.setFullYear(date.getFullYear() - age)
-                    newState.user.birth.date = date
+                    newState.user.birth.date = {
+                        year: date.getFullYear() - age
+                    }
                     break
                 }
                 case "education_level": {

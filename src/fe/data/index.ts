@@ -157,6 +157,8 @@ const RegionOptions: RegionOption[] = [
     },
 ]
 
+export const DEFAULT_AGE = 35
+
 export const filterSets: Filter[] = [
     {
         id: "work_experience_duration",
@@ -221,7 +223,7 @@ export const filterSets: Filter[] = [
         title: {
             en: "Age"
         },
-        defaultValue: 35,
+        defaultValue: DEFAULT_AGE,
     },
     {
         id: "english",

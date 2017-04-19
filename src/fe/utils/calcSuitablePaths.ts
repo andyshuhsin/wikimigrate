@@ -180,10 +180,13 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
     switch (prereq.prereqId) {
 
         case "age": {
-            const birthday = person.birth.date
-            if (typeof birthday !== "undefined") {
+            if (typeof person.birth.date !== "undefined") {
+                const birthYear = person.birth.date.year
+                const birthMonth = person.birth.date.month || 11 // Assume youngest month
                 const criticalDate = getCriticalDate(prereq.value)
-                return compare(prereq.operator, birthday, criticalDate)
+                const date = new Date(birthYear, birthMonth)
+                // Notice d1 < d2 means d1 happens before d2
+                return compare(prereq.operator, criticalDate, date)
             }
             return DEFAULT_RESULT
         }
@@ -220,6 +223,13 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
                 }
             }
             return false
+        }
+
+        case "union": {
+            if (typeof person.inUnion === "undefined") {
+                return DEFAULT_RESULT
+            }
+            return person.inUnion === prereq.inUnion
         }
 
         default: {
