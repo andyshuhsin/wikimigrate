@@ -1,6 +1,6 @@
 import {oneOf} from "../../../../definitions/auxillary/Combination"
 import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq"
-import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq"
+import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq"
 import {duration} from "../../../../definitions/auxillary/Duration"
 import AgePrereq from "../../../../definitions/Prerequisites/AgePrereq"
 
@@ -36,21 +36,27 @@ export const competentEnglish =  oneOf([
         } as RightPrereq,
     ]),
 
-    languagePrereq("ielts", { overall: 6 }),
-    languagePrereq("oet", { overall: "b" }),
-    languagePrereq("toefl", {
+    languagePrereqMinScore("ielts", {
+        listening: 6,
+        reading: 6,
+        writing: 6,
+        speaking: 6,
+    }),
+    // TODO: Implement string-based scoring
+    // languagePrereqMinScore("oet", { overall: "b" }),
+    languagePrereqMinScore("toefl", {
         listening: 12,
         reading: 12,
         writing: 21,
         speaking: 18,
     }),
-    languagePrereq("pte-academic", {
+    languagePrereqMinScore("pte-academic", {
         listening: 50,
         reading: 50,
         writing: 50,
         speaking: 50,
     }),
-    languagePrereq("cae", {
+    languagePrereqMinScore("cae", {
         listening: 169,
         reading: 169,
         writing: 169,

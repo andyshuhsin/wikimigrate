@@ -1,9 +1,22 @@
 import {Action} from "../actions"
-import {englishTestAssumptions, FilterId, FilterState} from "../data"
+import {
+    DEFAULT_AGE,
+    FilterId,
+    FilterState, languageAssumptionSet,
+    LanguageFilterId,
+} from "../data"
 import {Path} from "../utils/definitions"
 import {Person} from "../../definitions/Person"
+import {clone} from "../utils/clone"
+import {duration} from "../../definitions/auxillary/Duration"
+import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
+import {EducationQuality} from "../../definitions/Qualities/EducationExperience"
+import {LanguageTestResult} from "../../definitions/auxillary/LanguageTest"
+import {LangId} from "../../definitions/auxillary/MultiLang"
+import languageTestProfiles from "../../data/common/languageTestProfiles"
 
 const ESC_KEY_CODE = 27
+const F_KEY_CODE = 70
 
 export interface VisaPlannerState {
     user: Person,
@@ -16,10 +29,12 @@ export interface VisaPlannerState {
     }
 }
 
-const INITIAL_STATE: VisaPlannerState = {
+export const INITIAL_STATE: VisaPlannerState = {
     user: {
         birth: {
-            date: undefined,
+            date: {
+                year: new Date().getFullYear() - DEFAULT_AGE
+            },
             region: undefined,
         },
         status: {
@@ -31,13 +46,19 @@ const INITIAL_STATE: VisaPlannerState = {
         },
         education: undefined,
         languageTests: undefined,
+        inUnion: undefined,
+        spouse: undefined,
     },
     ui: {
         shouldDetailedFilterPanelExpand: false,
         filterState: {
-            offer: null,
+            work_experience_duration: null,
+            work_experience_region: null,
             english: null,
-            education: null,
+            french: null,
+            education_level: null,
+            education_region: null,
+            age: null,
         },
         filterPanelHeight: null,
         expandedFilterId: null,
@@ -45,10 +66,56 @@ const INITIAL_STATE: VisaPlannerState = {
     }
 }
 
-function clone<T>(obj: T): T {
-    return JSON.parse(JSON.stringify(obj))
-}
+function calcUserLanguageTests(
+    language: "english" | "french",
+    newLevel: LanguageFilterId | "reset",
+    currentLanguageTests: LanguageTestResult[] | undefined,
+): LanguageTestResult[] | undefined {
+    let langId: LangId
+    if (language === "english") {
+        langId = "en"
+    }
+    else if (language === "french") {
+        langId = "fr"
+    }
+    else {
+        console.warn("Unknown prereqId as language: ", language)
+        return undefined
+    }
 
+    if (currentLanguageTests) {
+        let res = currentLanguageTests.filter(test => test.language !== langId)
+        if (newLevel === "reset") {
+            return res
+        }
+        else {
+            const assumptions = languageAssumptionSet[langId]
+            if (assumptions) {
+                return res.concat(assumptions[newLevel])
+            }
+            else {
+                console.warn(langId, "doesn't have languageAssumptions")
+                return res
+            }
+        }
+    }
+    else {
+        if (newLevel === "reset") {
+            return undefined
+        }
+        else {
+            const assumptions = languageAssumptionSet[langId]
+            if (assumptions) {
+                return assumptions[newLevel]
+            }
+            else {
+                console.warn(langId, "doesn't have languageAssumptions")
+                return undefined
+            }
+        }
+    }
+
+}
 
 function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
     const newState = clone(state)
@@ -57,6 +124,11 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         case "KEY_DOWN": {
             if (action.payload.keyCode === ESC_KEY_CODE) {
                 newState.ui.pathOnDisplay = null
+                newState.ui.shouldDetailedFilterPanelExpand = false
+                return newState
+            }
+            else if (action.payload.keyCode === F_KEY_CODE) {
+                newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
                 return newState
             }
             return state
@@ -66,26 +138,99 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             // Person data
             switch (action.payload.filterId) {
                 case "english": {
-                    if (action.payload.optionId === newState.ui.filterState[action.payload.filterId]) {
-                        newState.user.languageTests = undefined
+                    let newLevel: LanguageFilterId | "reset" = action.payload.value
+                    if (newLevel === newState.ui.filterState[action.payload.filterId]) {
+                        newLevel = "reset"
                     }
-                    else if (action.payload.optionId === "good") {
-                        newState.user.languageTests = englishTestAssumptions.good
-                    } else {
-                        newState.user.languageTests = englishTestAssumptions.bad
+                    newState.user.languageTests = calcUserLanguageTests(
+                        "english",
+                        newLevel,
+                        state.user.languageTests
+                    )
+                    break
+                }
+                case "french": {
+                    let newLevel: LanguageFilterId | "reset" = action.payload.value
+                    if (newLevel === newState.ui.filterState[action.payload.filterId]) {
+                        newLevel = "reset"
+                    }
+                    newState.user.languageTests = calcUserLanguageTests(
+                        "french",
+                        newLevel,
+                        state.user.languageTests
+                    )
+                    break
+                }
+                case "age": {
+                    const date = new Date()
+                    const age = Number(action.payload.value)
+                    newState.user.birth.date = {
+                        year: date.getFullYear() - age
+                    }
+                    break
+                }
+                case "education_level": {
+                    const education = newState.user.education
+                    if (education && education[0]) {
+                        education[0].stage = action.payload.value
+                    }
+                    else {
+                        newState.user.education = [{
+                            qualityId: "education",
+                            stage: action.payload.value
+                        } as EducationQuality]
+                    }
+                    break
+                }
+                case "education_region": {
+                    const education = newState.user.education
+                    if (education && education[0]) {
+                        education[0].regionId = action.payload.value
+                    }
+                    else {
+                        newState.user.education = [{
+                            qualityId: "education",
+                            regionId: action.payload.value
+                        } as EducationQuality]
+                    }
+                    break
+                }
+                case "work_experience_duration": {
+                    const works = newState.user.workExperiences
+                    if (works && works[0]) {
+                        works[0].duration = duration(action.payload.value, "year")
+                    }
+                    else {
+                        newState.user.workExperiences = [{
+                            qualityId: "work_experience",
+                            duration: duration(action.payload.value, "year"),
+                        } as WorkExperienceQuality]
+                    }
+                    break
+                }
+                case "work_experience_region": {
+                    const works = newState.user.workExperiences
+                    if (works && works[0]) {
+                        works[0].regionId = action.payload.value
+                    }
+                    else {
+                        newState.user.workExperiences = [{
+                            qualityId: "work_experience",
+                            region: action.payload.value,
+                        } as WorkExperienceQuality]
                     }
                     break
                 }
                 default: {
-                    console.warn("Unimplemented state change for filterId", action.payload.filterId)
+                    console.warn("Unexpected filterId:", (action.payload as any).filterId)
                 }
             }
 
             // UI
-            if (state.ui.filterState[action.payload.filterId] === action.payload.optionId) {
+            if (state.ui.filterState[action.payload.filterId] === action.payload.value) {
                 newState.ui.filterState[action.payload.filterId] = null
             } else {
-                newState.ui.filterState[action.payload.filterId] = action.payload.optionId
+                newState.ui.filterState[action.payload.filterId] = action.payload.value
             }
             return newState
         }

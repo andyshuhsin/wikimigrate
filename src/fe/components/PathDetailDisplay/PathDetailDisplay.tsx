@@ -5,6 +5,7 @@ import sys from '../../sys'
 import {
     Path
 } from '../../utils/definitions'
+import {Person} from "../../../definitions/Person"
 
 const style = {
     position: "absolute",
@@ -55,6 +56,7 @@ const crossStyle = {
 }
 
 interface Props {
+    user: Person
     pathOnDisplay: Path | null
     onClose: (event: any) => void
 }
@@ -70,6 +72,7 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
                         this.props.pathOnDisplay.transitions.map(
                             transition => 
                                 <TransitionDisplay
+                                    user={this.props.user}
                                     transition={transition}
                                     key={transition.id}
                                 />

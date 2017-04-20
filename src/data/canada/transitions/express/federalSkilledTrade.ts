@@ -1,6 +1,6 @@
 import Transition from "../../../../definitions/Transition";
-import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
-import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
+import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
@@ -27,14 +27,8 @@ const federalSkilledTrade: Transition = {
     prerequisiteList: allOf([
 
         // Language Requirements
-        oneOf([
-            languagePrereq("clb", {
-                speaking: 5,
-                listening: 5,
-                reading: 4,
-                writing: 4,
-            }),
-            languagePrereq("nclc", {
+        identity([
+            languagePrereqMinScore("clb", {
                 speaking: 5,
                 listening: 5,
                 reading: 4,
@@ -49,9 +43,10 @@ const federalSkilledTrade: Transition = {
         allOf([
             {
                 prereqId: "work_experience",
-                length: duration(2, "year"),
+                length: [">=", duration(2, "year")],
                 withinLast: duration(5, "year"),
                 workHoursPerWeek: duration(30, "hour"),
+                region: "world",
                 jobNature: oneOf([
                     jobClass.jobGroups.noc72,
                     jobClass.jobGroups.noc73,

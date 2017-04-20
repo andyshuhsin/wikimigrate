@@ -5,7 +5,7 @@ import {
 
 // See: http://noc.esdc.gc.ca/English/noc/Introduction.aspx?ver=16#struc
 
-const noc0: JobGroup = {
+export const noc0: JobGroup = {
     jobGroupId: "noc0",
     parentClassificationSystemId: "noc",
     specification: "0",
@@ -18,7 +18,20 @@ const noc0: JobGroup = {
     }
 }
 
-const nocA: JobGroup = {
+export const noc00: JobGroup = {
+    jobGroupId: "noc0",
+    parentClassificationSystemId: "noc",
+    specification: "00",
+    description: {
+        en: "Senior management occupations",
+    },
+    parentGroup: null,
+    reference: {
+        url: "http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314245&CPV=00&CST=01012016&CLV=2&MLV=4"
+    }
+}
+
+export const nocA: JobGroup = {
     jobGroupId: "nocA",
     parentClassificationSystemId: "noc",
     specification: "A",
@@ -31,7 +44,7 @@ const nocA: JobGroup = {
     },
 }
 
-const nocB: JobGroup = {
+export const nocB: JobGroup = {
     jobGroupId: "nocB",
     parentClassificationSystemId: "noc",
     specification: "B",
@@ -44,7 +57,7 @@ const nocB: JobGroup = {
     },
 }
 
-const nocC: JobGroup = {
+export const nocC: JobGroup = {
     jobGroupId: "nocC",
     parentClassificationSystemId: "noc",
     specification: "C",
@@ -57,7 +70,7 @@ const nocC: JobGroup = {
     },
 }
 
-const nocD: JobGroup = {
+export const nocD: JobGroup = {
     jobGroupId: "nocD",
     parentClassificationSystemId: "noc",
     specification: "D",
@@ -70,7 +83,7 @@ const nocD: JobGroup = {
     },
 }
 
-const noc72: JobGroup = {
+export const noc72: JobGroup = {
     jobGroupId: "noc72",
     parentClassificationSystemId: "noc",
     specification: "72",
@@ -80,7 +93,7 @@ const noc72: JobGroup = {
     parentGroup: nocB
 }
 
-const noc73: JobGroup = {
+export const noc73: JobGroup = {
     jobGroupId: "noc73",
     parentClassificationSystemId: "noc",
     specification: "73",
@@ -90,7 +103,7 @@ const noc73: JobGroup = {
     parentGroup: nocB
 }
 
-const noc82: JobGroup = {
+export const noc82: JobGroup = {
     jobGroupId: "noc82",
     parentClassificationSystemId: "noc",
     specification: "74",
@@ -100,7 +113,7 @@ const noc82: JobGroup = {
     parentGroup: nocB
 }
 
-const noc92: JobGroup = {
+export const noc92: JobGroup = {
     jobGroupId: "noc92",
     parentClassificationSystemId: "noc",
     specification: "92",
@@ -110,7 +123,7 @@ const noc92: JobGroup = {
     parentGroup: nocB
 }
 
-const noc632: JobGroup = {
+export const noc632: JobGroup = {
     jobGroupId: "noc632",
     parentClassificationSystemId: "noc",
     specification: "632",
@@ -120,7 +133,7 @@ const noc632: JobGroup = {
     parentGroup: nocB
 }
 
-const noc633: JobGroup = {
+export const noc633: JobGroup = {
     jobGroupId: "noc633",
     parentClassificationSystemId: "noc",
     specification: "633",
@@ -130,7 +143,7 @@ const noc633: JobGroup = {
     parentGroup: nocB
 }
 
-const noc2016: JobClassification = {
+export const noc2016: JobClassification = {
     classificationSystemId: "noc",
     regionId: "canada",
     title: {

@@ -9,6 +9,7 @@ module.exports = {
         external: [
             "react",
             "react-dom",
+            "react-redux",
             "redux",
         ],
     },

@@ -11,6 +11,9 @@ export type PrereqId =
     | "fund"
     | "certification"
     | "offer"
+    | "union"
+    | "spouse"
+    | "nomination"
 
 interface BasePrereq {
     prereqId: PrereqId

@@ -6,7 +6,7 @@ import {
 import jobClass from '../../jobClass'
 import Transition from "../../../../definitions/Transition";
 import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
-import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";
@@ -15,6 +15,7 @@ import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq";
 import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 import {prereqTitleDict} from "../../../common/prereqTitleDict"
+import crs from "../../crs"
 
 const federalSkilledWorker: Transition = {
     id: "federal_skilled_worker",
@@ -26,11 +27,16 @@ const federalSkilledWorker: Transition = {
     },
     from: alien,
     to: expressEntryCandidate,
+    scoreSystem: crs,
     prerequisiteList: allOf([
 
         oneOf([
-            languagePrereq("clb", {overall: 7}),
-            languagePrereq("nclc", {overall: 7}),
+            languagePrereqMinScore("clb", {
+                listening: 7,
+                speaking: 7,
+                reading: 7,
+                writing: 7,
+            }),
         ], {
             title: prereqTitleDict.language_test
         }),
@@ -38,8 +44,9 @@ const federalSkilledWorker: Transition = {
         identity([
             {
                 prereqId: "work_experience",
-                length: duration(1, "year"),
+                length: [">=", duration(1, "year")],
                 withinLast: duration(10, "year"),
+                region: "world",
                 workHoursPerWeek: duration(30, "hour"),
                 jobNature: oneOf([
                     jobClass.jobGroups.noc0,
@@ -56,36 +63,17 @@ const federalSkilledWorker: Transition = {
 
             {
                 prereqId: "education",
-                education: {
-                    stage: "secondary",
-                    regionId: "canada"
-                }
+                stage: [">=", "secondary"],
+                region: "canada"
             } as EducationPrereq,
 
             {
                 prereqId: "education",
-                education: {
-                    stage: "post-secondary",
-                    regionId: "canada"
-                }
+                region: "world",
+                stage: [">=", "secondary"],
+                certification: "eca"
             } as EducationPrereq,
 
-            {
-                prereqId: "education",
-                education: {
-                    regionId: "world",
-                    stage: "secondary",
-                },
-                certification: "eca"
-            } as EducationPrereq,
-            {
-                prereqId: "education",
-                education: {
-                    regionId: "world",
-                    stage: "post-secondary",
-                },
-                certification: "eca"
-            } as EducationPrereq,
         ],
         {
             title: prereqTitleDict.education

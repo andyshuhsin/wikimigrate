@@ -7,6 +7,7 @@ import URLDatum from './auxillary/URLDatum'
 import {RegionId} from "./auxillary/Region"
 import Status from "./Qualities/Status"
 import Prerequisite from "./Prerequisites/index"
+import {ScoreSystem} from "./ScoreSystem"
 
 interface Transition {
     id: string
@@ -21,6 +22,7 @@ interface Transition {
     }
     prerequisiteList: Combination<Prerequisite>
     procedureList: Procedure[]
+    scoreSystem?: ScoreSystem
     exceptionList?: Array<Exception>
     referenceList?:  URLDatum[]
 }

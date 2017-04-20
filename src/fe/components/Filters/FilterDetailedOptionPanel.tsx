@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {connect, Dispatch} from "react-redux"
 import {VisaPlannerState} from "../../reducers/index"
-import {BaseFilter, FilterId, filterSets, FilterState, OptionId} from "../../data"
+import {BaseFilter, Filter, FilterId, filterSets, FilterState, OptionId} from "../../data"
 import {filterOptionClickAction, filterPanelRenderAction} from "../../actions"
 import SingleFilterPanel from "./SingleFilterPanel"
 import design from "../../design"
@@ -31,7 +31,9 @@ class FilterDetailedOptionPanel extends React.PureComponent<OptionDisplayProps, 
                        ? `translateY(100vh)`
                        : `translateY(${this.props.myHeight}px)`,
             transition: `transform ${design.durations.slide}s`,
-        }
+            overflowY: "scroll",
+            maxHeight: "80vh",
+        } as React.CSSProperties
 
         const styleExpanded = {
             transform: `translateY(0)`,
@@ -51,7 +53,7 @@ class FilterDetailedOptionPanel extends React.PureComponent<OptionDisplayProps, 
                     }
                 }}
             >
-                {filterSets.map((filter: BaseFilter) =>
+                {filterSets.map((filter: Filter) =>
                     <SingleFilterPanel
                         key={filter.id}
                         filter={filter}

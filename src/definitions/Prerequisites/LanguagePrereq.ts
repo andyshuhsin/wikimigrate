@@ -1,20 +1,49 @@
 import BasePrereq from "./BasePrereq";
-import {LanguageTestId, LanguageTestResult, LanguageTestScores} from "../auxillary/LanguageTest"
+import {
+    LanguageTestId, LanguageTestItem, languageTestItemValues, LanguageTestScoreSet,
+} from "../auxillary/LanguageTest"
+import {ArithmeticComparisonOperator, Interval} from "../auxillary/Operator"
+
+
+export const zeroLanguagePrereqScores: LanguagePrereqScoreSet = {
+    listening: [">=", 0],
+    speaking: [">=", 0],
+    reading: [">=", 0],
+    writing: [">=", 0],
+}
+
+export type LanguagePrereqScoreSet = {
+    [key in LanguageTestItem]: Interval<number>
+}
+
+export type LanguagePrereqResult = {
+    testId: LanguageTestId
+    scores: LanguagePrereqScoreSet
+}
 
 export interface LanguagePrereq extends BasePrereq {
     prereqId: "language_test"
-    result: LanguageTestResult
+    result: LanguagePrereqResult
     // TODO: Add time limits
 }
 
-export function languagePrereq(testId: LanguageTestId,
-                               scores: LanguageTestScores
+function transformMinScores(scores: LanguageTestScoreSet): LanguagePrereqScoreSet {
+    let result: any = {}
+    for (const key of languageTestItemValues) {
+        result[key] = [">=", scores[key]]
+    }
+    return result
+}
+
+export function languagePrereqMinScore(
+    testId: LanguageTestId,
+    scores: LanguageTestScoreSet,
 ): LanguagePrereq {
     return {
         prereqId: "language_test",
         result: {
             testId,
-            scores,
+            scores: transformMinScores(scores),
         }
     }
 }

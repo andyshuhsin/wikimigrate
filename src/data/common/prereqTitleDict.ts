@@ -36,6 +36,15 @@ export const prereqTitleDict: PrereqTitleDict = {
     offer: {
         en: "Offer"
     },
+    union: {
+        en: "Union"
+    },
+    spouse: {
+        en: "Spouse"
+    },
+    nomination: {
+        en: "Nomination"
+    }
 }
 
 export default prereqTitleDict

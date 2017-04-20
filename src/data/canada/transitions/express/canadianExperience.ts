@@ -5,10 +5,10 @@ import {
 
 import jobClass from '../../jobClass'
 import Transition from "../../../../definitions/Transition";
-import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
-import {languagePrereq} from "../../../../definitions/Prerequisites/LanguagePrereq";
+import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {prereqTitleDict} from "../../../common/prereqTitleDict"
 
 const canadianExperience: Transition = {
@@ -28,17 +28,21 @@ const canadianExperience: Transition = {
 
             // NOC 0 or A job
             allOf([
-                oneOf([
-                    languagePrereq("clb", { overall: 7 }),
-                    languagePrereq("nclc", { overall: 7 }),
+                identity([
+                    languagePrereqMinScore("clb", {
+                        listening: 7,
+                        speaking: 7,
+                        reading: 7,
+                        writing: 7,
+                    }),
                 ]),
 
                 {
                     prereqId: "work_experience",
-                    length: duration(12, "month"),
+                    length: [">=", duration(12, "month")],
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
-                    regionId: 'canada',
+                    region: 'canada',
                     jobNature: oneOf([
                         jobClass.jobGroups.noc0,
                         jobClass.jobGroups.nocA,
@@ -52,17 +56,21 @@ const canadianExperience: Transition = {
 
             //NOC B job
             allOf([
-                oneOf([
-                    languagePrereq("clb", { overall: 5 }),
-                    languagePrereq("nclc", { overall: 5 }),
+                identity([
+                    languagePrereqMinScore("clb", {
+                        listening: 7,
+                        speaking: 7,
+                        reading: 7,
+                        writing: 7,
+                    }),
                 ]),
 
                 {
                     prereqId: "work_experience",
-                    length: duration(12, "month"),
+                    length: [">=", duration(12, "month")],
                     withinLast: duration(3, "year"),
                     workHoursPerWeek: duration(30, "hour"),
-                    regionId: 'canada',
+                    region: 'canada',
                     jobNature: oneOf([
                         jobClass.jobGroups.nocB
                     ])
@@ -79,7 +87,7 @@ const canadianExperience: Transition = {
     procedureList: [
         {
             name: {
-                en: "Check eligiblility",
+                en: "Check eligibility",
                 "zh-hans": "确认有权申请"
             },
             description: {

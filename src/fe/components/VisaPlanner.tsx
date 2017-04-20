@@ -4,7 +4,6 @@ import * as React from 'react'
 import {connect, Dispatch} from 'react-redux'
 
 import TopBar from './TopBar'
-import Title from './Title'
 import PathShowcase from './PathShowcase'
 import FilterBar from './Filters/FilterBar'
 import PathDetailDisplay from './PathDetailDisplay'
@@ -27,6 +26,11 @@ import {
 } from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
 import {text} from "../utils/text"
+import {calcScore} from "../utils/calcScore"
+import crs from "../../data/canada/crs"
+
+// import {calcScoreTest} from "../utils/calcScore"
+// calcScoreTest()
 
 const style = {
     position: "relative",
@@ -80,14 +84,15 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                     brandName={text(data.app.brandName)}
                     version={data.app.version}
                 />
-                <Title text={
-                    "Popular mobility options"
-                } />
+                <div>
+                    {calcScore(this.props.user, crs)}
+                </div>
                 <PathShowcase
                     paths={calcSuitablePaths(this.props.user, allTransitions)}
                     onClick={this.props.onPathBoxClick}
                 />
                 <PathDetailDisplay
+                    user={this.props.user}
                     pathOnDisplay={this.props.pathOnDisplay}
                     onClose={this.props.onPathViewCloseButtonClick}
                 />

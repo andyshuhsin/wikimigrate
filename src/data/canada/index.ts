@@ -21,6 +21,7 @@ import atlanticInternationalGraduate from './transitions/atlantic/atlanticIntern
 
 import noc2016 from './jobClass/noc2016'
 import {designatedAngelInvestors, designatedBusinessIncubators, designatedVentureCapitalFunds} from "./fundSources"
+import crs from "./crs"
 
 //TODO: Include admissibility http://www.cic.gc.ca/english/information/inadmissibility/index.asp
 
@@ -38,15 +39,15 @@ const canada: Region = {
     transitionList: [
         // visaExemption,
         federalSkilledWorker,
-        federalSkilledTrade,
-        canadianExperience,
+        // federalSkilledTrade,
+        // canadianExperience,
         // quebecSkilled,
         startupVisa,
-        iivc,
-        selfEmployedVisa,
-        atlanticHighSkilled,
-        atlanticIntermediateSkilled,
-        atlanticInternationalGraduate,
+        // iivc,
+        // selfEmployedVisa,
+        // atlanticHighSkilled,
+        // atlanticIntermediateSkilled,
+        // atlanticInternationalGraduate,
     ],
     referenceList: [
         {
@@ -63,6 +64,9 @@ const canada: Region = {
         designatedAngelInvestors,
         designatedBusinessIncubators,
     ],
+    scoreSystems: [
+        crs,
+    ]
 }
 
 export default canada
