@@ -307,7 +307,7 @@ function existSurjection<A, B>(
     predicate: (a: A, b: B) => boolean
 ): boolean {
 
-    const validCounterpartTable: any[] = []
+    const validCounterpartTable: B[][] = []
     for (const keyA in setA) {
         validCounterpartTable[keyA] = []
     }
