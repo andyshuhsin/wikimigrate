@@ -1,5 +1,5 @@
 import Transition from "../../../../definitions/Transition";
-import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
 import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
@@ -27,14 +27,8 @@ const federalSkilledTrade: Transition = {
     prerequisiteList: allOf([
 
         // Language Requirements
-        oneOf([
+        identity([
             languagePrereqMinScore("clb", {
-                speaking: 5,
-                listening: 5,
-                reading: 4,
-                writing: 4,
-            }),
-            languagePrereqMinScore("nclc", {
                 speaking: 5,
                 listening: 5,
                 reading: 4,

@@ -1,4 +1,4 @@
-import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 import {LanguageTestResult} from "../../definitions/auxillary/LanguageTest"
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
 import {RegionId} from "../../definitions/auxillary/Region"
@@ -10,6 +10,7 @@ export type FilterId =
     | "education_region"
     | "age"
     | "english"
+    | "french"
 
 export type FilterOption = {
     id: OptionId
@@ -38,97 +39,118 @@ export type Filter =
 
 export type OptionId = string
 
-export type EnglishFilterId = "proficient" | "good" | "not_good"
+export type LanguageFilterId = "proficient" | "good" | "not_good"
 
-export type EnglishAssumptionSet = {
-    [key in EnglishFilterId]: LanguageTestResult[]
+export type LanguageFilterAssumptions = {
+    [key in LanguageFilterId]: LanguageTestResult[]
 }
 
-export const englishTestAssumptions: EnglishAssumptionSet = {
+const englishTestAssumptions: LanguageFilterAssumptions = {
     proficient: [
         {
             testId: "clb",
+            language: "en",
             scores: {
-                listening: 9,
-                speaking: 9,
-                reading: 9,
-                writing: 9,
-            }
+                listening: 11,
+                speaking: 11,
+                reading: 11,
+                writing: 11,
+            },
         },
-        {
-            testId: "ielts",
-            scores: {
-                listening: 8,
-                speaking: 8,
-                reading: 8,
-                writing: 8,
-            }
-        },
-        {
-            testId: "toefl",
-            scores: {
-                listening: 28,
-                speaking: 28,
-                reading: 28,
-                writing: 28,
-            }
-        },
+        // {
+        //     testId: "ielts",
+        //     language: "en",
+        //     scores: {
+        //         listening: 8,
+        //         speaking: 8,
+        //         reading: 8,
+        //         writing: 8,
+        //     }
+        // },
+        // {
+        //     testId: "toefl",
+        //     language: "en",
+        //     scores: {
+        //         listening: 28,
+        //         speaking: 28,
+        //         reading: 28,
+        //         writing: 28,
+        //     }
+        // },
     ] as LanguageTestResult[],
     good: [
         {
             testId: "clb",
+            language: "en",
             scores: {
-                listening: 7,
+                listening: 9,
                 speaking: 7,
-                reading: 7,
-                writing: 7,
-            }
-        },
-        {
-            testId: "ielts",
-            scores: {
-                listening: 7,
-                speaking: 7,
-                reading: 7,
-                writing: 7,
-            }
-        },
-        {
-            testId: "toefl",
-            scores: {
-                listening: 22,
-                speaking: 22,
-                reading: 22,
-                writing: 22,
-            }
+                reading: 9,
+                writing: 9,
+            },
         },
     ] as LanguageTestResult[],
     not_good: [
         {
             testId: "clb",
-            scores: {
-                overall: 0,
-            }
-        },
-        {
-            testId: "ielts",
+            language: "en",
             scores: {
                 listening: 0,
                 speaking: 0,
                 reading: 0,
                 writing: 0,
-            }
-        },
-        {
-            testId: "toefl",
-            scores: {
-                listening: 0,
-                speaking: 0,
-                reading: 0,
-                writing: 0,
-            }
+            },
         },
     ] as LanguageTestResult[]
+}
+
+const frenchTestAssumptions: LanguageFilterAssumptions = {
+    proficient: [
+        {
+            testId: "clb",
+            language: "fr",
+            scores: {
+                listening: 11,
+                speaking: 11,
+                reading: 11,
+                writing: 11,
+            },
+        },
+    ] as LanguageTestResult[],
+    good: [
+        {
+            testId: "clb",
+            language: "fr",
+            scores: {
+                listening: 9,
+                speaking: 9,
+                reading: 9,
+                writing: 9,
+            },
+        },
+    ] as LanguageTestResult[],
+    not_good: [
+        {
+            testId: "clb",
+            language: "fr",
+            scores: {
+                listening: 0,
+                speaking: 0,
+                reading: 0,
+                writing: 0,
+            },
+        },
+    ] as LanguageTestResult[]
+
+}
+
+type LanguageAssumptionSet = {
+    [key in LangId]?: LanguageFilterAssumptions
+}
+
+export const languageAssumptionSet: LanguageAssumptionSet = {
+    en: englishTestAssumptions,
+    fr: frenchTestAssumptions,
 }
 
 interface RegionOption {
@@ -252,6 +274,33 @@ export const filterSets: Filter[] = [
             },
         ]
     },
+    {
+        id: "french",
+        filterType: "multiple-choice",
+        title: {
+            en: "French"
+        },
+        options: [
+            {
+                id: "not_good",
+                label: {
+                    en: "Not good"
+                }
+            },
+            {
+                id: "good",
+                label: {
+                    en: "Good"
+                }
+            },
+            {
+                id: "proficient",
+                label: {
+                    en: "Proficient"
+                }
+            },
+        ]
+    }
 ]
 
 export type FilterState = {

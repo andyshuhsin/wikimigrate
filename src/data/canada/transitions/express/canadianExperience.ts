@@ -5,7 +5,7 @@ import {
 
 import jobClass from '../../jobClass'
 import Transition from "../../../../definitions/Transition";
-import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
 import {duration} from "../../../../definitions/auxillary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
@@ -28,9 +28,13 @@ const canadianExperience: Transition = {
 
             // NOC 0 or A job
             allOf([
-                oneOf([
-                    languagePrereqMinScore("clb", { overall: 7 }),
-                    languagePrereqMinScore("nclc", { overall: 7 }),
+                identity([
+                    languagePrereqMinScore("clb", {
+                        listening: 7,
+                        speaking: 7,
+                        reading: 7,
+                        writing: 7,
+                    }),
                 ]),
 
                 {
@@ -52,9 +56,13 @@ const canadianExperience: Transition = {
 
             //NOC B job
             allOf([
-                oneOf([
-                    languagePrereqMinScore("clb", { overall: 5 }),
-                    languagePrereqMinScore("nclc", { overall: 5 }),
+                identity([
+                    languagePrereqMinScore("clb", {
+                        listening: 7,
+                        speaking: 7,
+                        reading: 7,
+                        writing: 7,
+                    }),
                 ]),
 
                 {

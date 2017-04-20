@@ -1,4 +1,4 @@
-import {EnglishFilterId, FilterId, OptionId} from "../data"
+import {LanguageFilterId, FilterId, OptionId} from "../data"
 import {Path} from "../utils/definitions"
 import {EducationStage} from "../../definitions/Qualities/EducationExperience"
 import {RegionId} from "../../definitions/auxillary/Region"
@@ -35,7 +35,14 @@ interface OptionClickAction_EducationRegion extends BaseOptionClickAction {
 interface OptionClickAction_English extends BaseOptionClickAction {
     payload: {
         filterId: "english",
-        value: EnglishFilterId,
+        value: LanguageFilterId,
+    }
+}
+
+interface OptionClickAction_French extends BaseOptionClickAction {
+    payload: {
+        filterId: "french",
+        value: LanguageFilterId,
     }
 }
 
@@ -57,6 +64,7 @@ export type OptionClickAction_MultipleChoice =
     OptionClickAction_EducationLevel
     | OptionClickAction_EducationRegion
     | OptionClickAction_English
+    | OptionClickAction_French
     | OptionClickAction_WorkExperienceRegion
 
 export type OptionClickAction_RealVallue =
