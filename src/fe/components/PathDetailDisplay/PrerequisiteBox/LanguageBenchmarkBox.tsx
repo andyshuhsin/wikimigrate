@@ -4,14 +4,13 @@ import text from "../../../utils/text"
 import data from '../../../../data'
 
 import {
-    LanguagePrereq, LanguagePrereqScoreItemized,
-    LanguagePrereqScoreSingle,
+    LanguagePrereq,
+    LanguagePrereqScoreSet,
 } from "../../../../definitions/Prerequisites/LanguagePrereq"
 
 import {
     LanguageTestItem,
-    LanguageTestScoreItemized,
-    LanguageTestScoreSingle
+    LanguageTestScoreSet
 } from "../../../../definitions/auxillary/LanguageTest"
 
 const langRequirementKeyOrder: string[] = [
@@ -55,21 +54,14 @@ const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
             <h5 style={testNameStyle}>
                 {text(test.title)} {" "}
             </h5>
-            {((prereq.result.scores as LanguagePrereqScoreSingle).overall)
-                ? <div>
-                    Overall score
-                    {(prereq.result.scores as LanguagePrereqScoreSingle).overall[0]}
-                    {(prereq.result.scores as LanguagePrereqScoreSingle).overall[1]}
-                  </div>
-                : langRequirementKeyOrder.map(
-                      (testItemKey: LanguageTestItem) =>
-                      <LanguageTestItemBox
-                          testItemKey={testItemKey}
-                          score={(prereq.result.scores as LanguagePrereqScoreItemized)[testItemKey][1]}
-                          key={testItemKey}
-                      />
-                  )
-            }
+            {langRequirementKeyOrder.map(
+                  (testItemKey: LanguageTestItem) =>
+                  <LanguageTestItemBox
+                      testItemKey={testItemKey}
+                      score={prereq.result.scores[testItemKey][1]}
+                      key={testItemKey}
+                  />
+            )}
         </div>
     )
 }

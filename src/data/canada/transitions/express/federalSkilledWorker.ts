@@ -31,8 +31,12 @@ const federalSkilledWorker: Transition = {
     prerequisiteList: allOf([
 
         oneOf([
-            languagePrereqMinScore("clb", {overall: 7}),
-            languagePrereqMinScore("nclc", {overall: 7}),
+            languagePrereqMinScore("clb", {
+                listening: 7,
+                speaking: 7,
+                reading: 7,
+                writing: 7,
+            }),
         ], {
             title: prereqTitleDict.language_test
         }),

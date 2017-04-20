@@ -36,8 +36,14 @@ export const competentEnglish =  oneOf([
         } as RightPrereq,
     ]),
 
-    languagePrereqMinScore("ielts", { overall: 6 }),
-    languagePrereqMinScore("oet", { overall: "b" }),
+    languagePrereqMinScore("ielts", {
+        listening: 6,
+        reading: 6,
+        writing: 6,
+        speaking: 6,
+    }),
+    // TODO: Implement string-based scoring
+    // languagePrereqMinScore("oet", { overall: "b" }),
     languagePrereqMinScore("toefl", {
         listening: 12,
         reading: 12,

@@ -84,6 +84,9 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                     brandName={text(data.app.brandName)}
                     version={data.app.version}
                 />
+                <div>
+                    {calcScore(this.props.user, crs)}
+                </div>
                 <PathShowcase
                     paths={calcSuitablePaths(this.props.user, allTransitions)}
                     onClick={this.props.onPathBoxClick}

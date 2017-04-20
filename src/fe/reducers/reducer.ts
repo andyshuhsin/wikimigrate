@@ -1,11 +1,19 @@
 import {Action} from "../actions"
-import {DEFAULT_AGE, englishTestAssumptions, FilterId, FilterState} from "../data"
+import {
+    DEFAULT_AGE,
+    FilterId,
+    FilterState, languageAssumptionSet,
+    LanguageFilterId,
+} from "../data"
 import {Path} from "../utils/definitions"
 import {Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
 import {duration} from "../../definitions/auxillary/Duration"
 import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
 import {EducationQuality} from "../../definitions/Qualities/EducationExperience"
+import {LanguageTestResult} from "../../definitions/auxillary/LanguageTest"
+import {LangId} from "../../definitions/auxillary/MultiLang"
+import languageTestProfiles from "../../data/common/languageTestProfiles"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
@@ -39,6 +47,7 @@ export const INITIAL_STATE: VisaPlannerState = {
         education: undefined,
         languageTests: undefined,
         inUnion: undefined,
+        spouse: undefined,
     },
     ui: {
         shouldDetailedFilterPanelExpand: false,
@@ -46,6 +55,7 @@ export const INITIAL_STATE: VisaPlannerState = {
             work_experience_duration: null,
             work_experience_region: null,
             english: null,
+            french: null,
             education_level: null,
             education_region: null,
             age: null,
@@ -54,6 +64,57 @@ export const INITIAL_STATE: VisaPlannerState = {
         expandedFilterId: null,
         pathOnDisplay: null,
     }
+}
+
+function calcUserLanguageTests(
+    language: "english" | "french",
+    newLevel: LanguageFilterId | "reset",
+    currentLanguageTests: LanguageTestResult[] | undefined,
+): LanguageTestResult[] | undefined {
+    let langId: LangId
+    if (language === "english") {
+        langId = "en"
+    }
+    else if (language === "french") {
+        langId = "fr"
+    }
+    else {
+        console.warn("Unknown prereqId as language: ", language)
+        return undefined
+    }
+
+    if (currentLanguageTests) {
+        let res = currentLanguageTests.filter(test => test.language !== langId)
+        if (newLevel === "reset") {
+            return res
+        }
+        else {
+            const assumptions = languageAssumptionSet[langId]
+            if (assumptions) {
+                return res.concat(assumptions[newLevel])
+            }
+            else {
+                console.warn(langId, "doesn't have languageAssumptions")
+                return res
+            }
+        }
+    }
+    else {
+        if (newLevel === "reset") {
+            return undefined
+        }
+        else {
+            const assumptions = languageAssumptionSet[langId]
+            if (assumptions) {
+                return assumptions[newLevel]
+            }
+            else {
+                console.warn(langId, "doesn't have languageAssumptions")
+                return undefined
+            }
+        }
+    }
+
 }
 
 function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
@@ -77,14 +138,27 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             // Person data
             switch (action.payload.filterId) {
                 case "english": {
-                    if (action.payload.value === newState.ui.filterState[action.payload.filterId]) {
-                        newState.user.languageTests = undefined
+                    let newLevel: LanguageFilterId | "reset" = action.payload.value
+                    if (newLevel === newState.ui.filterState[action.payload.filterId]) {
+                        newLevel = "reset"
                     }
-                    else if (action.payload.value === "good") {
-                        newState.user.languageTests = englishTestAssumptions.good
-                    } else {
-                        newState.user.languageTests = englishTestAssumptions.not_good
+                    newState.user.languageTests = calcUserLanguageTests(
+                        "english",
+                        newLevel,
+                        state.user.languageTests
+                    )
+                    break
+                }
+                case "french": {
+                    let newLevel: LanguageFilterId | "reset" = action.payload.value
+                    if (newLevel === newState.ui.filterState[action.payload.filterId]) {
+                        newLevel = "reset"
                     }
+                    newState.user.languageTests = calcUserLanguageTests(
+                        "french",
+                        newLevel,
+                        state.user.languageTests
+                    )
                     break
                 }
                 case "age": {

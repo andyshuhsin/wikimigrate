@@ -7,6 +7,9 @@ export type ScoreSystemId = "crs"
 export interface ScoreCondition {
     score: number
     prerequisites: Combination<Prerequisite>
+    // Only the highest score among applicable conditions
+    // of the same batch would be added
+    batch: string
 }
 
 export interface ScoreSystem {
