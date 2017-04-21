@@ -10,6 +10,7 @@ import RightBox from './RightBox'
 import OfferBox from './OfferBox'
 import CertificationBox from './CertificationBox'
 import AgeBox from './AgeBox'
+import BusinessBox from './BusinessBox'
 
 interface Props {
     prereq: Prerequisite
@@ -42,6 +43,9 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
             }
             case "age": {
                 return <AgeBox prereq={prereq} />
+            }
+            case "business": {
+                return <BusinessBox prereq={prereq} />
             }
             default: {
                 console.warn("Unknown prereq:", JSON.stringify(prereq))
