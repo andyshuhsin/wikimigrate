@@ -75,12 +75,13 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                     </section>
                 }
 
-                <section>
-                    <h3 style={sectionTitleStyle}>Application</h3>
-                    {
-                        <ProcedureBox procedureList={transition.procedureList} />
-                    }
-                </section>
+                {/* TODO: Implement procedural guides */}
+                {/*<section>*/}
+                    {/*<h3 style={sectionTitleStyle}>Application</h3>*/}
+                    {/*{*/}
+                        {/*<ProcedureBox procedureList={transition.procedureList} />*/}
+                    {/*}*/}
+                {/*</section>*/}
 
                 {
                     transition.referenceList &&
