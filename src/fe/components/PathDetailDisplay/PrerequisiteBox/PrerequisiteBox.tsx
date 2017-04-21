@@ -34,7 +34,7 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
         }
         else {
             console.warn("Unknown prereq:", JSON.stringify(prereq))
-            return <div>{JSON.stringify(prereq)}</div>
+            return <noscript />
         }
     }
 }
