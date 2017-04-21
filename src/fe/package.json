@@ -22,6 +22,7 @@
     "@types/react-redux": "^4.4.38",
     "@types/redux": "^3.6.0",
     "babel-cli": "^6.24.0",
+    "chunk-manifest-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "file-loader": "^0.10.1",
@@ -32,6 +33,8 @@
     "typescript": "^2.2.2",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.3",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "webpack-manifest-plugin": "^1.1.0",
+    "webpack-md5-hash": "^0.0.5"
   }
 }
