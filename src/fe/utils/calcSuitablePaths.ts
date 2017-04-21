@@ -10,6 +10,21 @@ export function canApply(person: Person, transition: Transition): boolean {
     return satisfyPrerequisiteCombination(person, transition.prerequisiteList)
 }
 
+const suitabilityCache: any = {}
+
+export function calcSuitability(person: Person, path: Path): number {
+    // TODO: Proper logic
+    const id = path.transitions[0].id
+    if (suitabilityCache[id]) {
+        return suitabilityCache[id]
+    }
+    else {
+        const suitability = Math.random()
+        suitabilityCache[id] = suitability
+        return suitability
+    }
+}
+
 
 export function calcSuitablePaths(user: Person, allTransitions: Transition[]): Path[] {
 
@@ -29,11 +44,11 @@ export function calcSuitablePaths(user: Person, allTransitions: Transition[]): P
         },
     ]
 
-    const paths: Path[] = applicableTransitions.map(
-        transition => ({
+    const paths: Path[] = applicableTransitions
+        .map(transition => ({
             transitions: [transition],
-        })
-    )
+        }))
+        .sort((pathA, pathB) => calcSuitability(user, pathA) - calcSuitability(user, pathB))
     return paths
 }
 
