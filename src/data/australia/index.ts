@@ -37,9 +37,9 @@ const australia: Region = {
         businessTalent,
         businessInnovation,
 
-        employerNominationDirectEntry,
-        employerNominationTemporaryResidenceTransition,
-        employerNominationAgreement,
+        // employerNominationDirectEntry,
+        // employerNominationTemporaryResidenceTransition,
+        // employerNominationAgreement,
 
         temporaryWorkSkilled,
     ],

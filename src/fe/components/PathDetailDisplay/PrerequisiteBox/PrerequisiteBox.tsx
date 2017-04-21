@@ -9,6 +9,8 @@ import FundBox from './FundBox'
 import RightBox from './RightBox'
 import OfferBox from './OfferBox'
 import CertificationBox from './CertificationBox'
+import AgeBox from './AgeBox'
+import BusinessBox from './BusinessBox'
 
 interface Props {
     prereq: Prerequisite
@@ -17,24 +19,38 @@ interface Props {
 class PrerequisiteBox extends React.PureComponent<Props, {}> {
     render() {
         const prereq = this.props.prereq
-        if (prereq.prereqId === "language_test") {
-            return <LanguageBenchmarkBox prereq={prereq}/>
-        } else if (prereq.prereqId === "work_experience") {
-            return <WorkExperienceBox prereq={prereq} />
-        } else if (prereq.prereqId === "education") {
-            return  <EducationBox prereq={prereq} />
-        } else if (prereq.prereqId === "fund") {
-            return <FundBox prereq={prereq} />
-        } else if (prereq.prereqId === "right") {
-            return <RightBox prereq={prereq} />
-        } else if (prereq.prereqId === "offer") {
-            return <OfferBox prereq={prereq} />
-        } else if (prereq.prereqId === "certification") {
-            return <CertificationBox prereq={prereq} />
-        }
-        else {
-            console.warn("Unknown prereq:", JSON.stringify(prereq))
-            return <div>{JSON.stringify(prereq)}</div>
+        switch (prereq.prereqId) {
+            case "language_test": {
+                return <LanguageBenchmarkBox prereq={prereq}/>
+            }
+            case "work_experience": {
+                return <WorkExperienceBox prereq={prereq} />
+            }
+            case "education": {
+                return  <EducationBox prereq={prereq} />
+            }
+            case "fund": {
+                return <FundBox prereq={prereq} />
+            }
+            case "right": {
+                return <RightBox prereq={prereq} />
+            }
+            case "offer": {
+                return <OfferBox prereq={prereq} />
+            }
+            case "certification": {
+                return <CertificationBox prereq={prereq} />
+            }
+            case "age": {
+                return <AgeBox prereq={prereq} />
+            }
+            case "business": {
+                return <BusinessBox prereq={prereq} />
+            }
+            default: {
+                console.warn("Unknown prereq:", JSON.stringify(prereq))
+                return <noscript />
+            }
         }
     }
 }

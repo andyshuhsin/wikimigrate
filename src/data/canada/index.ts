@@ -39,7 +39,7 @@ const canada: Region = {
     transitionList: [
         // visaExemption,
         federalSkilledWorker,
-        // federalSkilledTrade,
+        federalSkilledTrade,
         // canadianExperience,
         // quebecSkilled,
         startupVisa,

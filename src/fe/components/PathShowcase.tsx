@@ -15,6 +15,7 @@ const pathShowcaseStyle = {
     justifyContent: "space-around",
     overflow: "scroll",
     padding: "1em",
+    paddingBottom: "3em",
 } as React.CSSProperties
 
 

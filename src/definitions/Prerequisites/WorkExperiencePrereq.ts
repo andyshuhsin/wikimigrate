@@ -13,7 +13,7 @@ export interface WorkExperiencePrereq extends BasePrereq {
     workHoursPerWeek?: Duration
     region: RegionId
     regionExcept?: RegionId // TODO: unify with region + logic operators
-    jobNature?: Combination<JobGroup | JobType> | MultiLangStringSet
+    jobNature?: Combination<JobGroup | JobType | MultiLangStringSet>
 }
 
 export default WorkExperiencePrereq

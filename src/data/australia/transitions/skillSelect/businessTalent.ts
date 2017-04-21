@@ -1,5 +1,5 @@
 import Transition from "../../../../definitions/Transition"
-import {allOf} from "../../../../definitions/auxillary/Combination"
+import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
 import {money} from "../../../../definitions/auxillary/Money"
 import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq"
 import {duration} from "../../../../definitions/auxillary/Duration"
@@ -20,7 +20,7 @@ const businessTalent: Transition = {
     },
     from: alien,
     to: visa132holder,
-    prerequisiteList: allOf([
+    prerequisiteList: oneOf([
 
         // Significant Business History
         allOf([
@@ -44,10 +44,14 @@ const businessTalent: Transition = {
                     }
                 ]
             } as BusinessPrereq
-        ]),
+        ], {
+            title: {
+                en: "Significant Business History",
+            }
+        }),
 
         // Venture Capital Entrepreneur
-        {
+        identity([{
             prereqId: "fund",
             type: "investee",
             schemes: [
@@ -55,7 +59,9 @@ const businessTalent: Transition = {
                     fund: money(1000000, "aud")
                 }
             ]
-        } as FundPrereq
+        } as FundPrereq], {
+            title: "Venture Capital Entrepreneur"
+        })
 
     ]),
     procedureList: [

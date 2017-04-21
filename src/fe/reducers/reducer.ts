@@ -127,10 +127,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 newState.ui.shouldDetailedFilterPanelExpand = false
                 return newState
             }
-            else if (action.payload.keyCode === F_KEY_CODE) {
-                newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
-                return newState
-            }
+            // else if (action.payload.keyCode === F_KEY_CODE) {
+            //     newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
+            //     return newState
+            // }
             return state
         }
 

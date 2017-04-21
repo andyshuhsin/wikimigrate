@@ -1,4 +1,4 @@
-import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";
@@ -20,15 +20,15 @@ const atlanticJobOfferCommon = allOf([
 const atlanticWorkersJob = allOf([
     {
         prereqId: "work_experience",
-        jobNature: {
+        jobNature: identity([{
             en: "You must have worked at least one year (1,560 hours total or 30 hours per week) within the last three years.",
-        }
+        }])
     } as WorkExperiencePrereq,
     {
         prereqId: "work_experience",
-        jobNature: {
+        jobNature: identity([{
             en: "The work must be in one occupation (but can be with different employers) and paid (volunteering or unpaid internships do not count)"
-        }
+        }])
     } as WorkExperiencePrereq,
 ])
 

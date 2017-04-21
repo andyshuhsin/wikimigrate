@@ -7,7 +7,7 @@ export interface BusinessPrereq extends BasePrereq {
     schemes: [
         {
             condition: {
-                turnover?: Money
+                turnover: Money
                 duration: Duration
             }
         }

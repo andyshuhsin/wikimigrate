@@ -71,13 +71,11 @@ function getConditionsFromAgeTable(table: AgeTable): ScoreCondition[] {
                 } as UnionPrereq,
                 {
                     prereqId: "age",
-                    value: duration(age, "year"),
-                    operator: ">=",
+                    value: [">=", duration(age, "year")],
                 } as AgePrereq,
                 {
                     prereqId: "age",
-                    value: duration(age + 1, "year"),
-                    operator: "<",
+                    value: ["<", duration(age + 1, "year")],
                 } as AgePrereq,
             ])
         }
@@ -944,6 +942,20 @@ const crs: ScoreSystem = {
             conditions: additionalPointsTable,
         }
     },
+    history: [
+        {
+            lowestScore: 423,
+            date: [2017, 4, 12],
+        },
+        {
+            lowestScore: 431,
+            date: [2017, 4, 5],
+        },
+        {
+            lowestScore: 441,
+            date: [2017, 3, 24],
+        },
+    ],
     reference: {
         url: "http://www.cic.gc.ca/english/express-entry/grid-crs.asp"
     }
