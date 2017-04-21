@@ -68,7 +68,9 @@ export const competentEnglish =  oneOf([
             rightId: "ireland"
         } as RightPrereq,
     ], {
-        title: "Exempted for those from English-speaking countries"
+        title: {
+            en: "Exempted for those from English-speaking countries"
+        }
     }),
 
 ], {
