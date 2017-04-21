@@ -177,10 +177,10 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
             if (typeof person.birth.date !== "undefined") {
                 const birthYear = person.birth.date.year
                 const birthMonth = person.birth.date.month || 0
-                const criticalDate = getCriticalDate(prereq.value)
+                const criticalDate = getCriticalDate(prereq.value[1])
                 const date = new Date(birthYear, birthMonth)
                 // Notice d1 < d2 means d1 happens before d2
-                return compare(prereq.operator, criticalDate, date)
+                return compare(prereq.value[0], criticalDate, date)
             }
             return DEFAULT_RESULT
         }

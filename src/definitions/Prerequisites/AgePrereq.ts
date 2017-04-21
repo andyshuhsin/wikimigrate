@@ -1,11 +1,10 @@
 import { Duration } from '../auxillary/Duration'
 import BasePrereq from './BasePrereq'
-import {ArithmeticComparisonOperator} from "../auxillary/Operator"
+import {ArithmeticComparisonOperator, Interval} from "../auxillary/Operator"
 
 interface AgePrereq extends BasePrereq {
     prereqId: "age"
-    value: Duration
-    operator: ArithmeticComparisonOperator
+    value: Interval<Duration>
 }
 
 export default AgePrereq

@@ -71,13 +71,11 @@ function getConditionsFromAgeTable(table: AgeTable): ScoreCondition[] {
                 } as UnionPrereq,
                 {
                     prereqId: "age",
-                    value: duration(age, "year"),
-                    operator: ">=",
+                    value: [">=", duration(age, "year")],
                 } as AgePrereq,
                 {
                     prereqId: "age",
-                    value: duration(age + 1, "year"),
-                    operator: "<",
+                    value: ["<", duration(age + 1, "year")],
                 } as AgePrereq,
             ])
         }
