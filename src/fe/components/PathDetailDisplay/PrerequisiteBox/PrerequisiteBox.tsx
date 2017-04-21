@@ -9,6 +9,7 @@ import FundBox from './FundBox'
 import RightBox from './RightBox'
 import OfferBox from './OfferBox'
 import CertificationBox from './CertificationBox'
+import AgeBox from './AgeBox'
 
 interface Props {
     prereq: Prerequisite
@@ -38,6 +39,9 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
             }
             case "certification": {
                 return <CertificationBox prereq={prereq} />
+            }
+            case "age": {
+                return <AgeBox prereq={prereq} />
             }
             default: {
                 console.warn("Unknown prereq:", JSON.stringify(prereq))
