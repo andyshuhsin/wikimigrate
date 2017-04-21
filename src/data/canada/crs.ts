@@ -944,6 +944,20 @@ const crs: ScoreSystem = {
             conditions: additionalPointsTable,
         }
     },
+    history: [
+        {
+            lowestScore: 423,
+            date: [2017, 4, 12],
+        },
+        {
+            lowestScore: 431,
+            date: [2017, 4, 5],
+        },
+        {
+            lowestScore: 441,
+            date: [2017, 3, 24],
+        },
+    ],
     reference: {
         url: "http://www.cic.gc.ca/english/express-entry/grid-crs.asp"
     }

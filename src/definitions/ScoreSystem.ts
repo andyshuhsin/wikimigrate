@@ -4,6 +4,13 @@ import {MultiLangStringSet} from "./auxillary/MultiLang"
 import URLDatum from "./auxillary/URLDatum"
 export type ScoreSystemId = "crs"
 
+export interface ScoreHistoryEntry {
+    lowestScore: number
+    date: [number, number, number]
+}
+
+export type ScoreHistory = ScoreHistoryEntry[]
+
 export interface ScoreCondition {
     score: number
     prerequisites: Combination<Prerequisite>
@@ -22,5 +29,6 @@ export interface ScoreSystem {
             conditions: ScoreCondition[]
         }
     }
+    history: ScoreHistory
     reference: URLDatum
 }

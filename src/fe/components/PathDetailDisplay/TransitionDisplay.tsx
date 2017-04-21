@@ -4,6 +4,7 @@ import text from "../../utils/text"
 import CombinationBox from './CombinationBox'
 import ProcedureBox from './ProcedureBox'
 import ReferenceBox from './ReferenceBox'
+import ScoreBox from './ScoreBox'
 import Transition from "../../../definitions/Transition";
 import {RegionId} from "../../../definitions/auxillary/Region"
 import {calcScore} from "../../utils/calcScore"
@@ -71,17 +72,23 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 {
                     transition.scoreSystem &&
                     <section>
-                        {calcScore(this.props.user, transition.scoreSystem)}
+                        <h3 style={sectionTitleStyle}>Scoring (Experimental)</h3>
+                        <ScoreBox
+                            score={calcScore(this.props.user, transition.scoreSystem)}
+                            history={transition.scoreSystem.history}
+                            name={text(transition.scoreSystem.name)}
+                        />
                     </section>
                 }
 
-                {/* TODO: Implement procedural guides */}
-                {/*<section>*/}
-                    {/*<h3 style={sectionTitleStyle}>Application</h3>*/}
-                    {/*{*/}
-                        {/*<ProcedureBox procedureList={transition.procedureList} />*/}
-                    {/*}*/}
-                {/*</section>*/}
+                {/* TODO: Implement procedural guides
+                <section>
+                    <h3 style={sectionTitleStyle}>Application</h3>
+                    {
+                        <ProcedureBox procedureList={transition.procedureList} />
+                    }
+                </section>
+                */}
 
                 {
                     transition.referenceList &&
