@@ -4,7 +4,6 @@ import data from "../../../../data/index"
 
 const BusinessBox = (props: {prereq: BusinessPrereq}) => (
     <div>
-        {console.info(props.prereq.schemes)}
         {props.prereq.schemes.map(scheme => (
             <div key={scheme.condition.duration.value}>
                 Your business turnover is {" "}

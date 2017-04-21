@@ -2,6 +2,9 @@ const webpack = require('webpack')
 const path = require("path")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const ManifestPlugin = require("webpack-manifest-plugin")
+const  ChunkManifestPlugin = require("chunk-manifest-webpack-plugin")
+const WebpackMd5Hash = require("webpack-md5-hash")
 
 module.exports = {
     entry: {
@@ -50,6 +53,12 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             names: ['external', 'manifest']
+        }),
+        new WebpackMd5Hash(),
+        new ManifestPlugin(),
+        new ChunkManifestPlugin({
+            filename: "chunk-manifest.json",
+            manifestVariable: "webpackManifest"
         }),
         new CopyWebpackPlugin([
             {from: 'about.html', to: '.'},

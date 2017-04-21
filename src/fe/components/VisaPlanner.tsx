@@ -12,8 +12,8 @@ import Shade from './Shade'
 import sys from '../sys'
 
 import {
-    Path,
-} from '../utils/definitions'
+    Path, PathDescriptor,
+} from "../utils/definitions"
 
 import calcSuitablePaths from "../utils/calcSuitablePaths"
 
@@ -51,7 +51,7 @@ const style = {
 
 interface PropTypes {
     user: Person
-    pathOnDisplay: Path | null
+    pathOnDisplay: PathDescriptor | null
     onFilterBarClick: () => void
     onShadeClick: () => void
     onPathBoxClick: (path: Path) => void
@@ -74,6 +74,17 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
             this.props.onKeyDown(event.keyCode)
     }
 
+    getPaths(pathDescriptor: PathDescriptor | null): Path | null {
+        if (!pathDescriptor) {
+            return null
+        }
+        return {
+            transitions: pathDescriptor.transitionIds.map(
+                id => allTransitions.filter(transition => transition.id === id)[0]
+            )
+        }
+    }
+
     render() {
 
         const shouldShadeShow = this.props.shouldDetailedFilterPanelExpand
@@ -90,7 +101,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                 />
                 <PathDetailDisplay
                     user={this.props.user}
-                    pathOnDisplay={this.props.pathOnDisplay}
+                    pathOnDisplay={this.getPaths(this.props.pathOnDisplay)}
                     onClose={this.props.onPathViewCloseButtonClick}
                 />
                 <Shade

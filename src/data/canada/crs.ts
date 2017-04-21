@@ -395,8 +395,6 @@ function getConditionsFromFirstLanguageTables(
         }
     }
 
-    console.info(result)
-
     return result
 }
 
