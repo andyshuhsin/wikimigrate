@@ -5,7 +5,7 @@ import {
     FilterState, languageAssumptionSet,
     LanguageFilterId,
 } from "../data"
-import {Path} from "../utils/definitions"
+import {Path, PathDescriptor} from "../utils/definitions"
 import {Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
 import {duration} from "../../definitions/auxillary/Duration"
@@ -25,7 +25,7 @@ export interface VisaPlannerState {
         filterState: FilterState
         shouldDetailedFilterPanelExpand: boolean
         filterPanelHeight: number | null
-        pathOnDisplay: Path | null
+        pathOnDisplay: PathDescriptor | null
     }
 }
 
@@ -236,7 +236,9 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case "PATH_BOX_CLICK": {
-            newState.ui.pathOnDisplay = action.payload.path
+            newState.ui.pathOnDisplay = {
+                transitionIds: action.payload.path.transitions.map(transition => transition.id)
+            }
             return newState
         }
 
