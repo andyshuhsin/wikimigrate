@@ -35,7 +35,7 @@ export const globalImpactVisa: Transition = {
     procedureList: [],
     referenceList: [
         {
-            url: "https://www.immigration.govt.nz/new-zealand-visas/apply-for-a-visa/about-visa/silver-fern-job-search-work-visa",
+            url: "https://www.immigration.govt.nz/new-zealand-visas/options/start-a-business-or-invest/i-want-to-invest-or-do-business-in-nz/the-global-impact-visa",
             title: {
                 en: "Official Page",
                 zh_hans: "官方页面"
