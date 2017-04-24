@@ -10,7 +10,8 @@ const sys = {
             !(/CriOS/).test(userAgent) &&
             !(/FxiOS/).test(userAgent) &&
             !(/OPiOS/).test(userAgent) &&
-            !(/mercury/).test(userAgent)
+            !(/mercury/).test(userAgent) &&
+            !/micromessenger/i.test(userAgent)
         ),
         iosWechat: /micromessenger/i.test(userAgent),
     },
