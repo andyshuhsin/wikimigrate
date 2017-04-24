@@ -6,7 +6,7 @@ export interface FundPrereqCondition {
     source: FundSourceGroup
 }
 
-export interface FundPrereq extends BasePrereq {
+export interface FundPrereqWithMoney extends BasePrereq {
     prereqId: "fund"
     type: "possess" | "investor" | "investee" | "donate"
     schemes: [
@@ -16,5 +16,21 @@ export interface FundPrereq extends BasePrereq {
         }
     ]
 }
+
+export interface FundPrereqAdmission extends BasePrereq {
+    prereqId: "fund"
+    type: "admission"
+    schemes: [
+        {
+            fund: null
+            condition: {
+                source: FundSourceGroup
+            }
+        }
+    ]
+
+}
+
+export type FundPrereq = FundPrereqWithMoney | FundPrereqAdmission
 
 export default FundPrereq
