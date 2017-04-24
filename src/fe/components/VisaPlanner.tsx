@@ -36,7 +36,7 @@ const style = {
     position: "relative",
     margin: 0,
     padding: 0,
-    height: sys.ua.iosSafari
+    height: sys.ua.iosSafari && !sys.ua.iosWechat
             ? `calc(100vh - ${sys.dimensions.iosSafariBottomBarHeight}px)`
             : "100vh",
 

@@ -11,7 +11,8 @@ const sys = {
             !(/FxiOS/).test(userAgent) &&
             !(/OPiOS/).test(userAgent) &&
             !(/mercury/).test(userAgent)
-        )
+        ),
+        iosWechat: /micromessenger/i.test(userAgent),
     },
     dimensions: {
         iosSafariBottomBarHeight: 69
