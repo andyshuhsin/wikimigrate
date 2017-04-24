@@ -19,7 +19,7 @@ const skilledNominated: Transition = {
     acquireBy: "application",
     name: {
         en: "Skilled Nominated visa (subclass 190)",
-        "zh-hans": "州担保技术移民(190)"
+        zh_hans: "州担保技术移民(190)"
     },
     from: alien,
     to: visa190holder,

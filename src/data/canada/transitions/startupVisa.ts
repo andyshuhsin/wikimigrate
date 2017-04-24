@@ -19,9 +19,9 @@ const startupVisa: Transition = {
     regionId: "canada",
     acquireBy: "application",
     name: {
-        "en": "Startup Visa",
-        "zh-hans": "创业签证",
-        "zh-hant": "創業簽證",
+        en: "Startup Visa",
+        zh_hans: "创业签证",
+        zh_hant: "創業簽證",
     },
     from: alien,
     to: pr,

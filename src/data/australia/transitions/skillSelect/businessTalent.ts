@@ -16,7 +16,7 @@ const businessTalent: Transition = {
     acquireBy: "application",
     name: {
         en: "Business Talent (Permanent) visa (subclass 132)",
-        "zh-hans": "商业移民(132)"
+        zh_hans: "商业移民(132)"
     },
     from: alien,
     to: visa132holder,

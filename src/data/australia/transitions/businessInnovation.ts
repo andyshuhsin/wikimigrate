@@ -16,7 +16,7 @@ const businessInnovation: Transition = {
     acquireBy: "application",
     name: {
         en: "Business Innovation and Investment (Provisional) visa (subclass 188)",
-        "zh-hans": "商业移民(188)"
+        zh_hans: "商业移民(188)",
     },
     from: alien,
     to: visa188holder,

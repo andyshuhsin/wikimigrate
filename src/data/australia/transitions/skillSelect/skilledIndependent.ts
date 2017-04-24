@@ -19,7 +19,7 @@ const skilledIndependent: Transition = {
     acquireBy: "application",
     name: {
         en: "Skilled Independent visa (subclass 189)",
-        "zh-hans": "独立技术移民(189)"
+        zh_hans: "独立技术移民(189)",
     },
     from: alien,
     to: visa189holder,

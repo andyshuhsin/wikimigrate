@@ -56,6 +56,9 @@ export type FundSourceId =
     | "toronto"
     | "waterloo"
 
+    // Kiwi
+    | "ehf"
+
 
 export interface FundSource {
     fundSourceId: FundSourceId
@@ -67,6 +70,7 @@ export type FundSourceGroupId =
     "canada-designated-venture-capital-funds"
     | "canada-designated-angel-investor-groups"
     | "canada-designated-business-incubators"
+    | "new_zealand_edmund_hillary_fellowship"
 
 export interface FundSourceGroup {
     fundSourceGroupId: FundSourceGroupId

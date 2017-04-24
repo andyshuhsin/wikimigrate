@@ -4,7 +4,7 @@ const lang: LangId = "en"
 
 const brandName: MultiLangStringSet = {
     en: "The Good Move",
-    "zh-hans": "跑得快"
+    zh_hans: "跑得快"
 }
 
 const version: string = "0.61"

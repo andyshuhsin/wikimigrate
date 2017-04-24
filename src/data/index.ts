@@ -3,10 +3,12 @@ import australia from './australia'
 import app from './app'
 import common from './common'
 import {Region, RegionId} from "../definitions/auxillary/Region"
+import new_zealand from "./new_zealand/index"
 
 const regions = [
     canada,
     australia,
+    new_zealand,
 ]
 
 function getRegionById(targetId: RegionId, regionList = regions): Region | null {
