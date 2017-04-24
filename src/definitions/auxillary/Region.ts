@@ -10,6 +10,7 @@ export type RegionId =
     "world"
     | "canada"
     | "australia"
+    | "new_zealand"
     | "canada_pacific_provinces"
 
 export interface Region {
