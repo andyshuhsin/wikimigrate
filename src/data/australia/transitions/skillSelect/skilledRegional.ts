@@ -20,7 +20,7 @@ const skilledRegional: Transition = {
     acquireBy: "application",
     name: {
         en: "Skilled Regional (Provisional) visa (subclass 489)",
-        "zh-hans": "偏远地区担保技术移民(189)"
+        zh_hans: "偏远地区担保技术移民(189)"
     },
     from: alien,
     to: visa189holder,

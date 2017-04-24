@@ -23,7 +23,7 @@ const federalSkilledWorker: Transition = {
     acquireBy: "application",
     name: {
         en: "Federal Skilled Worker Program",
-        "zh-hans": "联邦技术移民(Federal Skilled Worker Program, FSW)"
+        zh_hans: "联邦技术移民(Federal Skilled Worker Program, FSW)"
     },
     from: alien,
     to: expressEntryCandidate,
@@ -139,23 +139,23 @@ const federalSkilledWorker: Transition = {
         {
             name: {
                 en: "Check eligiblility",
-                "zh-hans": "确认有权申请"
+                zh_hans: "确认有权申请",
             },
             description: {
                 en: "Go to http://www.cic.gc.ca/ctc-vac/ee-start.asp and check your eligibility",
-                "zh-hans": "访问http://www.cic.gc.ca/ctc-vac/ee-start.asp，确认您有权申请"
+                zh_hans: "访问http://www.cic.gc.ca/ctc-vac/ee-start.asp，确认您有权申请",
             }
         },
         {
             name: {
                 en: "Create Express Entry Profile",
-                "zh-hans": "设立Express Entry档案"
+                zh_hans: "设立Express Entry档案",
             },
         },
         {
             name: {
                 en: "Wait for invitation",
-                "zh-hans": "等待邀请"
+                zh_hans: "等待邀请",
             }
         }
     ],

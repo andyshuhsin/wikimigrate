@@ -25,7 +25,7 @@ const FilterBar = (props: FilterBarProps) => (
         {
             text({
                 en: "Filters",
-                "zh-hans": "更多筛选",
+                zh_hans: "更多筛选",
             })
         }
         <img

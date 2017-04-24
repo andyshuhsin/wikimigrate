@@ -1,7 +1,7 @@
 export type LangId =
     "en"
-    | "zh-hans"
-    | "zh-hant"
+    | "zh_hans"
+    | "zh_hant"
     | "fr"
 
 export type MultiLangStringSet = {
