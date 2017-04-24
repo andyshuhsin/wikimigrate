@@ -43,6 +43,7 @@ export const INITIAL_STATE: VisaPlannerState = {
             canada: ["alien"],
             australia: ["alien"],
             canada_pacific_provinces: ["alien"],
+            new_zealand: ["alien"],
         },
         education: undefined,
         languageTests: undefined,

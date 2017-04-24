@@ -20,6 +20,9 @@ const person: Person = {
         ],
         "canada_pacific_provinces": [
             "alien"
+        ],
+        new_zealand: [
+            "alien"
         ]
     },
     "languageTests": [

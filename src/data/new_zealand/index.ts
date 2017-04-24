@@ -20,9 +20,10 @@ const new_zealand: Region = {
     ],
     referenceList: [
         {
-            url: "http://www.australia.gov.au/information-and-services/immigration-and-visas",
+            url: "https://www.immigration.govt.nz/new-zealand-visas",
             title: {
-                en: "Immigration and Visas"
+                en: "New Zealand Visas",
+                zh_hans: "新西兰签证"
             }
         }
     ],
