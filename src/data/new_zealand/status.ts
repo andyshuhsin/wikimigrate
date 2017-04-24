@@ -12,6 +12,19 @@ export const citizenship: Status = {
     ]
 }
 
+export const silverFernHolder: Status = {
+    id: "silver_fern",
+    regionId: "new_zealand",
+    name: {
+        en: "Silver Fern",
+        zh_hans: "银蕨",
+    },
+    rights: [
+        "work"
+    ],
+    duration: duration(9, "month")
+}
+
 export const pr: Status = {
     id: "permanent",
     regionId: "new_zealand",

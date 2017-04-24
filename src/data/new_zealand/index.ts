@@ -5,6 +5,7 @@ import {
     pr,
     alien
 } from "./status"
+import {silverFern} from "./transitions/silverFern"
 
 const new_zealand: Region = {
     id: "new_zealand",
@@ -17,6 +18,7 @@ const new_zealand: Region = {
         alien
     ],
     transitionList: [
+        silverFern,
     ],
     referenceList: [
         {
