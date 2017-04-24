@@ -34,14 +34,14 @@ const australia: Region = {
         skilledIndependent,
         skilledNominated,
         skilledRegional,
-        businessTalent,
-        businessInnovation,
+        // businessTalent,
+        // businessInnovation,
 
         // employerNominationDirectEntry,
         // employerNominationTemporaryResidenceTransition,
         // employerNominationAgreement,
 
-        temporaryWorkSkilled,
+        // temporaryWorkSkilled,
     ],
     referenceList: [
         {
