@@ -77,6 +77,17 @@ const FundBox = (props: {prereq: FundPrereq}) => {
             </div>
         )
     }
+    else if (props.prereq.type === "admission") {
+        const source = props.prereq.schemes[0].condition.source
+        return (
+            <div>
+                You are admitted by
+                <a href={source.reference.url}>
+                    {text(source.name)}
+                </a>
+            </div>
+        )
+    }
     else {
         console.warn("Unimplemented: cannot handle FundPreq", props.prereq)
         return <noscript />

@@ -25,6 +25,19 @@ export const silverFernHolder: Status = {
     duration: duration(9, "month")
 }
 
+export const globalImpactVisaHolder: Status = {
+    id: "new_zealand_global_impact_visa_holder",
+    regionId: "new_zealand",
+    name: {
+        en: "Global Impact Visa Holder",
+        zh_hans: "全球影响力签证持有人",
+    },
+    rights: [
+        "work"
+    ],
+    duration: duration(9, "month")
+}
+
 export const pr: Status = {
     id: "permanent",
     regionId: "new_zealand",

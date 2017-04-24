@@ -6,6 +6,7 @@ import {
     alien
 } from "./status"
 import {silverFern} from "./transitions/silverFern"
+import {globalImpactVisa} from "./transitions/globalImpact"
 
 const new_zealand: Region = {
     id: "new_zealand",
@@ -19,6 +20,7 @@ const new_zealand: Region = {
     ],
     transitionList: [
         silverFern,
+        globalImpactVisa,
     ],
     referenceList: [
         {
