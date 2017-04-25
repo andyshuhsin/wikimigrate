@@ -2,6 +2,7 @@ import {LanguageFilterId, FilterId, OptionId} from "../data"
 import {Path} from "../utils/definitions"
 import {EducationStage} from "../../definitions/Qualities/EducationExperience"
 import {RegionId} from "../../definitions/auxillary/Region"
+import {LangId} from "../../definitions/auxillary/MultiLang"
 
 interface BaseOptionClickAction {
     type: "FILTER_OPTION_CLICK"
@@ -60,12 +61,20 @@ interface OptionClickAction_WorkExperienceDuration extends BaseOptionClickAction
     }
 }
 
+interface OptionClickAction_AppLang extends BaseOptionClickAction {
+        payload: {
+            filterId: "app_lang",
+            value: LangId,
+        }
+}
+
 export type OptionClickAction_MultipleChoice =
     OptionClickAction_EducationLevel
     | OptionClickAction_EducationRegion
     | OptionClickAction_English
     | OptionClickAction_French
     | OptionClickAction_WorkExperienceRegion
+    | OptionClickAction_AppLang
 
 export type OptionClickAction_RealVallue =
     OptionClickAction_Age

@@ -34,7 +34,7 @@ else {
     state = INITIAL_STATE
 }
 
-const store = createStore<VisaPlannerState>(
+export const store = createStore<VisaPlannerState>(
     reducer,
     state,
     enhancer,

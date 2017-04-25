@@ -1,11 +1,11 @@
-import { app } from '../../data'
 import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {store} from "../main"
 
 const fallbackLangList: LangId[] = ["en", "fr"]
 
 export function text(
     s: MultiLangStringSet | string | null | undefined,
-    lang: LangId = app.lang,
+    lang: LangId = store.getState().ui.lang,
     fallbackLangs = fallbackLangList): string {
        if (s === null || typeof s === "undefined") {
            return ''

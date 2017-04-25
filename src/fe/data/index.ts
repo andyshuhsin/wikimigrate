@@ -11,6 +11,7 @@ export type FilterId =
     | "age"
     | "english"
     | "french"
+    | "app_lang"
 
 export type FilterOption = {
     id: OptionId
@@ -297,6 +298,27 @@ export const filterSets: Filter[] = [
                 id: "proficient",
                 label: {
                     en: "Proficient"
+                }
+            },
+        ]
+    },
+    {
+        id: "app_lang",
+        filterType: "multiple-choice",
+        title: {
+            en: "Choose App Language"
+        },
+        options: [
+            {
+                id: "en",
+                label: {
+                    en: "English"
+                }
+            },
+            {
+                id: "zh_hans",
+                label: {
+                    en: "简体中文"
                 }
             },
         ]
