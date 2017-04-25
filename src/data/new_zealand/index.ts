@@ -12,6 +12,7 @@ const new_zealand: Region = {
     id: "new_zealand",
     name: {
         en: "New Zealand",
+        zh_hans: "新西兰",
     },
     statusList: [
         citizenship,

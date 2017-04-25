@@ -28,7 +28,8 @@ import crs from "./crs"
 const canada: Region = {
     id: "canada",
     name: {
-        en: "Canada"
+        en: "Canada",
+        zh_hans: "加拿大",
     },
     statusList: [
         citizenship,
