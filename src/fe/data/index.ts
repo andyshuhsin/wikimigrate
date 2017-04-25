@@ -161,6 +161,13 @@ interface RegionOption {
 
 const RegionOptions: RegionOption[] = [
     {
+        id: "new_zealand",
+        label: {
+            en: "New Zealand",
+            zh_hans: "新西兰",
+        }
+    },
+    {
         id: "australia",
         label: {
             en: "Australia",
@@ -172,13 +179,6 @@ const RegionOptions: RegionOption[] = [
         label: {
             en: "Canada",
             zh_hans: "加拿大",
-        }
-    },
-    {
-        id: "new_zealand",
-        label: {
-            en: "New Zealand",
-            zh_hans: "新西兰",
         }
     },
     {
