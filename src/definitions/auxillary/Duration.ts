@@ -1,4 +1,4 @@
-type DurationUnit = "year" | "month" | "week" | "day" | "hour"
+export type DurationUnit = "year" | "month" | "week" | "day" | "hour"
 
 type Duration = {
     unit: DurationUnit

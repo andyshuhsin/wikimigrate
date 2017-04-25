@@ -11,20 +11,26 @@ import OfferBox from './OfferBox'
 import CertificationBox from './CertificationBox'
 import AgeBox from './AgeBox'
 import BusinessBox from './BusinessBox'
+import {getCurrentLang} from "../../../utils/text"
+import {LangId} from "../../../../definitions/auxillary/MultiLang"
 
 interface Props {
-    prereq: Prerequisite
+    prereq: Prerequisite,
+    lang: LangId,
 }
 
 class PrerequisiteBox extends React.PureComponent<Props, {}> {
     render() {
-        const prereq = this.props.prereq
+        const {
+            prereq,
+            lang,
+        } = this.props
         switch (prereq.prereqId) {
             case "language_test": {
                 return <LanguageBenchmarkBox prereq={prereq}/>
             }
             case "work_experience": {
-                return <WorkExperienceBox prereq={prereq} />
+                return <WorkExperienceBox prereq={prereq} lang={lang} />
             }
             case "education": {
                 return  <EducationBox prereq={prereq} />
@@ -36,7 +42,7 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
                 return <RightBox prereq={prereq} />
             }
             case "offer": {
-                return <OfferBox prereq={prereq} />
+                return <OfferBox prereq={prereq} lang={lang} />
             }
             case "certification": {
                 return <CertificationBox prereq={prereq} />

@@ -28,6 +28,7 @@ import {Region} from "../../definitions/auxillary/Region"
 import {text} from "../utils/text"
 import {calcScore} from "../utils/calcScore"
 import crs from "../../data/canada/crs"
+import {LangId} from "../../definitions/auxillary/MultiLang"
 
 // import {calcScoreTest} from "../utils/calcScore"
 // calcScoreTest()
@@ -51,6 +52,7 @@ const style = {
 
 interface PropTypes {
     user: Person
+    lang: LangId
     pathOnDisplay: PathDescriptor | null
     onFilterBarClick: () => void
     onShadeClick: () => void
@@ -87,7 +89,17 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 
     render() {
 
-        const shouldShadeShow = this.props.shouldDetailedFilterPanelExpand
+        const {
+            user,
+            lang,
+            shouldDetailedFilterPanelExpand,
+            pathOnDisplay,
+            filterPanelHeight,
+            onPathViewCloseButtonClick,
+            onShadeClick,
+            onFilterBarClick,
+            onPathBoxClick,
+        }= this.props
 
         return (
             <div style={style}>
@@ -96,23 +108,24 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                     version={data.app.version}
                 />
                 <PathShowcase
-                    paths={calcSuitablePaths(this.props.user, allTransitions)}
-                    onClick={this.props.onPathBoxClick}
+                    paths={calcSuitablePaths(user, allTransitions)}
+                    onClick={onPathBoxClick}
                 />
                 <PathDetailDisplay
-                    user={this.props.user}
-                    pathOnDisplay={this.getPaths(this.props.pathOnDisplay)}
-                    onClose={this.props.onPathViewCloseButtonClick}
+                    user={user}
+                    pathOnDisplay={this.getPaths(pathOnDisplay)}
+                    onClose={onPathViewCloseButtonClick}
+                    lang={lang}
                 />
                 <Shade
-                    shouldShow={shouldShadeShow}
-                    onClick={this.props.onShadeClick}
+                    shouldShow={shouldDetailedFilterPanelExpand}
+                    onClick={onShadeClick}
                 />
                 <FilterBar
-                    onClick={this.props.onFilterBarClick}
+                    onClick={onFilterBarClick}
                     offset={
-                        this.props.shouldDetailedFilterPanelExpand
-                        ? this.props.filterPanelHeight
+                        shouldDetailedFilterPanelExpand
+                        ? filterPanelHeight
                         : 0
                     }
                 />
@@ -125,6 +138,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
     return {
         user: state.user,
+        lang: state.ui.lang,
         pathOnDisplay: state.ui.pathOnDisplay,
         filterPanelHeight: state.ui.filterPanelHeight,
         shouldDetailedFilterPanelExpand: state.ui.shouldDetailedFilterPanelExpand,

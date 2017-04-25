@@ -6,6 +6,8 @@ import JobGroupBox from './PrerequisiteBox/JobGroupBox'
 import CombinationSubhead from "./CombinationSubhead"
 import {text} from "../../utils/text"
 import {isJobGroup} from "../../../definitions/auxillary/JobClassification"
+import {operators} from "../../../data/common/operators"
+import {LangId} from "../../../definitions/auxillary/MultiLang"
 
 const embeddedCombinationBoxStyle = {
     margin: "0.8em 0",
@@ -14,11 +16,6 @@ const embeddedCombinationBoxStyle = {
 
 function isPrerequisite(input: any): boolean {
     return !!input.prereqId
-}
-
-interface Props {
-    combo: Combination<any>
-    level: number
 }
 
 const branchStyle = {
@@ -39,6 +36,13 @@ const operandViewStyle = {
     marginBottom: "0.2em",
 } as React.CSSProperties
 
+interface Props {
+    combo: Combination<any>
+    level: number
+    lang: LangId
+}
+
+
 class CombinationBox extends React.PureComponent<Props, {}> {
 
     render() {
@@ -50,7 +54,8 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                     combo.combinator === "or" && combo.operands.length >= 3
                     ? <span style={{fontVariant: "small-caps"}}>
                         {text({
-                            en: "One of"
+                            en: "One of",
+                            zh_hans: "至少满足一项：",
                         })}
                     </span>
                     : ''
@@ -62,7 +67,11 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                                 style={operandViewStyle}
                                 key={JSON.stringify(operand) /* FIXME: Excessive? */}
                             >
-                                <this.OperandView operand={operand} level={this.props.level + 1}/>
+                                <this.OperandView
+                                    operand={operand}
+                                    level={this.props.level + 1}
+                                    lang={this.props.lang}
+                                />
                                 {
                                     combo.operands.length === 2
                                     && index === 0
@@ -77,7 +86,7 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                                                 fontVariant: "small-caps",
                                             }
                                         }>
-                                            {combo.combinator}
+                                            {text(operators[combo.combinator].name)}
                                         </div>
                                     )
                                 }
@@ -89,11 +98,11 @@ class CombinationBox extends React.PureComponent<Props, {}> {
         )
     }
 
-    OperandView(props: {operand: any, level: number}): JSX.Element {
+    OperandView(props: {operand: any, level: number, lang: LangId}): JSX.Element {
         if (isCombination(props.operand)) {
-            return <CombinationBox combo={props.operand} level={props.level} />
+            return <CombinationBox combo={props.operand} level={props.level} lang={props.lang} />
         } else if (isPrerequisite(props.operand)) {
-            return <PrerequisiteBox prereq={props.operand} />
+            return <PrerequisiteBox prereq={props.operand} lang={props.lang} />
         } else if (isJobGroup(props.operand)) {
             return <JobGroupBox jobGroup={props.operand} />
         } else {

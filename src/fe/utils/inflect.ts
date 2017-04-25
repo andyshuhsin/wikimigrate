@@ -1,4 +1,5 @@
 import {LangId} from "../../definitions/auxillary/MultiLang"
+import {store} from "../main"
 
 const DEFAULT_LANG: LangId = "en"
 
@@ -16,8 +17,11 @@ function inflect(
     if (options.language) {
         lang = options.language
     }
+    else if (store) {
+        lang = store.getState().ui.lang
+    }
     else {
-        lang = DEFAULT_LANG
+        return DEFAULT_LANG
     }
 
     switch (lang) {

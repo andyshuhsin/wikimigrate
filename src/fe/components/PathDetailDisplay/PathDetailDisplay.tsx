@@ -6,6 +6,7 @@ import {
     Path
 } from '../../utils/definitions'
 import {Person} from "../../../definitions/Person"
+import {LangId} from "../../../definitions/auxillary/MultiLang"
 
 const style = {
     position: "absolute",
@@ -59,6 +60,7 @@ interface Props {
     user: Person
     pathOnDisplay: Path | null
     onClose: (event: any) => void
+    lang: LangId
 }
 
 class PathDetailDisplay extends React.PureComponent<Props, {}> {
@@ -75,6 +77,7 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
                                     user={this.props.user}
                                     transition={transition}
                                     key={transition.id}
+                                    lang={this.props.lang}
                                 />
                         )
                     }

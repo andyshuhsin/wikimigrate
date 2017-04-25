@@ -3,9 +3,18 @@ import {store} from "../main"
 
 const fallbackLangList: LangId[] = ["en", "fr", "zh_hans"]
 
+export function getCurrentLang(): LangId {
+    if (store) {
+        return store.getState().ui.lang
+    }
+    else {
+        return "en"
+    }
+}
+
 export function text(
     s: MultiLangStringSet | string | null | undefined,
-    lang: LangId = store.getState().ui.lang,
+    lang: LangId = getCurrentLang(),
     fallbackLangs = fallbackLangList): string {
        if (s === null || typeof s === "undefined") {
            return ''

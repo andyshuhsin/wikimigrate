@@ -1,5 +1,7 @@
 import {MultiLangStringSet} from "./MultiLang"
 
+export type Combinator = "and" | "or" | "not"
+
 export type CombinationMeta = Partial<{
     title: MultiLangStringSet
 
@@ -24,7 +26,7 @@ export type CombinationMeta = Partial<{
 }>
 
 export interface Combination<T> {
-    combinator: "and" | "or" | "not"
+    combinator: Combinator
     operands: Array<T | Combination<T>>
     meta?: CombinationMeta
 }

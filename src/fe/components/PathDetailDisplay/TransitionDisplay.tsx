@@ -9,6 +9,7 @@ import Transition from "../../../definitions/Transition";
 import {RegionId} from "../../../definitions/auxillary/Region"
 import {calcScore} from "../../utils/calcScore"
 import {Person} from "../../../definitions/Person"
+import {LangId} from "../../../definitions/auxillary/MultiLang"
 
 const transitionNameStyle = {
     margin: 0,
@@ -41,11 +42,14 @@ const flagSources: {[key in RegionId]: Package | null} = {
 interface Props {
     transition: Transition
     user: Person
+    lang: LangId,
 }
 
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
-        const transition = this.props.transition
+        const {
+            transition, lang
+        } = this.props
         return (
             <div>
                 <h1 style={transitionNameStyle}>
@@ -61,11 +65,19 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 </h2>*/}
 
                 <section>
-                    <h3 style={sectionTitleStyle}>Prerequisites</h3>
+                    <h3 style={sectionTitleStyle}>
+                        {
+                            text({
+                                en: "Prerequisites",
+                                zh_hans: "申请条件",
+                            })
+                        }
+                    </h3>
                     {
                         <CombinationBox
                             combo={transition.prerequisiteList}
                             level={0}
+                            lang={lang}
                         />
                     }
                 </section>

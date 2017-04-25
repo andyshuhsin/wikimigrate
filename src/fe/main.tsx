@@ -40,7 +40,6 @@ export const store = createStore<VisaPlannerState>(
     enhancer,
 )
 
-
 store.subscribe(() => {
     localStorage.setItem(REDUX_STATE_KEY, JSON.stringify(store.getState()))
 })
