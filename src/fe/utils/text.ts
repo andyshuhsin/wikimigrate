@@ -1,7 +1,7 @@
 import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
 import {store} from "../main"
 
-const fallbackLangList: LangId[] = ["en", "fr"]
+const fallbackLangList: LangId[] = ["en", "fr", "zh_hans"]
 
 export function text(
     s: MultiLangStringSet | string | null | undefined,
