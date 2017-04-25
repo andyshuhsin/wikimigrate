@@ -161,21 +161,31 @@ interface RegionOption {
 
 const RegionOptions: RegionOption[] = [
     {
-        id: "canada",
+        id: "australia",
         label: {
-            en: "Canada"
+            en: "Australia",
+            zh_hans: "澳大利亚",
         }
     },
     {
-        id: "australia",
+        id: "canada",
         label: {
-            en: "Australia"
+            en: "Canada",
+            zh_hans: "加拿大",
+        }
+    },
+    {
+        id: "new_zealand",
+        label: {
+            en: "New Zealand",
+            zh_hans: "新西兰",
         }
     },
     {
         id: "world",
         label: {
-            en: "Elsewhere"
+            en: "Elsewhere",
+            zh_hans: "其他",
         }
     },
 ]
@@ -187,7 +197,8 @@ export const filterSets: Filter[] = [
         id: "work_experience_duration",
         filterType: "real",
         title: {
-            en: "Work experience in years"
+            en: "Work experience in years",
+            zh_hans: "工作经验（年）",
         },
         defaultValue: 1,
     },
@@ -195,7 +206,8 @@ export const filterSets: Filter[] = [
         id: "work_experience_region",
         filterType: "multiple-choice",
         title: {
-            en: "Work experience: Where?"
+            en: "Work experience: Where?",
+            zh_hans: "工作经验：地点",
         },
         options: RegionOptions,
     },
@@ -203,31 +215,36 @@ export const filterSets: Filter[] = [
         id: "education_level",
         filterType: "multiple-choice",
         title: {
-            en: "Education: Highest Level"
+            en: "Education: Highest Level",
+            zh_hans: "最高学历",
         },
         options: [
             {
                 id: "secondary",
                 label: {
-                    en: "Secondary"
+                    en: "Secondary",
+                    zh_hans: "高中",
                 }
             },
             {
                 id: "bachelor",
                 label: {
-                    en: "Bachelor"
+                    en: "Bachelor",
+                    zh_hans: "本科",
                 }
             },
             {
                 id: "master",
                 label: {
-                    en: "Master"
+                    en: "Master",
+                    zh_hans: "硕士",
                 }
             },
             {
                 id: "phd",
                 label: {
-                    en: "PhD"
+                    en: "PhD",
+                    zh_hans: "博士",
                 }
             },
         ]
@@ -236,7 +253,8 @@ export const filterSets: Filter[] = [
         id: "education_region",
         filterType: "multiple-choice",
         title: {
-            en: "Highest education: Where?"
+            en: "Highest education: Where?",
+            zh_hans: "最高学历取得地",
         },
         options: RegionOptions,
     },
@@ -244,7 +262,8 @@ export const filterSets: Filter[] = [
         id: "age",
         filterType: "real",
         title: {
-            en: "Age"
+            en: "Age",
+            zh_hans: "年龄",
         },
         defaultValue: DEFAULT_AGE,
     },
@@ -252,25 +271,29 @@ export const filterSets: Filter[] = [
         id: "english",
         filterType: "multiple-choice",
         title: {
-            en: "English"
+            en: "English",
+            zh_hans: "英语能力",
         },
         options: [
             {
                 id: "not_good",
                 label: {
-                    en: "Not good"
+                    en: "Not good",
+                    zh_hans: "不行",
                 }
             },
             {
                 id: "good",
                 label: {
-                    en: "Good"
+                    en: "Good",
+                    zh_hans: "挺好",
                 }
             },
             {
                 id: "proficient",
                 label: {
-                    en: "Proficient"
+                    en: "Proficient",
+                    zh_hans: "流利",
                 }
             },
         ]
@@ -279,26 +302,30 @@ export const filterSets: Filter[] = [
         id: "french",
         filterType: "multiple-choice",
         title: {
-            en: "French"
+            en: "French",
+            zh_hans: "法语能力",
         },
         options: [
             {
                 id: "not_good",
                 label: {
-                    en: "Not good"
-                }
+                    en: "Not good",
+                    zh_hans: "不行",
+                },
             },
             {
                 id: "good",
                 label: {
-                    en: "Good"
-                }
+                    en: "Good",
+                    zh_hans: "挺好",
+                },
             },
             {
                 id: "proficient",
                 label: {
-                    en: "Proficient"
-                }
+                    en: "Proficient",
+                    zh_hans: "流利",
+                },
             },
         ]
     },
@@ -306,7 +333,8 @@ export const filterSets: Filter[] = [
         id: "app_lang",
         filterType: "multiple-choice",
         title: {
-            en: "Choose App Language"
+            en: "Choose App Language",
+            zh_hans: "选择语言",
         },
         options: [
             {
@@ -318,7 +346,7 @@ export const filterSets: Filter[] = [
             {
                 id: "zh_hans",
                 label: {
-                    en: "简体中文"
+                    zh_hans: "简体中文"
                 }
             },
         ]
