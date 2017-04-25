@@ -5,6 +5,7 @@ import Title from './Title'
 import {
     Path
 } from '../utils/definitions'
+import {text} from "../utils/text"
 
 interface PathShowcaseProps {
     paths: Path[]
@@ -23,7 +24,10 @@ const pathShowcaseStyle = {
 const PathShowcase = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
         <Title text={
-            "Mobility options for you"
+            text({
+                en: "Mobility options for you",
+                zh_hans: "签证选项",
+            })
         } />
         {
             props.paths.map((path: Path) =>
