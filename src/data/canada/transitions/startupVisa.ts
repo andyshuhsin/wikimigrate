@@ -53,7 +53,7 @@ const startupVisa: Transition = {
             } as FundPrereq,
             {
                 prereqId: "fund",
-                type: "investee",
+                type: "admission",
                 schemes: [
                     {
                         fund: null,
