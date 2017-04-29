@@ -46,7 +46,7 @@ const startupVisa: Transition = {
                     {
                         fund: money(75000, "cad"),
                         condition: {
-                            source: designatedVentureCapitalFunds
+                            source: designatedAngelInvestors
                         }
                     },
                 ]
