@@ -106,7 +106,12 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 {
                     transition.referenceList &&
                     <section>
-                        <h3 style={sectionTitleStyle}>References</h3>
+                        <h3 style={sectionTitleStyle}>
+                            {text({
+                                en: "References",
+                                zh_hans: "参考资料",
+                            })}
+                        </h3>
                         {
                             <ReferenceBox referenceList={transition.referenceList} />
                         }
