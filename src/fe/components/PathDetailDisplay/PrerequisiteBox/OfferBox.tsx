@@ -2,16 +2,28 @@ import * as React from 'react'
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq"
 import {getCurrentLang, text} from "../../../utils/text"
 import {LangId} from "../../../../definitions/auxillary/MultiLang"
+import data from "../../../../data/index"
 
 const OfferBox = (props: {prereq: OfferPrereq, lang: LangId}) => {
     if (props.lang === "zh_hans") {
-        return (
-            <div>
-                您有来自
-                {text(props.prereq.employer.region)}
-                的offer
-            </div>
-        )
+        const regionId = props.prereq.employer.region
+        if (regionId) {
+            const region = data.getRegionById(regionId)
+            if (!region) {
+                console.warn("Cannot find region", regionId)
+                return <noscript />
+            }
+            return (
+                <div>
+                    您有来自
+                    {text(region.name)}
+                    的offer
+                </div>
+            )
+        }
+        else {
+            return <noscript />
+        }
     }
     else {
         return (
