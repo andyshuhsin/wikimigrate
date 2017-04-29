@@ -85,7 +85,14 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 {
                     transition.scoreSystem &&
                     <section>
-                        <h3 style={sectionTitleStyle}>Scoring (Experimental)</h3>
+                        <h3 style={sectionTitleStyle}>
+                            {
+                                text({
+                                    en: "Scoring(Experimental)",
+                                    zh_hans: "分数(功能测试中)",
+                                })
+                            }
+                        </h3>
                         <ScoreBox
                             score={calcScore(this.props.user, transition.scoreSystem)}
                             history={transition.scoreSystem.history}
