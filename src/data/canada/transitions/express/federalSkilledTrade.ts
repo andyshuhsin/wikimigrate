@@ -64,7 +64,7 @@ const federalSkilledTrade: Transition = {
             {
                 prereqId: "offer",
                 employer: {
-                    regionId: "canada"
+                    region: "canada"
                 },
             } as OfferPrereq,
             {
