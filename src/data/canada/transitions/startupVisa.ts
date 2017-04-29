@@ -79,7 +79,8 @@ const startupVisa: Transition = {
     referenceList: [
         {
             title: {
-                en: "Official homepage"
+                en: "Official page",
+                zh_hans: "官方主页",
             },
             url: "http://www.cic.gc.ca/english/immigrate/business/start-up/",
         }

@@ -54,7 +54,8 @@ const skilledIndependent: Transition = {
         {
             url: "https://www.border.gov.au/Trav/Visa-1/189-",
             title: {
-                en: "Official Webpage"
+                en: "Official page",
+                zh_hans: "官方页面",
             }
         }
     ]

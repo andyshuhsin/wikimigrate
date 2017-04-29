@@ -40,8 +40,8 @@ export const silverFern: Transition = {
         {
             url: "https://www.immigration.govt.nz/new-zealand-visas/apply-for-a-visa/about-visa/silver-fern-job-search-work-visa",
             title: {
-                en: "Official Page",
-                zh_hans: "官方页面"
+                en: "Official page",
+                zh_hans: "官方页面",
             }
         }
     ]

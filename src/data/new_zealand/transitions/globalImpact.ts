@@ -37,8 +37,8 @@ export const globalImpactVisa: Transition = {
         {
             url: "https://www.immigration.govt.nz/new-zealand-visas/options/start-a-business-or-invest/i-want-to-invest-or-do-business-in-nz/the-global-impact-visa",
             title: {
-                en: "Official Page",
-                zh_hans: "官方页面"
+                en: "Official page",
+                zh_hans: "官方页面",
             }
         }
     ]
