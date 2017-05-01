@@ -64,13 +64,14 @@ const federalSkilledTrade: Transition = {
             {
                 prereqId: "offer",
                 employer: {
-                    regionId: "canada"
+                    region: "canada"
                 },
             } as OfferPrereq,
             {
                 prereqId: "certification",
                 description: {
-                    en: "a certificate of qualification in that skilled trade issued by a Canadian provincial or territorial authority"
+                    en: "a certificate of qualification in that skilled trade issued by a Canadian provincial or territorial authority",
+                    zh_hans: "由加拿大省级政府发出的确认专业技能的证明",
                 }
             } as CertificationPrereq
         ], {
@@ -107,7 +108,8 @@ const federalSkilledTrade: Transition = {
     referenceList: [
         {
             title: {
-                en: "Official page"
+                en: "Official page",
+                zh_hans: "官方网页",
             },
             url: "http://www.cic.gc.ca/english/immigrate/trades/apply-who.asp",
         }

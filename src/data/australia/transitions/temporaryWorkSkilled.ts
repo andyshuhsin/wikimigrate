@@ -53,7 +53,8 @@ const temporaryWorkSkilled: Transition = {
         {
             url: "http://www.border.gov.au/Trav/Visa-1/457-",
             title: {
-                en: "Official Webpage"
+                en: "Official page",
+                zh_hans: "官方页面",
             }
         }
     ]

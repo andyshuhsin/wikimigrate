@@ -6,6 +6,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
         title: {
             en: "Canadian Language Benchmark",
             fr: "Niveaux de compétence linguistique canadiens",
+            zh_hans: "加拿大语言标准",
         },
         languages: ["en", "fr"],
         reference: {

@@ -34,12 +34,11 @@ else {
     state = INITIAL_STATE
 }
 
-const store = createStore<VisaPlannerState>(
+export const store = createStore<VisaPlannerState>(
     reducer,
     state,
     enhancer,
 )
-
 
 store.subscribe(() => {
     localStorage.setItem(REDUX_STATE_KEY, JSON.stringify(store.getState()))

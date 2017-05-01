@@ -10,17 +10,62 @@ export type EducationStage =
     | "phd"
     | "professional"
 
-export const educationStages: EducationStage[] = [
-    "primary"
-    , "secondary"
-    , "bachelor"
-    , "master"
-    , "phd"
-    , "professional"
-]
+interface EducationStageProfile {
+    rank: number
+    name: MultiLangStringSet
+}
+
+type EducationStageProfiles = {
+    [key in EducationStage]: EducationStageProfile
+}
+
+export const educationStageProfiles: EducationStageProfiles = {
+    primary: {
+        rank: 1,
+        name: {
+            en: "Primary",
+            zh_hans: "小学",
+        },
+    },
+    secondary: {
+        rank: 2,
+        name: {
+            en: "Secondary",
+            zh_hans: "中学",
+        },
+    },
+    bachelor: {
+        rank: 3,
+        name: {
+            en: "Bachelor",
+            zh_hans: "本科",
+        },
+    },
+    master: {
+        rank: 4,
+        name: {
+            en: "master",
+            zh_hans: "硕士",
+        },
+    },
+    phd: {
+        rank: 5,
+        name: {
+            en: "PhD",
+            zh_hans: "博士",
+        },
+    },
+    professional: {
+        rank: -1,
+        name: {
+            en: "Professional",
+            zh_hans: "职业教育",
+        },
+    }
+}
 
 export function getEducationStageRank(stage: EducationStage): number {
-    return educationStages.indexOf(stage)
+    return educationStageProfiles[stage].rank
 }
 
 export interface EducationQuality {

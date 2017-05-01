@@ -33,7 +33,7 @@ const atlanticInternationalGraduate: Transition = {
         } as EducationPrereq,
         {
             prereqId: "residence",
-            regionId: "canada_pacific_provinces",
+            regionId: "canada_atlantic_provinces",
             duration: duration(16, "month"),
             validPeriod: duration(2, "year"),
         } as ResidencePrereq,

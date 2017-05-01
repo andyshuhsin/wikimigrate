@@ -18,7 +18,7 @@ const person: Person = {
         "australia": [
             "alien"
         ],
-        "canada_pacific_provinces": [
+        "canada_atlantic_provinces": [
             "alien"
         ],
         new_zealand: [

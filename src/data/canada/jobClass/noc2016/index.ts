@@ -11,6 +11,7 @@ export const noc0: JobGroup = {
     specification: "0",
     description: {
         en: "Management occupations",
+        zh_hans: "管理职务",
     },
     parentGroup: null,
     reference: {
@@ -24,6 +25,7 @@ export const noc00: JobGroup = {
     specification: "00",
     description: {
         en: "Senior management occupations",
+        zh_hans: "高级管理职务",
     },
     parentGroup: null,
     reference: {
@@ -37,6 +39,7 @@ export const nocA: JobGroup = {
     specification: "A",
     description: {
         en: "Professional jobs",
+        zh_hans: "专业工作",
     },
     parentGroup: null,
     reference: {
@@ -50,6 +53,7 @@ export const nocB: JobGroup = {
     specification: "B",
     description: {
         en: "Technical jobs and skilled trades",
+        zh_hans: "技术工作和技能工种"
     },
     parentGroup: null,
     reference: {
@@ -63,6 +67,7 @@ export const nocC: JobGroup = {
     specification: "C",
     description: {
         en: "Intermediate jobs",
+        zh_hans: "中级工作",
     },
     parentGroup: null,
     reference: {
@@ -76,6 +81,7 @@ export const nocD: JobGroup = {
     specification: "D",
     description: {
         en: "Labour jobs",
+        zh_hans: "体力工作",
     },
     parentGroup: null,
     reference: {
@@ -88,7 +94,8 @@ export const noc72: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "72",
     description: {
-        en: "Industrial, electrical and construction trades"
+        en: "Industrial, electrical and construction trades",
+        zh_hans: "工业、电器和建筑工种",
     },
     parentGroup: nocB
 }
@@ -98,7 +105,8 @@ export const noc73: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "73",
     description: {
-        en: "Maintenance and equipment operation trades"
+        en: "Maintenance and equipment operation trades",
+        zh_hans: "维修和设备操作工种",
     },
     parentGroup: nocB
 }
@@ -108,7 +116,8 @@ export const noc82: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "74",
     description: {
-        en: "Supervisors and technical jobs in natural resources, agriculture and related production"
+        en: "Supervisors and technical jobs in natural resources, agriculture and related production",
+        zh_hans: "监督和自然资源、农业和相关生产领域的技术工作"
     },
     parentGroup: nocB
 }
@@ -118,7 +127,8 @@ export const noc92: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "92",
     description: {
-        en: "Processing, manufacturing and utilities supervisors and central control operators"
+        en: "Processing, manufacturing and utilities supervisors and central control operators",
+        zh_hans: "加工、制造和基础设施的监督和中央控制操作员",
     },
     parentGroup: nocB
 }
@@ -128,7 +138,8 @@ export const noc632: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "632",
     description: {
-        en: "Chefs and cooks"
+        en: "Chefs and cooks",
+        zh_hans: "厨师",
     },
     parentGroup: nocB
 }
@@ -138,7 +149,8 @@ export const noc633: JobGroup = {
     parentClassificationSystemId: "noc",
     specification: "633",
     description: {
-        en: "Butchers and bakers"
+        en: "Butchers and bakers",
+        zh_hans: "屠宰师和烘焙师",
     },
     parentGroup: nocB
 }

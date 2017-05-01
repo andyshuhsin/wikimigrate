@@ -46,14 +46,14 @@ const startupVisa: Transition = {
                     {
                         fund: money(75000, "cad"),
                         condition: {
-                            source: designatedVentureCapitalFunds
+                            source: designatedAngelInvestors
                         }
                     },
                 ]
             } as FundPrereq,
             {
                 prereqId: "fund",
-                type: "investee",
+                type: "admission",
                 schemes: [
                     {
                         fund: null,
@@ -65,7 +65,8 @@ const startupVisa: Transition = {
             } as FundPrereq,
         ], {
             title: {
-                en: "Venture investment"
+                en: "Venture investment",
+                zh_hans: "风险投资",
             }
         })
     ]),
@@ -79,7 +80,8 @@ const startupVisa: Transition = {
     referenceList: [
         {
             title: {
-                en: "Official homepage"
+                en: "Official page",
+                zh_hans: "官方主页",
             },
             url: "http://www.cic.gc.ca/english/immigrate/business/start-up/",
         }

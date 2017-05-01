@@ -23,7 +23,8 @@ import jobClass from './jobClass'
 const australia: Region = {
     id: "australia",
     name: {
-        en: "Australia"
+        en: "Australia",
+        zh_hans: "澳大利亚",
     },
     statusList: [
         citizenship,

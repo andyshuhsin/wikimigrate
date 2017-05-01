@@ -7,7 +7,7 @@ const atlanticJobOfferCommon = allOf([
     {
         prereqId: "offer",
         employer: {
-            regionId: "canada-atlantic-provinces"  // TODO: Implement this properly
+            region: "canada_atlantic_provinces"  // TODO: Implement this properly
         },
         fulltime: true,
         seasonal: false,

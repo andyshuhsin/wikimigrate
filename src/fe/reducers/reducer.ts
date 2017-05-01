@@ -14,6 +14,7 @@ import {EducationQuality} from "../../definitions/Qualities/EducationExperience"
 import {LanguageTestResult} from "../../definitions/auxillary/LanguageTest"
 import {LangId} from "../../definitions/auxillary/MultiLang"
 import languageTestProfiles from "../../data/common/languageTestProfiles"
+import data from "../../data/index"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
@@ -21,6 +22,7 @@ const F_KEY_CODE = 70
 export interface VisaPlannerState {
     user: Person,
     ui: {
+        lang: LangId
         expandedFilterId: FilterId | null
         filterState: FilterState
         shouldDetailedFilterPanelExpand: boolean
@@ -42,7 +44,7 @@ export const INITIAL_STATE: VisaPlannerState = {
             world: ["alien"],
             canada: ["alien"],
             australia: ["alien"],
-            canada_pacific_provinces: ["alien"],
+            canada_atlantic_provinces: ["alien"],
             new_zealand: ["alien"],
         },
         education: undefined,
@@ -51,6 +53,7 @@ export const INITIAL_STATE: VisaPlannerState = {
         spouse: undefined,
     },
     ui: {
+        lang: data.app.lang,
         shouldDetailedFilterPanelExpand: false,
         filterState: {
             work_experience_duration: null,
@@ -60,6 +63,7 @@ export const INITIAL_STATE: VisaPlannerState = {
             education_level: null,
             education_region: null,
             age: null,
+            app_lang: null,
         },
         filterPanelHeight: null,
         expandedFilterId: null,
@@ -220,6 +224,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                             region: action.payload.value,
                         } as WorkExperienceQuality]
                     }
+                    break
+                }
+                case "app_lang": {
+                    newState.ui.lang = action.payload.value || data.app.lang
                     break
                 }
                 default: {

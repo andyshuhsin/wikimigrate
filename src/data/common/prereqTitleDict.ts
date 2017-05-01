@@ -7,43 +7,56 @@ type PrereqTitleDict = {
 
 export const prereqTitleDict: PrereqTitleDict = {
     education: {
-        en: "Education"
+        en: "Education",
+        zh_hans: "教育",
     },
     age: {
-        en: "Age"
+        en: "Age",
+        zh_hans: "年龄",
     },
     business: {
-        en: "business"
+        en: "business",
+        zh_hans: "生意",
     },
     language_test: {
-        en: "Language"
+        en: "Language",
+        zh_hans: "语言",
     },
     right: {
-        en: "Right"
+        en: "Right",
+        zh_hans: "权利",
     },
     residence: {
-        en: "Residence"
+        en: "Residence",
+        zh_hans: "居住",
     },
     work_experience: {
-        en: "Work Experience"
+        en: "Work Experience",
+        zh_hans: "工作经验",
     },
     fund: {
-        en: "Fund"
+        en: "Fund",
+        zh_hans: "资金",
     },
     certification: {
-        en: "Certification"
+        en: "Certification",
+        zh_hans: "认证",
     },
     offer: {
-        en: "Offer"
+        en: "Offer",
+        zh_hans: "工作合约",
     },
     union: {
-        en: "Union"
+        en: "Union",
+        zh_hans: "婚姻",
     },
     spouse: {
-        en: "Spouse"
+        en: "Spouse",
+        zh_hans: "夫妻",
     },
     nomination: {
-        en: "Nomination"
+        en: "Nomination",
+        zh_hans: "提名",
     }
 }
 
