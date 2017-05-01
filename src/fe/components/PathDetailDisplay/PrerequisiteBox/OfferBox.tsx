@@ -17,7 +17,7 @@ const OfferBox = (props: {prereq: OfferPrereq, lang: LangId}) => {
                 <div>
                     您有来自
                     {text(region.name)}
-                    的offer
+                    的工作邀约（offer）
                 </div>
             )
         }
