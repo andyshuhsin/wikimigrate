@@ -70,7 +70,8 @@ const federalSkilledTrade: Transition = {
             {
                 prereqId: "certification",
                 description: {
-                    en: "a certificate of qualification in that skilled trade issued by a Canadian provincial or territorial authority"
+                    en: "a certificate of qualification in that skilled trade issued by a Canadian provincial or territorial authority",
+                    zh_hans: "由加拿大省级政府发出的确认专业技能的证明",
                 }
             } as CertificationPrereq
         ], {
