@@ -108,7 +108,8 @@ const federalSkilledTrade: Transition = {
     referenceList: [
         {
             title: {
-                en: "Official page"
+                en: "Official page",
+                zh_hans: "官方网页",
             },
             url: "http://www.cic.gc.ca/english/immigrate/trades/apply-who.asp",
         }
