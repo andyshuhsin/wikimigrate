@@ -17,7 +17,8 @@ function stringifyCondition(condition: Partial<FundPrereqCondition>) {
             <span>
                 {
                     text({
-                        zh_hans: "从"
+                        en: "from ",
+                        zh_hans: "从",
                     })
                 }
                 <a href={condition.source.reference.url}>
@@ -156,7 +157,7 @@ const FundBox = (props: {prereq: FundPrereq, lang: LangId}) => {
         else {
             return (
                 <div>
-                    You are admitted by
+                    You are admitted by {" "}
                     <a href={source.reference.url}>
                         {text(source.name)}
                     </a>
