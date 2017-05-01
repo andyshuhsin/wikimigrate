@@ -4,6 +4,7 @@ export const designatedVentureCapitalFunds: FundSourceGroup = {
     fundSourceGroupId: "canada-designated-venture-capital-funds",
     name: {
         en: "designated venture capital funds",
+        zh_hans: "指定风险投资基金",
     },
     sources: [
         {
@@ -250,6 +251,7 @@ export const designatedAngelInvestors: FundSourceGroup = {
     fundSourceGroupId: "canada-designated-angel-investor-groups",
     name: {
         en: "designated angel investor groups",
+        zh_hans: "指定天使投资团体",
     },
     sources: [
         {
@@ -316,6 +318,7 @@ export const designatedBusinessIncubators: FundSourceGroup = {
     fundSourceGroupId: "canada-designated-business-incubators",
     name: {
         en: "designated business incubators",
+        zh_hans: "指定商业孵化器",
     },
     sources: [
         {
