@@ -8,7 +8,15 @@ export function getCurrentLang(): LangId {
         return store.getState().ui.lang
     }
     else {
-        return "en"
+        // TODO: (1)Implement proper detection via Accept-Language
+        // TODO: (2)Proper handling of Chinese tags
+        const lang = window.navigator.language
+        if (lang.indexOf("zh-cn") > -1) {
+            return "zh_hans"
+        }
+        else {
+            return "en"
+        }
     }
 }
 
