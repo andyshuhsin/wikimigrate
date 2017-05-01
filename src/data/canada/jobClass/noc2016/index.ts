@@ -11,6 +11,7 @@ export const noc0: JobGroup = {
     specification: "0",
     description: {
         en: "Management occupations",
+        zh_hans: "管理职务",
     },
     parentGroup: null,
     reference: {
@@ -24,6 +25,7 @@ export const noc00: JobGroup = {
     specification: "00",
     description: {
         en: "Senior management occupations",
+        zh_hans: "高级管理职务",
     },
     parentGroup: null,
     reference: {
@@ -37,6 +39,7 @@ export const nocA: JobGroup = {
     specification: "A",
     description: {
         en: "Professional jobs",
+        zh_hans: "专业工作",
     },
     parentGroup: null,
     reference: {
@@ -50,6 +53,7 @@ export const nocB: JobGroup = {
     specification: "B",
     description: {
         en: "Technical jobs and skilled trades",
+        zh_hans: "技术工作和技能工种"
     },
     parentGroup: null,
     reference: {
@@ -63,6 +67,7 @@ export const nocC: JobGroup = {
     specification: "C",
     description: {
         en: "Intermediate jobs",
+        zh_hans: "中级工作",
     },
     parentGroup: null,
     reference: {
@@ -76,6 +81,7 @@ export const nocD: JobGroup = {
     specification: "D",
     description: {
         en: "Labour jobs",
+        zh_hans: "体力工作",
     },
     parentGroup: null,
     reference: {
