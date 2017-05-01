@@ -8,7 +8,7 @@ export interface Certification {
     id: CertificationId
     title: MultiLangStringSet
     titleShort?: MultiLangStringSet
-    referenceList?: URLDatum[]
+    reference?: URLDatum
 }
 
 export default Certification

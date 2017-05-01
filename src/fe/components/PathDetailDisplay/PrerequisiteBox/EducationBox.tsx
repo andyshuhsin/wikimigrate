@@ -1,39 +1,99 @@
 import * as React from 'react'
 import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq"
 import {LangId} from "../../../../definitions/auxillary/MultiLang"
+import data, {certifications} from "../../../../data/index"
+import {text} from "../../../utils/text"
+import {educationStageProfiles} from "../../../../definitions/Qualities/EducationExperience"
+import {arithmeticComparisonOperatorProfiles} from "../../../../definitions/auxillary/Operator"
 
 const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
     const prereq = props.prereq
+    const stage = prereq.stage
+    const region = data.getRegionById(prereq.region)
     if (props.lang === "zh_hans") {
+        let regionName: string
+        if (region) {
+            regionName = text(region.name)
+        }
+        else {
+            regionName = "任何地区"
+        }
+
+        let educationStage: string
+        let educationStageModifier: string
+        if (stage) {
+            educationStage = text(educationStageProfiles[stage[1]].name)
+            educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.education)
+        }
+        else {
+            educationStage = "任何水平的教育"
+            educationStageModifier = ""
+        }
+
+        let certificationModifier: JSX.Element | null
+        if (prereq.certification) {
+            const cert = certifications[prereq.certification]
+            certificationModifier = <span>
+                并拥有
+                <a href={cert.reference && cert.reference.url} target="_blank">
+                    {text(cert.title)}
+                </a>
+                认证
+            </span>
+        }
+        else {
+            certificationModifier = null
+        }
+
         return (
             <span>
-            {
-                prereq.region
-                    ? `您在${prereq.region}接受${prereq.stage && prereq.stage[1]}教育`
-                    : `您在任何地区接受${prereq.stage && prereq.stage[1]}教育`
-            }
-            {
-                prereq.certification
-                    ? `并拥有${prereq.certification}认证`
-                    : ``
-            }
+                您在{regionName}接受{educationStage}{educationStageModifier}教育
+                {certificationModifier}
             </span>
         )
 
     }
     else {
+        let regionName: string
+        if (region) {
+            regionName = text(region.name)
+        }
+        else {
+            regionName = "any region"
+        }
+
+        let educationStage: string
+        let educationStageModifier: string
+        if (stage) {
+            educationStage = text(educationStageProfiles[stage[1]].name)
+            educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.education)
+        }
+        else {
+            educationStage = "any level"
+            educationStageModifier = ""
+        }
+
+        let certificationModifier: JSX.Element | null
+        if (prereq.certification) {
+            const cert = certifications[prereq.certification]
+            certificationModifier = <span>
+                , and has
+                {" "}
+                <a href={cert.reference && cert.reference.url} target="_blank">
+                    {text(cert.title)}
+                </a>
+                {" "}
+                certification
+            </span>
+        }
+        else {
+            certificationModifier = null
+        }
+
         return (
             <span>
-            {
-                prereq.region
-                    ? `You were educated in ${prereq.region} on ${prereq.stage && prereq.stage[1]} level.`
-                    : `You were educated anywhere on ${prereq.stage && prereq.stage[1]} level.`
-            }
-            {
-                prereq.certification
-                    ? ` And you have ${prereq.certification} certification.`
-                    : ``
-            }
+                You were educated in {regionName} on {educationStage}{" "}{educationStageModifier} level
+                {certificationModifier}
             </span>
         )
     }

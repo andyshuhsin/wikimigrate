@@ -9,14 +9,13 @@ const eca: Certification = {
     titleShort: {
         en: "ECA"
     },
-    referenceList: [
-        {
-            title: {
-                en: "Official Website"
-            },
-            url: "http://www.cic.gc.ca/english/immigrate/skilled/assessment.asp"
-        }
-    ]
+    reference: {
+        title: {
+            en: "Official Website",
+            zh_hans: "官方网站"
+        },
+        url: "http://www.cic.gc.ca/english/immigrate/skilled/assessment.asp"
+    }
 }
 
 export {
