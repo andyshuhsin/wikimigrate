@@ -33,7 +33,7 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
                 return <WorkExperienceBox prereq={prereq} lang={lang} />
             }
             case "education": {
-                return  <EducationBox prereq={prereq} />
+                return  <EducationBox prereq={prereq} lang={lang} />
             }
             case "fund": {
                 return <FundBox prereq={prereq} lang={lang} />
