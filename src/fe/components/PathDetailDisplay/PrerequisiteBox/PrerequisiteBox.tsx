@@ -48,7 +48,7 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
                 return <CertificationBox prereq={prereq} lang={lang} />
             }
             case "age": {
-                return <AgeBox prereq={prereq} />
+                return <AgeBox prereq={prereq} lang={lang} />
             }
             case "business": {
                 return <BusinessBox prereq={prereq} />

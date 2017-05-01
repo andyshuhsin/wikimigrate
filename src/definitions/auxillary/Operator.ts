@@ -1,7 +1,7 @@
 import {MultiLangStringSet} from "./MultiLang"
 export type ArithmeticComparisonOperator = "<" | "<=" | ">" | ">=" | "="
 
-type Scenario = "education"
+type Scenario = "post"
 
 interface ArithmeticComparisonOperatorProfile {
     description: {
@@ -16,7 +16,7 @@ type ArithmeticComparisonOperatorProfiles = {
 export const arithmeticComparisonOperatorProfiles: ArithmeticComparisonOperatorProfiles = {
     "<": {
         description: {
-            education: {
+            post: {
                 en: "below",
                 zh_hans: "以下",
             }
@@ -24,15 +24,15 @@ export const arithmeticComparisonOperatorProfiles: ArithmeticComparisonOperatorP
     },
     "<=": {
         description: {
-            education: {
-                en: "below or equal to",
+            post: {
+                en: "or below",
                 zh_hans: "或以下",
             }
         },
     },
     ">": {
         description: {
-            education: {
+            post: {
                 en: "above",
                 zh_hans: "以上",
             }
@@ -40,7 +40,7 @@ export const arithmeticComparisonOperatorProfiles: ArithmeticComparisonOperatorP
     },
     ">=": {
         description: {
-            education: {
+            post: {
                 en: "or above",
                 zh_hans: "或以上",
             }
@@ -48,7 +48,7 @@ export const arithmeticComparisonOperatorProfiles: ArithmeticComparisonOperatorP
     },
     "=": {
         description: {
-            education: {
+            post: {
                 en: "",
                 zh_hans: "",
             }

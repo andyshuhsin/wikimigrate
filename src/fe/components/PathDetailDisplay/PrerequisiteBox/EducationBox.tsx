@@ -23,7 +23,7 @@ const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
         let educationStageModifier: string
         if (stage) {
             educationStage = text(educationStageProfiles[stage[1]].name)
-            educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.education)
+            educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.post)
         }
         else {
             educationStage = "任何水平的教育"
@@ -66,7 +66,7 @@ const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
         let educationStageModifier: string
         if (stage) {
             educationStage = text(educationStageProfiles[stage[1]].name)
-            educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.education)
+            educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.post)
         }
         else {
             educationStage = "any level"
