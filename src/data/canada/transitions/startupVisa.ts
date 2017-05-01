@@ -65,7 +65,8 @@ const startupVisa: Transition = {
             } as FundPrereq,
         ], {
             title: {
-                en: "Venture investment"
+                en: "Venture investment",
+                zh_hans: "风险投资",
             }
         })
     ]),
