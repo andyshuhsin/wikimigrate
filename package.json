@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "cd src/fe; node_modules/.bin/webpack-dev-server",
+    "start": "sh tools/dev-be.sh && sh tools/dev-web.sh",
     "deploy": "cd src/fe; NODE_ENV='production' webpack -p && rsync -azP built/* tokyo1:/var/www/vp",
     "stage": "cd src/fe; NODE_ENV='production' webpack -p && rsync -azP built/* tokyo1:/var/www/vp-stage"
   }

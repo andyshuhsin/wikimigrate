@@ -1,6 +1,5 @@
 .idea
 .vscode
 .DS_store
-.publish
 node_modules
-src/fe/built
+built
