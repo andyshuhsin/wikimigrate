@@ -82,9 +82,9 @@ const state: State = {
     }
 }
 
-async function wechatDetect(context: Context) {
-    if (context.path !== `/api-wechat`) {
-        return
+async function wechatDetect(context: Context, next: () => Promise<any>) {
+    if (context.path === `/api-wechat`) {
+        await next()
     }
 }
 
