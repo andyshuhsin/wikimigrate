@@ -2,7 +2,8 @@
   "extends": "../common/tsconfig.json",
   "compilerOptions": {
     "lib": ["es2015"],
-    "outDir": "built"
+    "outDir": "built",
+    "target": "es2017"
   },
   "include": [
     "**/*.ts"
