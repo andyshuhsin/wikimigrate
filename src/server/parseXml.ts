@@ -9,14 +9,17 @@ function deArray(obj: any) {
 }
 
 
-export function parseXml<T>(s: string): Promise<T> {
+export function parseXml<T>(s: string, shouldDearray: boolean): Promise<T> {
+    console.info('s', s)
     return new Promise((resolve, reject) => {
         parseString(s, (error, result) => {
             if (error) {
                 reject(error)
             }
             else {
-                deArray(result.xml)
+                if (shouldDearray) {
+                    deArray(result.xml)
+                }
                 resolve(result.xml)
             }
         });

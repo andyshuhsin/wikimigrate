@@ -83,7 +83,7 @@ chat.use(async (context: Context, next) => {
             }
             else {
                 // const responseText = JSON.stringify(context.request.toJSON(), null, 4)
-                const data = await parseXml<WechatNormalTextData>(context.request.body)
+                const data = await parseXml<WechatNormalTextData>(context.request.body, true)
                 const responseText = data.Content
                 context.body = `
                     <xml>
