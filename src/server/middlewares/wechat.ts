@@ -2,6 +2,10 @@ import {Context} from "koa"
 
 import {createHash} from "crypto"
 import {parseXml} from "../parseXml"
+import {Person} from "../../definitions/Person"
+
+import * as compose from "koa-compose"
+
 
 interface WechatNormalTextData {
     MsgType: "text"
@@ -48,26 +52,66 @@ function getWechatVerificationResponseBody(query: Object): string {
     }
 }
 
-export async function wechat(context: Context) {
+function getResponseBodyXml(
+    fromUsername: string,
+    toUsername: string,
+    createTime: string,
+    content: string,
+) {
+    return `<xml>
+        <ToUserName><![CDATA[${toUsername}]]></ToUserName>
+        <FromUserName><![CDATA[${fromUsername}]]></FromUserName>
+        <CreateTime>${createTime}</CreateTime>
+        <MsgType><![CDATA[text]]></MsgType>
+        <Content><![CDATA[${content}]]></Content>
+        </xml>
+    `
+}
+
+interface State {
+    users: {
+        [id: string]: {
+            exchangeNo: number
+            person: Person
+        }
+    }
+}
+
+const state: State = {
+    users: {
+    }
+}
+
+async function wechatDetect(context: Context) {
     if (context.path !== `/api-wechat`) {
         return
     }
+}
+
+async function wechatVerify(context: Context, next: () => Promise<any>) {
     const isVerificationMode = context.request.query["echostr"]
     if (isVerificationMode) {
         context.body = getWechatVerificationResponseBody(context.request.query)
     }
     else {
-        // const responseText = JSON.stringify(context.request.toJSON(), null, 4)
-        const data = await parseXml<WechatNormalTextData>(context.request.body, true)
-        const responseText = data.Content
-        context.body = `
-            <xml>
-                <ToUserName><![CDATA[${data.FromUserName}]]></ToUserName>
-                <FromUserName><![CDATA[${data.ToUserName}]]></FromUserName>
-                <CreateTime>${Date.now().toString().slice(0, 8)}</CreateTime>
-                <MsgType><![CDATA[text]]></MsgType>
-                <Content><![CDATA[${responseText}]]></Content>
-            </xml>
-        `
+        await next()
     }
 }
+
+async function wechatNormalResponse(context: Context) {
+    // const responseText = JSON.stringify(context.request.toJSON(), null, 4)
+    const request = await parseXml<WechatNormalTextData>(context.request.body, true)
+    const responseText = request.Content
+    context.body = getResponseBodyXml(
+        request.FromUserName,
+        request.ToUserName,
+        Date.now().toString().slice(0, 8),
+        responseText
+    )
+}
+
+export const wechat = compose([
+    wechatDetect,
+    wechatVerify,
+    wechatNormalResponse,
+])
