@@ -6,7 +6,7 @@ import {
     LanguageFilterId,
 } from "../data"
 import {Path, PathDescriptor} from "../utils/definitions"
-import {Person} from "../../definitions/Person"
+import {getInitialPerson, Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
 import {duration} from "../../definitions/auxillary/Duration"
 import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
@@ -32,26 +32,7 @@ export interface VisaPlannerState {
 }
 
 export const INITIAL_STATE: VisaPlannerState = {
-    user: {
-        birth: {
-            date: {
-                year: new Date().getFullYear() - DEFAULT_AGE
-            },
-            region: undefined,
-        },
-        status: {
-            // TODO: Should this part be automated?
-            world: ["alien"],
-            canada: ["alien"],
-            australia: ["alien"],
-            canada_atlantic_provinces: ["alien"],
-            new_zealand: ["alien"],
-        },
-        education: undefined,
-        languageTests: undefined,
-        inUnion: undefined,
-        spouse: undefined,
-    },
+    user: getInitialPerson(DEFAULT_AGE),
     ui: {
         lang: data.app.lang,
         shouldDetailedFilterPanelExpand: false,

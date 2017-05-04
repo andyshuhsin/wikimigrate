@@ -2,9 +2,11 @@ import {Context} from "koa"
 
 import {createHash} from "crypto"
 import {parseXml} from "../parseXml"
-import {Person} from "../../definitions/Person"
+import {getInitialPerson, Person} from "../../definitions/Person"
 
 import * as compose from "koa-compose"
+import {wechatDialogue} from "../data/dialogue"
+import {text} from "../../fe/utils/text"
 
 
 interface WechatNormalTextData {
@@ -68,17 +70,26 @@ function getResponseBodyXml(
     `
 }
 
+interface UserState {
+    exchangeNo: number
+    person: Person
+}
+
 interface State {
     users: {
-        [id: string]: {
-            exchangeNo: number
-            person: Person
-        }
+        [id: string]: UserState
     }
 }
 
 const state: State = {
     users: {
+    }
+}
+
+function getInitialUserState(): UserState {
+    return {
+        exchangeNo: 0,
+        person: getInitialPerson(30),
     }
 }
 
@@ -102,7 +113,22 @@ async function wechatNormalResponse(context: Context, next: () => Promise<any>) 
         return next()
     }
     const request = await parseXml<WechatNormalTextData>(context.request.body, true)
-    const responseText = request.Content
+    let responseText
+
+    const isNewUser = !state.users[request.FromUserName]
+    const forceReset = ["重来", "reset"].includes(request.Content)
+
+    if (isNewUser || forceReset) {
+        state.users[request.FromUserName] = getInitialUserState()
+    }
+    else {
+    }
+    const userState = state.users[request.FromUserName]
+    const exchange = wechatDialogue.exchanges[userState.exchangeNo]
+    userState.person = exchange.getNewPersonDescription(userState.person, request.Content)
+    responseText = text(exchange.text)
+    userState.exchangeNo += 1
+
     context.body = getResponseBodyXml(
         request.ToUserName,
         request.FromUserName,
