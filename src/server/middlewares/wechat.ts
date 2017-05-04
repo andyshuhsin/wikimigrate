@@ -104,8 +104,8 @@ async function wechatNormalResponse(context: Context, next: () => Promise<any>) 
     const request = await parseXml<WechatNormalTextData>(context.request.body, true)
     const responseText = request.Content
     context.body = getResponseBodyXml(
-        request.FromUserName,
         request.ToUserName,
+        request.FromUserName,
         Date.now().toString().slice(0, 8),
         responseText
     )
