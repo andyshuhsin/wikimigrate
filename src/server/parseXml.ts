@@ -10,7 +10,6 @@ function deArray(obj: any) {
 
 
 export function parseXml<T>(s: string, shouldDearray: boolean): Promise<T> {
-    console.info('s', s)
     return new Promise((resolve, reject) => {
         parseString(s, (error, result) => {
             if (error) {
