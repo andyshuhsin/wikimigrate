@@ -5,11 +5,10 @@ import {parseXml} from "../parseXml"
 import {getInitialPerson, Person} from "../../definitions/Person"
 
 import * as compose from "koa-compose"
-import {wechatDialogue} from "../data/dialogue"
-import {text} from "../../fe/utils/text"
+import {shouldReset, wechatDialog as dialog} from "../data/dialogue"
+import {text, setTextLang} from "../../fe/utils/text"
 
-
-interface WechatNormalTextData {
+interface WechatOrdinaryMessageData {
     MsgType: "text"
     ToUserName: string
     FromUserName: string
@@ -17,6 +16,18 @@ interface WechatNormalTextData {
     Content: string
     MsgId: string
 }
+
+interface WechatEventData {
+    MsgType: "event"
+    ToUserName: string
+    FromUserName: string
+    CreateTime: string
+    Event: "subscribe" | "unsubscribe"
+}
+
+type WechatData = WechatOrdinaryMessageData | WechatEventData
+
+setTextLang("zh_hans")
 
 const TOKEN = process.env["GOMIGRANT_WECHAT_TOKEN"]
 
@@ -59,12 +70,13 @@ function getResponseBodyXml(
     toUsername: string,
     createTime: string,
     content: string,
+    msgType: WechatData["MsgType"]
 ) {
     return `<xml>
         <ToUserName><![CDATA[${toUsername}]]></ToUserName>
         <FromUserName><![CDATA[${fromUsername}]]></FromUserName>
         <CreateTime>${createTime}</CreateTime>
-        <MsgType><![CDATA[text]]></MsgType>
+        <MsgType><![CDATA[${msgType}]]></MsgType>
         <Content><![CDATA[${content}]]></Content>
         </xml>
     `
@@ -107,37 +119,76 @@ async function wechatVerify(context: Context, next: () => Promise<any>) {
     }
 }
 
-async function wechatNormalResponse(context: Context, next: () => Promise<any>) {
-    // const responseText = JSON.stringify(context.request.toJSON(), null, 4)
-    if (!isWechatRequest(context.path)) {
+
+/** @see https://mp.weixin.qq.com/wiki/7/9f89d962eba4c5924ed95b513ba69d9b.html */
+async function wechatEvent(context: Context, next: () => Promise<any>) {
+    const request = await parseXml<WechatData>(context.request.body, true)
+    if (!isWechatRequest(context.path) || request.MsgType !== "event") {
         return next()
     }
-    const request = await parseXml<WechatNormalTextData>(context.request.body, true)
-    let responseText
-
-    const isNewUser = !state.users[request.FromUserName]
-    const forceReset = ["重来", "reset"].includes(request.Content)
-
-    if (isNewUser || forceReset) {
+    if (request.Event === "subscribe") {
         state.users[request.FromUserName] = getInitialUserState()
+        context.body = getResponseBodyXml(
+            request.ToUserName,
+            request.FromUserName,
+            Date.now().toString().slice(0, 8),
+            text(dialog.exchanges[0].text),
+            "text",
+        )
+    }
+    else if (request.Event === "unsubscribe") {
+
     }
     else {
+        console.error(`Cannot recognize event type ${request.Event}
+                       ${JSON.stringify(context.request.body, null, 4)}`)
     }
-    const userState = state.users[request.FromUserName]
-    const exchange = wechatDialogue.exchanges[userState.exchangeNo]
-    userState.person = exchange.getNewPersonDescription(userState.person, request.Content)
-    responseText = text(exchange.text)
-    userState.exchangeNo += 1
+}
 
-    context.body = getResponseBodyXml(
-        request.ToUserName,
-        request.FromUserName,
-        Date.now().toString().slice(0, 8),
-        responseText
-    )
+/** @see https://mp.weixin.qq.com/wiki/17/f298879f8fb29ab98b2f2971d42552fd.html */
+async function wechatOrdindaryMessage(context: Context, next: () => Promise<any>) {
+    const request = await parseXml<WechatData>(context.request.body, true)
+    if (!isWechatRequest(context.path) || request.MsgType !== "text") {
+        return next()
+    }
+    let responseText: string
+
+    const userState = state.users[request.FromUserName]
+
+    const forceReset = shouldReset(request.Content)
+    if (forceReset) {
+        state.users[request.FromUserName] = getInitialUserState()
+    }
+
+    const exchangeExhausted = userState.exchangeNo >= dialog.exchanges.length
+    if (exchangeExhausted) {
+        context.body = getResponseBodyXml(
+            request.ToUserName,
+            request.FromUserName,
+            Date.now().toString().slice(0, 8),
+            text(dialog.terminalExchange.text),
+            "text",
+        )
+        userState.exchangeNo += 1
+    }
+    else {
+        const exchange = dialog.exchanges[userState.exchangeNo]
+        userState.person = exchange.getNewPersonDescription(userState.person, request.Content)
+        responseText = text(exchange.text)
+        userState.exchangeNo += 1
+
+        context.body = getResponseBodyXml(
+            request.ToUserName,
+            request.FromUserName,
+            Date.now().toString().slice(0, 8),
+            responseText,
+            "text",
+        )
+    }
 }
 
 export const wechat = compose([
     wechatVerify,
-    wechatNormalResponse,
+    wechatEvent,
+    wechatOrdindaryMessage,
 ])

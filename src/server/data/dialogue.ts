@@ -9,23 +9,34 @@ interface Exchange {
 
 interface Dialogue {
     exchanges: Exchange[]
+    terminalExchange: Exchange
 }
 
-export const wechatDialogue: Dialogue = {
+const restartKeywords = ["重来", "reset"]
+
+export function shouldReset(answer: string): boolean {
+    return restartKeywords.includes(answer.toLowerCase())
+}
+
+const wrap = (markStart: string, markEnd: string) => (content: string) => markStart + content + markEnd
+
+export const wechatDialog: Dialogue = {
     exchanges: [
         {
             text: {
-                zh_hans: "年龄多大了？"
+                zh_hans: `你好，我是谷麦出海机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。`
             },
-            getNewPersonDescription(person, answer)  {
-                const newPerson = clone(person)
-                newPerson.birth = {
-                    date: {
-                        year: new Date().getFullYear() - Number(answer)
-                    }
-                }
-                return newPerson
+            getNewPersonDescription(person)  {
+                return person
             }
         }
     ],
+    terminalExchange: {
+        text: {
+            zh_hans: `想要重新开始吗？请输入${restartKeywords.map(wrap("「", "」")).join("或")}`
+        },
+        getNewPersonDescription(person)  {
+            return person
+        }
+    }
 }
