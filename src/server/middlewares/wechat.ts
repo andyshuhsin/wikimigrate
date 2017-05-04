@@ -48,9 +48,9 @@ function getWechatVerificationResponseBody(query: Object): string {
     }
 }
 
-export async function wechat(context: Context, next: () => Promise<any>) {
+export async function wechat(context: Context) {
     if (context.path !== `/api-wechat`) {
-        return next()
+        return
     }
     const isVerificationMode = context.request.query["echostr"]
     if (isVerificationMode) {
@@ -70,5 +70,4 @@ export async function wechat(context: Context, next: () => Promise<any>) {
             </xml>
         `
     }
-    await next()
 }
