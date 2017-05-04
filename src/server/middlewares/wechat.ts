@@ -48,13 +48,9 @@ function getWechatVerificationResponseBody(query: Object): string {
     }
 }
 
-function isWechatRequest(url: string): boolean {
-    return url.includes("api-wechat")
-}
-
 export async function wechat(context: Context, next: () => Promise<any>) {
-    if (!isWechatRequest(context.request.url)) {
-        return next
+    if (context.path !== `/api-wechat`) {
+        return next()
     }
     const isVerificationMode = context.request.query["echostr"]
     if (isVerificationMode) {
@@ -74,5 +70,5 @@ export async function wechat(context: Context, next: () => Promise<any>) {
             </xml>
         `
     }
-    await next
+    await next()
 }
