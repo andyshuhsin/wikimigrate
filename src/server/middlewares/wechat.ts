@@ -82,15 +82,13 @@ const state: State = {
     }
 }
 
-async function wechatDetect(context: Context, next: () => Promise<any>) {
-    if (context.path === `/api-wechat`) {
-        await next()
-    }
+function isWechatRequest(path: string): boolean {
+    return path === "/api-wechat"
 }
 
 async function wechatVerify(context: Context, next: () => Promise<any>) {
     const isVerificationMode = context.request.query["echostr"]
-    if (isVerificationMode) {
+    if (isWechatRequest(context.path) && isVerificationMode) {
         context.body = getWechatVerificationResponseBody(context.request.query)
     }
     else {
@@ -98,8 +96,11 @@ async function wechatVerify(context: Context, next: () => Promise<any>) {
     }
 }
 
-async function wechatNormalResponse(context: Context) {
+async function wechatNormalResponse(context: Context, next: () => Promise<any>) {
     // const responseText = JSON.stringify(context.request.toJSON(), null, 4)
+    if (!isWechatRequest(context.path)) {
+        return next()
+    }
     const request = await parseXml<WechatNormalTextData>(context.request.body, true)
     const responseText = request.Content
     context.body = getResponseBodyXml(
@@ -111,7 +112,6 @@ async function wechatNormalResponse(context: Context) {
 }
 
 export const wechat = compose([
-    wechatDetect,
     wechatVerify,
     wechatNormalResponse,
 ])
