@@ -1,6 +1,6 @@
 import {parseString} from "xml2js"
 
-function deArray(obj: any) {
+function deArray(obj: any): void {
     for (const key in obj) {
         if (obj.hasOwnProperty(key) && obj[key].length === 1) {
             obj[key] = obj[key][0]
