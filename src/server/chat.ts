@@ -3,8 +3,9 @@ import * as bodyParser from "koa-bodyparser"
 
 import {wechat} from "./middlewares/wechat"
 
+const PORT = 20000
+
 const chat = new Koa()
-const port = 20000
 
 chat.use(bodyParser({
     enableTypes: ["text", "json", "form"],
@@ -14,6 +15,6 @@ chat.use(bodyParser({
 }))
 chat.use(wechat)
 
-chat.listen(port, () => {
-    console.info("Chat started listening to", port, "at", new Date())
+chat.listen(PORT, () => {
+    console.info("Chat started listening to", PORT, "at", new Date())
 })
