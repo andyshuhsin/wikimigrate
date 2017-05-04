@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq"
-import {getCurrentLang, text} from "../../../utils/text"
+import {text} from "../../../utils/text"
 import {LangId} from "../../../../definitions/auxillary/MultiLang"
 import data from "../../../../data/index"
 

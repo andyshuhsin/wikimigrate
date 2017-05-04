@@ -25,7 +25,7 @@ import {
     shadeClickAction,
 } from "../actions/index"
 import {Region} from "../../definitions/auxillary/Region"
-import {text} from "../utils/text"
+import {setTextLang, text} from "../utils/text"
 import {calcScore} from "../utils/calcScore"
 import crs from "../../data/canada/crs"
 import {LangId} from "../../definitions/auxillary/MultiLang"
@@ -68,9 +68,11 @@ const allTransitions = data.regions.map((region: Region) => region.transitionLis
     []
 )
 
+
 class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentDidMount() {
+        setTextLang(this.getCurrentLang())
         document.title = text(data.app.brandName)
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
@@ -87,7 +89,25 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
         }
     }
 
+    getCurrentLang(): LangId {
+    if (this.props.lang) {
+        return this.props.lang
+    }
+    else {
+        // TODO: (1)Implement proper detection via Accept-Language
+        // TODO: (2)Proper handling of Chinese tags
+        const lang = window.navigator.language
+        if (lang.indexOf("zh-cn") > -1) {
+            return "zh_hans"
+        }
+        else {
+            return "en"
+        }
+    }
+}
+
     render() {
+        setTextLang(this.getCurrentLang())
 
         const {
             user,

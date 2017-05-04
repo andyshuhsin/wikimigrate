@@ -1,29 +1,11 @@
 import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
-import {store} from "../main"
+
+let currentLang: LangId = "en"
 
 const fallbackLangList: LangId[] = ["en", "fr", "zh_hans"]
 
-export function getCurrentLang(): LangId {
-    if (store) {
-        return store.getState().ui.lang
-    }
-    else {
-        // TODO: (1)Implement proper detection via Accept-Language
-        // TODO: (2)Proper handling of Chinese tags
-        const lang = window.navigator.language
-        if (lang.indexOf("zh-cn") > -1) {
-            return "zh_hans"
-        }
-        else {
-            return "en"
-        }
-    }
-}
+export function text(s?: MultiLangStringSet | string): string {
 
-export function text(
-    s: MultiLangStringSet | string | null | undefined,
-    lang: LangId = getCurrentLang(),
-    fallbackLangs = fallbackLangList): string {
        if (s === null || typeof s === "undefined") {
            return ''
        }
@@ -32,12 +14,12 @@ export function text(
            return s
        }
        else {
-           const translation = s[lang]
+           const translation = s[currentLang]
            if (translation) {
                return translation
            }
            else {
-               for (let lang of fallbackLangs) {
+               for (let lang of fallbackLangList) {
                    let translation = s[lang]
                    if (translation) {
                        return translation
@@ -47,6 +29,10 @@ export function text(
        }
        console.warn("Cannot convert to text: ", s)
        return ''
+}
+
+export function setTextLang(langArg: LangId) {
+    currentLang = langArg
 }
 
 export default text
