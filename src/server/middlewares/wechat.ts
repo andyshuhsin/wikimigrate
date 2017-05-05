@@ -83,27 +83,24 @@ function getResponseBodyXml(
 }
 
 interface UserState {
+    id: string
     exchangeNo: number
     person: Person
 }
 
-interface State {
-    users: {
-        [id: string]: UserState
-    }
+interface AppState {
+    users: UserState[]
 }
 
-const state: State = {
-    users: {
-    }
+const state: AppState = {
+    users: []
 }
 
-function getInitialUserState(): UserState {
-    return {
-        exchangeNo: 0,
-        person: getInitialPerson(30),
-    }
+const getUserGetterById = (state: AppState) => (id: string) => {
+    return state.users.find(user => user.id === id)
 }
+
+const getUser = getUserGetterById(state)
 
 function isWechatRequest(path: string): boolean {
     return path === "/api-wechat"
@@ -119,6 +116,18 @@ async function wechatVerify(context: Context, next: () => Promise<any>) {
     }
 }
 
+const defaultUserState = {
+    exchangeNo: 0,
+    person: getInitialPerson(30),
+}
+
+function getDefaultUserState(id: string): UserState {
+    return {
+        ...defaultUserState,
+        id,
+    }
+}
+
 
 /** @see https://mp.weixin.qq.com/wiki/7/9f89d962eba4c5924ed95b513ba69d9b.html */
 async function wechatEvent(context: Context, next: () => Promise<any>) {
@@ -127,7 +136,7 @@ async function wechatEvent(context: Context, next: () => Promise<any>) {
         return next()
     }
     if (request.Event === "subscribe") {
-        state.users[request.FromUserName] = getInitialUserState()
+        state.users.push(getDefaultUserState(request.FromUserName))
         context.body = getResponseBodyXml(
             request.ToUserName,
             request.FromUserName,
@@ -153,11 +162,16 @@ async function wechatOrdindaryMessage(context: Context, next: () => Promise<any>
     }
     let responseText: string
 
-    const userState = state.users[request.FromUserName]
+    let userState = getUser(request.FromUserName)
+    if (!userState) {
+        userState = getDefaultUserState(request.FromUserName)
+        state.users.push(userState)
+        console.warn("Unknown user making conversation, subscribe event skipped?", request.FromUserName)
+    }
 
     const forceReset = shouldReset(request.Content)
-    if (forceReset) {
-        state.users[request.FromUserName] = getInitialUserState()
+    if (forceReset && userState) {
+        userState.exchangeNo = 0
     }
 
     const exchangeExhausted = userState.exchangeNo >= dialog.exchanges.length
