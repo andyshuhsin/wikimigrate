@@ -4,6 +4,7 @@ import * as bodyParser from "koa-bodyparser"
 import {wechat} from "./middlewares/wechat"
 
 const PORT = 20000
+export const MONGO_URL = 'mongodb://localhost:27017/gomi'
 
 const chat = new Koa()
 

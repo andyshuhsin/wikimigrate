@@ -6,6 +6,12 @@
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.2.tgz#52897ad5a51f05ea2f57f8e8136085c7d1c385a5"
 
+"@types/bson@*":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-1.0.3.tgz#6c26f0876bf9d8cbb06edd4019e29354bf3a03e0"
+  dependencies:
+    "@types/node" "*"
+
 "@types/cookies@*":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@types/cookies/-/cookies-0.6.1.tgz#d12cbd0f8aa6b9f0d3bfb613b958897a0b348731"
@@ -42,6 +48,13 @@
     "@types/koa-compose" "*"
     "@types/node" "*"
 
+"@types/mongodb@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-2.2.2.tgz#3edd247936c2fdb4e1cbeca6a0affec9fa656b56"
+  dependencies:
+    "@types/bson" "*"
+    "@types/node" "*"
+
 "@types/node@*":
   version "7.0.15"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.15.tgz#628429289604c5f7e56c13f3a0422f3e59df1a17"
@@ -60,6 +73,14 @@ accepts@^1.2.2:
 any-promise@^1.1.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/any-promise/-/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
+
+bson@~1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.4.tgz#93c10d39eaa5b58415cbc4052f3e53e562b0b72c"
+
+buffer-shims@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/buffer-shims/-/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
 
 bytes@2.4.0:
   version "2.4.0"
@@ -97,6 +118,10 @@ copy-to@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/copy-to/-/copy-to-2.0.1.tgz#2680fbb8068a48d08656b6098092bdafc906f4a5"
 
+core-util-is@~1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+
 debug@*:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.6.tgz#a9fa6fbe9ca43cf1e79f73b75c0189cbb7d6db5a"
@@ -126,6 +151,10 @@ ee-first@1.1.1:
 error-inject@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/error-inject/-/error-inject-1.0.0.tgz#e2b3d91b54aed672f309d950d154850fa11d4f37"
+
+es6-promise@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.2.1.tgz#ec56233868032909207170c39448e24449dd1fc4"
 
 escape-html@~1.0.1:
   version "1.0.3"
@@ -170,13 +199,17 @@ inherits@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
 
-inherits@2.0.3:
+inherits@2.0.3, inherits@~2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
 is-generator-function@^1.0.3:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/is-generator-function/-/is-generator-function-1.0.6.tgz#9e71653cd15fff341c79c4151460a131d31e9fc4"
+
+isarray@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
 
 keygrip@~1.0.1:
   version "1.0.1"
@@ -257,6 +290,21 @@ mime-types@^2.0.7, mime-types@~2.1.11, mime-types@~2.1.15:
   dependencies:
     mime-db "~1.27.0"
 
+mongodb-core@2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-2.1.10.tgz#eb290681d196d3346a492161aa2ea0905e63151b"
+  dependencies:
+    bson "~1.0.4"
+    require_optional "~1.0.0"
+
+mongodb@^2.2.26:
+  version "2.2.26"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-2.2.26.tgz#1bd50c557c277c98e1a05da38c9839c4922b034a"
+  dependencies:
+    es6-promise "3.2.1"
+    mongodb-core "2.1.10"
+    readable-stream "2.2.7"
+
 ms@0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
@@ -279,6 +327,10 @@ parseurl@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
 
+process-nextick-args@~1.0.6:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
+
 qs@^6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
@@ -291,9 +343,36 @@ raw-body@^2.2.0:
     iconv-lite "0.4.15"
     unpipe "1.0.0"
 
+readable-stream@2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.7.tgz#07057acbe2467b22042d36f98c5ad507054e95b1"
+  dependencies:
+    buffer-shims "~1.0.0"
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "~1.0.0"
+    process-nextick-args "~1.0.6"
+    string_decoder "~1.0.0"
+    util-deprecate "~1.0.1"
+
+require_optional@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/require_optional/-/require_optional-1.0.0.tgz#52a86137a849728eb60a55533617f8f914f59abf"
+  dependencies:
+    resolve-from "^2.0.0"
+    semver "^5.1.0"
+
+resolve-from@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
+
 sax@>=0.6.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
+
+semver@^5.1.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
 setprototypeof@1.0.3:
   version "1.0.3"
@@ -302,6 +381,12 @@ setprototypeof@1.0.3:
 "statuses@>= 1.2.1 < 2", "statuses@>= 1.3.1 < 2", statuses@^1.2.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
+
+string_decoder@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.0.tgz#f06f41157b664d86069f84bdbdc9b0d8ab281667"
+  dependencies:
+    buffer-shims "~1.0.0"
 
 type-is@^1.5.5, type-is@^1.6.14:
   version "1.6.15"
@@ -313,6 +398,10 @@ type-is@^1.5.5, type-is@^1.6.14:
 unpipe@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
+
+util-deprecate@~1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
 vary@^1.0.0:
   version "1.1.1"
