@@ -5,3 +5,4 @@ cd src/server/
 touch built/chat.js
 pm2 start ecosystem.config.js
 tsc --watch &
+pm2 logs &
