@@ -75,6 +75,22 @@ class WxChatbotAppState {
     getUser(id: string): User | undefined {
         return this.users.find(user => user.id === id)
     }
+
+    updateUser(id: string, userData: Partial<UserPlain>) {
+        const user = this.getUser(id)
+        if (!user) {
+            console.warn("Unkown user id:", id)
+            return
+        }
+        Object.assign(user, userData)
+        if (this.db) {
+            this.db.collection(USERS_COLLECTION_KEY)
+                .update(
+                    {id: id},
+                    user
+                )
+        }
+    }
 }
 
 interface WechatContext extends Context {
@@ -175,13 +191,15 @@ async function wechatEvent(context: WechatContext, next: () => Promise<any>) {
         const user = new User(request.FromUserName)
         context.state.addUser(user)
         context.body = getResponseBodyXml(
-            text(dialog.exchanges[0].text),
+            '1' + text(dialog.exchanges[0].text),
             request.ToUserName,
             request.FromUserName,
             "text",
             Date.now().toString().slice(0, 8),
         )
-        user.exchangeNo += 1
+        context.state.updateUser(user.id, {
+            exchangeNo: user.exchangeNo + 1
+        })
     }
     else if (request.Event === "unsubscribe") {
 
@@ -215,7 +233,7 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
     console.info(user.exchangeNo, dialog.exchanges.length)
     if (exchangeExhausted) {
         context.body = getResponseBodyXml(
-            text(dialog.terminalExchange.text),
+            '2' + text(dialog.terminalExchange.text),
             request.ToUserName,
             request.FromUserName,
             "text",
@@ -226,13 +244,15 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
         user.person = exchange.getNewPersonDescription(user.person, request.Content)
 
         context.body = getResponseBodyXml(
-            text(exchange.text),
+            '3' + text(exchange.text),
             request.ToUserName,
             request.FromUserName,
             "text",
         )
 
-        user.exchangeNo += 1
+        context.state.updateUser(user.id, {
+            exchangeNo: user.exchangeNo + 1
+        })
     }
 }
 
