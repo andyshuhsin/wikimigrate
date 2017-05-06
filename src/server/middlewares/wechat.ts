@@ -29,20 +29,29 @@ interface WechatEventData {
 
 type WechatData = WechatOrdinaryMessageData | WechatEventData
 
-class User {
+interface UserPlain {
+    readonly id: string
+    exchangeNo: number
+    person: Person
+}
+
+class User implements UserPlain {
     readonly id: string
     exchangeNo: number
     person: Person
 
-    constructor(id: string, exchangeNo = 0, person = getInitialPerson(30)) {
+    constructor(id: string, exchangeNo?: number, person?: Person) {
         this.id = id
-        this.exchangeNo = exchangeNo
-        this.person = person
+        this.initialize(exchangeNo, person)
     }
 
-    reset() {
-        // Reset everything except id
-        this.constructor(this.id)
+    static loadDataFromPlainObject(input: UserPlain): User {
+        return new User(input.id, input.exchangeNo, input.person)
+    }
+
+    initialize(exchangeNo = 0, person = getInitialPerson(30)) {
+        this.exchangeNo = exchangeNo
+        this.person = person
     }
 }
 
@@ -136,12 +145,12 @@ function isWechatRequest(path: string): boolean {
 async function loadPersistentState(context: WechatContext, next: () => Promise<any>) {
     if (Object.keys(context.state).length === 0) {
         const db = await MongoClient.connect(MONGO_URL)
-        const users = await db.collection(USERS_COLLECTION_KEY)
-                              .find<User>()
-                              .toArray()
+        const users = (await db.collection(USERS_COLLECTION_KEY)
+                              .find<UserPlain>()
+                              .toArray())
+                              .map(user => User.loadDataFromPlainObject(user))
         context.state = new WxChatbotAppState(users, db)
     }
-    // console.info("state\n", JSON.stringify(context.state.users, null, 4))
     return next()
 }
 
@@ -163,7 +172,8 @@ async function wechatEvent(context: WechatContext, next: () => Promise<any>) {
         return next()
     }
     if (request.Event === "subscribe") {
-        context.state.addUser(new User(request.FromUserName))
+        const user = new User(request.FromUserName)
+        context.state.addUser(user)
         context.body = getResponseBodyXml(
             text(dialog.exchanges[0].text),
             request.ToUserName,
@@ -171,6 +181,7 @@ async function wechatEvent(context: WechatContext, next: () => Promise<any>) {
             "text",
             Date.now().toString().slice(0, 8),
         )
+        user.exchangeNo += 1
     }
     else if (request.Event === "unsubscribe") {
 
@@ -197,10 +208,11 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
     }
 
     if (shouldReset(request.Content)) {
-        user.reset()
+        user.initialize()
     }
 
     const exchangeExhausted = user.exchangeNo >= dialog.exchanges.length
+    console.info(user.exchangeNo, dialog.exchanges.length)
     if (exchangeExhausted) {
         context.body = getResponseBodyXml(
             text(dialog.terminalExchange.text),
