@@ -1,6 +1,7 @@
-import { MultiLangStringSet } from "../auxillary/MultiLang"
+import {LangId, MultiLangStringSet} from "../auxillary/MultiLang"
 import Duration from "../auxillary/Duration"
 import {RegionId} from "../auxillary/Region"
+import {text} from "../../fe/utils/text"
 
 export type EducationStage =
     "primary"
@@ -15,7 +16,7 @@ interface EducationStageProfile {
     name: MultiLangStringSet
 }
 
-type EducationStageProfiles = {
+export type EducationStageProfiles = {
     [key in EducationStage]: EducationStageProfile
 }
 
@@ -62,6 +63,23 @@ export const educationStageProfiles: EducationStageProfiles = {
             zh_hans: "职业教育",
         },
     }
+}
+
+interface ReverseEducationNameTextTable {
+    [text: string]: EducationStage
+}
+
+export function buildReverseStageTable(
+    lang: LangId,
+    profiles = educationStageProfiles
+): ReverseEducationNameTextTable {
+    const result: ReverseEducationNameTextTable = {}
+    for (const entry of Object.entries(profiles)) {
+        const displayText = text(entry[1].name, lang)
+        const stage = entry[0] as EducationStage
+        result[displayText] = stage
+    }
+    return result
 }
 
 export function getEducationStageRank(stage: EducationStage): number {

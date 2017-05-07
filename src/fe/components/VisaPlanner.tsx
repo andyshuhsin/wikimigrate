@@ -63,10 +63,7 @@ interface PropTypes {
     shouldDetailedFilterPanelExpand: boolean
 }
 
-const allTransitions = data.regions.map((region: Region) => region.transitionList).reduce(
-    (prev, nextArray) => prev.concat(nextArray),
-    []
-)
+const allTransitions = data.allTransitions
 
 
 class VisaPlanner extends React.Component<PropTypes, {}> {

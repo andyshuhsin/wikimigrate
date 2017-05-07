@@ -9,6 +9,10 @@ import * as compose from "koa-compose"
 import {shouldReset, wechatDialog as dialog} from "../data/dialogue"
 import {text, setTextLang} from "../../fe/utils/text"
 import {MONGO_URL} from "../chat"
+import {calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
+import {data} from "../../data/index"
+import {Region} from "../../definitions/auxillary/Region"
+import {Path} from "../../fe/utils/definitions"
 
 interface WechatOrdinaryMessageData {
     MsgType: "text"
@@ -153,6 +157,14 @@ function getResponseBodyXml(
     `
 }
 
+function getTransitionName(path: Path): string {
+    return path.transitions.map(transition => {
+        const region = data.getRegionById(transition.regionId)
+        return text(region && region.name) + text(transition.name)
+    })
+    .join('\n')
+}
+
 
 function isWechatRequest(path: string): boolean {
     return path === "/api-wechat"
@@ -191,7 +203,7 @@ async function wechatEvent(context: WechatContext, next: () => Promise<any>) {
         const user = new User(request.FromUserName)
         context.state.addUser(user)
         context.body = getResponseBodyXml(
-            '1' + text(dialog.exchanges[0].text),
+            text(dialog.exchanges[0].text),
             request.ToUserName,
             request.FromUserName,
             "text",
@@ -229,11 +241,19 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
         user.initialize()
     }
 
+    const previousExchange = dialog.exchanges[user.exchangeNo - 1]
+    if (previousExchange) {
+        user.person = previousExchange.getNewPersonDescription(user.person, request.Content)
+    }
     const exchangeExhausted = user.exchangeNo >= dialog.exchanges.length
-    console.info(user.exchangeNo, dialog.exchanges.length)
+
+
     if (exchangeExhausted) {
+        const allTransitions = data.allTransitions
+        const suitablePaths = calcSuitablePaths(user.person, allTransitions)
+        const descriptions = suitablePaths.map(getTransitionName).join('\n')
         context.body = getResponseBodyXml(
-            '2' + text(dialog.terminalExchange.text),
+            `您可以申请以下签证哟：\n${descriptions}`,
             request.ToUserName,
             request.FromUserName,
             "text",
@@ -241,10 +261,9 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
     }
     else {
         const exchange = dialog.exchanges[user.exchangeNo]
-        user.person = exchange.getNewPersonDescription(user.person, request.Content)
 
         context.body = getResponseBodyXml(
-            '3' + text(exchange.text),
+            text(exchange.text),
             request.ToUserName,
             request.FromUserName,
             "text",

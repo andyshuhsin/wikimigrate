@@ -25,9 +25,15 @@ export const certifications = {
     eca: eca
 }
 
+const allTransitions = regions.map((region: Region) => region.transitionList).reduce(
+    (prev, nextArray) => prev.concat(nextArray),
+    []
+)
+
 export const data = {
     app,
     regions,
+    allTransitions,
     getRegionById,
     common,
     certifications,

@@ -4,7 +4,7 @@ let currentLang: LangId = "en"
 
 const fallbackLangList: LangId[] = ["en", "fr", "zh_hans"]
 
-export function text(s?: MultiLangStringSet | string): string {
+export function text(s?: MultiLangStringSet | string | null, langArg = currentLang): string {
 
        if (s === null || typeof s === "undefined") {
            return ''
@@ -14,7 +14,7 @@ export function text(s?: MultiLangStringSet | string): string {
            return s
        }
        else {
-           const translation = s[currentLang]
+           const translation = s[langArg]
            if (translation) {
                return translation
            }
