@@ -11,14 +11,13 @@ fi
 
 ## Web-frontend
 cd src/fe
+rm -rf built
 NODE_ENV='production' webpack -p
-rsync -azP built/* ${server}:/var/www/wkm/fe
+rsync -azP built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/web
 
 ## Backend
 cd -
+cd src/server
+rm -rf built
 tsc
-rsync -azP built/* ${server}:/var/www/wkm/server
-
-## nginx config upgrade
-cd -
-scp -rp tools/nginx-$1-conf ${server}:/etc/nginx
+rsync -azP built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/server

@@ -101,7 +101,7 @@ interface WechatContext extends Context {
 
 setTextLang("zh_hans")
 
-const TOKEN = process.env["GOMIGRANT_WECHAT_TOKEN"]
+const TOKEN = process.env["WKM_WECHAT_TOKEN"]
 const USERS_COLLECTION_KEY = "users"
 
 export function sha1(s: any): string {
