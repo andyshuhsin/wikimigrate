@@ -6,13 +6,11 @@ import {parseXml} from "../parseXml"
 import {getInitialPerson, Person} from "../../definitions/Person"
 
 import * as compose from "koa-compose"
-import {shouldReset, wechatDialog as dialog} from "../data/dialogue"
+import {ExchangeId, shouldReset, wechatDialog} from "../data/dialogue"
 import {text, setTextLang} from "../../fe/utils/text"
 import {MONGO_URL} from "../chat"
 import {calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
 import {data} from "../../data/index"
-import {Region} from "../../definitions/auxillary/Region"
-import {Path} from "../../fe/utils/definitions"
 
 interface WechatOrdinaryMessageData {
     MsgType: "text"
@@ -33,42 +31,42 @@ interface WechatEventData {
 
 type WechatData = WechatOrdinaryMessageData | WechatEventData
 
-interface UserPlain {
+interface WechatChatbotUserPlain {
     readonly id: string
-    exchangeNo: number
+    currentExchange: ExchangeId
     person: Person
 }
 
-class User implements UserPlain {
+export class WechatChatbotUser implements WechatChatbotUserPlain {
     readonly id: string
-    exchangeNo: number
+    currentExchange: ExchangeId
     person: Person
 
-    constructor(id: string, exchangeNo?: number, person?: Person) {
+    constructor(id: string, exchange?: ExchangeId, person?: Person) {
         this.id = id
-        this.initialize(exchangeNo, person)
+        this.initialize(exchange, person)
     }
 
-    static loadDataFromPlainObject(input: UserPlain): User {
-        return new User(input.id, input.exchangeNo, input.person)
+    static loadData(input: WechatChatbotUserPlain): WechatChatbotUser {
+        return new WechatChatbotUser(input.id, input.currentExchange, input.person)
     }
 
-    initialize(exchangeNo = 0, person = getInitialPerson(30)) {
-        this.exchangeNo = exchangeNo
+    initialize(exchange: ExchangeId = "initial", person = getInitialPerson(30)) {
+        this.currentExchange = exchange
         this.person = person
     }
 }
 
 class WxChatbotAppState {
-    readonly users: User[]
+    readonly users: WechatChatbotUser[]
     readonly db: Db | undefined
 
-    constructor(users: User[] = [], db?: Db) {
+    constructor(users: WechatChatbotUser[] = [], db?: Db) {
         this.users = users
         this.db = db
     }
 
-    async addUser(user: User): Promise<void> {
+    async addUser(user: WechatChatbotUser): Promise<void> {
         this.users.push(user)
         if (this.db) {
             this.db.collection(USERS_COLLECTION_KEY).insert(user)
@@ -76,11 +74,11 @@ class WxChatbotAppState {
         return undefined
     }
 
-    getUser(id: string): User | undefined {
+    getUser(id: string): WechatChatbotUser | undefined {
         return this.users.find(user => user.id === id)
     }
 
-    updateUser(id: string, userData: Partial<UserPlain>) {
+    updateUser(id: string, userData: Partial<WechatChatbotUserPlain>) {
         const user = this.getUser(id)
         if (!user) {
             console.warn("Unkown user id:", id)
@@ -157,14 +155,6 @@ function getResponseBodyXml(
     `
 }
 
-function getTransitionName(path: Path): string {
-    return path.transitions.map(transition => {
-        const region = data.getRegionById(transition.regionId)
-        return text(region && region.name) + text(transition.name)
-    })
-    .join('\n')
-}
-
 
 function isWechatRequest(path: string): boolean {
     return path === "/api-wechat"
@@ -174,9 +164,9 @@ async function loadPersistentState(context: WechatContext, next: () => Promise<a
     if (Object.keys(context.state).length === 0) {
         const db = await MongoClient.connect(MONGO_URL)
         const users = (await db.collection(USERS_COLLECTION_KEY)
-                              .find<UserPlain>()
+                              .find<WechatChatbotUserPlain>()
                               .toArray())
-                              .map(user => User.loadDataFromPlainObject(user))
+                              .map(user => WechatChatbotUser.loadData(user))
         context.state = new WxChatbotAppState(users, db)
     }
     return next()
@@ -200,18 +190,16 @@ async function wechatEvent(context: WechatContext, next: () => Promise<any>) {
         return next()
     }
     if (request.Event === "subscribe") {
-        const user = new User(request.FromUserName)
-        context.state.addUser(user)
+        const user = new WechatChatbotUser(request.FromUserName)
+        const responseText = wechatDialog.text(user)
         context.body = getResponseBodyXml(
-            text(dialog.exchanges[0].text),
+            responseText,
             request.ToUserName,
             request.FromUserName,
             "text",
             Date.now().toString().slice(0, 8),
         )
-        context.state.updateUser(user.id, {
-            exchangeNo: user.exchangeNo + 1
-        })
+        context.state.addUser(user)
     }
     else if (request.Event === "unsubscribe") {
 
@@ -233,46 +221,21 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
 
     if (!user) {
         console.warn("Unknown user making conversation, subscribe event unprocessed?", request.FromUserName)
-        user = new User(request.FromUserName)
+        user = new WechatChatbotUser(request.FromUserName)
         context.state.addUser(user)
     }
 
-    if (shouldReset(request.Content)) {
-        user.initialize()
-    }
+    const responseText = wechatDialog.text(user)
+    context.body = getResponseBodyXml(
+        responseText,
+        request.ToUserName,
+        request.FromUserName,
+        "text",
+        Date.now().toString().slice(0, 8),
+    )
 
-    const previousExchange = dialog.exchanges[user.exchangeNo - 1]
-    if (previousExchange) {
-        user.person = previousExchange.getNewPersonDescription(user.person, request.Content)
-    }
-    const exchangeExhausted = user.exchangeNo >= dialog.exchanges.length
-
-
-    if (exchangeExhausted) {
-        const allTransitions = data.allTransitions
-        const suitablePaths = calcSuitablePaths(user.person, allTransitions)
-        const descriptions = suitablePaths.map(getTransitionName).join('\n')
-        context.body = getResponseBodyXml(
-            `您可以申请以下签证哟：\n${descriptions}`,
-            request.ToUserName,
-            request.FromUserName,
-            "text",
-        )
-    }
-    else {
-        const exchange = dialog.exchanges[user.exchangeNo]
-
-        context.body = getResponseBodyXml(
-            text(exchange.text),
-            request.ToUserName,
-            request.FromUserName,
-            "text",
-        )
-
-        context.state.updateUser(user.id, {
-            exchangeNo: user.exchangeNo + 1
-        })
-    }
+    const newUser = wechatDialog.reduce(user, request.Content)
+    context.state.updateUser(user.id, newUser)
 }
 
 export const wechat = compose([

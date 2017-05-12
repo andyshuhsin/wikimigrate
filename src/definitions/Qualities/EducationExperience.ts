@@ -65,23 +65,6 @@ export const educationStageProfiles: EducationStageProfiles = {
     }
 }
 
-interface ReverseEducationNameTextTable {
-    [text: string]: EducationStage
-}
-
-export function buildReverseStageTable(
-    lang: LangId,
-    profiles = educationStageProfiles
-): ReverseEducationNameTextTable {
-    const result: ReverseEducationNameTextTable = {}
-    for (const entry of Object.entries(profiles)) {
-        const displayText = text(entry[1].name, lang)
-        const stage = entry[0] as EducationStage
-        result[displayText] = stage
-    }
-    return result
-}
-
 export function getEducationStageRank(stage: EducationStage): number {
     return educationStageProfiles[stage].rank
 }
