@@ -98,14 +98,7 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
             const region = data.regions.find(
                 (region => text(region.name, "zh_hans") === input)
             )
-
-            let regionId: RegionId
-            if (!region) {
-                regionId = "world"
-            }
-            else {
-                regionId = region.id
-            }
+            const regionId = region ? region.id : "world"
 
             if (newUser.person.education) {
                 newUser.person.education[0].regionId = regionId
