@@ -27,21 +27,32 @@ interface WechatEventData {
     Event: "subscribe" | "unsubscribe"
 }
 
+interface ChatHistoryEntry {
+    timestamp: number
+    speaker: string
+    content: string
+}
+
 type WechatData = WechatOrdinaryMessageData | WechatEventData
 
 interface WechatChatbotUserPlain {
     readonly id: string
     topic: TopicId
+    invalidInput: boolean
+    history: ChatHistoryEntry[]
     person: Person
 }
 
 export class WechatChatbotUser implements WechatChatbotUserPlain {
     readonly id: string
     topic: TopicId
+    invalidInput: boolean
+    history: ChatHistoryEntry[]
     person: Person
 
     constructor(id: string, topic?: TopicId, person?: Person) {
         this.id = id
+        this.history = []
         this.initialize(topic, person)
     }
 
@@ -52,6 +63,7 @@ export class WechatChatbotUser implements WechatChatbotUserPlain {
     initialize(topic: TopicId = "initial", person = getInitialPerson(30)) {
         this.topic = topic
         this.person = person
+        this.invalidInput = false
     }
 }
 

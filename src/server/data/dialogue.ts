@@ -77,6 +77,12 @@ export type TopicId =
 
 export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
     const newUser = WechatChatbotUser.loadData(user)
+    newUser.history.push({
+        timestamp: Date.now(),
+        speaker: user.id,
+        content: input
+    })
+
     if (shouldReset(input)) {
         newUser.initialize()
         return newUser
@@ -87,12 +93,19 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
             return newUser
         }
         case "education-level": {
-            newUser.person.education = [{
-                qualityId: "education",
-                stage: reverseEducationStageNameTable[input]
-            } as EducationQuality]
-            newUser.topic = "education-duration"
-            return newUser
+            if (reverseEducationStageNameTable[input]) {
+                newUser.person.education = [{
+                    qualityId: "education",
+                    stage: reverseEducationStageNameTable[input]
+                } as EducationQuality]
+                newUser.topic = "education-duration"
+                newUser.invalidInput = false
+                return newUser
+            }
+            else {
+                newUser.invalidInput = true
+                return newUser
+            }
         }
         case "education-duration": {
             const region = data.regions.find(
@@ -116,24 +129,34 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
 }
 
 export const wechatText: Template<WechatChatbotUser> = function(user) {
+    let response: string = ""
+
+    if (user.invalidInput) {
+        response += `不好意思，没听懂「${user.history[user.history.length - 1].content}的意思，请再试一次：`
+    }
+
     switch (user.topic) {
         case "initial": {
-            return "你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。"
+            response += "你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。"
+            break
         }
 
         case "education-level": {
-            return "您最高学历是什么？（本科？硕士？）"
+            response += "您最高学历是什么？（本科？硕士？）"
+            break
         }
 
         case "education-duration": {
-            return "在哪个国家或地区读的？"
+            response += "在哪个国家或地区读的？"
+            break
         }
 
         case "finish": {
             const allTransitions = data.allTransitions
             const suitablePaths = calcSuitablePaths(user.person, allTransitions)
             const descriptions = suitablePaths.map(getTransitionName).join('\n')
-            return `你可以申请以下签证哟：\n${descriptions}`
+            response += `你可以申请以下签证哟：\n${descriptions}`
+            break
         }
 
         default: {
@@ -141,6 +164,8 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
             return ""
         }
     }
+
+    return response
 }
 
 export const wechatDialog: Dialogue<WechatChatbotUser> = {
