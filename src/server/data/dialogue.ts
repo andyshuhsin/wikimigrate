@@ -137,17 +137,18 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
 
     switch (user.topic) {
         case "initial": {
-            response += "你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。"
+            response += `你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。
+                         我们聊天的过城中，您可以随时回复${restartKeywords.join("或")}重新开始。`
             break
         }
 
         case "education_level": {
-            response += "您最高学历是什么？（本科？硕士？）"
+            response += "你的最高学历是什么？（本科？硕士？）"
             break
         }
 
         case "education_location": {
-            response += "在哪个国家或地区读的？"
+            response += "你的最高学历是在哪个国家或地区读的？"
             break
         }
 
