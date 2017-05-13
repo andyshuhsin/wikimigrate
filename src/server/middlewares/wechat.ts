@@ -9,6 +9,7 @@ import * as compose from "koa-compose"
 import {TopicId, wechatDialog} from "../data/dialogue"
 import {text, setTextLang} from "../../fe/utils/text"
 import {MONGO_URL} from "../chat"
+import {Path} from "../../fe/utils/definitions"
 
 interface WechatOrdinaryMessageData {
     MsgType: "text"
@@ -37,18 +38,25 @@ type WechatData = WechatOrdinaryMessageData | WechatEventData
 
 interface WechatChatbotUserPlain {
     readonly id: string
-    topic: TopicId
-    invalidInput: boolean
-    history: ChatHistoryEntry[]
     person: Person
+    ui: {
+        topic: TopicId
+        invalidInput: boolean
+        interestedPath: number
+    }
+    history: ChatHistoryEntry[]
 }
 
 export class WechatChatbotUser implements WechatChatbotUserPlain {
     readonly id: string
-    topic: TopicId
-    invalidInput: boolean
-    history: ChatHistoryEntry[]
     person: Person
+    ui: {
+        topic: TopicId
+        invalidInput: boolean
+        interestedPath: number
+        suitablePaths: Path[]
+    }
+    history: ChatHistoryEntry[]
 
     constructor(id: string, topic?: TopicId, person?: Person) {
         this.id = id
@@ -57,13 +65,17 @@ export class WechatChatbotUser implements WechatChatbotUserPlain {
     }
 
     static loadData(input: WechatChatbotUserPlain): WechatChatbotUser {
-        return new WechatChatbotUser(input.id, input.topic, input.person)
+        return new WechatChatbotUser(input.id, input.ui.topic, input.person)
     }
 
     initialize(topic: TopicId = "initial", person = getInitialPerson(30)) {
-        this.topic = topic
         this.person = person
-        this.invalidInput = false
+        this.ui = {
+            topic,
+            invalidInput: false,
+            interestedPath: 0,
+            suitablePaths: [],
+        }
     }
 }
 

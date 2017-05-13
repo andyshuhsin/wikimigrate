@@ -12,6 +12,7 @@ import {RegionId} from "../../definitions/auxillary/Region"
 import {WechatChatbotUser} from "../middlewares/wechat"
 import {Path} from "../../fe/utils/definitions"
 import {calcSuitability, calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
+import Transition from "../../definitions/Transition"
 
 type Response = string
 
@@ -63,11 +64,20 @@ function getTransitionName(path: Path): string {
         .join('\n')
 }
 
+function getTransitionTextDescription(transition: Transition): string {
+    return ""
+}
+
+function getPathTextDescription(path: Path): string {
+    return path.transitions.map(getTransitionTextDescription).join("\n")
+}
+
 export type TopicId =
     "initial"
     | "education_level"
     | "education_location"
     | "path_list"
+    | "single_path_view"
 
 
 export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
@@ -82,9 +92,9 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
         newUser.initialize()
         return newUser
     }
-    switch (user.topic) {
+    switch (user.ui.topic) {
         case "initial": {
-            newUser.topic = "education_level"
+            newUser.ui.topic = "education_level"
             return newUser
         }
         case "education_level": {
@@ -93,12 +103,12 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
                     qualityId: "education",
                     stage: reverseEducationStageNameTable[input]
                 } as EducationQuality]
-                newUser.topic = "education_location"
-                newUser.invalidInput = false
+                newUser.ui.invalidInput = false
+                newUser.ui.topic = "education_location"
                 return newUser
             }
             else {
-                newUser.invalidInput = true
+                newUser.ui.invalidInput = true
                 return newUser
             }
         }
@@ -114,10 +124,21 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
             else {
                 console.warn("Unexpected answer: ", input)
             }
-            newUser.topic = "path_list"
+            newUser.ui.topic = "path_list"
+            newUser.ui.suitablePaths = calcSuitablePaths(user.person, data.allTransitions)
             return newUser
         }
-        case "path_list": {
+        case "path_list":
+        case "single_path_view": {
+            const inputNumber = Number(input)
+            if (Number.isNaN(inputNumber) || inputNumber > user.ui.suitablePaths.length) {
+                newUser.ui.invalidInput = true
+            }
+            else {
+                newUser.ui.invalidInput = false
+                newUser.ui.interestedPath = inputNumber
+                newUser.ui.topic = "single_path_view"
+            }
             return newUser
         }
     }
@@ -126,11 +147,11 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
 export const wechatText: Template<WechatChatbotUser> = function(user) {
     let response: string = ""
 
-    if (user.invalidInput) {
+    if (user.ui.invalidInput) {
         response += `不好意思，没听懂「${user.history[user.history.length - 1].content}的意思，请再试一次：`
     }
 
-    switch (user.topic) {
+    switch (user.ui.topic) {
         case "initial": {
             response += `你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。
                          我们聊天的过城中，您可以随时回复${restartKeywords.join("或")}重新开始。`
@@ -148,15 +169,23 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
         }
 
         case "path_list": {
-            const allTransitions = data.allTransitions
-            const suitablePaths = calcSuitablePaths(user.person, allTransitions)
-            const descriptions = suitablePaths.map(getTransitionName).join('\n')
-            response += `你可以申请以下签证哟：\n${descriptions}`
+            const descriptions = user.ui.suitablePaths
+                                    .map(getTransitionName)
+                                    .map((value, index) => `${index + 1}. ${value}`)
+                                    .join("\n")
+            response += `你可以申请以下签证哟：\n${descriptions}\n
+                         回复序号可以查看详情`
+            break
+        }
+
+        case "single_path_view": {
+            response += getPathTextDescription(user.ui.suitablePaths[user.ui.interestedPath])
+            response += `回复其他签证序号可以查看详情，也可以回复${restartKeywords.join("或")}重新开始`
             break
         }
 
         default: {
-            console.error("Unimplemented exchange", user.topic)
+            console.error("Unimplemented exchange", user.ui.topic)
             return ""
         }
     }
