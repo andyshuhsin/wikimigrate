@@ -6,11 +6,9 @@ import {parseXml} from "../parseXml"
 import {getInitialPerson, Person} from "../../definitions/Person"
 
 import * as compose from "koa-compose"
-import {TopicId, shouldReset, wechatDialog} from "../data/dialogue"
+import {TopicId, wechatDialog} from "../data/dialogue"
 import {text, setTextLang} from "../../fe/utils/text"
 import {MONGO_URL} from "../chat"
-import {calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
-import {data} from "../../data/index"
 
 interface WechatOrdinaryMessageData {
     MsgType: "text"
