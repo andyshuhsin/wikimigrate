@@ -70,8 +70,8 @@ function getTransitionName(path: Path): string {
 
 export type TopicId =
     "initial"
-    | "education-level"
-    | "education-duration"
+    | "education_level"
+    | "education_location"
     | "finish"
 
 
@@ -89,16 +89,16 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
     }
     switch (user.topic) {
         case "initial": {
-            newUser.topic = "education-level"
+            newUser.topic = "education_level"
             return newUser
         }
-        case "education-level": {
+        case "education_level": {
             if (reverseEducationStageNameTable[input]) {
                 newUser.person.education = [{
                     qualityId: "education",
                     stage: reverseEducationStageNameTable[input]
                 } as EducationQuality]
-                newUser.topic = "education-duration"
+                newUser.topic = "education_location"
                 newUser.invalidInput = false
                 return newUser
             }
@@ -107,7 +107,7 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
                 return newUser
             }
         }
-        case "education-duration": {
+        case "education_location": {
             const region = data.regions.find(
                 (region => text(region.name, "zh_hans") === input)
             )
@@ -141,12 +141,12 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
             break
         }
 
-        case "education-level": {
+        case "education_level": {
             response += "您最高学历是什么？（本科？硕士？）"
             break
         }
 
-        case "education-duration": {
+        case "education_location": {
             response += "在哪个国家或地区读的？"
             break
         }
