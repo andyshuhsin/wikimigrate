@@ -76,7 +76,7 @@ export type TopicId =
 
 
 export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
-    const newUser = WechatChatbotUser.loadData(user)
+    const newUser = WechatChatbotUser.loadData(clone(user))
     newUser.history.push({
         timestamp: Date.now(),
         speaker: user.id,
