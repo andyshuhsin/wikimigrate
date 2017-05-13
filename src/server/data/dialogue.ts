@@ -13,11 +13,6 @@ import {WechatChatbotUser} from "../middlewares/wechat"
 import {Path} from "../../fe/utils/definitions"
 import {calcSuitability, calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
 
-interface Exchange {
-    text: MultiLangStringSet
-    getNewPersonDescription(person: Person, answer: string): Person
-}
-
 type Response = string
 
 interface Reducer<T> {
