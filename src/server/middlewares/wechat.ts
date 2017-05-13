@@ -6,7 +6,7 @@ import {parseXml} from "../parseXml"
 import {getInitialPerson, Person} from "../../definitions/Person"
 
 import * as compose from "koa-compose"
-import {ExchangeId, shouldReset, wechatDialog} from "../data/dialogue"
+import {TopicId, shouldReset, wechatDialog} from "../data/dialogue"
 import {text, setTextLang} from "../../fe/utils/text"
 import {MONGO_URL} from "../chat"
 import {calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
@@ -33,26 +33,26 @@ type WechatData = WechatOrdinaryMessageData | WechatEventData
 
 interface WechatChatbotUserPlain {
     readonly id: string
-    currentExchange: ExchangeId
+    topic: TopicId
     person: Person
 }
 
 export class WechatChatbotUser implements WechatChatbotUserPlain {
     readonly id: string
-    currentExchange: ExchangeId
+    topic: TopicId
     person: Person
 
-    constructor(id: string, exchange?: ExchangeId, person?: Person) {
+    constructor(id: string, exchange?: TopicId, person?: Person) {
         this.id = id
         this.initialize(exchange, person)
     }
 
     static loadData(input: WechatChatbotUserPlain): WechatChatbotUser {
-        return new WechatChatbotUser(input.id, input.currentExchange, input.person)
+        return new WechatChatbotUser(input.id, input.topic, input.person)
     }
 
-    initialize(exchange: ExchangeId = "initial", person = getInitialPerson(30)) {
-        this.currentExchange = exchange
+    initialize(exchange: TopicId = "initial", person = getInitialPerson(30)) {
+        this.topic = exchange
         this.person = person
     }
 }

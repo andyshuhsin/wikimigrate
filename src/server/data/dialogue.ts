@@ -68,7 +68,7 @@ function getTransitionName(path: Path): string {
         .join('\n')
 }
 
-export type ExchangeId =
+export type TopicId =
     "initial"
     | "education-level"
     | "education-duration"
@@ -82,9 +82,9 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
         newUser.initialize()
         return newUser
     }
-    switch (user.currentExchange) {
+    switch (user.topic) {
         case "initial": {
-            newUser.currentExchange = "education-level"
+            newUser.topic = "education-level"
             return newUser
         }
         case "education-level": {
@@ -92,7 +92,7 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
                 qualityId: "education",
                 stage: reverseEducationStageNameTable[input]
             } as EducationQuality]
-            newUser.currentExchange = "education-duration"
+            newUser.topic = "education-duration"
             return newUser
         }
         case "education-duration": {
@@ -114,7 +114,7 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
             else {
                 console.warn("Unexpected answer: ", input)
             }
-            newUser.currentExchange = "finish"
+            newUser.topic = "finish"
             return newUser
         }
         case "finish": {
@@ -124,7 +124,7 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
 }
 
 export const wechatText: Template<WechatChatbotUser> = function(user) {
-    switch (user.currentExchange) {
+    switch (user.topic) {
         case "initial": {
             return "你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。"
         }
@@ -145,7 +145,7 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
         }
 
         default: {
-            console.error("Unimplemented exchange", user.currentExchange)
+            console.error("Unimplemented exchange", user.topic)
             return ""
         }
     }
