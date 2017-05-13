@@ -67,7 +67,7 @@ export type TopicId =
     "initial"
     | "education_level"
     | "education_location"
-    | "finish"
+    | "path_list"
 
 
 export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
@@ -114,10 +114,10 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
             else {
                 console.warn("Unexpected answer: ", input)
             }
-            newUser.topic = "finish"
+            newUser.topic = "path_list"
             return newUser
         }
-        case "finish": {
+        case "path_list": {
             return newUser
         }
     }
@@ -147,7 +147,7 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
             break
         }
 
-        case "finish": {
+        case "path_list": {
             const allTransitions = data.allTransitions
             const suitablePaths = calcSuitablePaths(user.person, allTransitions)
             const descriptions = suitablePaths.map(getTransitionName).join('\n')
