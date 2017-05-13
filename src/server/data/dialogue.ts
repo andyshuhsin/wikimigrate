@@ -78,7 +78,6 @@ export type TopicId =
 export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
     const newUser = WechatChatbotUser.loadData(user)
     if (shouldReset(input)) {
-        console.info(user instanceof WechatChatbotUser)
         newUser.initialize()
         return newUser
     }
