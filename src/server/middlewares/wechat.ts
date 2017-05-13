@@ -42,17 +42,17 @@ export class WechatChatbotUser implements WechatChatbotUserPlain {
     topic: TopicId
     person: Person
 
-    constructor(id: string, exchange?: TopicId, person?: Person) {
+    constructor(id: string, topic?: TopicId, person?: Person) {
         this.id = id
-        this.initialize(exchange, person)
+        this.initialize(topic, person)
     }
 
     static loadData(input: WechatChatbotUserPlain): WechatChatbotUser {
         return new WechatChatbotUser(input.id, input.topic, input.person)
     }
 
-    initialize(exchange: TopicId = "initial", person = getInitialPerson(30)) {
-        this.topic = exchange
+    initialize(topic: TopicId = "initial", person = getInitialPerson(30)) {
+        this.topic = topic
         this.person = person
     }
 }
