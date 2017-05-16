@@ -10,7 +10,7 @@ else
 fi
 
 ## Web-frontend
-cd src/fe
+cd src/client/web
 rm -rf built
 NODE_ENV='production' webpack -p
 rsync -azP built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/web
