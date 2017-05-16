@@ -1,5 +1,5 @@
-import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
-import {CurrencyId} from "../../definitions/auxillary/Money"
+import {MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
+import {CurrencyId} from "../../definitions/auxiliary/Money"
 
 type CurrencyDB = {
     [key in CurrencyId]: {

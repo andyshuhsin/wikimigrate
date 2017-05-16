@@ -1,5 +1,5 @@
 import BasePrereq from './BasePrereq'
-import Money, {FundSourceGroup} from "../auxillary/Money"
+import Money, {FundSourceGroup} from "../auxiliary/Money"
 
 export interface FundPrereqCondition {
     familyMember: number

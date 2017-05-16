@@ -1,5 +1,5 @@
-import { Duration } from '../auxillary/Duration'
-import { MultiLangStringSet } from '../auxillary/MultiLang'
+import { Duration } from '../auxiliary/Duration'
+import { MultiLangStringSet } from '../auxiliary/MultiLang'
 
 interface Status {
     id: string

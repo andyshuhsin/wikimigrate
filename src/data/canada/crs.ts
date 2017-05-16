@@ -1,19 +1,19 @@
 import {ScoreCondition, ScoreSystem} from "../../definitions/ScoreSystem"
 import AgePrereq from "../../definitions/Prerequisites/AgePrereq"
-import {allOf, Combination, identity, oneOf} from "../../definitions/auxillary/Combination"
+import {allOf, Combination, identity, oneOf} from "../../definitions/auxiliary/Combination"
 import {UnionPrereq} from "../../definitions/Prerequisites/UnionPrereq"
-import {duration, Duration} from "../../definitions/auxillary/Duration"
+import {duration, Duration} from "../../definitions/auxiliary/Duration"
 import {EducationStage} from "../../definitions/Qualities/EducationExperience"
 import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
 import {LanguagePrereq, zeroLanguagePrereqScores} from "../../definitions/Prerequisites/LanguagePrereq"
 import {SpousePrereq} from "../../definitions/Prerequisites/SpousePrereq"
-import {Interval} from "../../definitions/auxillary/Operator"
+import {Interval} from "../../definitions/auxiliary/Operator"
 import {WorkExperiencePrereq} from "../../definitions/Prerequisites/WorkExperiencePrereq"
 import {CertificationPrereq} from "../../definitions/Prerequisites/CertificationPrereq"
 import {OfferPrereq} from "../../definitions/Prerequisites/OfferPrereq"
 import {noc0, noc00, nocA, nocB} from "./jobClass/noc2016/index"
 import {NominationPrereq} from "../../definitions/Prerequisites/NominationPrereq"
-import {LanguageTestItem, languageTestItemValues, zeroLanguageScores} from "../../definitions/auxillary/LanguageTest"
+import {LanguageTestItem, languageTestItemValues, zeroLanguageScores} from "../../definitions/auxiliary/LanguageTest"
 
 type MarriedScore = number
 type SingleScore = number

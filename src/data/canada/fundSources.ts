@@ -1,4 +1,4 @@
-import {FundSourceGroup} from "../../definitions/auxillary/Money"
+import {FundSourceGroup} from "../../definitions/auxiliary/Money"
 
 export const designatedVentureCapitalFunds: FundSourceGroup = {
     fundSourceGroupId: "canada-designated-venture-capital-funds",

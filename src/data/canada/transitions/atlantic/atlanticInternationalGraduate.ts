@@ -4,9 +4,9 @@ import {
     pr,
 } from '../../status'
 import Transition from "../../../../definitions/Transition";
-import {allOf, oneOf} from "../../../../definitions/auxillary/Combination";
+import {allOf, oneOf} from "../../../../definitions/auxiliary/Combination";
 import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";
-import {duration} from "../../../../definitions/auxillary/Duration";
+import {duration} from "../../../../definitions/auxiliary/Duration";
 import {ResidencePrereq} from "../../../../definitions/Prerequisites/ResidencePrereq";
 import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq";
 

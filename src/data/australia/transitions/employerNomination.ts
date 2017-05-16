@@ -1,5 +1,5 @@
 import Transition from "../../../definitions/Transition";
-import {allOf} from "../../../definitions/auxillary/Combination";
+import {allOf} from "../../../definitions/auxiliary/Combination";
 
 import {
     alien,

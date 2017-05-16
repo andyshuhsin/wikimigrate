@@ -1,4 +1,4 @@
-import Certification from '../../definitions/auxillary/Certification'
+import Certification from '../../definitions/auxiliary/Certification'
 
 const eca: Certification = {
     type: "certification",

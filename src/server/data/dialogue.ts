@@ -1,5 +1,5 @@
-import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
-import {clone} from "../../fe/utils/clone"
+import {LangId, MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
+import {clone} from "../../client/utils/clone"
 import {Person} from "../../definitions/Person"
 import {
     EducationQuality,
@@ -7,12 +7,12 @@ import {
     educationStageProfiles,
 } from "../../definitions/Qualities/EducationExperience"
 import {stripIndents} from "common-tags"
-import {text} from "../../fe/utils/text"
+import {text} from "../../client/utils/text"
 import {data} from "../../data/index"
-import {RegionId} from "../../definitions/auxillary/Region"
+import {RegionId} from "../../definitions/auxiliary/Region"
 import {WechatChatbotUser} from "../middlewares/wechat"
-import {Path} from "../../fe/utils/definitions"
-import {calcSuitability, calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
+import {Path} from "../../client/utils/definitions"
+import {calcSuitability, calcSuitablePaths} from "../../client/utils/calcSuitablePaths"
 import Transition from "../../definitions/Transition"
 import {Prerequisite} from "../../definitions/Prerequisites/index"
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"

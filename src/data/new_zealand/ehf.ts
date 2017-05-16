@@ -1,4 +1,4 @@
-import {FundSourceGroup} from "../../definitions/auxillary/Money"
+import {FundSourceGroup} from "../../definitions/auxiliary/Money"
 
 export const ehf: FundSourceGroup = {
     fundSourceGroupId: "new_zealand_edmund_hillary_fellowship",

@@ -1,7 +1,7 @@
-import {oneOf} from "../../../../definitions/auxillary/Combination"
+import {oneOf} from "../../../../definitions/auxiliary/Combination"
 import {RightPrereq} from "../../../../definitions/Prerequisites/RightPrereq"
 import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq"
-import {duration} from "../../../../definitions/auxillary/Duration"
+import {duration} from "../../../../definitions/auxiliary/Duration"
 import AgePrereq from "../../../../definitions/Prerequisites/AgePrereq"
 
 // English requirements; see http://www.border.gov.au/Lega/Lega/Form/Immi-FAQs/how-can-i-prove-i-have-competent-english

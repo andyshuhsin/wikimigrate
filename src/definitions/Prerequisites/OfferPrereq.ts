@@ -1,8 +1,8 @@
 import BasePrereq from './BasePrereq'
-import { MultiLangStringSet } from '../auxillary/MultiLang'
-import {RegionId} from "../auxillary/Region"
-import {JobGroup} from "../auxillary/JobClassification"
-import {Combination} from "../auxillary/Combination"
+import { MultiLangStringSet } from '../auxiliary/MultiLang'
+import {RegionId} from "../auxiliary/Region"
+import {JobGroup} from "../auxiliary/JobClassification"
+import {Combination} from "../auxiliary/Combination"
 
 export interface OfferPrereq extends BasePrereq {
     prereqId: "offer"

@@ -1,7 +1,7 @@
-import {RegionId} from "./auxillary/Region"
+import {RegionId} from "./auxiliary/Region"
 
 import {BirthQuality} from "./Qualities/Birth"
-import {LanguageTestResult} from "./auxillary/LanguageTest"
+import {LanguageTestResult} from "./auxiliary/LanguageTest"
 import {EducationQuality} from "./Qualities/EducationExperience"
 import {WorkExperienceQuality} from "./Qualities/WorkExperience"
 

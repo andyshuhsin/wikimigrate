@@ -1,11 +1,11 @@
 import Transition from "../../../definitions/Transition"
-import {allOf} from "../../../definitions/auxillary/Combination"
+import {allOf} from "../../../definitions/auxiliary/Combination"
 import AgePrereq from "../../../definitions/Prerequisites/AgePrereq"
 
 import {
     alien, silverFernHolder,
 } from "../status"
-import {duration} from "../../../definitions/auxillary/Duration"
+import {duration} from "../../../definitions/auxiliary/Duration"
 
 export const silverFern: Transition = {
     id: "new_zealand_silver_fern",

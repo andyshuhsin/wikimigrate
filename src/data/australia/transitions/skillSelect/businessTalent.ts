@@ -1,8 +1,8 @@
 import Transition from "../../../../definitions/Transition"
-import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
-import {money} from "../../../../definitions/auxillary/Money"
+import {allOf, identity, oneOf} from "../../../../definitions/auxiliary/Combination"
+import {money} from "../../../../definitions/auxiliary/Money"
 import {FundPrereq} from "../../../../definitions/Prerequisites/FundPrereq"
-import {duration} from "../../../../definitions/auxillary/Duration"
+import {duration} from "../../../../definitions/auxiliary/Duration"
 import {BusinessPrereq} from "../../../../definitions/Prerequisites/BusinessPrereq"
 
 import {

@@ -1,5 +1,5 @@
 import Transition from "../../../definitions/Transition"
-import {allOf, oneOf} from "../../../definitions/auxillary/Combination"
+import {allOf, oneOf} from "../../../definitions/auxiliary/Combination"
 
 import {
     alien,
@@ -7,7 +7,7 @@ import {
 } from '../status'
 import {prereqTitleDict} from "../../common/prereqTitleDict"
 import {FundPrereq} from "../../../definitions/Prerequisites/FundPrereq"
-import {money} from "../../../definitions/auxillary/Money"
+import {money} from "../../../definitions/auxiliary/Money"
 import {
     designatedVentureCapitalFunds,
     designatedAngelInvestors,

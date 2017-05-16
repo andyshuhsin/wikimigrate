@@ -1,4 +1,4 @@
-import {LanguageTestProfile} from "../../definitions/auxillary/LanguageTest"
+import {LanguageTestProfile} from "../../definitions/auxiliary/LanguageTest"
 
 const languageTestProfiles: LanguageTestProfile[] = [
     {

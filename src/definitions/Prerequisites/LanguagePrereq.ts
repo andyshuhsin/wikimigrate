@@ -1,8 +1,8 @@
 import BasePrereq from "./BasePrereq";
 import {
     LanguageTestId, LanguageTestItem, languageTestItemValues, LanguageTestScoreSet,
-} from "../auxillary/LanguageTest"
-import {ArithmeticComparisonOperator, Interval} from "../auxillary/Operator"
+} from "../auxiliary/LanguageTest"
+import {ArithmeticComparisonOperator, Interval} from "../auxiliary/Operator"
 
 
 export const zeroLanguagePrereqScores: LanguagePrereqScoreSet = {

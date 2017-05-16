@@ -1,13 +1,13 @@
-import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {LangId, MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
 
 const lang: LangId = "en"
 
 const brandName: MultiLangStringSet = {
-    en: "The Good Move",
-    zh_hans: "The Good Move"
+    en: "WikiMigrate",
+    zh_hans: "维基迁徙"
 }
 
-const version: string = "0.7"
+const version: string = "0.8"
 
 const app = {
     lang,

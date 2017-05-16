@@ -1,7 +1,7 @@
 import {
     JobClassification,
     JobGroup,
-} from '../../../../definitions/auxillary/JobClassification'
+} from '../../../../definitions/auxiliary/JobClassification'
 
 // See: http://noc.esdc.gc.ca/English/noc/Introduction.aspx?ver=16#struc
 

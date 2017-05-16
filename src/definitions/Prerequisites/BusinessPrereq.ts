@@ -1,6 +1,6 @@
 import BasePrereq from './BasePrereq'
-import Money from '../auxillary/Money'
-import { Duration } from '../auxillary/Duration'
+import Money from '../auxiliary/Money'
+import { Duration } from '../auxiliary/Duration'
 
 export interface BusinessPrereq extends BasePrereq {
     prereqId: "business"

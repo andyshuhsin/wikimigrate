@@ -1,4 +1,4 @@
-import { MultiLangStringSet } from "../auxillary/MultiLang"
+import { MultiLangStringSet } from "../auxiliary/MultiLang"
 
 export type PrereqId =
     "education"

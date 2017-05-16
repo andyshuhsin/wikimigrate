@@ -1,5 +1,5 @@
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
-import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
 
 type PrereqTitleDict = {
     [id in PrereqId]: MultiLangStringSet
