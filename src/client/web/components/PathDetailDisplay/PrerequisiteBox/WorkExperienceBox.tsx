@@ -5,7 +5,7 @@ import {WorkExperiencePrereq} from "../../../../../definitions/Prerequisites/Wor
 import inflect from "../../../../utils/inflect"
 import {text} from "../../../../utils/text"
 import {units} from "../../../../../data/common/units"
-import {LangId} from "../../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
 
 const WorkExperienceBox = (props: {prereq: WorkExperiencePrereq, lang: LangId}) => {
     const prereq = props.prereq

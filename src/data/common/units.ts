@@ -1,5 +1,5 @@
-import {DurationUnit} from "../../definitions/auxillary/Duration"
-import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {DurationUnit} from "../../definitions/auxiliary/Duration"
+import {MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
 
 type UnitsTable = {
     [key in DurationUnit]: {

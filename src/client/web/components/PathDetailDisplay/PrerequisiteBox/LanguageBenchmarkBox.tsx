@@ -9,7 +9,7 @@ import {
 
 import {
     LanguageTestItem,
-} from "../../../../../definitions/auxillary/LanguageTest"
+} from "../../../../../definitions/auxiliary/LanguageTest"
 
 const langRequirementKeyOrder: string[] = [
         "listening",

@@ -1,13 +1,13 @@
 import * as React from 'react'
-import {Combination, isCombination} from "../../../../definitions/auxillary/Combination"
+import {Combination, isCombination} from "../../../../definitions/auxiliary/Combination"
 
 import PrerequisiteBox from './PrerequisiteBox'
 import JobGroupBox from './PrerequisiteBox/JobGroupBox'
 import CombinationSubhead from "./CombinationSubhead"
 import {text} from "../../../utils/text"
-import {isJobGroup} from "../../../../definitions/auxillary/JobClassification"
+import {isJobGroup} from "../../../../definitions/auxiliary/JobClassification"
 import {operators} from "../../../../data/common/operators"
-import {LangId} from "../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../definitions/auxiliary/MultiLang"
 
 const embeddedCombinationBoxStyle = {
     margin: "0.8em 0",

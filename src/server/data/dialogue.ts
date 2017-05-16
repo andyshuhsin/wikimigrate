@@ -1,4 +1,4 @@
-import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {LangId, MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
 import {clone} from "../../client/utils/clone"
 import {Person} from "../../definitions/Person"
 import {
@@ -9,7 +9,7 @@ import {
 import {stripIndents} from "common-tags"
 import {text} from "../../client/utils/text"
 import {data} from "../../data/index"
-import {RegionId} from "../../definitions/auxillary/Region"
+import {RegionId} from "../../definitions/auxiliary/Region"
 import {WechatChatbotUser} from "../middlewares/wechat"
 import {Path} from "../../client/utils/definitions"
 import {calcSuitability, calcSuitablePaths} from "../../client/utils/calcSuitablePaths"

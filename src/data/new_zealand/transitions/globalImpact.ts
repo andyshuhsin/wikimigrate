@@ -1,12 +1,12 @@
 import Transition from "../../../definitions/Transition"
-import {allOf, identity} from "../../../definitions/auxillary/Combination"
+import {allOf, identity} from "../../../definitions/auxiliary/Combination"
 import AgePrereq from "../../../definitions/Prerequisites/AgePrereq"
 
 import {
     alien,
     globalImpactVisaHolder,
 } from "../status"
-import {duration} from "../../../definitions/auxillary/Duration"
+import {duration} from "../../../definitions/auxiliary/Duration"
 import {FundPrereq} from "../../../definitions/Prerequisites/FundPrereq"
 import {ehf} from "../ehf"
 

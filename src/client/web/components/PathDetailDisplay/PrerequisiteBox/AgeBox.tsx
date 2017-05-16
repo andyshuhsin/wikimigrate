@@ -1,9 +1,9 @@
 import * as React from "react"
 import AgePrereq from "../../../../../definitions/Prerequisites/AgePrereq"
-import {LangId} from "../../../../../definitions/auxillary/MultiLang"
-import {arithmeticComparisonOperatorProfiles} from "../../../../../definitions/auxillary/Operator"
+import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
+import {arithmeticComparisonOperatorProfiles} from "../../../../../definitions/auxiliary/Operator"
 import {text} from "../../../../utils/text"
-import {durationUnitProfiles} from "../../../../../definitions/auxillary/Duration"
+import {durationUnitProfiles} from "../../../../../definitions/auxiliary/Duration"
 
 const AgeBox = (props: {prereq: AgePrereq, lang: LangId}) => {
     const operator = props.prereq.value[0]

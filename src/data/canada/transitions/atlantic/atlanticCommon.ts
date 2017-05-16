@@ -1,4 +1,4 @@
-import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
+import {allOf, identity, oneOf} from "../../../../definitions/auxiliary/Combination"
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {EducationPrereq} from "../../../../definitions/Prerequisites/EducationPrereq";

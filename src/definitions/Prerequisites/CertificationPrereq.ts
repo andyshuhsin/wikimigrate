@@ -1,5 +1,5 @@
 import BasePrereq from './BasePrereq'
-import { MultiLangStringSet } from '../auxillary/MultiLang'
+import { MultiLangStringSet } from '../auxiliary/MultiLang'
 
 export interface CertificationPrereq extends BasePrereq {
     prereqId: "certification"

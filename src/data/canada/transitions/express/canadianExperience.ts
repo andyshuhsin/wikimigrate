@@ -5,8 +5,8 @@ import {
 
 import jobClass from '../../jobClass'
 import Transition from "../../../../definitions/Transition";
-import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
-import {duration} from "../../../../definitions/auxillary/Duration";
+import {allOf, identity, oneOf} from "../../../../definitions/auxiliary/Combination"
+import {duration} from "../../../../definitions/auxiliary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
 import {prereqTitleDict} from "../../../common/prereqTitleDict"

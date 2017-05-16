@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {CertificationPrereq} from "../../../../../definitions/Prerequisites/CertificationPrereq"
-import {LangId} from "../../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
 import {text} from "../../../../utils/text"
 
 const CertificationBox = (props: {prereq: CertificationPrereq, lang: LangId}) => {

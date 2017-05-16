@@ -1,7 +1,7 @@
 import Transition from "../../../../definitions/Transition";
-import {allOf, identity, oneOf} from "../../../../definitions/auxillary/Combination"
+import {allOf, identity, oneOf} from "../../../../definitions/auxiliary/Combination"
 import {languagePrereqMinScore} from "../../../../definitions/Prerequisites/LanguagePrereq";
-import {duration} from "../../../../definitions/auxillary/Duration";
+import {duration} from "../../../../definitions/auxiliary/Duration";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
 import {CertificationPrereq} from "../../../../definitions/Prerequisites/CertificationPrereq";

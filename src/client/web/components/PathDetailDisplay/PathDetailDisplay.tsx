@@ -6,7 +6,7 @@ import {
     Path
 } from '../../../utils/definitions'
 import {Person} from "../../../../definitions/Person"
-import {LangId} from "../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../definitions/auxiliary/MultiLang"
 
 const style = {
     position: "absolute",

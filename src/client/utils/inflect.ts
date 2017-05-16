@@ -1,4 +1,4 @@
-import {LangId} from "../../definitions/auxillary/MultiLang"
+import {LangId} from "../../definitions/auxiliary/MultiLang"
 import {store} from "../web/main"
 
 const DEFAULT_LANG: LangId = "en"

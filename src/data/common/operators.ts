@@ -1,5 +1,5 @@
-import {Combinator} from "../../definitions/auxillary/Combination"
-import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {Combinator} from "../../definitions/auxiliary/Combination"
+import {MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
 
 type OperatorTable = {
     [key in Combinator]: {

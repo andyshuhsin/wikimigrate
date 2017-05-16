@@ -1,10 +1,10 @@
 import * as React from 'react'
 import {EducationPrereq} from "../../../../../definitions/Prerequisites/EducationPrereq"
-import {LangId} from "../../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
 import data, {certifications} from "../../../../../data/index"
 import {text} from "../../../../utils/text"
 import {educationStageProfiles} from "../../../../../definitions/Qualities/EducationExperience"
-import {arithmeticComparisonOperatorProfiles} from "../../../../../definitions/auxillary/Operator"
+import {arithmeticComparisonOperatorProfiles} from "../../../../../definitions/auxiliary/Operator"
 
 const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
     const prereq = props.prereq

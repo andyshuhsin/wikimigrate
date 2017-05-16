@@ -1,5 +1,5 @@
 import * as React from "react"
-import URLDatum from "../../../../definitions/auxillary/URLDatum"
+import URLDatum from "../../../../definitions/auxiliary/URLDatum"
 import {text} from "../../../utils/text"
 
 const ReferenceBox = (props: {referenceList: URLDatum[]}) => (

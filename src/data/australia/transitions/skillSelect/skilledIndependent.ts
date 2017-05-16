@@ -10,7 +10,7 @@ import {
 
 import jobClass from '../../jobClass'
 import Transition from "../../../../definitions/Transition";
-import {allOf} from "../../../../definitions/auxillary/Combination";
+import {allOf} from "../../../../definitions/auxiliary/Combination";
 import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
 
 const skilledIndependent: Transition = {

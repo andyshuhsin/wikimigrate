@@ -1,10 +1,10 @@
-import { MultiLangStringSet } from '../auxillary/MultiLang'
+import { MultiLangStringSet } from '../auxiliary/MultiLang'
 import BasePrereq from './BasePrereq'
-import { JobGroup, JobType } from '../auxillary/JobClassification'
-import Duration from '../auxillary/Duration'
-import { Combination } from '../auxillary/Combination'
-import {Interval} from "../auxillary/Operator"
-import {RegionId} from "../auxillary/Region"
+import { JobGroup, JobType } from '../auxiliary/JobClassification'
+import Duration from '../auxiliary/Duration'
+import { Combination } from '../auxiliary/Combination'
+import {Interval} from "../auxiliary/Operator"
+import {RegionId} from "../auxiliary/Region"
 
 export interface WorkExperiencePrereq extends BasePrereq {
     prereqId: "work_experience"

@@ -1,10 +1,10 @@
 import BasePrereq from './BasePrereq'
-import { MultiLangStringSet } from '../auxillary/MultiLang'
-import { CertificationId } from '../auxillary/Certification'
+import { MultiLangStringSet } from '../auxiliary/MultiLang'
+import { CertificationId } from '../auxiliary/Certification'
 import {EducationStage} from "../Qualities/EducationExperience"
-import {Duration} from "../auxillary/Duration"
-import {Interval} from "../auxillary/Operator"
-import {RegionId} from "../auxillary/Region"
+import {Duration} from "../auxiliary/Duration"
+import {Interval} from "../auxiliary/Operator"
+import {RegionId} from "../auxiliary/Region"
 
 export interface EducationPrereq extends BasePrereq {
     prereqId: "education"

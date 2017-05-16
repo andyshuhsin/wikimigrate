@@ -2,7 +2,7 @@ import canada from './canada'
 import australia from './australia'
 import app from './app'
 import common from './common'
-import {Region, RegionId} from "../definitions/auxillary/Region"
+import {Region, RegionId} from "../definitions/auxiliary/Region"
 import new_zealand from "./new_zealand/index"
 import {eca} from "./canada/certifications"
 

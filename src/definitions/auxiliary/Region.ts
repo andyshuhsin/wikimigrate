@@ -1,6 +1,6 @@
 import Status from "../Qualities/Status"
 import Transition from '../Transition'
-import URLDatum from '../auxillary/URLDatum'
+import URLDatum from './/URLDatum'
 import {MultiLangStringSet} from "./MultiLang"
 import {JobClassification} from "./JobClassification"
 import {FundSourceGroup} from "./Money"

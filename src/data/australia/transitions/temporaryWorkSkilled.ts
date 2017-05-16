@@ -1,5 +1,5 @@
 import Transition from "../../../definitions/Transition";
-import {allOf, identity} from "../../../definitions/auxillary/Combination";
+import {allOf, identity} from "../../../definitions/auxiliary/Combination";
 import {OfferPrereq} from "../../../definitions/Prerequisites/OfferPrereq";
 import {WorkExperiencePrereq} from "../../../definitions/Prerequisites/WorkExperiencePrereq";
 

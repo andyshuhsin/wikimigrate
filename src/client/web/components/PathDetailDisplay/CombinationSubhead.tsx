@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Combination} from "../../../../definitions/auxillary/Combination"
+import {Combination} from "../../../../definitions/auxiliary/Combination"
 import {text} from "../../../utils/text"
 import design from "../../design"
 

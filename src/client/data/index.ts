@@ -1,7 +1,7 @@
-import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
-import {LanguageTestResult} from "../../definitions/auxillary/LanguageTest"
+import {LangId, MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
+import {LanguageTestResult} from "../../definitions/auxiliary/LanguageTest"
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
-import {RegionId} from "../../definitions/auxillary/Region"
+import {RegionId} from "../../definitions/auxiliary/Region"
 
 export type FilterId =
     "work_experience_duration"

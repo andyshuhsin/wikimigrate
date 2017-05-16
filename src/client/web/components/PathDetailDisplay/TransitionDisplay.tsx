@@ -6,10 +6,10 @@ import ProcedureBox from './ProcedureBox'
 import ReferenceBox from './ReferenceBox'
 import ScoreBox from './ScoreBox'
 import Transition from "../../../../definitions/Transition";
-import {RegionId} from "../../../../definitions/auxillary/Region"
+import {RegionId} from "../../../../definitions/auxiliary/Region"
 import {calcScore} from "../../../utils/calcScore"
 import {Person} from "../../../../definitions/Person"
-import {LangId} from "../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../definitions/auxiliary/MultiLang"
 
 const transitionNameStyle = {
     margin: 0,

@@ -1,6 +1,6 @@
-import {MultiLangStringSet} from "../auxillary/MultiLang"
-import {Duration} from "../auxillary/Duration"
-import {RegionId} from "../auxillary/Region"
+import {MultiLangStringSet} from "../auxiliary/MultiLang"
+import {Duration} from "../auxiliary/Duration"
+import {RegionId} from "../auxiliary/Region"
 
 export interface WorkExperienceQuality {
     qualityId: "work_experience"

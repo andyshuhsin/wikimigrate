@@ -1,4 +1,4 @@
-import {Region} from "../../definitions/auxillary/Region"
+import {Region} from "../../definitions/auxiliary/Region"
 
 import {
     citizenship,

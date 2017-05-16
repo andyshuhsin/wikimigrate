@@ -1,8 +1,8 @@
 import {LanguageFilterId, FilterId, OptionId} from "../data"
 import {Path} from "../utils/definitions"
 import {EducationStage} from "../../definitions/Qualities/EducationExperience"
-import {RegionId} from "../../definitions/auxillary/Region"
-import {LangId} from "../../definitions/auxillary/MultiLang"
+import {RegionId} from "../../definitions/auxiliary/Region"
+import {LangId} from "../../definitions/auxiliary/MultiLang"
 
 interface BaseOptionClickAction {
     type: "FILTER_OPTION_CLICK"

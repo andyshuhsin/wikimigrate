@@ -1,4 +1,4 @@
-import {MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
 
 const languageBenchmarkItemNames: { [key: string]: MultiLangStringSet } = {
     listening: {

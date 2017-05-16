@@ -11,7 +11,7 @@ import OfferBox from './OfferBox'
 import CertificationBox from './CertificationBox'
 import AgeBox from './AgeBox'
 import BusinessBox from './BusinessBox'
-import {LangId} from "../../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
 
 interface Props {
     prereq: Prerequisite,

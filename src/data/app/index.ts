@@ -1,4 +1,4 @@
-import {LangId, MultiLangStringSet} from "../../definitions/auxillary/MultiLang"
+import {LangId, MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
 
 const lang: LangId = "en"
 

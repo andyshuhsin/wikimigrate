@@ -1,17 +1,17 @@
 import {isPrerequisite, Prerequisite} from "../../definitions/Prerequisites/index"
-import {Duration} from "../../definitions/auxillary/Duration"
-import {Combination, isCombination} from "../../definitions/auxillary/Combination"
+import {Duration} from "../../definitions/auxiliary/Duration"
+import {Combination, isCombination} from "../../definitions/auxiliary/Combination"
 import {
     languageTestItemValues, LanguageTestResult, LanguageTestScoreSet,
-} from "../../definitions/auxillary/LanguageTest"
+} from "../../definitions/auxiliary/LanguageTest"
 import {
     LanguagePrereq,
     LanguagePrereqResult, LanguagePrereqScoreSet,
 } from "../../definitions/Prerequisites/LanguagePrereq"
 import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
 import {WorkExperiencePrereq} from "../../definitions/Prerequisites/WorkExperiencePrereq"
-import {RegionId} from "../../definitions/auxillary/Region"
-import {ArithmeticComparisonOperator, Interval} from "../../definitions/auxillary/Operator"
+import {RegionId} from "../../definitions/auxiliary/Region"
+import {ArithmeticComparisonOperator, Interval} from "../../definitions/auxiliary/Operator"
 import {EducationQuality, getEducationStageRank} from "../../definitions/Qualities/EducationExperience"
 import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
 import {Person} from "../../definitions/Person"

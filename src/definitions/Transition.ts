@@ -1,10 +1,10 @@
-import { MultiLangStringSet } from './auxillary/MultiLang'
-import { Combination } from './auxillary/Combination'
-import Procedure from './auxillary/Procedure'
-import Exception from './auxillary/Exception'
-import URLDatum from './auxillary/URLDatum'
+import { MultiLangStringSet } from './auxiliary/MultiLang'
+import { Combination } from './auxiliary/Combination'
+import Procedure from './auxiliary/Procedure'
+import Exception from './auxiliary/Exception'
+import URLDatum from './auxiliary/URLDatum'
 
-import {RegionId} from "./auxillary/Region"
+import {RegionId} from "./auxiliary/Region"
 import Status from "./Qualities/Status"
 import Prerequisite from "./Prerequisites/index"
 import {ScoreSystem} from "./ScoreSystem"

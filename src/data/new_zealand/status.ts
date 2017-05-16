@@ -1,5 +1,5 @@
 import Status from "../../definitions/Qualities/Status"
-import {duration} from "../../definitions/auxillary/Duration"
+import {duration} from "../../definitions/auxiliary/Duration"
 
 export const citizenship: Status = {
     id: "citizen",

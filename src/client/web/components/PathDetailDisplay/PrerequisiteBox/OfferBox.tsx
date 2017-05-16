@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {OfferPrereq} from "../../../../../definitions/Prerequisites/OfferPrereq"
 import {text} from "../../../../utils/text"
-import {LangId} from "../../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
 import {data} from "../../../../../data"
 
 const OfferBox = (props: {prereq: OfferPrereq, lang: LangId}) => {

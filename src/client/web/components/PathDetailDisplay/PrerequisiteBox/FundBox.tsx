@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {FundPrereq, FundPrereqCondition} from "../../../../../definitions/Prerequisites/FundPrereq"
 import {text} from "../../../../utils/text"
-import {LangId} from "../../../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
 import {data} from "../../../../../data"
 
 function stringifyCondition(condition: Partial<FundPrereqCondition>) {

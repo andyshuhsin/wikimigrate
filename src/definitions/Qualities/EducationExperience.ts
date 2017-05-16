@@ -1,6 +1,6 @@
-import {LangId, MultiLangStringSet} from "../auxillary/MultiLang"
-import Duration from "../auxillary/Duration"
-import {RegionId} from "../auxillary/Region"
+import {LangId, MultiLangStringSet} from "../auxiliary/MultiLang"
+import Duration from "../auxiliary/Duration"
+import {RegionId} from "../auxiliary/Region"
 import {text} from "../../client/utils/text"
 
 export type EducationStage =

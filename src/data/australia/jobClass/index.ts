@@ -1,7 +1,7 @@
 import {
     JobClassification,
     JobGroup,
-} from '../../../definitions/auxillary/JobClassification'
+} from '../../../definitions/auxiliary/JobClassification'
 
 const sol: JobGroup = {
     jobGroupId: "sol",

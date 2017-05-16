@@ -1,7 +1,7 @@
-import {Combination} from "./auxillary/Combination"
+import {Combination} from "./auxiliary/Combination"
 import {Prerequisite} from "./Prerequisites/index"
-import {MultiLangStringSet} from "./auxillary/MultiLang"
-import URLDatum from "./auxillary/URLDatum"
+import {MultiLangStringSet} from "./auxiliary/MultiLang"
+import URLDatum from "./auxiliary/URLDatum"
 export type ScoreSystemId = "crs"
 
 export interface ScoreHistoryEntry {

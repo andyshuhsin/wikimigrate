@@ -25,7 +25,7 @@ import {
     shadeClickAction,
 } from "../../actions"
 import {setTextLang, text} from "../../utils/text"
-import {LangId} from "../../../definitions/auxillary/MultiLang"
+import {LangId} from "../../../definitions/auxiliary/MultiLang"
 
 const style = {
     position: "relative",
