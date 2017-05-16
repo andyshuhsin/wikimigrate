@@ -58,7 +58,7 @@ export class WechatChatbotUser implements WechatChatbotUserPlain {
         interestedPath: number
         suitablePaths: Path[]
     }
-    history: ChatHistoryEntry[]
+    history: ChatHistory
 
     constructor(id: string, topic?: TopicId, person?: Person, history: ChatHistory = []) {
         this.id = id
