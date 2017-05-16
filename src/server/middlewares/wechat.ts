@@ -240,24 +240,22 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
     }
 
     let user = context.state.getUser(request.FromUserName)
-
     if (!user) {
         console.warn("Unknown user making conversation, subscribe event unprocessed?", request.FromUserName)
         user = new WechatChatbotUser(request.FromUserName)
         context.state.addUser(user)
     }
 
-    const responseText = wechatDialog.text(user)
+    user = wechatDialog.reduce(user, request.Content)
+
     context.body = getResponseBodyXml(
-        responseText,
+        wechatDialog.text(user),
         request.ToUserName,
         request.FromUserName,
         "text",
         Date.now().toString().slice(0, 8),
     )
-
-    const newUser = wechatDialog.reduce(user, request.Content)
-    context.state.updateUser(user.id, newUser)
+    context.state.updateUser(user.id, user)
 }
 
 export const wechat = compose([
