@@ -7,9 +7,9 @@ import {getInitialPerson, Person} from "../../definitions/Person"
 
 import * as compose from "koa-compose"
 import {TopicId, wechatDialog} from "../data/dialogue"
-import {text, setTextLang} from "../../fe/utils/text"
+import {text, setTextLang} from "../../client/utils/text"
 import {MONGO_URL} from "../chat"
-import {Path} from "../../fe/utils/definitions"
+import {Path} from "../../client/utils/definitions"
 
 interface WechatOrdinaryMessageData {
     MsgType: "text"

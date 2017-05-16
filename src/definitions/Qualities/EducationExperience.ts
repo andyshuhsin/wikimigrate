@@ -1,7 +1,7 @@
 import {LangId, MultiLangStringSet} from "../auxillary/MultiLang"
 import Duration from "../auxillary/Duration"
 import {RegionId} from "../auxillary/Region"
-import {text} from "../../fe/utils/text"
+import {text} from "../../client/utils/text"
 
 export type EducationStage =
     "primary"
