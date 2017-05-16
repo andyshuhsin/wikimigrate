@@ -6,6 +6,7 @@ import {
     EducationStage,
     educationStageProfiles,
 } from "../../definitions/Qualities/EducationExperience"
+import {stripIndents} from "common-tags"
 import {text} from "../../fe/utils/text"
 import {data} from "../../data/index"
 import {RegionId} from "../../definitions/auxillary/Region"
@@ -153,8 +154,8 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
 
     switch (user.ui.topic) {
         case "initial": {
-            response += `你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。
-                         我们聊天的过城中，您可以随时回复${restartKeywords.join("或")}重新开始。`
+            response += stripIndents`你好，我是维基迁徙机器人。请回复「开始」开始聊天，我会帮你想想怎么样出去比较好。
+                         我们聊天的过程中，您可以随时回复${restartKeywords.join("或")}重新开始。`
             break
         }
 

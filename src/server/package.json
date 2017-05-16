@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "common-tags": "^1.4.0",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
     "koa-compose": "^4.0.0",
@@ -16,6 +17,7 @@
     "xml2js": "^0.4.17"
   },
   "devDependencies": {
+    "@types/common-tags": "^1.2.5",
     "@types/koa": "^2.0.39",
     "@types/koa-bodyparser": "^3.0.23",
     "@types/koa-compose": "^3.2.2",
