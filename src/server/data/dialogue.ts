@@ -131,8 +131,10 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function(user, input) {
         }
         case "path_list":
         case "single_path_view": {
+            newUser.ui.suitablePaths = calcSuitablePaths(user.person, data.allTransitions)
+
             const inputNumber = Number(input)
-            if (Number.isNaN(inputNumber) || inputNumber > user.ui.suitablePaths.length) {
+            if (Number.isNaN(inputNumber) || inputNumber > newUser.ui.suitablePaths.length) {
                 newUser.ui.invalidInput = true
             }
             else {

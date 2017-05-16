@@ -45,6 +45,7 @@ interface WechatChatbotUserPlain {
         topic: TopicId
         invalidInput: boolean
         interestedPath: number
+        suitablePaths: Path[]
     }
     history: ChatHistory
 }
