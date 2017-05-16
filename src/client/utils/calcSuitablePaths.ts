@@ -19,7 +19,7 @@ export function calcSuitability(person: Person, path: Path): number {
         return suitabilityCache[id]
     }
     else {
-        const suitability = Math.random()
+        const suitability = 1
         suitabilityCache[id] = suitability
         return suitability
     }

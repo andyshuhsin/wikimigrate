@@ -18,7 +18,7 @@ const remoteConfig = {
     ],
 }
 
-if (process.env["WKM_DEV"]) {
+if (process.env["WKM_ENVIRONMENT"] === "dev") {
     module.exports = devConfig
 }
 else {
