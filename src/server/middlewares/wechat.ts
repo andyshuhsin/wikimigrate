@@ -34,6 +34,8 @@ interface ChatHistoryEntry {
     content: string
 }
 
+type ChatHistory = ChatHistoryEntry[]
+
 type WechatData = WechatOrdinaryMessageData | WechatEventData
 
 interface WechatChatbotUserPlain {
@@ -44,7 +46,7 @@ interface WechatChatbotUserPlain {
         invalidInput: boolean
         interestedPath: number
     }
-    history: ChatHistoryEntry[]
+    history: ChatHistory
 }
 
 export class WechatChatbotUser implements WechatChatbotUserPlain {
@@ -58,14 +60,14 @@ export class WechatChatbotUser implements WechatChatbotUserPlain {
     }
     history: ChatHistoryEntry[]
 
-    constructor(id: string, topic?: TopicId, person?: Person) {
+    constructor(id: string, topic?: TopicId, person?: Person, history: ChatHistory = []) {
         this.id = id
-        this.history = []
+        this.history = history
         this.initialize(topic, person)
     }
 
     static loadData(input: WechatChatbotUserPlain): WechatChatbotUser {
-        return new WechatChatbotUser(input.id, input.ui.topic, input.person)
+        return new WechatChatbotUser(input.id, input.ui.topic, input.person, input.history)
     }
 
     initialize(topic: TopicId = "initial", person = getInitialPerson(30)) {
