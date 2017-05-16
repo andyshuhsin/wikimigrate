@@ -1,6 +1,7 @@
-import { MultiLangStringSet } from "../auxillary/MultiLang"
+import {LangId, MultiLangStringSet} from "../auxillary/MultiLang"
 import Duration from "../auxillary/Duration"
 import {RegionId} from "../auxillary/Region"
+import {text} from "../../fe/utils/text"
 
 export type EducationStage =
     "primary"
@@ -15,7 +16,7 @@ interface EducationStageProfile {
     name: MultiLangStringSet
 }
 
-type EducationStageProfiles = {
+export type EducationStageProfiles = {
     [key in EducationStage]: EducationStageProfile
 }
 
