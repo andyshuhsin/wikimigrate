@@ -16,7 +16,6 @@ import {LangId} from "../../definitions/auxiliary/MultiLang"
 import languageTestProfiles from "../../data/common/languageTestProfiles"
 import data from "../../data/index"
 import {parseQueryString} from "../utils/parseQueryString"
-import {PATH_QUERY_KEY} from "../utils/constants"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
@@ -260,21 +259,15 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
-        case "QUERY_CHANGE": {
-            const queryString = action.payload.query
-            debugger
-            if (queryString) {
-                const query = parseQueryString(queryString)
-                if (query[PATH_QUERY_KEY]) {
-                    newState.ui.shouldDetailedFilterPanelExpand = true
-                    newState.ui.pathOnDisplay = {
-                        transitionIds: query[PATH_QUERY_KEY].split("+")
-                    }
-                    console.info(newState.ui.pathOnDisplay)
+        case "PATHNAME_CHANGE": {
+            const pathname = action.payload.path
+            if (pathname) {
+                newState.ui.pathOnDisplay = {
+                    transitionIds: pathname.split("+")
                 }
             }
             else {
-                newState.ui.shouldDetailedFilterPanelExpand = false
+                newState.ui.pathOnDisplay = null
             }
             return newState
         }

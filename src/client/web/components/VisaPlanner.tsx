@@ -21,12 +21,11 @@ import {VisaPlannerState} from "../../reducers"
 
 import {Person} from "../../../definitions/Person"
 import {
-    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction, queryChangeAction,
+    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction, pathnameChangeAction,
     shadeClickAction,
 } from "../../actions"
 import {setTextLang, text} from "../../utils/text"
 import {LangId} from "../../../definitions/auxiliary/MultiLang"
-import {PATH_QUERY_KEY} from "../../utils/constants"
 
 const style = {
     position: "relative",
@@ -56,7 +55,7 @@ interface PropTypes {
     onKeyDown: (keyCode: number) => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
-    onQueryChange: (query: string) => void
+    onPathnameChange: (path: string) => void
 }
 
 const allTransitions = data.allTransitions
@@ -65,7 +64,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentWillMount() {
         setTextLang(this.getCurrentLang())
-        this.props.onQueryChange(window.location.search)
+        this.props.onPathnameChange(window.location.pathname.slice(1))
         document.title = text(data.app.brandName)
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
@@ -148,8 +147,8 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentDidUpdate() {
         if (this.props.pathOnDisplay) {
-            const query = `?${PATH_QUERY_KEY}=${this.props.pathOnDisplay.transitionIds.join("+")}`
-            window.history.pushState(null, document.title, query)
+            const path = `/${this.props.pathOnDisplay.transitionIds.join("+")}`
+            window.history.pushState(null, document.title, path)
         }
         else if (!this.props.shouldDetailedFilterPanelExpand) {
             window.history.pushState(null, document.title, "/")
@@ -184,8 +183,8 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         onKeyDown(keyCode: number) {
             dispatch(keyDownAction(keyCode))
         },
-        onQueryChange(query: string) {
-            dispatch(queryChangeAction(query))
+        onPathnameChange(path: string) {
+            dispatch(pathnameChangeAction(path))
         }
     }
 }

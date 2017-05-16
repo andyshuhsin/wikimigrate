@@ -50,6 +50,10 @@ module.exports = {
         ]
     },
 
+    devServer: {
+        historyApiFallback: true
+    },
+
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             names: ['external', 'manifest']

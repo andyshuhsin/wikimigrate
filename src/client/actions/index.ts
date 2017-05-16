@@ -125,10 +125,10 @@ export interface KeyDown {
     }
 }
 
-interface QueryChange {
-    type: "QUERY_CHANGE",
+interface PathnameChange {
+    type: "PATHNAME_CHANGE",
     payload: {
-        query: string
+        path: string
     }
 }
 
@@ -142,7 +142,7 @@ export type Action =
     | PathBoxClick
     | PathViewCloseButtonClick
     | KeyDown
-    | QueryChange
+    | PathnameChange
 
 export function filterOptionClickAction(filterId: FilterId, value: OptionId | number): OptionClickAction {
     const action = {
@@ -220,11 +220,11 @@ export function keyDownAction(keyCode: number): KeyDown {
     }
 }
 
-export function queryChangeAction(query: string): QueryChange {
+export function pathnameChangeAction(path: string): PathnameChange {
     return {
-        type: "QUERY_CHANGE",
+        type: "PATHNAME_CHANGE",
         payload: {
-            query
+            path
         }
     }
 }
