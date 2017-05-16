@@ -14,6 +14,10 @@ import {WechatChatbotUser} from "../middlewares/wechat"
 import {Path} from "../../fe/utils/definitions"
 import {calcSuitability, calcSuitablePaths} from "../../fe/utils/calcSuitablePaths"
 import Transition from "../../definitions/Transition"
+import {Prerequisite} from "../../definitions/Prerequisites/index"
+import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
+import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
+import AgePrereq from "../../definitions/Prerequisites/AgePrereq"
 
 type Response = string
 
@@ -65,12 +69,13 @@ function getTransitionName(path: Path): string {
         .join('\n')
 }
 
-function getTransitionTextDescription(transition: Transition): string {
-    return ""
+
+function getTransitionLink(transition: Transition): string {
+    return `https://wikimigrate.org`
 }
 
 function getPathTextDescription(path: Path): string {
-    return path.transitions.map(getTransitionTextDescription).join("\n")
+    return path.transitions.map(getTransitionLink).join("\n")
 }
 
 export type TopicId =
@@ -182,8 +187,10 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
         }
 
         case "single_path_view": {
-            response += getPathTextDescription(user.ui.suitablePaths[user.ui.interestedPath])
-            response += `回复其他签证序号可以查看详情，也可以回复${restartKeywords.join("或")}重新开始`
+            response += stripIndents`
+                ${getPathTextDescription(user.ui.suitablePaths[user.ui.interestedPath])}
+                回复其他签证序号可以查看详情，也可以回复${restartKeywords.join("或")}重新开始
+            `
             break
         }
 
