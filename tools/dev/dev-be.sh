@@ -1,4 +1,4 @@
-nginx -s stop; nginx -c $(pwd)/tools/nginx.dev.conf
+nginx -s stop; nginx -c $(pwd)/tools/dev/nginx.dev.conf
 mongod &
 cd src/server/
 
