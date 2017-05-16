@@ -26,6 +26,7 @@ import {
 } from "../../actions"
 import {setTextLang, text} from "../../utils/text"
 import {LangId} from "../../../definitions/auxiliary/MultiLang"
+import {PATH_QUERY_KEY} from "../../utils/constants"
 
 const style = {
     position: "relative",
@@ -60,15 +61,11 @@ interface PropTypes {
 
 const allTransitions = data.allTransitions
 
-let search: string = ""
-
 class VisaPlanner extends React.Component<PropTypes, {}> {
 
-    componentDidMount() {
+    componentWillMount() {
         setTextLang(this.getCurrentLang())
-        if (window.location.search !== search) {
-            this.props.onQueryChange(window.location.search)
-        }
+        this.props.onQueryChange(window.location.search)
         document.title = text(data.app.brandName)
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
@@ -104,7 +101,6 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 
     render() {
         setTextLang(this.getCurrentLang())
-
         const {
             user,
             lang,
@@ -148,6 +144,16 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                 <FilterDetailedOptionPanel />
             </div>
         )
+    }
+
+    componentDidUpdate() {
+        if (this.props.pathOnDisplay) {
+            const query = `?${PATH_QUERY_KEY}=${this.props.pathOnDisplay.transitionIds.join("+")}`
+            window.history.pushState(null, document.title, query)
+        }
+        else if (!this.props.shouldDetailedFilterPanelExpand) {
+            window.history.pushState(null, document.title, "/")
+        }
     }
 }
 
