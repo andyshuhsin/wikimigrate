@@ -1,6 +1,6 @@
 {
-  "name": "visaplanner-fe",
-  "version": "0.7",
+  "name": "wkm-web",
+  "version": "0.8",
   "description": "",
   "main": "bundle.js",
   "scripts": {
