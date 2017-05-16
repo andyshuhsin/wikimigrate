@@ -69,13 +69,29 @@ function getTransitionName(path: Path): string {
         .join('\n')
 }
 
+function getTransitionLink(transitionId: string): string {
+    const env = process.env["WKM_ENVIRONMENT"]
+    if (env === "dev") {
+        return `http://localhost:8888/${transitionId}`
+    }
+    else if (env === "stage") {
+        return `https://stage.wikimigrate.org/${transitionId}`
+    }
+    else if (env === "prod") {
+        return `https://wikimigrate.org/${transitionId}`
+    }
+    return `https://wikimigrate.org/${transitionId}`
+}
 
-function getTransitionLink(transition: Transition): string {
-    return `https://wikimigrate.org`
+function getTransitionDescription(transition: Transition): string {
+    return stripIndents`
+        ${text(transition.name)}
+        ${getTransitionLink(transition.id)}
+    `
 }
 
 function getPathTextDescription(path: Path): string {
-    return path.transitions.map(getTransitionLink).join("\n")
+    return path.transitions.map(getTransitionDescription).join("\n")
 }
 
 export type TopicId =
