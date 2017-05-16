@@ -21,7 +21,7 @@ import {VisaPlannerState} from "../../reducers"
 
 import {Person} from "../../../definitions/Person"
 import {
-    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction,
+    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction, queryChangeAction,
     shadeClickAction,
 } from "../../actions"
 import {setTextLang, text} from "../../utils/text"
@@ -55,15 +55,20 @@ interface PropTypes {
     onKeyDown: (keyCode: number) => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
+    onQueryChange: (query: string) => void
 }
 
 const allTransitions = data.allTransitions
 
+let search: string = ""
 
 class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentDidMount() {
         setTextLang(this.getCurrentLang())
+        if (window.location.search !== search) {
+            this.props.onQueryChange(window.location.search)
+        }
         document.title = text(data.app.brandName)
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
@@ -172,6 +177,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         },
         onKeyDown(keyCode: number) {
             dispatch(keyDownAction(keyCode))
+        },
+        onQueryChange(query: string) {
+            dispatch(queryChangeAction(query))
         }
     }
 }

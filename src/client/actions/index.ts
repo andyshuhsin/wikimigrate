@@ -125,6 +125,14 @@ export interface KeyDown {
     }
 }
 
+interface QueryChange {
+    type: "QUERY_CHANGE",
+    payload: {
+        query: string
+    }
+}
+
+
 export type Action =
     OptionClickAction
     | FilterSelectAction
@@ -134,6 +142,7 @@ export type Action =
     | PathBoxClick
     | PathViewCloseButtonClick
     | KeyDown
+    | QueryChange
 
 export function filterOptionClickAction(filterId: FilterId, value: OptionId | number): OptionClickAction {
     const action = {
@@ -211,3 +220,11 @@ export function keyDownAction(keyCode: number): KeyDown {
     }
 }
 
+export function queryChangeAction(query: string): QueryChange {
+    return {
+        type: "QUERY_CHANGE",
+        payload: {
+            query
+        }
+    }
+}

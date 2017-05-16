@@ -15,6 +15,7 @@ import {LanguageTestResult} from "../../definitions/auxiliary/LanguageTest"
 import {LangId} from "../../definitions/auxiliary/MultiLang"
 import languageTestProfiles from "../../data/common/languageTestProfiles"
 import data from "../../data/index"
+import {parseQueryString} from "../utils/parseQueryString"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
@@ -23,6 +24,7 @@ export interface VisaPlannerState {
     user: Person,
     ui: {
         lang: LangId
+        query: string
         expandedFilterId: FilterId | null
         filterState: FilterState
         shouldDetailedFilterPanelExpand: boolean
@@ -35,6 +37,7 @@ export const INITIAL_STATE: VisaPlannerState = {
     user: getInitialPerson(DEFAULT_AGE),
     ui: {
         lang: data.app.lang,
+        query: "",
         shouldDetailedFilterPanelExpand: false,
         filterState: {
             work_experience_duration: null,
@@ -255,6 +258,25 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             newState.ui.filterPanelHeight = action.payload.height
             return newState
         }
+
+        case "QUERY_CHANGE": {
+            const queryString = action.payload.query
+            if (queryString) {
+                const query = parseQueryString(queryString)
+                if (query["path_transitions"]) {
+                    newState.ui.shouldDetailedFilterPanelExpand = true
+                    newState.ui.pathOnDisplay = {
+                        transitionIds: query["path_transitions"].split("+")
+                    }
+                    console.info(newState.ui.pathOnDisplay)
+                }
+            }
+            else {
+                newState.ui.shouldDetailedFilterPanelExpand = false
+            }
+            // return newState
+        }
+
         default: {
             return state
         }
