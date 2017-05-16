@@ -149,7 +149,7 @@ export const wechatText: Template<WechatChatbotUser> = function(user) {
     let response: string = ""
 
     if (user.ui.invalidInput) {
-        response += `不好意思，没听懂「${user.history[user.history.length - 1].content}的意思，请再试一次：`
+        response += `不好意思，没听懂「${user.history[user.history.length - 1].content}」的意思，请再试一次：`
     }
 
     switch (user.ui.topic) {
