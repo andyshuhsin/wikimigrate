@@ -259,11 +259,11 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
-        case "PATHNAME_CHANGE": {
-            const pathname = action.payload.path
-            if (pathname) {
+        case "URLPATH_CHANGE": {
+            const urlpath = action.payload.path
+            if (urlpath) {
                 newState.ui.pathOnDisplay = {
-                    transitionIds: pathname.split("+")
+                    transitionIds: urlpath.split("+")
                 }
             }
             else {

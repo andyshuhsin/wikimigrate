@@ -21,7 +21,7 @@ import {VisaPlannerState} from "../../reducers"
 
 import {Person} from "../../../definitions/Person"
 import {
-    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction, pathnameChangeAction,
+    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction, urlpathChangeAction,
     shadeClickAction,
 } from "../../actions"
 import {setTextLang, text} from "../../utils/text"
@@ -55,7 +55,7 @@ interface PropTypes {
     onKeyDown: (keyCode: number) => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
-    onPathnameChange: (path: string) => void
+    onUrlpathChange: (path: string) => void
 }
 
 const allTransitions = data.allTransitions
@@ -66,9 +66,9 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
         setTextLang(this.getCurrentLang())
         document.title = text(data.app.brandName)
 
-        this.props.onPathnameChange(window.location.pathname.slice(1))
+        this.props.onUrlpathChange(window.location.pathname.slice(1))
         window.addEventListener("popstate", () =>
-            this.props.onPathnameChange(window.location.pathname.slice(1))
+            this.props.onUrlpathChange(window.location.pathname.slice(1))
         )
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
@@ -192,8 +192,8 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         onKeyDown(keyCode: number) {
             dispatch(keyDownAction(keyCode))
         },
-        onPathnameChange(path: string) {
-            dispatch(pathnameChangeAction(path))
+        onUrlpathChange(path: string) {
+            dispatch(urlpathChangeAction(path))
         }
     }
 }

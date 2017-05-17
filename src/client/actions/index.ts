@@ -125,8 +125,8 @@ export interface KeyDown {
     }
 }
 
-interface PathnameChange {
-    type: "PATHNAME_CHANGE",
+interface UrlPathChange {
+    type: "URLPATH_CHANGE",
     payload: {
         path: string
     }
@@ -142,7 +142,7 @@ export type Action =
     | PathBoxClick
     | PathViewCloseButtonClick
     | KeyDown
-    | PathnameChange
+    | UrlPathChange
 
 export function filterOptionClickAction(filterId: FilterId, value: OptionId | number): OptionClickAction {
     const action = {
@@ -220,9 +220,9 @@ export function keyDownAction(keyCode: number): KeyDown {
     }
 }
 
-export function pathnameChangeAction(path: string): PathnameChange {
+export function urlpathChangeAction(path: string): UrlPathChange {
     return {
-        type: "PATHNAME_CHANGE",
+        type: "URLPATH_CHANGE",
         payload: {
             path
         }
