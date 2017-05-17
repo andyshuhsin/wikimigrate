@@ -6,6 +6,8 @@ const ManifestPlugin = require("webpack-manifest-plugin")
 const ChunkManifestPlugin = require("chunk-manifest-webpack-plugin")
 const WebpackMd5Hash = require("webpack-md5-hash")
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
     entry: {
         app: path.join(__dirname, "main.tsx"),
@@ -20,6 +22,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "built"),
         filename: '[name].[chunkhash].js',
+        publicPath: '/'
     },
 
     resolve: {
@@ -30,7 +33,7 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/, loader: 'ts-loader', options: {
-                compilerOptions: (process.env.NODE_ENV === 'production') ? {
+                compilerOptions: isProd ? {
                     target: "es5"
                 } : null
             }
@@ -51,7 +54,8 @@ module.exports = {
     },
 
     devServer: {
-        historyApiFallback: true
+        contentBase: "/",
+        historyApiFallback: true,
     },
 
     plugins: [

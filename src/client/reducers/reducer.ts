@@ -260,10 +260,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case "URLPATH_CHANGE": {
-            const urlpath = action.payload.path
-            if (urlpath) {
+            const segs = action.payload.path.split("/")
+            if (segs[1] === "path") {
                 newState.ui.pathOnDisplay = {
-                    transitionIds: urlpath.split("+")
+                    transitionIds: segs[2].split("+")
                 }
             }
             else {

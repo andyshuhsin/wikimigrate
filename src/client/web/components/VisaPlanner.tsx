@@ -26,6 +26,7 @@ import {
 } from "../../actions"
 import {setTextLang, text} from "../../utils/text"
 import {LangId} from "../../../definitions/auxiliary/MultiLang"
+import {formPath} from "../../utils/urlpath"
 
 const style = {
     position: "relative",
@@ -66,9 +67,9 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
         setTextLang(this.getCurrentLang())
         document.title = text(data.app.brandName)
 
-        this.props.onUrlpathChange(window.location.pathname.slice(1))
+        this.props.onUrlpathChange(window.location.pathname)
         window.addEventListener("popstate", () =>
-            this.props.onUrlpathChange(window.location.pathname.slice(1))
+            this.props.onUrlpathChange(window.location.pathname)
         )
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
@@ -105,7 +106,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
     componentWillReceiveProps(newProps: PropTypes) {
         if (newProps.pathOnDisplay) {
             const oldPath = window.location.pathname
-            const path = `/${newProps.pathOnDisplay.transitionIds.join("+")}`
+            const path = formPath(newProps.pathOnDisplay)
             if (path !== oldPath) {
                 window.history.pushState(null, document.title, path)
             }
