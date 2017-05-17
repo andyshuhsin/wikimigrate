@@ -100,10 +100,10 @@ export interface ShadeClick {
     type: "SHADE_CLICK"
 }
 
-export interface PathBoxClick {
+export interface PathwayBoxClick {
     type: "PATH_BOX_CLICK",
     payload: {
-        path: Pathway
+        pathway: Pathway
     }
 }
 
@@ -139,7 +139,7 @@ export type Action =
     | FilterBarClick
     | FilterPanelRender
     | ShadeClick
-    | PathBoxClick
+    | PathwayBoxClick
     | PathViewCloseButtonClick
     | KeyDown
     | UrlPathChange
@@ -196,11 +196,11 @@ export function shadeClickAction(): ShadeClick {
     }
 }
 
-export function pathBoxClickAction(path: Pathway): PathBoxClick {
+export function pathBoxClickAction(pathway: Pathway): PathwayBoxClick {
     return {
         type: "PATH_BOX_CLICK",
         payload: {
-            path
+            pathway
         }
     }
 }

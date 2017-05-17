@@ -237,7 +237,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
 
         case "PATH_BOX_CLICK": {
             newState.ui.pathwayOnDisplay = {
-                transitionIds: action.payload.path.transitions.map(transition => transition.id)
+                transitionIds: action.payload.pathway.transitions.map(transition => transition.id)
             }
             return newState
         }
