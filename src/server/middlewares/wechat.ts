@@ -182,7 +182,7 @@ function getResponseBodyXml(
 
 
 function isWechatRequest(path: string): boolean {
-    return path === "/api-wechat"
+    return path === "/api/wechat"
 }
 
 async function loadPersistentState(context: WechatContext, next: () => Promise<any>) {

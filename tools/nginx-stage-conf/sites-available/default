@@ -32,7 +32,7 @@ server {
 
 	server_name stage.wikimigrate.org;
 
-    location /api-wechat {
+    location /api/wechat {
 		proxy_pass http://localhost:20000;
     }
 
