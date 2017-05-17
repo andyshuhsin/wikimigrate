@@ -154,7 +154,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
             const path = `/${this.props.pathOnDisplay.transitionIds.join("+")}`
             window.history.pushState(null, document.title, path)
         }
-        else if (!this.props.shouldDetailedFilterPanelExpand) {
+        else {
             window.history.pushState(null, document.title, "/")
         }
     }
