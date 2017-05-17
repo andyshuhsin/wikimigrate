@@ -9,8 +9,10 @@ import Status from "./Qualities/Status"
 import Prerequisite from "./Prerequisites/index"
 import {ScoreSystem} from "./ScoreSystem"
 
+export type TransitionId = string // TODO: Implement proper enumeration
+
 interface Transition {
-    id: string
+    id: TransitionId
     name: MultiLangStringSet
     regionId: RegionId,
     acquireBy: "application" | "invitation" | "automatic"

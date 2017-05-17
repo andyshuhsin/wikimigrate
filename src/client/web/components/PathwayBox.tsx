@@ -2,14 +2,14 @@ import * as React from "react"
 import text from "../../utils/text"
 
 import {
-    Path
+    Pathway
 } from "../../utils/definitions"
 
 import data from "../../../data"
 import design from "../design"
 
 interface PathShowcaseProps {
-    path: Path
+    path: Pathway
     onClick: (event: React.MouseEvent<any>) => void
 }
 
@@ -38,7 +38,7 @@ const pathNameStyle = {
     margin: 0
 } as React.CSSProperties
 
-class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
+class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
         const targetRegion = data.getRegionById(transitions[0].regionId)
@@ -57,4 +57,4 @@ class PathBox extends React.PureComponent<PathShowcaseProps, {}> {
     }
 }
 
-export default PathBox
+export default PathwayBox

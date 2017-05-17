@@ -3,7 +3,7 @@ import TransitionDisplay from './TransitionDisplay'
 import sys from '../../sys'
 
 import {
-    Path
+    Pathway
 } from '../../../utils/definitions'
 import {Person} from "../../../../definitions/Person"
 import {LangId} from "../../../../definitions/auxiliary/MultiLang"
@@ -58,7 +58,7 @@ const crossStyle = {
 
 interface Props {
     user: Person
-    pathOnDisplay: Path | null
+    pathOnDisplay: Pathway | null
     onClose: (event: any) => void
     lang: LangId
 }

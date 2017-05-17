@@ -11,14 +11,14 @@ import {text} from "../../client/utils/text"
 import {data} from "../../data/index"
 import {RegionId} from "../../definitions/auxiliary/Region"
 import {WechatChatbotUser} from "../middlewares/wechat"
-import {Path} from "../../client/utils/definitions"
+import {Pathway} from "../../client/utils/definitions"
 import {calcSuitability, calcSuitablePaths} from "../../client/utils/calcSuitablePaths"
 import Transition from "../../definitions/Transition"
 import {Prerequisite} from "../../definitions/Prerequisites/index"
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
 import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
 import AgePrereq from "../../definitions/Prerequisites/AgePrereq"
-import {PATH_KEYWORD} from "../../data/constants"
+import {PATHWAY_KW_SINGLE} from "../../data/constants"
 
 type Response = string
 
@@ -62,7 +62,7 @@ export function buildReverseStageTable(
 
 const reverseEducationStageNameTable = buildReverseStageTable("zh_hans")
 
-function getTransitionName(path: Path): string {
+function getTransitionName(path: Pathway): string {
     return path.transitions.map(transition => {
         const region = data.getRegionById(transition.regionId)
         return text(region && region.name) + text(transition.name)
@@ -73,15 +73,15 @@ function getTransitionName(path: Path): string {
 function getTransitionLink(transitionId: string): string {
     const env = process.env["WKM_ENVIRONMENT"]
     if (env === "dev") {
-        return `http://localhost:8888/${PATH_KEYWORD}/${transitionId}`
+        return `http://localhost:8888/${PATHWAY_KW_SINGLE}/${transitionId}`
     }
     else if (env === "stage") {
-        return `https://stage.wikimigrate.org/${PATH_KEYWORD}/${transitionId}`
+        return `https://stage.wikimigrate.org/${PATHWAY_KW_SINGLE}/${transitionId}`
     }
     else if (env === "prod") {
-        return `https://wikimigrate.org/${PATH_KEYWORD}/${transitionId}`
+        return `https://wikimigrate.org/${PATHWAY_KW_SINGLE}/${transitionId}`
     }
-    return `https://wikimigrate.org/${PATH_KEYWORD}/${transitionId}`
+    return `https://wikimigrate.org/${PATHWAY_KW_SINGLE}/${transitionId}`
 }
 
 function getTransitionDescription(transition: Transition): string {
@@ -91,7 +91,7 @@ function getTransitionDescription(transition: Transition): string {
     `
 }
 
-function getPathTextDescription(path: Path): string {
+function getPathTextDescription(path: Pathway): string {
     return path.transitions.map(getTransitionDescription).join("\n")
 }
 

@@ -6,13 +6,13 @@ import {connect, Dispatch} from 'react-redux'
 import TopBar from './TopBar'
 import PathShowcase from './PathShowcase'
 import FilterBar from './Filters/FilterBar'
-import PathDetailDisplay from './PathDetailDisplay'
+import PathwayDisplay from './PathwayDisplay'
 import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
 import Shade from './Shade'
 import sys from '../sys'
 
 import {
-    Path, PathDescriptor,
+    Pathway, PathwayDescriptor,
 } from "../../utils/definitions"
 
 import calcSuitablePaths from "../../utils/calcSuitablePaths"
@@ -48,10 +48,10 @@ const style = {
 interface PropTypes {
     user: Person
     lang: LangId
-    pathOnDisplay: PathDescriptor | null
+    pathwayOnDisplay: PathwayDescriptor | null
     onFilterBarClick: () => void
     onShadeClick: () => void
-    onPathBoxClick: (path: Path) => void
+    onPathwayBoxClick: (path: Pathway) => void
     onPathViewCloseButtonClick: () => void
     onKeyDown: (keyCode: number) => void
     filterPanelHeight: number | null
@@ -75,12 +75,12 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
             this.props.onKeyDown(event.keyCode)
     }
 
-    getPaths(pathDescriptor: PathDescriptor | null): Path | null {
-        if (!pathDescriptor) {
+    getPaths(pathwayDes: PathwayDescriptor | null): Pathway | null {
+        if (!pathwayDes) {
             return null
         }
         return {
-            transitions: pathDescriptor.transitionIds.map(
+            transitions: pathwayDes.transitionIds.map(
                 id => allTransitions.filter(transition => transition.id === id)[0]
             )
         }
@@ -104,14 +104,14 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 }
 
     componentWillReceiveProps(newProps: PropTypes) {
-        if (newProps.pathOnDisplay) {
+        if (newProps.pathwayOnDisplay) {
             const oldPath = window.location.pathname
-            const path = formPath(newProps.pathOnDisplay)
+            const path = formPath(newProps.pathwayOnDisplay)
             if (path !== oldPath) {
                 window.history.pushState(null, document.title, path)
             }
         }
-        if (!newProps.pathOnDisplay && this.props.pathOnDisplay) {
+        if (!newProps.pathwayOnDisplay && this.props.pathwayOnDisplay) {
             if (window.location.pathname !== "/") {
                 window.history.pushState(null, document.title, "/")
             }
@@ -124,12 +124,12 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
             user,
             lang,
             shouldDetailedFilterPanelExpand,
-            pathOnDisplay,
+            pathwayOnDisplay,
             filterPanelHeight,
             onPathViewCloseButtonClick,
             onShadeClick,
             onFilterBarClick,
-            onPathBoxClick,
+            onPathwayBoxClick,
         }= this.props
 
         return (
@@ -140,11 +140,11 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                 />
                 <PathShowcase
                     paths={calcSuitablePaths(user, allTransitions)}
-                    onClick={onPathBoxClick}
+                    onClick={onPathwayBoxClick}
                 />
-                <PathDetailDisplay
+                <PathwayDisplay
                     user={user}
-                    pathOnDisplay={this.getPaths(pathOnDisplay)}
+                    pathOnDisplay={this.getPaths(pathwayOnDisplay)}
                     onClose={onPathViewCloseButtonClick}
                     lang={lang}
                 />
@@ -170,7 +170,7 @@ function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
     return {
         user: state.user,
         lang: state.ui.lang,
-        pathOnDisplay: state.ui.pathOnDisplay,
+        pathwayOnDisplay: state.ui.pathwayOnDisplay,
         filterPanelHeight: state.ui.filterPanelHeight,
         shouldDetailedFilterPanelExpand: state.ui.shouldDetailedFilterPanelExpand,
     }
@@ -184,7 +184,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         onShadeClick() {
             dispatch(shadeClickAction())
         },
-        onPathBoxClick(path: Path) {
+        onPathwayBoxClick(path: Pathway) {
             dispatch(pathBoxClickAction(path))
         },
         onPathViewCloseButtonClick() {

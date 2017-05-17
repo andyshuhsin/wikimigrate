@@ -1,5 +1,5 @@
 import {LanguageFilterId, FilterId, OptionId} from "../data"
-import {Path} from "../utils/definitions"
+import {Pathway} from "../utils/definitions"
 import {EducationStage} from "../../definitions/Qualities/EducationExperience"
 import {RegionId} from "../../definitions/auxiliary/Region"
 import {LangId} from "../../definitions/auxiliary/MultiLang"
@@ -103,7 +103,7 @@ export interface ShadeClick {
 export interface PathBoxClick {
     type: "PATH_BOX_CLICK",
     payload: {
-        path: Path
+        path: Pathway
     }
 }
 
@@ -196,7 +196,7 @@ export function shadeClickAction(): ShadeClick {
     }
 }
 
-export function pathBoxClickAction(path: Path): PathBoxClick {
+export function pathBoxClickAction(path: Pathway): PathBoxClick {
     return {
         type: "PATH_BOX_CLICK",
         payload: {

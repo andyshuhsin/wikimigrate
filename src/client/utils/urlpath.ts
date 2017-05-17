@@ -1,6 +1,6 @@
-import {PathDescriptor} from "./definitions"
-import {PATH_KEYWORD} from "../../data/constants"
+import {PathwayDescriptor} from "./definitions"
+import {PATHWAY_KW_SINGLE} from "../../data/constants"
 
-export function formPath(path: PathDescriptor) {
-    return `/${PATH_KEYWORD}/${path.transitionIds.join("+")}`
+export function formPath(pathway: PathwayDescriptor) {
+    return `/${PATHWAY_KW_SINGLE}/${pathway.transitionIds.join("+")}`
 }
