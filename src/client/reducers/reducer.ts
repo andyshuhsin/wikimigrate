@@ -16,16 +16,16 @@ import {LangId} from "../../definitions/auxiliary/MultiLang"
 import languageTestProfiles from "../../data/common/languageTestProfiles"
 import data from "../../data/index"
 import {parseQueryString} from "../utils/parseQueryString"
-import {PATHWAY_KW_PLURAL, PATHWAY_KW_SINGLE} from "../../data/constants"
+import {PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE} from "../../data/constants"
 import {TransitionId} from "../../definitions/Transition"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
 
-type SINGLE_PATHWAY_SEGMENTS = ["", PATHWAY_KW_SINGLE, TransitionId]
-type PLURAL_PATHWAY_SEGMENTS = ["", PATHWAY_KW_PLURAL, string /* "id1+id2+id3..." */]
+type SIMPLE_PATHWAY_SEGMENTS = ["", PATHWAY_KW_SIMPLE, TransitionId]
+type COMPOSITE_PATHWAY_SEGMENTS = ["", PATHWAY_KW_COMPOSITE, string /* "id1+id2+id3..." */]
 
-type URLPATH_SEGMENTS = SINGLE_PATHWAY_SEGMENTS | PLURAL_PATHWAY_SEGMENTS
+type URLPATH_SEGMENTS = SIMPLE_PATHWAY_SEGMENTS | COMPOSITE_PATHWAY_SEGMENTS
 
 export interface VisaPlannerState {
     user: Person,
@@ -268,7 +268,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
 
         case "URLPATH_CHANGE": {
             const segs = action.payload.path.split("/") as URLPATH_SEGMENTS
-            if (segs[1] === PATHWAY_KW_SINGLE) {
+            if (segs[1] === PATHWAY_KW_SIMPLE) {
                 newState.ui.pathwayOnDisplay = {
                     transitionIds: segs[2].split("+")
                 }

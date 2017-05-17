@@ -18,7 +18,7 @@ import {Prerequisite} from "../../definitions/Prerequisites/index"
 import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
 import {EducationPrereq} from "../../definitions/Prerequisites/EducationPrereq"
 import AgePrereq from "../../definitions/Prerequisites/AgePrereq"
-import {PATHWAY_KW_SINGLE} from "../../data/constants"
+import {PATHWAY_KW_SIMPLE} from "../../data/constants"
 
 type Response = string
 
@@ -73,15 +73,15 @@ function getTransitionName(path: Pathway): string {
 function getTransitionLink(transitionId: string): string {
     const env = process.env["WKM_ENVIRONMENT"]
     if (env === "dev") {
-        return `http://localhost:8888/${PATHWAY_KW_SINGLE}/${transitionId}`
+        return `http://localhost:8888/${PATHWAY_KW_SIMPLE}/${transitionId}`
     }
     else if (env === "stage") {
-        return `https://stage.wikimigrate.org/${PATHWAY_KW_SINGLE}/${transitionId}`
+        return `https://stage.wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
     }
     else if (env === "prod") {
-        return `https://wikimigrate.org/${PATHWAY_KW_SINGLE}/${transitionId}`
+        return `https://wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
     }
-    return `https://wikimigrate.org/${PATHWAY_KW_SINGLE}/${transitionId}`
+    return `https://wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
 }
 
 function getTransitionDescription(transition: Transition): string {
