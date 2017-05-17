@@ -64,8 +64,12 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentWillMount() {
         setTextLang(this.getCurrentLang())
-        this.props.onPathnameChange(window.location.pathname.slice(1))
         document.title = text(data.app.brandName)
+
+        this.props.onPathnameChange(window.location.pathname.slice(1))
+        window.addEventListener("popstate", () =>
+            this.props.onPathnameChange(window.location.pathname.slice(1))
+        )
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
     }
@@ -97,6 +101,21 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
         }
     }
 }
+
+    componentWillReceiveProps(newProps: PropTypes) {
+        if (newProps.pathOnDisplay) {
+            const oldPath = window.location.pathname
+            const path = `/${newProps.pathOnDisplay.transitionIds.join("+")}`
+            if (path !== oldPath) {
+                window.history.pushState(null, document.title, path)
+            }
+        }
+        if (!newProps.pathOnDisplay && this.props.pathOnDisplay) {
+            if (window.location.pathname !== "/") {
+                window.history.pushState(null, document.title, "/")
+            }
+        }
+    }
 
     render() {
         setTextLang(this.getCurrentLang())
@@ -143,16 +162,6 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                 <FilterDetailedOptionPanel />
             </div>
         )
-    }
-
-    componentDidUpdate() {
-        if (this.props.pathOnDisplay) {
-            const path = `/${this.props.pathOnDisplay.transitionIds.join("+")}`
-            window.history.pushState(null, document.title, path)
-        }
-        else if (!this.props.shouldDetailedFilterPanelExpand) {
-            window.history.pushState(null, document.title, "/")
-        }
     }
 }
 
