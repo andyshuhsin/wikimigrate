@@ -64,8 +64,9 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentWillMount() {
         setTextLang(this.getCurrentLang())
-        this.props.onPathnameChange(window.location.pathname.slice(1))
         document.title = text(data.app.brandName)
+
+        this.props.onPathnameChange(window.location.pathname.slice(1))
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
     }
