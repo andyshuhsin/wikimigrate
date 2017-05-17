@@ -9,18 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-redux": "^5.0.3",
-    "redux": "^3.6.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^7.0.8",
-    "@types/react": "15.0.1",
-    "@types/react-dom": "^0.14.23",
-    "@types/react-redux": "^4.4.38",
-    "@types/redux": "^3.6.0",
     "babel-cli": "^6.24.0",
     "chunk-manifest-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.0.1",
