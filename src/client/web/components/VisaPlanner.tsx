@@ -102,6 +102,21 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
     }
 }
 
+    componentWillReceiveProps(newProps: PropTypes) {
+        if (newProps.pathOnDisplay) {
+            const oldPath = window.location.pathname
+            const path = `/${newProps.pathOnDisplay.transitionIds.join("+")}`
+            if (path !== oldPath) {
+                window.history.pushState(null, document.title, path)
+            }
+        }
+        if (!newProps.pathOnDisplay && this.props.pathOnDisplay) {
+            if (window.location.pathname !== "/") {
+                window.history.pushState(null, document.title, "/")
+            }
+        }
+    }
+
     render() {
         setTextLang(this.getCurrentLang())
         const {
@@ -147,16 +162,6 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
                 <FilterDetailedOptionPanel />
             </div>
         )
-    }
-
-    componentDidUpdate() {
-        if (this.props.pathOnDisplay) {
-            const path = `/${this.props.pathOnDisplay.transitionIds.join("+")}`
-            window.history.pushState(null, document.title, path)
-        }
-        else {
-            window.history.pushState(null, document.title, "/")
-        }
     }
 }
 
