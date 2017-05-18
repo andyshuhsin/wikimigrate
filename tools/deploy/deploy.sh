@@ -9,29 +9,32 @@ else
     exit 1
 fi
 
-rm -rf src/built
+find . -name "src/built/*.js" -delete
 
 ## Web contents
 cd src/client/web
-NODE_ENV='production' webpack -p
-cp ../../../tools/conf/robots.stage.txt src/built/web/robots.txt
+NODE_ENV='production' node_modules/.bin/webpack -p
+if [ $1 == "stage" ]
+then
+    cp ../../../tools/conf/robots.stage.txt ../../built/web/robots.txt
+else
+    cp ../../../tools/conf/robots.prod.txt ../../built/web/robots.txt
+fi
 cd ~-
 
-## Server side rendering code
+## SSR code
 cd src/server
-NODE_ENV='production' webpack -p
+webpack
 cd ~-
-
 
 ## Backend
 cd src/server
-rm -rf built
 tsc
-cp pm2.config.js built/
-cp package.json built/
-cp yarn.lock built/
-cp ../../../tools/conf/robots.prod.txt built/robots.txt
-rsync -azP built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/server
+cp pm2.config.js ../built/server
+cp package.json ../built/server
+cp yarn.lock ../built/server
+cd ~-
 
-rsync -azP src/built/built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/web
+rsync -azP src/built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/
 ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && yarn install && pm2 start pm2.config.js"
+cd ~-

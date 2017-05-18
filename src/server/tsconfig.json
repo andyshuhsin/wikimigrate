@@ -6,7 +6,7 @@
     "target": "es2017"
   },
   "include": [
-    "**/*.ts?"
+    "*.ts?"
   ],
   "exclude": [
     "node_modules"
