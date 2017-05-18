@@ -5,6 +5,11 @@ const devConfig = {
       script    : 'built/server/chat.js',
       watch     : ['built'],
     },
+    {
+      name      : 'server',
+      script    : 'built/server/server.js',
+      watch     : ['built'],
+    },
   ],
 }
 
@@ -13,6 +18,11 @@ const remoteConfig = {
         {
             name      : 'chat',
             script    : 'server/chat.js',
+            watch     : ['.'],
+        },
+        {
+            name      : 'render',
+            script    : 'server/render.js',
             watch     : ['.'],
         },
     ],

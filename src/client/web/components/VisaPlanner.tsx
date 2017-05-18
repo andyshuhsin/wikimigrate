@@ -61,7 +61,7 @@ interface PropTypes {
 
 const allTransitions = data.allTransitions
 
-class VisaPlanner extends React.Component<PropTypes, {}> {
+export class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentWillMount() {
         setTextLang(this.getCurrentLang())
@@ -133,7 +133,7 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
         }= this.props
 
         return (
-            <div style={style}>
+            <div style={style} id={"react-entry"}>
                 <TopBar
                     brandName={text(data.app.brandName)}
                     version={data.app.version}
@@ -199,4 +199,6 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VisaPlanner)
+export const ConnectedVisaPlanner = connect(mapStateToProps, mapDispatchToProps)(VisaPlanner)
+
+export default ConnectedVisaPlanner

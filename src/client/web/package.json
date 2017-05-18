@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^7.0.8",
+    "@types/node": "^7.0.18",
     "babel-cli": "^6.24.0",
     "chunk-manifest-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.0.1",

@@ -1,3 +1,5 @@
+console.trace("Here I am!")
+
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import { Provider } from 'react-redux'
@@ -9,6 +11,10 @@ import {INITIAL_STATE, VisaPlannerState} from "../reducers/reducer"
 
 import "../utils/global.css"
 import "../utils/normalize.css"
+
+if (typeof window === "undefined") {
+    var window = {} as any
+}
 
 let enhancer: StoreEnhancer<VisaPlannerState> | undefined
 
@@ -23,15 +29,22 @@ else {
 const REDUX_STATE_KEY = "redux_state"
 
 let state: VisaPlannerState
-const persistedStateString = localStorage.getItem(REDUX_STATE_KEY)
-const shouldForceResetReduxState = location.href.indexOf("reset") > -1
-
-if (persistedStateString && !shouldForceResetReduxState) {
-    state = JSON.parse(persistedStateString)
+const preloadedState = (window as any)["__WKM_PRELOADED_STATE__"]
+if (preloadedState) {
+    state = JSON.parse(preloadedState)
 }
 else {
-    state = INITIAL_STATE
+    const persistedStateString = localStorage.getItem(REDUX_STATE_KEY)
+    const shouldForceResetReduxState = location.href.indexOf("reset") > -1
+    if (persistedStateString && !shouldForceResetReduxState) {
+        state = JSON.parse(persistedStateString)
+    }
+    else {
+        state = INITIAL_STATE
+    }
 }
+
+delete (window as any)["__WKM_PRELOADED_STATE__"]
 
 export const store = createStore<VisaPlannerState>(
     reducer,
