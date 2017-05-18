@@ -39,13 +39,14 @@ async function renderFullPage(html: string, preloadedState: VisaPlannerState, la
     }
     const pathwayOnDisplay = preloadedState.ui.pathwayOnDisplay
     const title = getDocumentTitle(pathwayOnDisplay, lang)
-    return template.replace(/<!--Inject-->[\s\S]*?<!--\/Inject-->/, `
-        <script>
-            window.__WKM_PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
-        </script>
-        ${html}
-    `)
-    .replace(/<!--title-->[\s\S]*?<!--\/title-->/, title)
+    return template
+        .replace(/<!--Inject-->[\s\S]*?<!--\/Inject-->/, `
+            <script>
+                window.__WKM_PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+            </script>
+            ${html}
+        `)
+        .replace(/<!--title-->[\s\S]*?<!--\/title-->/, title)
 }
 
 app.use(handleRender)
