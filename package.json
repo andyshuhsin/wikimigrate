@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "sh tools/dev/dev-be.sh && sh tools/dev/dev-web.sh",
+    "start": "sh tools/dev/dev.sh",
+    "start:ssr": "sh tools/dev/dev.sh ssr",
     "deploy:production": "sh tools/deploy/deploy.sh prod",
     "stage": "sh tools/deploy/deploy.sh stage"
   }
