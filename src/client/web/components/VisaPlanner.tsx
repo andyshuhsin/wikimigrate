@@ -27,6 +27,7 @@ import {
 import {setTextLang, text} from "../../utils/text"
 import {LangId} from "../../../definitions/auxiliary/MultiLang"
 import {formPath} from "../../utils/urlpath"
+import {getDocumentTitle} from "../../utils/getDocumentTitle"
 
 const style = {
     position: "relative",
@@ -65,7 +66,7 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentWillMount() {
         setTextLang(this.getCurrentLang())
-        document.title = text(data.app.brandName)
+        document.title = getDocumentTitle(this.props.pathwayOnDisplay, this.props.lang)
 
         this.props.onUrlpathChange(window.location.pathname)
         window.addEventListener("popstate", () =>
