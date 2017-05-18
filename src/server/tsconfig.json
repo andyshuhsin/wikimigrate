@@ -8,7 +8,11 @@
   "include": [
     "*.ts?"
   ],
+  "files": [
+    "chat.ts"
+  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "render.tsx"
   ]
 }
