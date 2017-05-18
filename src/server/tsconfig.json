@@ -12,7 +12,6 @@
     "chat.ts"
   ],
   "exclude": [
-    "node_modules",
-    "render.tsx"
+    "node_modules"
   ]
 }
