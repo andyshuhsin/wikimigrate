@@ -1,5 +1,3 @@
-console.trace("Here I am!")
-
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import { Provider } from 'react-redux'
