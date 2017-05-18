@@ -45,10 +45,11 @@ fi
 mongod &
 
 # Chat Scripts
-cp src/server/pm2.config.js src/built/server/
+cp src/server/pm2.config.js src/built/
 rsync -a src/server/node_modules src/built/server/node_modules
 cd src/built/server
 touch chat.js
+cd ..
 pm2 start pm2.config.js
 pm2 logs &
 cd ~-

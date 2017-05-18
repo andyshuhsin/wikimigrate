@@ -30,11 +30,11 @@ cd ~-
 ## Backend
 cd src/server
 tsc
-cp pm2.config.js ../built/server
+cp pm2.config.js ../built
 cp package.json ../built/server
 cp yarn.lock ../built/server
 cd ~-
 
 rsync -azP src/built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/
-ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && yarn install && pm2 start pm2.config.js"
+ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && yarn install && cd .. && pm2 start pm2.config.js"
 cd ~-
