@@ -6,7 +6,7 @@ module.exports = {
             watch: ['server'],
         },
         {
-            name: 'render',
+            name: 'render.bundle',
             script: 'web/render.bundle.js',
             watch: ['web'],
         },
