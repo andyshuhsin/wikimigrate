@@ -1,3 +1,5 @@
+root=$(pwd)
+
 if [ $1 == "prod" ]
 then
     server="tokyo1"
@@ -14,7 +16,7 @@ find ".built" -type f -delete
 ## Web contents
 cd src/client/web
 NODE_ENV='production' node_modules/.bin/webpack -p
-cd ~-
+cd ${root}
 
 if [ $1 == "stage" ]
 then
@@ -22,12 +24,11 @@ then
 else
     cp tools/conf/robots.prod.txt .built/web/robots.txt
 fi
-cd ~-
 
 ## SSR code
 cd src/client/ssr
 ../node_modules/.bin/webpack
-cd ~-
+cd ${root}
 
 ## Backend
 cd src/server
@@ -35,8 +36,8 @@ tsc
 cp pm2.config.js ../../.built
 cp package.json ../../.built/server
 cp yarn.lock ../../.built/server
-cd ~-
+cd ${root}
 
 rsync -azP .built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/
 ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && yarn install && cd .. && pm2 start pm2.config.js && pm2 save"
-cd ~-
+cd ${root}

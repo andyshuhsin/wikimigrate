@@ -1,3 +1,5 @@
+root=$(pwd)
+
 find ".built" -type f -delete
 mkdir -p .built/web
 mkdir -p .built/server
@@ -8,15 +10,15 @@ if [ $1 == "ssr" ]
 then
     cd src/client/web
     node_modules/.bin/webpack --config ./webpack.config.js --watch &
-    cd ~-
+    cd ${root}
 
     cd .built/web
     python -m http.server 8080 &
-    cd ~-
+    cd ${root}
 else
     cd src/client/web
     node_modules/.bin/webpack-dev-server
-    cd ~-
+    cd ${root}
 fi
 
 # Server-side rendering script (optional)
@@ -24,7 +26,7 @@ if [ $1 == "ssr" ]
 then
     cd src/client/ssr
     ../node_modules/.bin/webpack --config ./webpack.config.js --watch &
-    cd ~-
+    cd ${root}
 fi
 
 # Server
@@ -42,7 +44,7 @@ mongod &
 # Server script compilation
 cd src/server
 tsc --watch &
-cd ~-
+cd ${root}
 
 # Backend Scripts
 cp src/server/pm2.config.js .built/
