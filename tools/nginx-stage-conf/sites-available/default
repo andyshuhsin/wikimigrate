@@ -28,7 +28,7 @@ server {
 
 	index index.html;
 
-	server_name stage.wikimigrate.org;
+	server_name ~^(?<subdomain>\w+).stage\.wikimigrate\.org;
 
     location /api/wechat {
 		proxy_pass http://localhost:20000;
@@ -43,6 +43,7 @@ server {
 	}
 
 	location / {
+		proxy_set_header ACCEPT-LANGUAGE $subdomain;
 		proxy_pass http://localhost:10000;
 	}
 }
