@@ -37,7 +37,6 @@ else
 fi
 
 # Database
-mongod --shutdown
 mongod &
 
 # Server script compilation
@@ -53,13 +52,12 @@ cd .built/
 echo "Waiting for backend scripts to be built..."
 while [ ! -f "./ssr/render.bundle.js" ] || [ ! -f "./server/server/chat.js" ]
 do
-    printf "."
-    sleep 0.3
+    sleep 0.5
 done
 
 pm2 start pm2.config.js
-pm2 logs &
-cd ~-
+pm2 logs
 
 # Kill background processes on exit
-trap "trap - SIGTERM && kill -- -$$; pm2 kill" SIGINT SIGTERM EXIT
+kill $(jobs -p | awk '{ print $3 }')
+pm2 kill
