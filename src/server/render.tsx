@@ -54,12 +54,28 @@ async function handleRender(context: Koa.Context, next: () => Promise<any>) {
     return next
 }
 
+let cssCache: string = ""
+
+async function getCss(filenames: string[]) {
+    if (cssCache) {
+        return cssCache
+    }
+    let result = ""
+    for (const filename of filenames) {
+        const content = await readFile(`./${filename}`)
+        result += `<style>${content}</style>`
+    }
+    cssCache = result
+    return result
+}
+
 async function renderFullPage(html: string, preloadedState: VisaPlannerState) {
     if (!template) {
         template = String(await readFile("./index.html"))
     }
     const pathwayOnDisplay = preloadedState.ui.pathwayOnDisplay
     const title = getDocumentTitle(pathwayOnDisplay, preloadedState.ui.lang)
+    const css = await getCss(["normalize.css", "global.css"])
     return template
         .replace(/<!--Inject-->[\s\S]*?<!--\/Inject-->/, `
             <script>
@@ -68,6 +84,7 @@ async function renderFullPage(html: string, preloadedState: VisaPlannerState) {
             ${html}
         `)
         .replace(/<!--title-->[\s\S]*?<!--\/title-->/, title)
+        .replace("<!--css-->", css)
 }
 
 app.use(handleRender)

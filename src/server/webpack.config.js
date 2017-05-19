@@ -1,5 +1,6 @@
-const webpack = require('webpack')
 const path = require("path")
+const webpack = require('webpack')
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
     target: 'node',
@@ -37,5 +38,8 @@ module.exports = {
     },
 
     plugins: [
+        new CopyWebpackPlugin([
+            {from: '../client/utils/*.css', to: '.', flatten: true},
+        ]),
     ],
 }
