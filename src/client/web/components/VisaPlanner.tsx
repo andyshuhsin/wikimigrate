@@ -66,14 +66,19 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentWillMount() {
         setTextLang(this.getCurrentLang())
-        document.title = getDocumentTitle(this.props.pathwayOnDisplay, this.props.lang)
 
-        this.props.onUrlpathChange(window.location.pathname)
+        if (window.location.pathname !== "[ssr-fake-path]") {
+            this.props.onUrlpathChange(window.location.pathname)
+        }
         window.addEventListener("popstate", () =>
             this.props.onUrlpathChange(window.location.pathname)
         )
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
+    }
+
+    componentDidUpdate() {
+        document.title = getDocumentTitle(this.props.pathwayOnDisplay, this.props.lang)
     }
 
     getPaths(pathwayDes: PathwayDescriptor | null): Pathway | null {

@@ -8,7 +8,7 @@ const navigatorPoly: Partial<Navigator> = {
 }
 
 const locationPoly: any = {
-    pathname: ""
+    pathname: "[ssr-fake-path]"
 }
 
 const windowPoly: any = {
