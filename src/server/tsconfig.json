@@ -1,9 +1,10 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "lib": ["es2015", "es2016", "es2017", "dom"],
-    "outDir": "../built/server",
-    "target": "es2017"
+    "outDir": "../../.built/server",
+    "target": "es2017",
+    "moduleResolution": "node"
   },
   "include": [
     "*.ts?"

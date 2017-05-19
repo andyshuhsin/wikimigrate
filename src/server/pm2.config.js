@@ -8,9 +8,9 @@ module.exports = {
         },
         {
             name: 'render.bundle',
-            cwd: './web',
-            script: 'web/render.bundle.js',
-            watch: ['web'],
+            cwd: './ssr',
+            script: 'ssr/render.bundle.js',
+            watch: ['ssr'],
         },
     ],
 }

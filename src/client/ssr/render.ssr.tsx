@@ -1,19 +1,18 @@
-import "./utils/windowPolyfill"
+import "./windowPolyfill"
+
 import {readFile} from "fs-extra"
 import * as Koa from "koa"
 
 import * as React from "react"
-import {createStore} from "redux"
 import {renderToString} from "react-dom/server"
 import {Provider} from "react-redux"
+import {createStore} from "redux"
 
-import {ConnectedVisaPlanner} from "../client/web/components/VisaPlanner"
-import reducer, {VisaPlannerState} from "../client/reducers/reducer"
-import {setLangAction, urlpathChangeAction} from "../client/actions/index"
-import {data} from "../data/index"
-import {text} from "../client/utils/text"
-import {getDocumentTitle} from "../client/utils/getDocumentTitle"
-import {LangId} from "../definitions/auxiliary/MultiLang"
+import {ConnectedVisaPlanner} from "../web/components/VisaPlanner"
+import reducer, {VisaPlannerState} from "../reducers/reducer"
+import {setLangAction, urlpathChangeAction} from "../actions/index"
+import {getDocumentTitle} from "../utils/getDocumentTitle"
+import {LangId} from "../../definitions/auxiliary/MultiLang"
 
 const app = new Koa()
 const PORT = 10000
@@ -71,7 +70,7 @@ async function getCss(filenames: string[]) {
 
 async function renderFullPage(html: string, preloadedState: VisaPlannerState) {
     if (!template) {
-        template = String(await readFile("./index.html"))
+        template = String(await readFile("../web/index.html"))
     }
     const pathwayOnDisplay = preloadedState.ui.pathwayOnDisplay
     const title = getDocumentTitle(pathwayOnDisplay, preloadedState.ui.lang)
@@ -88,4 +87,6 @@ async function renderFullPage(html: string, preloadedState: VisaPlannerState) {
 }
 
 app.use(handleRender)
-app.listen(PORT)
+app.listen(PORT, () => {
+    console.info("Server-side rendering process started listening to", PORT, "at", new Date())
+})

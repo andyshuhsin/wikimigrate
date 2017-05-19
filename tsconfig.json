@@ -9,10 +9,6 @@
         "target": "es6",
         "types": [
             "node"
-        ],
-        "typeRoots": [
-            "node_modules/@types"
         ]
-    },
-    "exclude": ["*"]
+    }
 }

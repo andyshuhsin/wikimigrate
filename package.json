@@ -1,8 +1,17 @@
 {
+  "name": "WikiMigrate",
+  "version": "1.0.0",
+  "description": "Make immigration easy again",
+  "author": "Andy Shu",
+  "license": "ISC",
   "scripts": {
     "start": "sh tools/dev/dev.sh nossr",
     "start:ssr": "sh tools/dev/dev.sh ssr",
     "deploy:production": "sh tools/deploy/deploy.sh prod",
     "stage": "sh tools/deploy/deploy.sh stage"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.18",
+    "typescript": "^2.3.2"
   }
 }

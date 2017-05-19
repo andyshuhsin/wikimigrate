@@ -10,7 +10,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
     entry: {
-        app: path.join(__dirname, "main.tsx"),
+        app: path.join(__dirname, "render.client.tsx"),
         external: [
             "react",
             "react-dom",
@@ -20,7 +20,7 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(__dirname, "..", "..", "built", "web"),
+        path: path.resolve(__dirname, "../../../.built/web"),
         filename: '[name].[chunkhash].js',
         publicPath: '/'
     },

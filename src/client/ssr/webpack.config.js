@@ -6,11 +6,11 @@ module.exports = {
     target: 'node',
 
     entry: {
-        render: path.join(__dirname, "render.tsx"),
+        render: path.join(__dirname, "./render.ssr.tsx"),
     },
 
     output: {
-        path: path.resolve(__dirname, "..", "built", "web"),
+        path: path.resolve(__dirname, "../../../.built/ssr"),
         filename: '[name].bundle.js',
     },
 
@@ -39,7 +39,7 @@ module.exports = {
 
     plugins: [
         new CopyWebpackPlugin([
-            {from: '../client/utils/*.css', to: '.', flatten: true},
+            {from: '../utils/*.css', to: '.', flatten: true},
         ]),
     ],
 }
