@@ -279,6 +279,11 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case "SET_LANG": {
+            newState.ui.lang = action.payload.langId
+            return newState
+        }
+
         default: {
             return state
         }

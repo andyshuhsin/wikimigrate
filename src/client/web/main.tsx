@@ -10,10 +10,6 @@ import {INITIAL_STATE, VisaPlannerState} from "../reducers/reducer"
 import "../utils/global.css"
 import "../utils/normalize.css"
 
-if (typeof window === "undefined") {
-    var window = {} as any
-}
-
 let enhancer: StoreEnhancer<VisaPlannerState> | undefined
 
 const reduxDevToolsPlugin = (window as any).__REDUX_DEVTOOLS_EXTENSION__
@@ -29,7 +25,7 @@ const REDUX_STATE_KEY = "redux_state"
 let state: VisaPlannerState
 const preloadedState = (window as any)["__WKM_PRELOADED_STATE__"]
 if (preloadedState) {
-    state = JSON.parse(preloadedState)
+    state = preloadedState
 }
 else {
     const persistedStateString = localStorage.getItem(REDUX_STATE_KEY)
@@ -42,7 +38,7 @@ else {
     }
 }
 
-delete (window as any)["__WKM_PRELOADED_STATE__"]
+delete (window as any).__WKM_PRELOADED_STATE__
 
 export const store = createStore<VisaPlannerState>(
     reducer,

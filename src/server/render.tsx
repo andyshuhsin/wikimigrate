@@ -9,7 +9,7 @@ import {Provider} from "react-redux"
 
 import {ConnectedVisaPlanner} from "../client/web/components/VisaPlanner"
 import reducer, {VisaPlannerState} from "../client/reducers/reducer"
-import {urlpathChangeAction} from "../client/actions/index"
+import {setLangAction, urlpathChangeAction} from "../client/actions/index"
 import {data} from "../data/index"
 import {text} from "../client/utils/text"
 import {getDocumentTitle} from "../client/utils/getDocumentTitle"
@@ -18,27 +18,48 @@ import {LangId} from "../definitions/auxiliary/MultiLang"
 const app = new Koa()
 const PORT = 10000
 
+const langTable: {[acceptLang: string]: LangId} = {
+    en: "en",
+    zh: "zh_hans",
+    "zh-hans": "zh_hans",
+    "zh-hant": "zh_hant",
+}
+
+function getLang(acceptLang: string): LangId {
+    const lang = langTable[acceptLang]
+    if (lang) {
+        return lang
+    }
+    else {
+        return "en"
+    }
+}
+
 let template: string = ""
 
 async function handleRender(context: Koa.Context, next: () => Promise<any>) {
     const store = createStore<VisaPlannerState>(reducer)
-    const html = renderToString(
+
+    store.dispatch(urlpathChangeAction(context.path))
+    const lang = getLang(context.request.req.headers["accept-language"])
+    store.dispatch(setLangAction(lang))
+
+    let html = renderToString(
         <Provider store={store}>
             <ConnectedVisaPlanner />
         </Provider>
     )
-    store.dispatch(urlpathChangeAction(context.path))
     const preloadedState = store.getState()
-    context.body = await renderFullPage(html, preloadedState, "en")
+    context.body = await renderFullPage(html, preloadedState)
     return next
 }
 
-async function renderFullPage(html: string, preloadedState: VisaPlannerState, lang: LangId) {
+async function renderFullPage(html: string, preloadedState: VisaPlannerState) {
     if (!template) {
         template = String(await readFile("./index.html"))
     }
     const pathwayOnDisplay = preloadedState.ui.pathwayOnDisplay
-    const title = getDocumentTitle(pathwayOnDisplay, lang)
+    const title = getDocumentTitle(pathwayOnDisplay, preloadedState.ui.lang)
     return template
         .replace(/<!--Inject-->[\s\S]*?<!--\/Inject-->/, `
             <script>

@@ -132,6 +132,13 @@ interface UrlPathChange {
     }
 }
 
+interface SetLang {
+    type: "SET_LANG",
+    payload: {
+        langId: LangId
+    }
+}
+
 
 export type Action =
     OptionClickAction
@@ -143,6 +150,7 @@ export type Action =
     | PathViewCloseButtonClick
     | KeyDown
     | UrlPathChange
+    | SetLang
 
 export function filterOptionClickAction(filterId: FilterId, value: OptionId | number): OptionClickAction {
     const action = {
@@ -225,6 +233,15 @@ export function urlpathChangeAction(path: string): UrlPathChange {
         type: "URLPATH_CHANGE",
         payload: {
             path
+        }
+    }
+}
+
+export function setLangAction(langId: LangId): SetLang {
+    return {
+        type: "SET_LANG",
+        payload: {
+            langId
         }
     }
 }
