@@ -15,7 +15,7 @@ import {getDocumentTitle} from "../utils/getDocumentTitle"
 import {LangId} from "../../definitions/auxiliary/MultiLang"
 
 const app = new Koa()
-const PORT = 10000
+const PORT = 11000
 
 const langTable: {[acceptLang: string]: LangId} = {
     en: "en",
