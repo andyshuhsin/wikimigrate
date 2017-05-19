@@ -76,12 +76,12 @@ function getTransitionLink(transitionId: string): string {
         return `http://localhost:8888/${PATHWAY_KW_SIMPLE}/${transitionId}`
     }
     else if (env === "stage") {
-        return `https://stage.wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
+        return `https://zh.stage.wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
     }
     else if (env === "prod") {
-        return `https://wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
+        return `https://zh.wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
     }
-    return `https://wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
+    return `https://zh.wikimigrate.org/${PATHWAY_KW_SIMPLE}/${transitionId}`
 }
 
 function getTransitionDescription(transition: Transition): string {
