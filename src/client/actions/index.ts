@@ -1,5 +1,5 @@
 import {LanguageFilterId, FilterId, OptionId} from "../data"
-import {Path} from "../utils/definitions"
+import {Pathway} from "../utils/definitions"
 import {EducationStage} from "../../definitions/Qualities/EducationExperience"
 import {RegionId} from "../../definitions/auxiliary/Region"
 import {LangId} from "../../definitions/auxiliary/MultiLang"
@@ -100,10 +100,10 @@ export interface ShadeClick {
     type: "SHADE_CLICK"
 }
 
-export interface PathBoxClick {
+export interface PathwayBoxClick {
     type: "PATH_BOX_CLICK",
     payload: {
-        path: Path
+        pathway: Pathway
     }
 }
 
@@ -125,10 +125,17 @@ export interface KeyDown {
     }
 }
 
-interface PathnameChange {
-    type: "PATHNAME_CHANGE",
+interface UrlPathChange {
+    type: "URLPATH_CHANGE",
     payload: {
         path: string
+    }
+}
+
+interface SetLang {
+    type: "SET_LANG",
+    payload: {
+        langId: LangId
     }
 }
 
@@ -139,10 +146,11 @@ export type Action =
     | FilterBarClick
     | FilterPanelRender
     | ShadeClick
-    | PathBoxClick
+    | PathwayBoxClick
     | PathViewCloseButtonClick
     | KeyDown
-    | PathnameChange
+    | UrlPathChange
+    | SetLang
 
 export function filterOptionClickAction(filterId: FilterId, value: OptionId | number): OptionClickAction {
     const action = {
@@ -196,11 +204,11 @@ export function shadeClickAction(): ShadeClick {
     }
 }
 
-export function pathBoxClickAction(path: Path): PathBoxClick {
+export function pathBoxClickAction(pathway: Pathway): PathwayBoxClick {
     return {
         type: "PATH_BOX_CLICK",
         payload: {
-            path
+            pathway
         }
     }
 }
@@ -220,11 +228,20 @@ export function keyDownAction(keyCode: number): KeyDown {
     }
 }
 
-export function pathnameChangeAction(path: string): PathnameChange {
+export function urlpathChangeAction(path: string): UrlPathChange {
     return {
-        type: "PATHNAME_CHANGE",
+        type: "URLPATH_CHANGE",
         payload: {
             path
+        }
+    }
+}
+
+export function setLangAction(langId: LangId): SetLang {
+    return {
+        type: "SET_LANG",
+        payload: {
+            langId
         }
     }
 }

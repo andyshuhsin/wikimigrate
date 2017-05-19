@@ -3,7 +3,7 @@ import TransitionDisplay from './TransitionDisplay'
 import sys from '../../sys'
 
 import {
-    Path
+    Pathway
 } from '../../../utils/definitions'
 import {Person} from "../../../../definitions/Person"
 import {LangId} from "../../../../definitions/auxiliary/MultiLang"
@@ -20,7 +20,7 @@ const style = {
 
     background: "#ebebeb",
     zIndex: 1,
-}
+} as React.CSSProperties
 
 const sideLength = "1em"
 const closeButtonStyle = (() => {
@@ -43,7 +43,7 @@ const closeButtonStyle = (() => {
         textAlign: "center",
 
         cursor: "pointer",
-    }
+    } as React.CSSProperties
 })()
 
 const crossStyle = {
@@ -54,11 +54,11 @@ const crossStyle = {
     bottom: 0,
     margin: "auto",
     width: `calc(${sideLength} / 2)`
-}
+} as React.CSSProperties
 
 interface Props {
     user: Person
-    pathOnDisplay: Path | null
+    pathOnDisplay: Pathway | null
     onClose: (event: any) => void
     lang: LangId
 }

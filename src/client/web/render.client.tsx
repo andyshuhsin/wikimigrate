@@ -7,8 +7,8 @@ import VisaPlanner from './components/VisaPlanner'
 import '../utils/assign-polyfill'
 import {INITIAL_STATE, VisaPlannerState} from "../reducers/reducer"
 
-import "../utils/global.css"
 import "../utils/normalize.css"
+import "../utils/global.css"
 
 let enhancer: StoreEnhancer<VisaPlannerState> | undefined
 
@@ -23,15 +23,22 @@ else {
 const REDUX_STATE_KEY = "redux_state"
 
 let state: VisaPlannerState
-const persistedStateString = localStorage.getItem(REDUX_STATE_KEY)
-const shouldForceResetReduxState = location.href.indexOf("reset") > -1
-
-if (persistedStateString && !shouldForceResetReduxState) {
-    state = JSON.parse(persistedStateString)
+const preloadedState = (window as any)["__WKM_PRELOADED_STATE__"]
+if (preloadedState) {
+    state = preloadedState
 }
 else {
-    state = INITIAL_STATE
+    const persistedStateString = localStorage.getItem(REDUX_STATE_KEY)
+    const shouldForceResetReduxState = location.href.indexOf("reset") > -1
+    if (persistedStateString && !shouldForceResetReduxState) {
+        state = JSON.parse(persistedStateString)
+    }
+    else {
+        state = INITIAL_STATE
+    }
 }
+
+delete (window as any).__WKM_PRELOADED_STATE__
 
 export const store = createStore<VisaPlannerState>(
     reducer,

@@ -1,5 +1,5 @@
 import {Person} from "../../definitions/Person"
-import {Path} from "./definitions"
+import {Pathway} from "./definitions"
 import Transition from "../../definitions/Transition"
 import {RightPrereq} from "../../definitions/Prerequisites/RightPrereq"
 import {satisfyPrerequisiteCombination} from "./prerequisiteOperations"
@@ -12,7 +12,7 @@ export function canApply(person: Person, transition: Transition): boolean {
 
 const suitabilityCache: any = {}
 
-export function calcSuitability(person: Person, path: Path): number {
+export function calcSuitability(person: Person, path: Pathway): number {
     // TODO: Proper logic
     const id = path.transitions[0].id
     if (suitabilityCache[id]) {
@@ -26,7 +26,7 @@ export function calcSuitability(person: Person, path: Path): number {
 }
 
 
-export function calcSuitablePaths(user: Person, allTransitions: Transition[]): Path[] {
+export function calcSuitablePaths(user: Person, allTransitions: Transition[]): Pathway[] {
 
     const applicableTransitions = allTransitions.filter(transition => canApply(user, transition))
 
@@ -44,7 +44,7 @@ export function calcSuitablePaths(user: Person, allTransitions: Transition[]): P
         },
     ]
 
-    const paths: Path[] = applicableTransitions
+    const paths: Pathway[] = applicableTransitions
         .map(transition => ({
             transitions: [transition],
         }))

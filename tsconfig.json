@@ -1,20 +1,14 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "alwaysStrict": true,
+        "strict": true,
         "jsx": "react",
-        "strictNullChecks": true,
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
         "target": "es6",
         "types": [
             "node"
-        ],
-        "typeRoots": [
-            "node_modules/@types"
         ]
     }
 }

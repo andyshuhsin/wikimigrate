@@ -5,7 +5,7 @@ import {
     FilterState, languageAssumptionSet,
     LanguageFilterId,
 } from "../data"
-import {Path, PathDescriptor} from "../utils/definitions"
+import {Pathway, PathwayDescriptor} from "../utils/definitions"
 import {getInitialPerson, Person} from "../../definitions/Person"
 import {clone} from "../utils/clone"
 import {duration} from "../../definitions/auxiliary/Duration"
@@ -16,9 +16,16 @@ import {LangId} from "../../definitions/auxiliary/MultiLang"
 import languageTestProfiles from "../../data/common/languageTestProfiles"
 import data from "../../data/index"
 import {parseQueryString} from "../utils/parseQueryString"
+import {PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE} from "../../data/constants"
+import {TransitionId} from "../../definitions/Transition"
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
+
+type SIMPLE_PATHWAY_SEGMENTS = ["", PATHWAY_KW_SIMPLE, TransitionId]
+type COMPOSITE_PATHWAY_SEGMENTS = ["", PATHWAY_KW_COMPOSITE, string /* "id1+id2+id3..." */]
+
+type URLPATH_SEGMENTS = SIMPLE_PATHWAY_SEGMENTS | COMPOSITE_PATHWAY_SEGMENTS
 
 export interface VisaPlannerState {
     user: Person,
@@ -29,7 +36,7 @@ export interface VisaPlannerState {
         filterState: FilterState
         shouldDetailedFilterPanelExpand: boolean
         filterPanelHeight: number | null
-        pathOnDisplay: PathDescriptor | null
+        pathwayOnDisplay: PathwayDescriptor | null
     }
 }
 
@@ -51,7 +58,7 @@ export const INITIAL_STATE: VisaPlannerState = {
         },
         filterPanelHeight: null,
         expandedFilterId: null,
-        pathOnDisplay: null,
+        pathwayOnDisplay: null,
     }
 }
 
@@ -112,7 +119,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
 
         case "KEY_DOWN": {
             if (action.payload.keyCode === ESC_KEY_CODE) {
-                newState.ui.pathOnDisplay = null
+                newState.ui.pathwayOnDisplay = null
                 newState.ui.shouldDetailedFilterPanelExpand = false
                 return newState
             }
@@ -229,14 +236,14 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case "PATH_BOX_CLICK": {
-            newState.ui.pathOnDisplay = {
-                transitionIds: action.payload.path.transitions.map(transition => transition.id)
+            newState.ui.pathwayOnDisplay = {
+                transitionIds: action.payload.pathway.transitions.map(transition => transition.id)
             }
             return newState
         }
 
         case "PATH_VIEW_CLOSE_BUTTON_CLICK": {
-            newState.ui.pathOnDisplay = null
+            newState.ui.pathwayOnDisplay = null
             return newState
         }
 
@@ -259,16 +266,21 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
-        case "PATHNAME_CHANGE": {
-            const pathname = action.payload.path
-            if (pathname) {
-                newState.ui.pathOnDisplay = {
-                    transitionIds: pathname.split("+")
+        case "URLPATH_CHANGE": {
+            const segs = action.payload.path.split("/") as URLPATH_SEGMENTS
+            if (segs[1] === PATHWAY_KW_SIMPLE) {
+                newState.ui.pathwayOnDisplay = {
+                    transitionIds: segs[2].split("+")
                 }
             }
             else {
-                newState.ui.pathOnDisplay = null
+                newState.ui.pathwayOnDisplay = null
             }
+            return newState
+        }
+
+        case "SET_LANG": {
+            newState.ui.lang = action.payload.langId
             return newState
         }
 

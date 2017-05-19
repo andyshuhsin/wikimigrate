@@ -9,7 +9,7 @@ import * as compose from "koa-compose"
 import {TopicId, wechatDialog} from "../data/dialogue"
 import {text, setTextLang} from "../../client/utils/text"
 import {MONGO_URL} from "../chat"
-import {Path} from "../../client/utils/definitions"
+import {Pathway} from "../../client/utils/definitions"
 
 interface WechatOrdinaryMessageData {
     MsgType: "text"
@@ -45,7 +45,7 @@ interface WechatChatbotUserPlain {
         topic: TopicId
         invalidInput: boolean
         interestedPath: number
-        suitablePaths: Path[]
+        suitablePaths: Pathway[]
     }
     history: ChatHistory
 }
@@ -57,7 +57,7 @@ export class WechatChatbotUser implements WechatChatbotUserPlain {
         topic: TopicId
         invalidInput: boolean
         interestedPath: number
-        suitablePaths: Path[]
+        suitablePaths: Pathway[]
     }
     history: ChatHistory
 
@@ -182,7 +182,7 @@ function getResponseBodyXml(
 
 
 function isWechatRequest(path: string): boolean {
-    return path === "/api-wechat"
+    return path === "/api/wechat"
 }
 
 async function loadPersistentState(context: WechatContext, next: () => Promise<any>) {

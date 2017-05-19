@@ -6,13 +6,13 @@ import {connect, Dispatch} from 'react-redux'
 import TopBar from './TopBar'
 import PathShowcase from './PathShowcase'
 import FilterBar from './Filters/FilterBar'
-import PathDetailDisplay from './PathDetailDisplay'
+import PathwayDisplay from './PathwayDisplay'
 import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
 import Shade from './Shade'
 import sys from '../sys'
 
 import {
-    Path, PathDescriptor,
+    Pathway, PathwayDescriptor,
 } from "../../utils/definitions"
 
 import calcSuitablePaths from "../../utils/calcSuitablePaths"
@@ -21,11 +21,13 @@ import {VisaPlannerState} from "../../reducers"
 
 import {Person} from "../../../definitions/Person"
 import {
-    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction, pathnameChangeAction,
+    filterBarClickAction, keyDownAction, pathBoxClickAction, pathViewCloseButtonClickAction, urlpathChangeAction,
     shadeClickAction,
 } from "../../actions"
 import {setTextLang, text} from "../../utils/text"
 import {LangId} from "../../../definitions/auxiliary/MultiLang"
+import {formPath} from "../../utils/urlpath"
+import {getDocumentTitle} from "../../utils/getDocumentTitle"
 
 const style = {
     position: "relative",
@@ -47,39 +49,44 @@ const style = {
 interface PropTypes {
     user: Person
     lang: LangId
-    pathOnDisplay: PathDescriptor | null
+    pathwayOnDisplay: PathwayDescriptor | null
     onFilterBarClick: () => void
     onShadeClick: () => void
-    onPathBoxClick: (path: Path) => void
+    onPathwayBoxClick: (path: Pathway) => void
     onPathViewCloseButtonClick: () => void
     onKeyDown: (keyCode: number) => void
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
-    onPathnameChange: (path: string) => void
+    onUrlpathChange: (path: string) => void
 }
 
 const allTransitions = data.allTransitions
 
-class VisaPlanner extends React.Component<PropTypes, {}> {
+export class VisaPlanner extends React.Component<PropTypes, {}> {
 
     componentWillMount() {
         setTextLang(this.getCurrentLang())
-        document.title = text(data.app.brandName)
 
-        this.props.onPathnameChange(window.location.pathname.slice(1))
+        if (window.location.pathname !== "[ssr-fake-path]") {
+            this.props.onUrlpathChange(window.location.pathname)
+        }
         window.addEventListener("popstate", () =>
-            this.props.onPathnameChange(window.location.pathname.slice(1))
+            this.props.onUrlpathChange(window.location.pathname)
         )
         window.onkeydown = (event: KeyboardEvent) =>
             this.props.onKeyDown(event.keyCode)
     }
 
-    getPaths(pathDescriptor: PathDescriptor | null): Path | null {
-        if (!pathDescriptor) {
+    componentDidUpdate() {
+        document.title = getDocumentTitle(this.props.pathwayOnDisplay, this.props.lang)
+    }
+
+    getPaths(pathwayDes: PathwayDescriptor | null): Pathway | null {
+        if (!pathwayDes) {
             return null
         }
         return {
-            transitions: pathDescriptor.transitionIds.map(
+            transitions: pathwayDes.transitionIds.map(
                 id => allTransitions.filter(transition => transition.id === id)[0]
             )
         }
@@ -103,14 +110,14 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
 }
 
     componentWillReceiveProps(newProps: PropTypes) {
-        if (newProps.pathOnDisplay) {
+        if (newProps.pathwayOnDisplay) {
             const oldPath = window.location.pathname
-            const path = `/${newProps.pathOnDisplay.transitionIds.join("+")}`
+            const path = formPath(newProps.pathwayOnDisplay)
             if (path !== oldPath) {
                 window.history.pushState(null, document.title, path)
             }
         }
-        if (!newProps.pathOnDisplay && this.props.pathOnDisplay) {
+        if (!newProps.pathwayOnDisplay && this.props.pathwayOnDisplay) {
             if (window.location.pathname !== "/") {
                 window.history.pushState(null, document.title, "/")
             }
@@ -123,27 +130,27 @@ class VisaPlanner extends React.Component<PropTypes, {}> {
             user,
             lang,
             shouldDetailedFilterPanelExpand,
-            pathOnDisplay,
+            pathwayOnDisplay,
             filterPanelHeight,
             onPathViewCloseButtonClick,
             onShadeClick,
             onFilterBarClick,
-            onPathBoxClick,
+            onPathwayBoxClick,
         }= this.props
 
         return (
-            <div style={style}>
+            <div style={style} id={"react-entry"}>
                 <TopBar
                     brandName={text(data.app.brandName)}
                     version={data.app.version}
                 />
                 <PathShowcase
                     paths={calcSuitablePaths(user, allTransitions)}
-                    onClick={onPathBoxClick}
+                    onClick={onPathwayBoxClick}
                 />
-                <PathDetailDisplay
+                <PathwayDisplay
                     user={user}
-                    pathOnDisplay={this.getPaths(pathOnDisplay)}
+                    pathOnDisplay={this.getPaths(pathwayOnDisplay)}
                     onClose={onPathViewCloseButtonClick}
                     lang={lang}
                 />
@@ -169,7 +176,7 @@ function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
     return {
         user: state.user,
         lang: state.ui.lang,
-        pathOnDisplay: state.ui.pathOnDisplay,
+        pathwayOnDisplay: state.ui.pathwayOnDisplay,
         filterPanelHeight: state.ui.filterPanelHeight,
         shouldDetailedFilterPanelExpand: state.ui.shouldDetailedFilterPanelExpand,
     }
@@ -183,7 +190,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         onShadeClick() {
             dispatch(shadeClickAction())
         },
-        onPathBoxClick(path: Path) {
+        onPathwayBoxClick(path: Pathway) {
             dispatch(pathBoxClickAction(path))
         },
         onPathViewCloseButtonClick() {
@@ -192,10 +199,12 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         onKeyDown(keyCode: number) {
             dispatch(keyDownAction(keyCode))
         },
-        onPathnameChange(path: string) {
-            dispatch(pathnameChangeAction(path))
+        onUrlpathChange(path: string) {
+            dispatch(urlpathChangeAction(path))
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VisaPlanner)
+export const ConnectedVisaPlanner = connect(mapStateToProps, mapDispatchToProps)(VisaPlanner)
+
+export default ConnectedVisaPlanner

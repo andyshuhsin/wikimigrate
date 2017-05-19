@@ -1,4 +1,4 @@
-const userAgent = navigator.userAgent
+const userAgent = window.navigator.userAgent
 
 const sys = {
     viewport: {

@@ -1,9 +1,9 @@
 import Transition from "../../definitions/Transition"
 
-export interface Path {
+export interface Pathway {
     transitions: Transition[]
 }
 
-export interface PathDescriptor {
+export interface PathwayDescriptor {
     transitionIds: string[]
 }

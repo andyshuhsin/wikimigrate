@@ -1,27 +1,16 @@
-const devConfig = {
-  apps : [
-    {
-      name      : 'chat',
-      script    : 'built/server/chat.js',
-      watch     : ['built'],
-    },
-  ],
-}
-
-const remoteConfig = {
+module.exports = {
     apps : [
         {
-            name      : 'chat',
-            script    : 'server/chat.js',
-            watch     : ['.'],
+            name: 'chat',
+            cwd: './server',
+            script: 'server/server/chat.js',
+            watch: ['server'],
+        },
+        {
+            name: 'render.bundle',
+            cwd: './ssr',
+            script: 'ssr/render.bundle.js',
+            watch: ['ssr'],
         },
     ],
 }
-
-if (process.env["WKM_ENVIRONMENT"] === "dev") {
-    module.exports = devConfig
-}
-else {
-    module.exports = remoteConfig
-}
-

@@ -1,14 +1,14 @@
 import * as React from 'react'
-import PathBox from './PathBox'
+import PathwayBox from './PathwayBox'
 import Title from './Title'
 
 import {
-    Path
+    Pathway
 } from '../../utils/definitions'
 import {text} from "../../utils/text"
 
 interface PathShowcaseProps {
-    paths: Path[]
+    paths: Pathway[]
     onClick: (event: any) => void
 }
 
@@ -30,8 +30,8 @@ const PathShowcase = (props: PathShowcaseProps) =>
             })
         } />
         {
-            props.paths.map((path: Path) =>
-                <PathBox
+            props.paths.map((path: Pathway) =>
+                <PathwayBox
                     path={path}
                     key={path.transitions.map(transition => transition.id).join('')}
                     onClick={

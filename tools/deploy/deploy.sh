@@ -1,3 +1,5 @@
+root=$(pwd)
+
 if [ $1 == "prod" ]
 then
     server="tokyo1"
@@ -9,21 +11,33 @@ else
     exit 1
 fi
 
-## Web-frontend
+find ".built" -type f -delete
+
+## Web contents
 cd src/client/web
-rm -rf built
-NODE_ENV='production' webpack -p
-cp ../../../tools/conf/robots.stage.txt built/robots.txt
-rsync -azP built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/web
+NODE_ENV='production' node_modules/.bin/webpack -p
+cd ${root}
+
+if [ $1 == "stage" ]
+then
+    cp tools/conf/robots.stage.txt .built/web/robots.txt
+else
+    cp tools/conf/robots.prod.txt .built/web/robots.txt
+fi
+
+## SSR code
+cd src/client/ssr
+../node_modules/.bin/webpack
+cd ${root}
 
 ## Backend
-cd ~-
 cd src/server
-rm -rf built
 tsc
-cp pm2.config.js built/
-cp package.json built/
-cp yarn.lock built/
-cp ../../../tools/conf/robots.prod.txt built/robots.txt
-rsync -azP built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/server
-ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && yarn install && pm2 start pm2.config.js"
+cp pm2.config.js ../../.built
+cp package.json ../../.built/server
+cp yarn.lock ../../.built/server
+cd ${root}
+
+rsync -azP .built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/
+ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && yarn install && cd .. && pm2 start pm2.config.js && pm2 save"
+cd ${root}
