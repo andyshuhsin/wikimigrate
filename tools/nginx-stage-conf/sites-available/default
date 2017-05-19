@@ -21,6 +21,7 @@ server {
 
 server {
 	server_name stage.wikimigrate.org;
+	set $lang "";
 	ssl_certificate /etc/letsencrypt/live/stage.wikimigrate.org/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/stage.wikimigrate.org/privkey.pem;
 
@@ -29,6 +30,7 @@ server {
 
 server {
 	server_name en.stage.wikimigrate.org;
+	set $lang en;
 	ssl_certificate /etc/letsencrypt/live/en.stage.wikimigrate.org/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/en.stage.wikimigrate.org/privkey.pem;
 
@@ -37,6 +39,7 @@ server {
 
 server {
 	server_name zh.stage.wikimigrate.org;
+	set $lang zh-hans;
 	ssl_certificate /etc/letsencrypt/live/zh.stage.wikimigrate.org/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/zh.stage.wikimigrate.org/privkey.pem;
 
