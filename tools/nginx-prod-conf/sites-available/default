@@ -1,7 +1,14 @@
 server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
-	server_name wikimigrate.org www.wikimigrate.org en.wikimigrate.org zh.wikimigrate.org thegoodmove.org stage.thegoodmove.org;
+	server_name wikimigrate.org;
+	return 301 https://$server_name$request_uri;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+	server_name thegoodmove.org stage.thegoodmove.org;
 	return 301 https://$server_name$request_uri;
 }
 
