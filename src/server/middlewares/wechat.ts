@@ -1,18 +1,18 @@
-import {Context} from "koa"
-import {Db, MongoClient} from "mongodb"
+import { Context } from 'koa'
+import { Db, MongoClient } from 'mongodb'
 
-import {createHash} from "crypto"
-import {parseXml} from "../parseXml"
-import {getInitialPerson, Person} from "../../definitions/Person"
+import { createHash } from 'crypto'
+import { parseXml } from '../parseXml'
+import { getInitialPerson, Person } from '../../definitions/Person'
 
-import * as compose from "koa-compose"
-import {TopicId, wechatDialog} from "../data/dialogue"
-import {text, setTextLang} from "../../client/utils/text"
-import {MONGO_URL} from "../chat"
-import {Pathway} from "../../client/utils/definitions"
+import * as compose from 'koa-compose'
+import { TopicId, wechatDialog } from '../data/dialogue'
+import { setTextLang, text } from '../../client/utils/text'
+import { MONGO_URL } from '../chat'
+import { Pathway } from '../../client/utils/definitions'
 
 interface WechatOrdinaryMessageData {
-    MsgType: "text"
+    MsgType: 'text'
     ToUserName: string
     FromUserName: string
     CreateTime: string
@@ -21,11 +21,11 @@ interface WechatOrdinaryMessageData {
 }
 
 interface WechatEventData {
-    MsgType: "event"
+    MsgType: 'event'
     ToUserName: string
     FromUserName: string
     CreateTime: string
-    Event: "subscribe" | "unsubscribe"
+    Event: 'subscribe' | 'unsubscribe'
 }
 
 interface ChatHistoryEntry {
@@ -71,7 +71,7 @@ export class WechatChatbotUser implements WechatChatbotUserPlain {
         return new WechatChatbotUser(input.id, input.ui.topic, input.person, input.history)
     }
 
-    initialize(topic: TopicId = "initial", person = getInitialPerson(30)) {
+    initialize(topic: TopicId = 'initial', person = getInitialPerson(30)) {
         this.person = person
         this.ui = {
             topic,
@@ -106,7 +106,7 @@ class WxChatbotAppState {
     updateUser(id: string, userData: Partial<WechatChatbotUserPlain>) {
         const user = this.getUser(id)
         if (!user) {
-            console.warn("Unkown user id:", id)
+            console.warn('Unkown user id:', id)
             return
         }
         Object.assign(user, userData)
@@ -114,7 +114,7 @@ class WxChatbotAppState {
             this.db.collection(USERS_COLLECTION_KEY)
                 .update(
                     {id: id},
-                    user
+                    user,
                 )
         }
     }
@@ -124,15 +124,15 @@ interface WechatContext extends Context {
     state: WxChatbotAppState
 }
 
-setTextLang("zh_hans")
+setTextLang('zh_hans')
 
-const TOKEN = process.env["WKM_WECHAT_TOKEN"]
-const USERS_COLLECTION_KEY = "users"
+const TOKEN = process.env['WKM_WECHAT_TOKEN']
+const USERS_COLLECTION_KEY = 'users'
 
 export function sha1(s: any): string {
-    const hasher = createHash("sha1")
+    const hasher = createHash('sha1')
     hasher.update(s)
-    return hasher.digest("hex").toString()
+    return hasher.digest('hex').toString()
 }
 
 /**
@@ -144,7 +144,7 @@ function isWechatSignatureValid(
     nonce: string,
     signature: string,
 ): boolean {
-    const hash = sha1([token, timestamp, nonce].sort().join(""))
+    const hash = sha1([token, timestamp, nonce].sort().join(''))
     return hash === signature
 }
 
@@ -159,7 +159,7 @@ function getWechatVerificationResponseBody(query: Object): string {
         return echostr
     }
     else {
-        return ""
+        return ''
     }
 }
 
@@ -167,7 +167,7 @@ function getResponseBodyXml(
     content: string,
     fromUsername: string,
     toUsername: string,
-    msgType: WechatData["MsgType"],
+    msgType: WechatData['MsgType'],
     createTime: string = Date.now().toString().slice(0, 8),
 ) {
     return `<xml>
@@ -182,23 +182,23 @@ function getResponseBodyXml(
 
 
 function isWechatRequest(path: string): boolean {
-    return path === "/api/wechat"
+    return path === '/api/wechat'
 }
 
 async function loadPersistentState(context: WechatContext, next: () => Promise<any>) {
     if (Object.keys(context.state).length === 0) {
         const db = await MongoClient.connect(MONGO_URL)
         const users = (await db.collection(USERS_COLLECTION_KEY)
-                              .find<WechatChatbotUserPlain>()
-                              .toArray())
-                              .map(user => WechatChatbotUser.loadData(user))
+                               .find<WechatChatbotUserPlain>()
+                               .toArray())
+                      .map(user => WechatChatbotUser.loadData(user))
         context.state = new WxChatbotAppState(users, db)
     }
     return next()
 }
 
 async function wechatVerify(context: WechatContext, next: () => Promise<any>) {
-    const isVerificationMode = context.request.query["echostr"]
+    const isVerificationMode = context.request.query['echostr']
     if (isWechatRequest(context.path) && isVerificationMode) {
         context.body = getWechatVerificationResponseBody(context.request.query)
     }
@@ -211,22 +211,22 @@ async function wechatVerify(context: WechatContext, next: () => Promise<any>) {
 /** @see https://mp.weixin.qq.com/wiki/7/9f89d962eba4c5924ed95b513ba69d9b.html */
 async function wechatEvent(context: WechatContext, next: () => Promise<any>) {
     const request = await parseXml<WechatData>(context.request.body, true)
-    if (!isWechatRequest(context.path) || request.MsgType !== "event") {
+    if (!isWechatRequest(context.path) || request.MsgType !== 'event') {
         return next()
     }
-    if (request.Event === "subscribe") {
+    if (request.Event === 'subscribe') {
         const user = new WechatChatbotUser(request.FromUserName)
         const responseText = wechatDialog.text(user)
         context.body = getResponseBodyXml(
             responseText,
             request.ToUserName,
             request.FromUserName,
-            "text",
+            'text',
             Date.now().toString().slice(0, 8),
         )
         context.state.addUser(user)
     }
-    else if (request.Event === "unsubscribe") {
+    else if (request.Event === 'unsubscribe') {
 
     }
     else {
@@ -238,13 +238,13 @@ async function wechatEvent(context: WechatContext, next: () => Promise<any>) {
 /** @see https://mp.weixin.qq.com/wiki/17/f298879f8fb29ab98b2f2971d42552fd.html */
 async function wechatOrdindaryMessage(context: WechatContext, next: () => Promise<any>) {
     const request = await parseXml<WechatData>(context.request.body, true)
-    if (!isWechatRequest(context.path) || request.MsgType !== "text") {
+    if (!isWechatRequest(context.path) || request.MsgType !== 'text') {
         return next()
     }
 
     let user = context.state.getUser(request.FromUserName)
     if (!user) {
-        console.warn("Unknown user making conversation, subscribe event unprocessed?", request.FromUserName)
+        console.warn('Unknown user making conversation, subscribe event unprocessed?', request.FromUserName)
         user = new WechatChatbotUser(request.FromUserName)
         context.state.addUser(user)
     }
@@ -255,7 +255,7 @@ async function wechatOrdindaryMessage(context: WechatContext, next: () => Promis
         wechatDialog.text(user),
         request.ToUserName,
         request.FromUserName,
-        "text",
+        'text',
         Date.now().toString().slice(0, 8),
     )
     context.state.updateUser(user.id, user)

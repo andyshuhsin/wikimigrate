@@ -1,31 +1,30 @@
 import * as React from 'react'
-import text from "../../../utils/text"
+import text from '../../../utils/text'
 
 import CombinationBox from './CombinationBox'
-import ProcedureBox from './ProcedureBox'
 import ReferenceBox from './ReferenceBox'
 import ScoreBox from './ScoreBox'
-import Transition from "../../../../definitions/Transition";
-import {RegionId} from "../../../../definitions/auxiliary/Region"
-import {calcScore} from "../../../utils/calcScore"
-import {Person} from "../../../../definitions/Person"
-import {LangId} from "../../../../definitions/auxiliary/MultiLang"
+import Transition from '../../../../definitions/Transition'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
+import { calcScore } from '../../../utils/calcScore'
+import { Person } from '../../../../definitions/Person'
+import { LangId } from '../../../../definitions/auxiliary/MultiLang'
 
 const transitionNameStyle = {
     margin: 0,
 }
 
 const sectionTitleStyle = {
-    margin: "0.5em",
+    margin: '0.5em',
     marginLeft: 0,
 
-    fontWeight: "lighter",
-    fontSize: "1.4em",
+    fontWeight: 'lighter',
+    fontSize: '1.4em',
 } as React.CSSProperties
 
 const flagStyle = {
-    marginLeft: "0.3em",
-    maxWidth: "1.2em",
+    marginLeft: '0.3em',
+    maxWidth: '1.2em',
 } as React.CSSProperties
 
 type Package = any
@@ -48,7 +47,7 @@ interface Props {
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
         const {
-            transition, lang
+            transition, lang,
         } = this.props
         return (
             <div>
@@ -60,16 +59,16 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                     />
                 </h1>
                 {/*<h2 style={h2Style}>
-                    To {transition.to.name["en"]},
-                    for rights of {transition.to.rights}
-                </h2>*/}
+                 To {transition.to.name["en"]},
+                 for rights of {transition.to.rights}
+                 </h2>*/}
 
                 <section>
                     <h3 style={sectionTitleStyle}>
                         {
                             text({
-                                en: "Prerequisites",
-                                zh_hans: "申请条件",
+                                en: 'Prerequisites',
+                                zh_hans: '申请条件',
                             })
                         }
                     </h3>
@@ -88,8 +87,8 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                         <h3 style={sectionTitleStyle}>
                             {
                                 text({
-                                    en: "Scoring(Experimental)",
-                                    zh_hans: "分数(功能测试中)",
+                                    en: 'Scoring(Experimental)',
+                                    zh_hans: '分数(功能测试中)',
                                 })
                             }
                         </h3>
@@ -102,25 +101,25 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 }
 
                 {/* TODO: Implement procedural guides
-                <section>
-                    <h3 style={sectionTitleStyle}>Application</h3>
-                    {
-                        <ProcedureBox procedureList={transition.procedureList} />
-                    }
-                </section>
-                */}
+                 <section>
+                 <h3 style={sectionTitleStyle}>Application</h3>
+                 {
+                 <ProcedureBox procedureList={transition.procedureList} />
+                 }
+                 </section>
+                 */}
 
                 {
                     transition.referenceList &&
                     <section>
                         <h3 style={sectionTitleStyle}>
                             {text({
-                                en: "References",
-                                zh_hans: "参考资料",
+                                en: 'References',
+                                zh_hans: '参考资料',
                             })}
                         </h3>
                         {
-                            <ReferenceBox referenceList={transition.referenceList} />
+                            <ReferenceBox referenceList={transition.referenceList}/>
                         }
                     </section>
                 }

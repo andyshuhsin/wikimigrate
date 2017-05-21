@@ -1,59 +1,56 @@
 import * as React from 'react'
 import TransitionDisplay from './TransitionDisplay'
-import sys from '../../sys'
 
-import {
-    Pathway
-} from '../../../utils/definitions'
-import {Person} from "../../../../definitions/Person"
-import {LangId} from "../../../../definitions/auxiliary/MultiLang"
+import { Pathway } from '../../../utils/definitions'
+import { Person } from '../../../../definitions/Person'
+import { LangId } from '../../../../definitions/auxiliary/MultiLang'
 
 const style = {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
 
-    padding: "0.5em",
-    overflow: "scroll",
+    padding: '0.5em',
+    overflow: 'scroll',
 
-    background: "#ebebeb",
+    background: '#ebebeb',
     zIndex: 1,
 } as React.CSSProperties
 
-const sideLength = "1em"
+const sideLength = '1em'
 const closeButtonStyle = (() => {
     return {
-        position: "fixed",
+        position: 'fixed',
         left: 0,
         right: 0,
-        bottom: "20px",
-        margin: "auto",
+        bottom: '20px',
+        margin: 'auto',
 
         height: sideLength,
         width: sideLength,
         lineHeight: sideLength,
-        borderRadius: "50%",
+        borderRadius: '50%',
 
-        background: "rgba(0, 0, 0, 0.2)",
-        color: "white",
+        background: 'rgba(0, 0, 0, 0.2)',
+        color: 'white',
 
-        fontSize: "3em",
-        textAlign: "center",
+        fontSize: '3em',
+        textAlign: 'center',
 
-        cursor: "pointer",
+        cursor: 'pointer',
     } as React.CSSProperties
 })()
 
 const crossStyle = {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
-    margin: "auto",
-    width: `calc(${sideLength} / 2)`
+    margin: 'auto',
+    width: `calc(${sideLength} / 2)`,
 } as React.CSSProperties
 
 interface Props {
@@ -72,13 +69,13 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
 
                     {
                         this.props.pathOnDisplay.transitions.map(
-                            transition => 
+                            transition =>
                                 <TransitionDisplay
                                     user={this.props.user}
                                     transition={transition}
                                     key={transition.id}
                                     lang={this.props.lang}
-                                />
+                                />,
                         )
                     }
 
@@ -86,13 +83,14 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
                          onClick={this.props.onClose}>
                         <img
                             style={crossStyle}
-                            src={require("../../../assets/cross.svg")}
+                            src={require('../../../assets/cross.svg')}
                         />
                     </div>
 
                 </div>
             )
-        } else {
+        }
+        else {
             return null
         }
     }

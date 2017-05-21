@@ -1,6 +1,6 @@
-import {Person} from "../../definitions/Person"
-import {ScoreSystem} from "../../definitions/ScoreSystem"
-import {satisfyPrerequisiteCombination} from "./prerequisiteOperations"
+import { Person } from '../../definitions/Person'
+import { ScoreSystem } from '../../definitions/ScoreSystem'
+import { satisfyPrerequisiteCombination } from './prerequisiteOperations'
 
 interface BatchScores {
     [key: string]: number
@@ -23,7 +23,7 @@ export function calcScore(person: Person, system: ScoreSystem): number {
             if (satisfyPrerequisiteCombination(person, condition.prerequisites)) {
                 const batch = condition.batch
                 const higherThanBatchHighest = condition.score > batchScores[batch]
-                const newBatch = typeof batchScores[batch] === "undefined"
+                const newBatch = typeof batchScores[batch] === 'undefined'
                 if (newBatch || higherThanBatchHighest) {
                     batchScores[batch] = condition.score
                 }

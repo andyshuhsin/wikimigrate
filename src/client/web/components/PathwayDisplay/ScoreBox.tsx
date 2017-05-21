@@ -1,6 +1,6 @@
-import * as React from "react"
-import {ScoreHistory, ScoreHistoryEntry} from "../../../../definitions/ScoreSystem"
-import design from "../../design"
+import * as React from 'react'
+import { ScoreHistory, ScoreHistoryEntry } from '../../../../definitions/ScoreSystem'
+import design from '../../design'
 
 interface PropTypes {
     score: number
@@ -9,21 +9,21 @@ interface PropTypes {
 }
 
 const scoreStyle = {
-    fontWeight: "bolder",
+    fontWeight: 'bolder',
 } as React.CSSProperties
 
 const commentStyle = {
-    fontSize: "0.9em",
+    fontSize: '0.9em',
     color: design.colors.greyDark,
 }
 
-const HistoryEntry = (props: {entry: ScoreHistoryEntry}) => (
+const HistoryEntry = (props: { entry: ScoreHistoryEntry }) => (
     <div>
         <span style={scoreStyle}>
             {props.entry.lowestScore}
         </span>
-        {"@"}
-        {props.entry.date.join("-")}
+        {'@'}
+        {props.entry.date.join('-')}
     </div>
 )
 
@@ -31,7 +31,7 @@ class ScoreBox extends React.PureComponent<PropTypes, {}> {
     render() {
         return (
             <div>
-                <div style={{fontSize: "1.2em"}}>
+                <div style={{fontSize: '1.2em'}}>
                     {this.props.name}
                 </div>
                 <div>
@@ -51,7 +51,7 @@ class ScoreBox extends React.PureComponent<PropTypes, {}> {
                                 <HistoryEntry
                                     key={entry.date.join()}
                                     entry={entry}
-                                />
+                                />,
                         )
                     }
                 </div>

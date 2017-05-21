@@ -1,5 +1,5 @@
 import BasePrereq from './BasePrereq'
-import Money, {FundSourceGroup} from "../auxiliary/Money"
+import Money, { FundSourceGroup } from '../auxiliary/Money'
 
 export interface FundPrereqCondition {
     familyMember: number
@@ -7,8 +7,8 @@ export interface FundPrereqCondition {
 }
 
 export interface FundPrereqWithMoney extends BasePrereq {
-    prereqId: "fund"
-    type: "possess" | "investor" | "investee" | "donate"
+    prereqId: 'fund'
+    type: 'possess' | 'investor' | 'investee' | 'donate'
     schemes: [
         {
             fund: Money | null
@@ -18,8 +18,8 @@ export interface FundPrereqWithMoney extends BasePrereq {
 }
 
 export interface FundPrereqAdmission extends BasePrereq {
-    prereqId: "fund"
-    type: "admission"
+    prereqId: 'fund'
+    type: 'admission'
     schemes: [
         {
             fund: null

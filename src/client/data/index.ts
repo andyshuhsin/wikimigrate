@@ -1,17 +1,16 @@
-import {LangId, MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
-import {LanguageTestResult} from "../../definitions/auxiliary/LanguageTest"
-import {PrereqId} from "../../definitions/Prerequisites/BasePrereq"
-import {RegionId} from "../../definitions/auxiliary/Region"
+import { LangId, MultiLangStringSet } from '../../definitions/auxiliary/MultiLang'
+import { LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
+import { RegionId } from '../../definitions/auxiliary/Region'
 
 export type FilterId =
-    "work_experience_duration"
-    | "work_experience_region"
-    | "education_level"
-    | "education_region"
-    | "age"
-    | "english"
-    | "french"
-    | "app_lang"
+    'work_experience_duration'
+    | 'work_experience_region'
+    | 'education_level'
+    | 'education_region'
+    | 'age'
+    | 'english'
+    | 'french'
+    | 'app_lang'
 
 export type FilterOption = {
     id: OptionId
@@ -25,12 +24,12 @@ export interface BaseFilter {
 }
 
 export interface MultipleChoiceFilter extends BaseFilter {
-    filterType: "multiple-choice"
+    filterType: 'multiple-choice'
     options: FilterOption[]
 }
 
 export interface RealValueFilter extends BaseFilter {
-    filterType: "real",
+    filterType: 'real',
     defaultValue: number
 }
 
@@ -40,17 +39,17 @@ export type Filter =
 
 export type OptionId = string
 
-export type LanguageFilterId = "proficient" | "good" | "not_good"
+export type LanguageFilterId = 'proficient' | 'good' | 'not_good'
 
 export type LanguageFilterAssumptions = {
     [key in LanguageFilterId]: LanguageTestResult[]
-}
+    }
 
 const englishTestAssumptions: LanguageFilterAssumptions = {
     proficient: [
         {
-            testId: "clb",
-            language: "en",
+            testId: 'clb',
+            language: 'en',
             scores: {
                 listening: 11,
                 speaking: 11,
@@ -81,8 +80,8 @@ const englishTestAssumptions: LanguageFilterAssumptions = {
     ] as LanguageTestResult[],
     good: [
         {
-            testId: "clb",
-            language: "en",
+            testId: 'clb',
+            language: 'en',
             scores: {
                 listening: 9,
                 speaking: 7,
@@ -93,8 +92,8 @@ const englishTestAssumptions: LanguageFilterAssumptions = {
     ] as LanguageTestResult[],
     not_good: [
         {
-            testId: "clb",
-            language: "en",
+            testId: 'clb',
+            language: 'en',
             scores: {
                 listening: 0,
                 speaking: 0,
@@ -102,14 +101,14 @@ const englishTestAssumptions: LanguageFilterAssumptions = {
                 writing: 0,
             },
         },
-    ] as LanguageTestResult[]
+    ] as LanguageTestResult[],
 }
 
 const frenchTestAssumptions: LanguageFilterAssumptions = {
     proficient: [
         {
-            testId: "clb",
-            language: "fr",
+            testId: 'clb',
+            language: 'fr',
             scores: {
                 listening: 11,
                 speaking: 11,
@@ -120,8 +119,8 @@ const frenchTestAssumptions: LanguageFilterAssumptions = {
     ] as LanguageTestResult[],
     good: [
         {
-            testId: "clb",
-            language: "fr",
+            testId: 'clb',
+            language: 'fr',
             scores: {
                 listening: 9,
                 speaking: 9,
@@ -132,8 +131,8 @@ const frenchTestAssumptions: LanguageFilterAssumptions = {
     ] as LanguageTestResult[],
     not_good: [
         {
-            testId: "clb",
-            language: "fr",
+            testId: 'clb',
+            language: 'fr',
             scores: {
                 listening: 0,
                 speaking: 0,
@@ -141,13 +140,13 @@ const frenchTestAssumptions: LanguageFilterAssumptions = {
                 writing: 0,
             },
         },
-    ] as LanguageTestResult[]
+    ] as LanguageTestResult[],
 
 }
 
 type LanguageAssumptionSet = {
     [key in LangId]?: LanguageFilterAssumptions
-}
+    }
 
 export const languageAssumptionSet: LanguageAssumptionSet = {
     en: englishTestAssumptions,
@@ -161,32 +160,32 @@ interface RegionOption {
 
 const RegionOptions: RegionOption[] = [
     {
-        id: "new_zealand",
+        id: 'new_zealand',
         label: {
-            en: "New Zealand",
-            zh_hans: "新西兰",
-        }
+            en: 'New Zealand',
+            zh_hans: '新西兰',
+        },
     },
     {
-        id: "australia",
+        id: 'australia',
         label: {
-            en: "Australia",
-            zh_hans: "澳大利亚",
-        }
+            en: 'Australia',
+            zh_hans: '澳大利亚',
+        },
     },
     {
-        id: "canada",
+        id: 'canada',
         label: {
-            en: "Canada",
-            zh_hans: "加拿大",
-        }
+            en: 'Canada',
+            zh_hans: '加拿大',
+        },
     },
     {
-        id: "world",
+        id: 'world',
         label: {
-            en: "Elsewhere",
-            zh_hans: "其他",
-        }
+            en: 'Elsewhere',
+            zh_hans: '其他',
+        },
     },
 ]
 
@@ -194,163 +193,163 @@ export const DEFAULT_AGE = 35
 
 export const filterSets: Filter[] = [
     {
-        id: "work_experience_duration",
-        filterType: "real",
+        id: 'work_experience_duration',
+        filterType: 'real',
         title: {
-            en: "Work experience in years",
-            zh_hans: "工作经验（年）",
+            en: 'Work experience in years',
+            zh_hans: '工作经验（年）',
         },
         defaultValue: 1,
     },
     {
-        id: "work_experience_region",
-        filterType: "multiple-choice",
+        id: 'work_experience_region',
+        filterType: 'multiple-choice',
         title: {
-            en: "Work experience: Where?",
-            zh_hans: "工作经验：地点",
+            en: 'Work experience: Where?',
+            zh_hans: '工作经验：地点',
         },
         options: RegionOptions,
     },
     {
-        id: "education_level",
-        filterType: "multiple-choice",
+        id: 'education_level',
+        filterType: 'multiple-choice',
         title: {
-            en: "Education: Highest Level",
-            zh_hans: "最高学历",
+            en: 'Education: Highest Level',
+            zh_hans: '最高学历',
         },
         options: [
             {
-                id: "secondary",
+                id: 'secondary',
                 label: {
-                    en: "Secondary",
-                    zh_hans: "高中",
-                }
+                    en: 'Secondary',
+                    zh_hans: '高中',
+                },
             },
             {
-                id: "bachelor",
+                id: 'bachelor',
                 label: {
-                    en: "Bachelor",
-                    zh_hans: "本科",
-                }
+                    en: 'Bachelor',
+                    zh_hans: '本科',
+                },
             },
             {
-                id: "master",
+                id: 'master',
                 label: {
-                    en: "Master",
-                    zh_hans: "硕士",
-                }
+                    en: 'Master',
+                    zh_hans: '硕士',
+                },
             },
             {
-                id: "phd",
+                id: 'phd',
                 label: {
-                    en: "PhD",
-                    zh_hans: "博士",
-                }
+                    en: 'PhD',
+                    zh_hans: '博士',
+                },
             },
-        ]
+        ],
     },
     {
-        id: "education_region",
-        filterType: "multiple-choice",
+        id: 'education_region',
+        filterType: 'multiple-choice',
         title: {
-            en: "Highest education: Where?",
-            zh_hans: "最高学历取得地",
+            en: 'Highest education: Where?',
+            zh_hans: '最高学历取得地',
         },
         options: RegionOptions,
     },
     {
-        id: "age",
-        filterType: "real",
+        id: 'age',
+        filterType: 'real',
         title: {
-            en: "Age",
-            zh_hans: "年龄",
+            en: 'Age',
+            zh_hans: '年龄',
         },
         defaultValue: DEFAULT_AGE,
     },
     {
-        id: "english",
-        filterType: "multiple-choice",
+        id: 'english',
+        filterType: 'multiple-choice',
         title: {
-            en: "English",
-            zh_hans: "英语能力",
+            en: 'English',
+            zh_hans: '英语能力',
         },
         options: [
             {
-                id: "not_good",
+                id: 'not_good',
                 label: {
-                    en: "Not good",
-                    zh_hans: "不行",
-                }
+                    en: 'Not good',
+                    zh_hans: '不行',
+                },
             },
             {
-                id: "good",
+                id: 'good',
                 label: {
-                    en: "Good",
-                    zh_hans: "挺好",
-                }
+                    en: 'Good',
+                    zh_hans: '挺好',
+                },
             },
             {
-                id: "proficient",
+                id: 'proficient',
                 label: {
-                    en: "Proficient",
-                    zh_hans: "流利",
-                }
+                    en: 'Proficient',
+                    zh_hans: '流利',
+                },
             },
-        ]
+        ],
     },
     {
-        id: "french",
-        filterType: "multiple-choice",
+        id: 'french',
+        filterType: 'multiple-choice',
         title: {
-            en: "French",
-            zh_hans: "法语能力",
+            en: 'French',
+            zh_hans: '法语能力',
         },
         options: [
             {
-                id: "not_good",
+                id: 'not_good',
                 label: {
-                    en: "Not good",
-                    zh_hans: "不行",
+                    en: 'Not good',
+                    zh_hans: '不行',
                 },
             },
             {
-                id: "good",
+                id: 'good',
                 label: {
-                    en: "Good",
-                    zh_hans: "挺好",
+                    en: 'Good',
+                    zh_hans: '挺好',
                 },
             },
             {
-                id: "proficient",
+                id: 'proficient',
                 label: {
-                    en: "Proficient",
-                    zh_hans: "流利",
+                    en: 'Proficient',
+                    zh_hans: '流利',
                 },
             },
-        ]
+        ],
     },
     {
-        id: "app_lang",
-        filterType: "multiple-choice",
+        id: 'app_lang',
+        filterType: 'multiple-choice',
         title: {
-            en: "Choose App Language",
-            zh_hans: "选择语言",
+            en: 'Choose App Language',
+            zh_hans: '选择语言',
         },
         options: [
             {
-                id: "en",
+                id: 'en',
                 label: {
-                    en: "English"
-                }
+                    en: 'English',
+                },
             },
             {
-                id: "zh_hans",
+                id: 'zh_hans',
                 label: {
-                    zh_hans: "简体中文"
-                }
+                    zh_hans: '简体中文',
+                },
             },
-        ]
-    }
+        ],
+    },
 ]
 
 export type FilterState = {

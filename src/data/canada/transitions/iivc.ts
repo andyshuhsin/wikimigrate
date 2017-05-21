@@ -1,24 +1,21 @@
-import Transition from "../../../definitions/Transition"
-import {allOf} from "../../../definitions/auxiliary/Combination"
+import Transition from '../../../definitions/Transition'
+import { allOf } from '../../../definitions/auxiliary/Combination'
 
-import {
-    alien,
-    pr
-} from '../status'
+import { alien, pr } from '../status'
 
 const iivc: Transition = {
-    id: "iivc",
-    regionId: "canada",
+    id: 'iivc',
+    regionId: 'canada',
     name: {
-        en: "Immigrant Investor Venture Capital Pilot Program"
+        en: 'Immigrant Investor Venture Capital Pilot Program',
     },
     from: alien,
     to: pr,
-    acquireBy: "application",
+    acquireBy: 'application',
     stage: {
         description: {
-            en: "closed"
-        }
+            en: 'closed',
+        },
     },
     prerequisiteList: allOf([]),
     procedureList: [],

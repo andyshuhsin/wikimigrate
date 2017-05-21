@@ -1,7 +1,7 @@
-import {MultiLangStringSet} from "./MultiLang"
-import URLDatum from "./URLDatum"
+import { MultiLangStringSet } from './MultiLang'
+import URLDatum from './URLDatum'
 
-type ClassificationSystemId = "noc" | "aus-job-class"
+type ClassificationSystemId = 'noc' | 'aus-job-class'
 
 export interface JobGroup {
     jobGroupId: string

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Prerequisite from "../../../../../definitions/Prerequisites/index";
+import Prerequisite from '../../../../../definitions/Prerequisites/index'
 
 import LanguageBenchmarkBox from './LanguageBenchmarkBox'
 import WorkExperienceBox from './WorkExperienceBox'
@@ -11,7 +11,7 @@ import OfferBox from './OfferBox'
 import CertificationBox from './CertificationBox'
 import AgeBox from './AgeBox'
 import BusinessBox from './BusinessBox'
-import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
+import { LangId } from '../../../../../definitions/auxiliary/MultiLang'
 
 interface Props {
     prereq: Prerequisite,
@@ -25,35 +25,35 @@ class PrerequisiteBox extends React.PureComponent<Props, {}> {
             lang,
         } = this.props
         switch (prereq.prereqId) {
-            case "language_test": {
+            case 'language_test': {
                 return <LanguageBenchmarkBox prereq={prereq}/>
             }
-            case "work_experience": {
-                return <WorkExperienceBox prereq={prereq} lang={lang} />
+            case 'work_experience': {
+                return <WorkExperienceBox prereq={prereq} lang={lang}/>
             }
-            case "education": {
-                return  <EducationBox prereq={prereq} lang={lang} />
+            case 'education': {
+                return <EducationBox prereq={prereq} lang={lang}/>
             }
-            case "fund": {
-                return <FundBox prereq={prereq} lang={lang} />
+            case 'fund': {
+                return <FundBox prereq={prereq} lang={lang}/>
             }
-            case "right": {
-                return <RightBox prereq={prereq} />
+            case 'right': {
+                return <RightBox prereq={prereq}/>
             }
-            case "offer": {
-                return <OfferBox prereq={prereq} lang={lang} />
+            case 'offer': {
+                return <OfferBox prereq={prereq} lang={lang}/>
             }
-            case "certification": {
-                return <CertificationBox prereq={prereq} lang={lang} />
+            case 'certification': {
+                return <CertificationBox prereq={prereq} lang={lang}/>
             }
-            case "age": {
-                return <AgeBox prereq={prereq} lang={lang} />
+            case 'age': {
+                return <AgeBox prereq={prereq} lang={lang}/>
             }
-            case "business": {
-                return <BusinessBox prereq={prereq} />
+            case 'business': {
+                return <BusinessBox prereq={prereq}/>
             }
             default: {
-                console.warn("Unknown prereq:", JSON.stringify(prereq))
+                console.warn('Unknown prereq:', JSON.stringify(prereq))
                 return <noscript />
             }
         }

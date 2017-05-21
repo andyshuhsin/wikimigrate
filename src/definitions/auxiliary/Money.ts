@@ -1,63 +1,63 @@
-import URLDatum from "./URLDatum"
-import {MultiLangStringSet} from "./MultiLang"
+import URLDatum from './URLDatum'
+import { MultiLangStringSet } from './MultiLang'
 
-export type CurrencyId = "cad" | "usd" | "aud"
+export type CurrencyId = 'cad' | 'usd' | 'aud'
 
 export type FundSourceId =
     // Canada venture capitals
-    "bdc"
-    | "relay"
-    | "celtic"
-    | "dri"
-    | "extreme-venture"
-    | "golden-opportunities"
-    | "inovia"
-    | "lumira"
-    | "mobio"
-    | "new-brunswick"
-    | "oak-mason" // also angel
-    | "omers"
-    | "pangaea"
-    | "priveq"
-    | "quorum"
-    | "real-ventures"
-    | "rho-canada"
-    | "rogers"
-    | "summerhill"
-    | "tandem"
-    | "top-renergy"
-    | "vanedge"
-    | "version-one"
-    | "wellington"
-    | "westcap"
-    | "yaletown"
+    'bdc'
+    | 'relay'
+    | 'celtic'
+    | 'dri'
+    | 'extreme-venture'
+    | 'golden-opportunities'
+    | 'inovia'
+    | 'lumira'
+    | 'mobio'
+    | 'new-brunswick'
+    | 'oak-mason' // also angel
+    | 'omers'
+    | 'pangaea'
+    | 'priveq'
+    | 'quorum'
+    | 'real-ventures'
+    | 'rho-canada'
+    | 'rogers'
+    | 'summerhill'
+    | 'tandem'
+    | 'top-renergy'
+    | 'vanedge'
+    | 'version-one'
+    | 'wellington'
+    | 'westcap'
+    | 'yaletown'
 
     // Canada angels
-    | "angel-one"
-    | "first-angel"
-    | "golden-triangle"
-    | "oak-mason"  // also venture
-    | "tenx-angel"
-    | "vantec-angel"
+    | 'angel-one'
+    | 'first-angel'
+    | 'golden-triangle'
+    | 'oak-mason'  // also venture
+    | 'tenx-angel'
+    | 'vantec-angel'
 
     // Canada incubators
-    | "highline"
-    | "communitech"
-    | "empowered"
-    | "extreme-innovations"
-    | "incubes"
-    | "innovacorp"
-    | "innovate"
-    | "interactive"
-    | "knowledge"
-    | "launchpad"
-    | "real-investment"
-    | "ryerson"
-    | "toronto"
-    | "waterloo"
+    | 'highline'
+    | 'communitech'
+    | 'empowered'
+    | 'extreme-innovations'
+    | 'incubes'
+    | 'innovacorp'
+    | 'innovate'
+    | 'interactive'
+    | 'knowledge'
+    | 'launchpad'
+    | 'real-investment'
+    | 'ryerson'
+    | 'toronto'
+    | 'waterloo'
 
     // Kiwi
-    | "ehf"
+    | 'ehf'
 
 
 export interface FundSource {
@@ -67,10 +67,10 @@ export interface FundSource {
 }
 
 export type FundSourceGroupId =
-    "canada-designated-venture-capital-funds"
-    | "canada-designated-angel-investor-groups"
-    | "canada-designated-business-incubators"
-    | "new_zealand_edmund_hillary_fellowship"
+    'canada-designated-venture-capital-funds'
+    | 'canada-designated-angel-investor-groups'
+    | 'canada-designated-business-incubators'
+    | 'new_zealand_edmund_hillary_fellowship'
 
 export interface FundSourceGroup {
     fundSourceGroupId: FundSourceGroupId
@@ -88,7 +88,7 @@ export type Money = {
 export function money(value: number, currencyId: CurrencyId): Money {
     return {
         value,
-        currencyId
+        currencyId,
     }
 }
 

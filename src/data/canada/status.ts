@@ -1,54 +1,54 @@
-import Status from "../../definitions/Qualities/Status"
-import {duration} from "../../definitions/auxiliary/Duration"
+import Status from '../../definitions/Qualities/Status'
+import { duration } from '../../definitions/auxiliary/Duration'
 
 export const citizenship: Status = {
-    id: "citizen",
-    regionId: "canada",
+    id: 'citizen',
+    regionId: 'canada',
     name: {
-        en: "Citizenship"
+        en: 'Citizenship',
     },
     rights: [
-        "work"
-    ]
+        'work',
+    ],
 }
 
 export const pr: Status = {
-    id: "permanent",
-    regionId: "canada",
+    id: 'permanent',
+    regionId: 'canada',
     name: {
-        en: "Permanent Residence"
+        en: 'Permanent Residence',
     },
     rights: [
-        "work"
-    ]
+        'work',
+    ],
 }
 
 export const touristVisaExempted: Status = {
-    id: "tourist_visa_exempted",
-    regionId: "canada",
+    id: 'tourist_visa_exempted',
+    regionId: 'canada',
     name: {
-        en: "Visa Exemption"
+        en: 'Visa Exemption',
     },
     rights: [
-        "visit"
+        'visit',
     ],
-    duration: duration(6, "month")
+    duration: duration(6, 'month'),
 }
 
 export const expressEntryCandidate: Status = {
-    id: "express_entry_candidate",
-    regionId: "canada",
+    id: 'express_entry_candidate',
+    regionId: 'canada',
     name: {
-        en: "Express Entry Candidate"
+        en: 'Express Entry Candidate',
     },
     rights: [],
 }
 
 export const alien: Status = {
-    id: "alien",
-    regionId: "canada",
+    id: 'alien',
+    regionId: 'canada',
     name: {
-        en: "Alien"
+        en: 'Alien',
     },
     rights: [],
 }

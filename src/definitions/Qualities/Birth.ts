@@ -1,4 +1,4 @@
-import {RegionId} from "../auxiliary/Region"
+import { RegionId } from '../auxiliary/Region'
 
 export interface BirthQuality {
     // Cannot be Date because it cannot be safely saved in JSON

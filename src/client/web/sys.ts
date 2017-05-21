@@ -2,7 +2,7 @@ const userAgent = window.navigator.userAgent
 
 const sys = {
     viewport: {
-        width: window.innerWidth
+        width: window.innerWidth,
     },
     ua: {
         iosSafari: (
@@ -16,8 +16,8 @@ const sys = {
         iosWechat: /micromessenger/i.test(userAgent),
     },
     dimensions: {
-        iosSafariBottomBarHeight: 69
-    }
+        iosSafariBottomBarHeight: 69,
+    },
 }
 
 export default sys

@@ -1,15 +1,14 @@
-import {LangId, MultiLangStringSet} from "../auxiliary/MultiLang"
-import Duration from "../auxiliary/Duration"
-import {RegionId} from "../auxiliary/Region"
-import {text} from "../../client/utils/text"
+import { MultiLangStringSet } from '../auxiliary/MultiLang'
+import Duration from '../auxiliary/Duration'
+import { RegionId } from '../auxiliary/Region'
 
 export type EducationStage =
-    "primary"
-    | "secondary"
-    | "bachelor"
-    | "master"
-    | "phd"
-    | "professional"
+    'primary'
+    | 'secondary'
+    | 'bachelor'
+    | 'master'
+    | 'phd'
+    | 'professional'
 
 interface EducationStageProfile {
     rank: number
@@ -24,45 +23,45 @@ export const educationStageProfiles: EducationStageProfiles = {
     primary: {
         rank: 1,
         name: {
-            en: "Primary",
-            zh_hans: "小学",
+            en: 'Primary',
+            zh_hans: '小学',
         },
     },
     secondary: {
         rank: 2,
         name: {
-            en: "Secondary",
-            zh_hans: "中学",
+            en: 'Secondary',
+            zh_hans: '中学',
         },
     },
     bachelor: {
         rank: 3,
         name: {
-            en: "Bachelor",
-            zh_hans: "本科",
+            en: 'Bachelor',
+            zh_hans: '本科',
         },
     },
     master: {
         rank: 4,
         name: {
-            en: "master",
-            zh_hans: "硕士",
+            en: 'master',
+            zh_hans: '硕士',
         },
     },
     phd: {
         rank: 5,
         name: {
-            en: "PhD",
-            zh_hans: "博士",
+            en: 'PhD',
+            zh_hans: '博士',
         },
     },
     professional: {
         rank: -1,
         name: {
-            en: "Professional",
-            zh_hans: "职业教育",
+            en: 'Professional',
+            zh_hans: '职业教育',
         },
-    }
+    },
 }
 
 export function getEducationStageRank(stage: EducationStage): number {
@@ -70,7 +69,7 @@ export function getEducationStageRank(stage: EducationStage): number {
 }
 
 export interface EducationQuality {
-    qualityId: "education"
+    qualityId: 'education'
     stage: EducationStage | undefined
     regionId: RegionId | undefined
     duration?: Duration

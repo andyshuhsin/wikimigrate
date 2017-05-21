@@ -1,6 +1,6 @@
-import {MultiLangStringSet} from "./MultiLang"
+import { MultiLangStringSet } from './MultiLang'
 
-export type Combinator = "and" | "or" | "not"
+export type Combinator = 'and' | 'or' | 'not'
 
 export type CombinationMeta = Partial<{
     title: MultiLangStringSet
@@ -13,8 +13,8 @@ export type CombinationMeta = Partial<{
      But someone holding only ONE post-secondary degree can satisfy the
      prerequisite:
          allOf([
-           post-secondary,
-           post-secondary,
+             post-secondary,
+             post-secondary,
          ])
      Instead, this should be specified as
          allOf([
@@ -43,7 +43,7 @@ export function oneOf<T>(args: T[], meta?: CombinationMeta): Combination<T> {
     return {
         combinator: 'or',
         operands: args,
-        meta
+        meta,
     }
 }
 
@@ -51,7 +51,7 @@ export function not<T>(args: [T], meta?: CombinationMeta): Combination<T> {
     return {
         combinator: 'not',
         operands: args,
-        meta
+        meta,
     }
 }
 
@@ -59,7 +59,7 @@ export function not<T>(args: [T], meta?: CombinationMeta): Combination<T> {
 export const identity = allOf
 
 export function isCombination(args: any): boolean {
-    return !!(args["combinator"] && args["operands"])
+    return !!(args['combinator'] && args['operands'])
 }
 
 export default Combination

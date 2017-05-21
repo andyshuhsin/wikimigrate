@@ -1,128 +1,128 @@
-import Status from "../../definitions/Qualities/Status"
-import {duration} from "../../definitions/auxiliary/Duration"
+import Status from '../../definitions/Qualities/Status'
+import { duration } from '../../definitions/auxiliary/Duration'
 
 export const citizenship: Status = {
-    id: "citizen",
-    regionId: "australia",
+    id: 'citizen',
+    regionId: 'australia',
     name: {
-        en: "Citizenship"
+        en: 'Citizenship',
     },
     rights: [
-        "work"
-    ]
+        'work',
+    ],
 }
 
 export const visa189holder: Status = {
-    id: "189",
-    regionId: "australia",
+    id: '189',
+    regionId: 'australia',
     name: {
-        en: "Permanent Residence(189)"
+        en: 'Permanent Residence(189)',
     },
     rights: [
-        "work",
-        "study",
-        "medicare",
+        'work',
+        'study',
+        'medicare',
     ],
-    duration: duration(5, "year"),
+    duration: duration(5, 'year'),
 }
 
 export const visa190holder: Status = {
-    id: "190",
-    regionId: "australia",
+    id: '190',
+    regionId: 'australia',
     name: {
-        en: "Permanent Residence(190)"
+        en: 'Permanent Residence(190)',
     },
     rights: [
-        "work",
-        "study",
-        "medicare",
+        'work',
+        'study',
+        'medicare',
     ],
-    duration: duration(5, "year"),
+    duration: duration(5, 'year'),
 }
 
 export const visa489holder: Status = {
-    id: "489",
-    regionId: "australia",
+    id: '489',
+    regionId: 'australia',
     name: {
-        en: "Visa 489 Holder"
+        en: 'Visa 489 Holder',
     },
     rights: [
-        "work",
-        "study",
-        "medicare",
+        'work',
+        'study',
+        'medicare',
     ],
-    duration: duration(4, "year"),
+    duration: duration(4, 'year'),
 
 }
 
 export const visa132holder: Status = {
-    id: "132",
-    regionId: "australia",
+    id: '132',
+    regionId: 'australia',
     name: {
-        en: "Visa 132 Holder"
+        en: 'Visa 132 Holder',
     },
     rights: [
-        "work",
-        "study",
-        "medicare",
+        'work',
+        'study',
+        'medicare',
     ],
-    duration: duration(5, "year"),
+    duration: duration(5, 'year'),
 
 }
 
 export const visa188holder: Status = {
-    id: "188",
-    regionId: "australia",
+    id: '188',
+    regionId: 'australia',
     name: {
-        en: "Visa 188 Holder"
+        en: 'Visa 188 Holder',
     },
     rights: [
-        "entry",
-        "business",
-    ]
+        'entry',
+        'business',
+    ],
 }
 
 export const visa457holder: Status = {
-    id: "457",
-    regionId: "australia",
+    id: '457',
+    regionId: 'australia',
     name: {
-        en: "Visa 457 Holder"
+        en: 'Visa 457 Holder',
     },
     rights: [
-        "entry",
-        "work"
+        'entry',
+        'work',
     ],
-    duration: duration(2, "year"),
+    duration: duration(2, 'year'),
 }
 
 export const visa186holder: Status = {
-    id: "186",
-    regionId: "australia",
+    id: '186',
+    regionId: 'australia',
     name: {
-        en: "Visa 186 Holder"
+        en: 'Visa 186 Holder',
     },
     rights: [
-        "work"
-    ]
+        'work',
+    ],
 }
 
 
 export const pr: Status = {
-    id: "permanent",
-    regionId: "australia",
+    id: 'permanent',
+    regionId: 'australia',
     name: {
-        en: "Permanent Residence"
+        en: 'Permanent Residence',
     },
     rights: [
-        "work"
-    ]
+        'work',
+    ],
 }
 
 export const alien: Status = {
-    id: "alien",
-    regionId: "australia",
+    id: 'alien',
+    regionId: 'australia',
     name: {
-        en: "Alien"
+        en: 'Alien',
     },
     rights: [],
 }

@@ -1,25 +1,19 @@
-import {
-    alien,
-    visa190holder,
-} from '../../status'
+import { alien, visa190holder } from '../../status'
 
-import {
-    competentEnglish,
-    below50,
-} from './skillSelectCommon'
+import { below50, competentEnglish } from './skillSelectCommon'
 
 import jobClass from '../../jobClass'
-import Transition from "../../../../definitions/Transition"
-import {allOf} from "../../../../definitions/auxiliary/Combination"
-import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq"
+import Transition from '../../../../definitions/Transition'
+import { allOf } from '../../../../definitions/auxiliary/Combination'
+import { WorkExperiencePrereq } from '../../../../definitions/Prerequisites/WorkExperiencePrereq'
 
 const skilledNominated: Transition = {
-    id: "skilled_nominated",
-    regionId: "australia",
-    acquireBy: "application",
+    id: 'skilled_nominated',
+    regionId: 'australia',
+    acquireBy: 'application',
     name: {
-        en: "Skilled Nominated visa (subclass 190)",
-        zh_hans: "州担保技术移民(190)"
+        en: 'Skilled Nominated visa (subclass 190)',
+        zh_hans: '州担保技术移民(190)',
     },
     from: alien,
     to: visa190holder,
@@ -28,43 +22,43 @@ const skilledNominated: Transition = {
         competentEnglish,
         below50,
         {
-            prereqId: "work_experience",
+            prereqId: 'work_experience',
             jobNature: allOf([
-                jobClass.jobGroups.sol
-            ])
+                jobClass.jobGroups.sol,
+            ]),
         } as WorkExperiencePrereq,
     ]),
     procedureList: [
         {
             name: {
-                en: "Be nominated by an Australian state or territory government agency"
-            }
+                en: 'Be nominated by an Australian state or territory government agency',
+            },
         },
         {
             name: {
-                en: "Obtain a suitable skills assessment for that occupation"
-            }
+                en: 'Obtain a suitable skills assessment for that occupation',
+            },
         },
         {
             name: {
-                en: "Submit Expression of Interest"
-            }
+                en: 'Submit Expression of Interest',
+            },
         },
         {
             name: {
-                en: "Wait"
-            }
-        }
+                en: 'Wait',
+            },
+        },
     ],
     referenceList: [
         {
-            url: "https://www.border.gov.au/Trav/Visa-1/190-",
+            url: 'https://www.border.gov.au/Trav/Visa-1/190-',
             title: {
-                en: "Official page",
-                zh_hans: "官方页面",
-            }
-        }
-    ]
+                en: 'Official page',
+                zh_hans: '官方页面',
+            },
+        },
+    ],
 }
 
 export default skilledNominated

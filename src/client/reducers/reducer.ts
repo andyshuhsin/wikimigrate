@@ -1,29 +1,22 @@
-import {Action} from "../actions"
-import {
-    DEFAULT_AGE,
-    FilterId,
-    FilterState, languageAssumptionSet,
-    LanguageFilterId,
-} from "../data"
-import {Pathway, PathwayDescriptor} from "../utils/definitions"
-import {getInitialPerson, Person} from "../../definitions/Person"
-import {clone} from "../utils/clone"
-import {duration} from "../../definitions/auxiliary/Duration"
-import {WorkExperienceQuality} from "../../definitions/Qualities/WorkExperience"
-import {EducationQuality} from "../../definitions/Qualities/EducationExperience"
-import {LanguageTestResult} from "../../definitions/auxiliary/LanguageTest"
-import {LangId} from "../../definitions/auxiliary/MultiLang"
-import languageTestProfiles from "../../data/common/languageTestProfiles"
-import data from "../../data/index"
-import {parseQueryString} from "../utils/parseQueryString"
-import {PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE} from "../../data/constants"
-import {TransitionId} from "../../definitions/Transition"
+import { Action } from '../actions'
+import { DEFAULT_AGE, FilterId, FilterState, languageAssumptionSet, LanguageFilterId } from '../data'
+import { PathwayDescriptor } from '../utils/definitions'
+import { getInitialPerson, Person } from '../../definitions/Person'
+import { clone } from '../utils/clone'
+import { duration } from '../../definitions/auxiliary/Duration'
+import { WorkExperienceQuality } from '../../definitions/Qualities/WorkExperience'
+import { EducationQuality } from '../../definitions/Qualities/EducationExperience'
+import { LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
+import { LangId } from '../../definitions/auxiliary/MultiLang'
+import data from '../../data/index'
+import { PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE } from '../../data/constants'
+import { TransitionId } from '../../definitions/Transition'
 
 const ESC_KEY_CODE = 27
 const F_KEY_CODE = 70
 
-type SIMPLE_PATHWAY_SEGMENTS = ["", PATHWAY_KW_SIMPLE, TransitionId]
-type COMPOSITE_PATHWAY_SEGMENTS = ["", PATHWAY_KW_COMPOSITE, string /* "id1+id2+id3..." */]
+type SIMPLE_PATHWAY_SEGMENTS = ['', PATHWAY_KW_SIMPLE, TransitionId]
+type COMPOSITE_PATHWAY_SEGMENTS = ['', PATHWAY_KW_COMPOSITE, string /* "id1+id2+id3..." */]
 
 type URLPATH_SEGMENTS = SIMPLE_PATHWAY_SEGMENTS | COMPOSITE_PATHWAY_SEGMENTS
 
@@ -44,7 +37,7 @@ export const INITIAL_STATE: VisaPlannerState = {
     user: getInitialPerson(DEFAULT_AGE),
     ui: {
         lang: data.app.lang,
-        query: "",
+        query: '',
         shouldDetailedFilterPanelExpand: false,
         filterState: {
             work_experience_duration: null,
@@ -59,29 +52,29 @@ export const INITIAL_STATE: VisaPlannerState = {
         filterPanelHeight: null,
         expandedFilterId: null,
         pathwayOnDisplay: null,
-    }
+    },
 }
 
 function calcUserLanguageTests(
-    language: "english" | "french",
-    newLevel: LanguageFilterId | "reset",
+    language: 'english' | 'french',
+    newLevel: LanguageFilterId | 'reset',
     currentLanguageTests: LanguageTestResult[] | undefined,
 ): LanguageTestResult[] | undefined {
     let langId: LangId
-    if (language === "english") {
-        langId = "en"
+    if (language === 'english') {
+        langId = 'en'
     }
-    else if (language === "french") {
-        langId = "fr"
+    else if (language === 'french') {
+        langId = 'fr'
     }
     else {
-        console.warn("Unknown prereqId as language: ", language)
+        console.warn('Unknown prereqId as language: ', language)
         return undefined
     }
 
     if (currentLanguageTests) {
         let res = currentLanguageTests.filter(test => test.language !== langId)
-        if (newLevel === "reset") {
+        if (newLevel === 'reset') {
             return res
         }
         else {
@@ -90,13 +83,13 @@ function calcUserLanguageTests(
                 return res.concat(assumptions[newLevel])
             }
             else {
-                console.warn(langId, "doesn't have languageAssumptions")
+                console.warn(langId, 'doesn\'t have languageAssumptions')
                 return res
             }
         }
     }
     else {
-        if (newLevel === "reset") {
+        if (newLevel === 'reset') {
             return undefined
         }
         else {
@@ -105,7 +98,7 @@ function calcUserLanguageTests(
                 return assumptions[newLevel]
             }
             else {
-                console.warn(langId, "doesn't have languageAssumptions")
+                console.warn(langId, 'doesn\'t have languageAssumptions')
                 return undefined
             }
         }
@@ -117,7 +110,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
     const newState = clone(state)
     switch (action.type) {
 
-        case "KEY_DOWN": {
+        case 'KEY_DOWN': {
             if (action.payload.keyCode === ESC_KEY_CODE) {
                 newState.ui.pathwayOnDisplay = null
                 newState.ui.shouldDetailedFilterPanelExpand = false
@@ -130,147 +123,156 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return state
         }
 
-        case "FILTER_OPTION_CLICK": {
+        case 'FILTER_OPTION_CLICK': {
             // Person data
             switch (action.payload.filterId) {
-                case "english": {
-                    let newLevel: LanguageFilterId | "reset" = action.payload.value
+                case 'english': {
+                    let newLevel: LanguageFilterId | 'reset' = action.payload.value
                     if (newLevel === newState.ui.filterState[action.payload.filterId]) {
-                        newLevel = "reset"
+                        newLevel = 'reset'
                     }
                     newState.user.languageTests = calcUserLanguageTests(
-                        "english",
+                        'english',
                         newLevel,
-                        state.user.languageTests
+                        state.user.languageTests,
                     )
                     break
                 }
-                case "french": {
-                    let newLevel: LanguageFilterId | "reset" = action.payload.value
+                case 'french': {
+                    let newLevel: LanguageFilterId | 'reset' = action.payload.value
                     if (newLevel === newState.ui.filterState[action.payload.filterId]) {
-                        newLevel = "reset"
+                        newLevel = 'reset'
                     }
                     newState.user.languageTests = calcUserLanguageTests(
-                        "french",
+                        'french',
                         newLevel,
-                        state.user.languageTests
+                        state.user.languageTests,
                     )
                     break
                 }
-                case "age": {
+                case 'age': {
                     const date = new Date()
                     const age = Number(action.payload.value)
                     newState.user.birth.date = {
-                        year: date.getFullYear() - age
+                        year: date.getFullYear() - age,
                     }
                     break
                 }
-                case "education_level": {
+                case 'education_level': {
                     const education = newState.user.education
                     if (education && education[0]) {
                         education[0].stage = action.payload.value
                     }
                     else {
-                        newState.user.education = [{
-                            qualityId: "education",
-                            stage: action.payload.value
-                        } as EducationQuality]
+                        newState.user.education = [
+                            {
+                                qualityId: 'education',
+                                stage: action.payload.value,
+                            } as EducationQuality,
+                        ]
                     }
                     break
                 }
-                case "education_region": {
+                case 'education_region': {
                     const education = newState.user.education
                     if (education && education[0]) {
                         education[0].regionId = action.payload.value
                     }
                     else {
-                        newState.user.education = [{
-                            qualityId: "education",
-                            regionId: action.payload.value
-                        } as EducationQuality]
+                        newState.user.education = [
+                            {
+                                qualityId: 'education',
+                                regionId: action.payload.value,
+                            } as EducationQuality,
+                        ]
                     }
                     break
                 }
-                case "work_experience_duration": {
+                case 'work_experience_duration': {
                     const works = newState.user.workExperiences
                     if (works && works[0]) {
-                        works[0].duration = duration(action.payload.value, "year")
+                        works[0].duration = duration(action.payload.value, 'year')
                     }
                     else {
-                        newState.user.workExperiences = [{
-                            qualityId: "work_experience",
-                            duration: duration(action.payload.value, "year"),
-                        } as WorkExperienceQuality]
+                        newState.user.workExperiences = [
+                            {
+                                qualityId: 'work_experience',
+                                duration: duration(action.payload.value, 'year'),
+                            } as WorkExperienceQuality,
+                        ]
                     }
                     break
                 }
-                case "work_experience_region": {
+                case 'work_experience_region': {
                     const works = newState.user.workExperiences
                     if (works && works[0]) {
                         works[0].regionId = action.payload.value
                     }
                     else {
-                        newState.user.workExperiences = [{
-                            qualityId: "work_experience",
-                            region: action.payload.value,
-                        } as WorkExperienceQuality]
+                        newState.user.workExperiences = [
+                            {
+                                qualityId: 'work_experience',
+                                region: action.payload.value,
+                            } as WorkExperienceQuality,
+                        ]
                     }
                     break
                 }
-                case "app_lang": {
+                case 'app_lang': {
                     newState.ui.lang = action.payload.value || data.app.lang
                     break
                 }
                 default: {
-                    console.warn("Unexpected filterId:", (action.payload as any).filterId)
+                    console.warn('Unexpected filterId:', (action.payload as any).filterId)
                 }
             }
 
             // UI
             if (state.ui.filterState[action.payload.filterId] === action.payload.value) {
                 newState.ui.filterState[action.payload.filterId] = null
-            } else {
+            }
+            else {
                 newState.ui.filterState[action.payload.filterId] = action.payload.value
             }
             return newState
         }
 
-        case "PATH_BOX_CLICK": {
+        case 'PATH_BOX_CLICK': {
             newState.ui.pathwayOnDisplay = {
-                transitionIds: action.payload.pathway.transitions.map(transition => transition.id)
+                transitionIds: action.payload.pathway.transitions.map(transition => transition.id),
             }
             return newState
         }
 
-        case "PATH_VIEW_CLOSE_BUTTON_CLICK": {
+        case 'PATH_VIEW_CLOSE_BUTTON_CLICK': {
             newState.ui.pathwayOnDisplay = null
             return newState
         }
 
-        case "FILTER_BAR_CLICK": {
+        case 'FILTER_BAR_CLICK': {
             newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
             return newState
         }
 
-        case "SHADE_CLICK": {
+        case 'SHADE_CLICK': {
             newState.ui.shouldDetailedFilterPanelExpand = false
             return newState
         }
 
-        case "FILTER_SELECT": {
+        case 'FILTER_SELECT': {
             return state
         }
 
-        case "FILTER_PANEL_RENDER": {
+        case 'FILTER_PANEL_RENDER': {
             newState.ui.filterPanelHeight = action.payload.height
             return newState
         }
 
-        case "URLPATH_CHANGE": {
-            const segs = action.payload.path.split("/") as URLPATH_SEGMENTS
+        case 'URLPATH_CHANGE': {
+            const segs = action.payload.path.split('/') as URLPATH_SEGMENTS
             if (segs[1] === PATHWAY_KW_SIMPLE) {
                 newState.ui.pathwayOnDisplay = {
-                    transitionIds: segs[2].split("+")
+                    transitionIds: segs[2].split('+'),
                 }
             }
             else {
@@ -279,7 +281,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
-        case "SET_LANG": {
+        case 'SET_LANG': {
             newState.ui.lang = action.payload.langId
             return newState
         }

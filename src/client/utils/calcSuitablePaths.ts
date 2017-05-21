@@ -1,8 +1,8 @@
-import {Person} from "../../definitions/Person"
-import {Pathway} from "./definitions"
-import Transition from "../../definitions/Transition"
-import {RightPrereq} from "../../definitions/Prerequisites/RightPrereq"
-import {satisfyPrerequisiteCombination} from "./prerequisiteOperations"
+import { Person } from '../../definitions/Person'
+import { Pathway } from './definitions'
+import Transition from '../../definitions/Transition'
+import { RightPrereq } from '../../definitions/Prerequisites/RightPrereq'
+import { satisfyPrerequisiteCombination } from './prerequisiteOperations'
 
 // Applicability of a program when user didn't specify a condition;
 // Set to true for maximal coverage
@@ -33,14 +33,14 @@ export function calcSuitablePaths(user: Person, allTransitions: Transition[]): P
     // TODO: Compute from 'person'
     const desiredRights: RightPrereq[] = [
         {
-            prereqId: "right",
-            regionId: "canada",
-            rightId: "permanent"
+            prereqId: 'right',
+            regionId: 'canada',
+            rightId: 'permanent',
         },
         {
-            prereqId: "right",
-            regionId: "australia",
-            rightId: "permanent"
+            prereqId: 'right',
+            regionId: 'australia',
+            rightId: 'permanent',
         },
     ]
 

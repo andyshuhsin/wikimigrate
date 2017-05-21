@@ -1,22 +1,22 @@
 import * as React from 'react'
-import {EducationPrereq} from "../../../../../definitions/Prerequisites/EducationPrereq"
-import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
-import data, {certifications} from "../../../../../data/index"
-import {text} from "../../../../utils/text"
-import {educationStageProfiles} from "../../../../../definitions/Qualities/EducationExperience"
-import {arithmeticComparisonOperatorProfiles} from "../../../../../definitions/auxiliary/Operator"
+import { EducationPrereq } from '../../../../../definitions/Prerequisites/EducationPrereq'
+import { LangId } from '../../../../../definitions/auxiliary/MultiLang'
+import data, { certifications } from '../../../../../data/index'
+import { text } from '../../../../utils/text'
+import { educationStageProfiles } from '../../../../../definitions/Qualities/EducationExperience'
+import { arithmeticComparisonOperatorProfiles } from '../../../../../definitions/auxiliary/Operator'
 
-const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
+const EducationBox = (props: { prereq: EducationPrereq, lang: LangId }) => {
     const prereq = props.prereq
     const stage = prereq.stage
     const region = data.getRegionById(prereq.region)
-    if (props.lang === "zh_hans") {
+    if (props.lang === 'zh_hans') {
         let regionName: string
         if (region) {
             regionName = text(region.name)
         }
         else {
-            regionName = "任何地区"
+            regionName = '任何地区'
         }
 
         let educationStage: string
@@ -26,8 +26,8 @@ const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
             educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.post)
         }
         else {
-            educationStage = "任何水平的教育"
-            educationStageModifier = ""
+            educationStage = '任何水平的教育'
+            educationStageModifier = ''
         }
 
         let certificationModifier: JSX.Element | null
@@ -59,7 +59,7 @@ const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
             regionName = text(region.name)
         }
         else {
-            regionName = "any region"
+            regionName = 'any region'
         }
 
         let educationStage: string
@@ -69,8 +69,8 @@ const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
             educationStageModifier = text(arithmeticComparisonOperatorProfiles[stage[0]].description.post)
         }
         else {
-            educationStage = "any level"
-            educationStageModifier = ""
+            educationStage = 'any level'
+            educationStageModifier = ''
         }
 
         let certificationModifier: JSX.Element | null
@@ -78,11 +78,11 @@ const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
             const cert = certifications[prereq.certification]
             certificationModifier = <span>
                 , and has
-                {" "}
+                {' '}
                 <a href={cert.reference && cert.reference.url} target="_blank">
                     {text(cert.title)}
                 </a>
-                {" "}
+                {' '}
                 certification
             </span>
         }
@@ -92,7 +92,7 @@ const EducationBox = (props: {prereq: EducationPrereq, lang: LangId}) => {
 
         return (
             <span>
-                You were educated in {regionName} on {educationStage}{" "}{educationStageModifier} level
+                You were educated in {regionName} on {educationStage}{' '}{educationStageModifier} level
                 {certificationModifier}
             </span>
         )
