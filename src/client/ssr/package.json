@@ -1,11 +1,11 @@
 {
-  "name": "wkm-ssr",
-  "dependencies": {
-    "fs-extra": "^3.0.1",
-    "koa": "^2.2.0"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "^3.0.1",
-    "@types/koa": "^2.0.39"
-  }
+    "name": "wkm-ssr",
+    "dependencies": {
+        "fs-extra": "^3.0.1",
+        "koa": "^2.2.0"
+    },
+    "devDependencies": {
+        "@types/fs-extra": "^3.0.1",
+        "@types/koa": "^2.0.39"
+    }
 }

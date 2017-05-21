@@ -1,7 +1,7 @@
-import {MultiLangStringSet} from "./MultiLang"
-export type ArithmeticComparisonOperator = "<" | "<=" | ">" | ">=" | "="
+import { MultiLangStringSet } from './MultiLang'
+export type ArithmeticComparisonOperator = '<' | '<=' | '>' | '>=' | '='
 
-type Scenario = "post"
+type Scenario = 'post'
 
 interface ArithmeticComparisonOperatorProfile {
     description: {
@@ -14,44 +14,44 @@ type ArithmeticComparisonOperatorProfiles = {
 }
 
 export const arithmeticComparisonOperatorProfiles: ArithmeticComparisonOperatorProfiles = {
-    "<": {
+    '<': {
         description: {
             post: {
-                en: "below",
-                zh_hans: "以下",
-            }
+                en: 'below',
+                zh_hans: '以下',
+            },
         },
     },
-    "<=": {
+    '<=': {
         description: {
             post: {
-                en: "or below",
-                zh_hans: "或以下",
-            }
+                en: 'or below',
+                zh_hans: '或以下',
+            },
         },
     },
-    ">": {
+    '>': {
         description: {
             post: {
-                en: "above",
-                zh_hans: "以上",
-            }
+                en: 'above',
+                zh_hans: '以上',
+            },
         },
     },
-    ">=": {
+    '>=': {
         description: {
             post: {
-                en: "or above",
-                zh_hans: "或以上",
-            }
+                en: 'or above',
+                zh_hans: '或以上',
+            },
         },
     },
-    "=": {
+    '=': {
         description: {
             post: {
-                en: "",
-                zh_hans: "",
-            }
+                en: '',
+                zh_hans: '',
+            },
         },
     },
 }

@@ -1,68 +1,68 @@
-import {LanguageTestProfile} from "../../definitions/auxiliary/LanguageTest"
+import { LanguageTestProfile } from '../../definitions/auxiliary/LanguageTest'
 
 const languageTestProfiles: LanguageTestProfile[] = [
     {
-        id: "clb",
+        id: 'clb',
         title: {
-            en: "Canadian Language Benchmark",
-            fr: "Niveaux de compétence linguistique canadiens",
-            zh_hans: "加拿大语言标准",
+            en: 'Canadian Language Benchmark',
+            fr: 'Niveaux de compétence linguistique canadiens',
+            zh_hans: '加拿大语言标准',
         },
-        languages: ["en", "fr"],
+        languages: ['en', 'fr'],
         reference: {
-            url: "http://www.language.ca/index.cfm?Repertoire_No=2137991327",
+            url: 'http://www.language.ca/index.cfm?Repertoire_No=2137991327',
         },
     },
     {
-        id: "ielts",
+        id: 'ielts',
         title: {
-            en: "International English Language Testing System"
+            en: 'International English Language Testing System',
         },
-        languages: ["en"],
+        languages: ['en'],
         reference: {
-            url: "https://www.ielts.org/",
-        }
-    },
-    {
-        id: "toefl",
-        title: {
-            en: "Test of English as a Foreign Language"
-        },
-        languages: ["en"],
-        reference: {
-            url: "https://www.ets.org/toefl",
+            url: 'https://www.ielts.org/',
         },
     },
     {
-        id: "pte-academic",
+        id: 'toefl',
         title: {
-            en: "Pearson Test of English"
+            en: 'Test of English as a Foreign Language',
         },
-        languages: ["en"],
+        languages: ['en'],
         reference: {
-            url: "http://pearsonpte.com/",
+            url: 'https://www.ets.org/toefl',
         },
     },
     {
-        id: "cae",
+        id: 'pte-academic',
         title: {
-            en: "Cambridge English: Advanced"
+            en: 'Pearson Test of English',
         },
-        languages: ["en"],
+        languages: ['en'],
         reference: {
-            url: "http://www.cambridgeenglish.org/exams/advanced/",
+            url: 'http://pearsonpte.com/',
         },
     },
     {
-        id: "oet",
+        id: 'cae',
         title: {
-            en: " Occupational English Test"
+            en: 'Cambridge English: Advanced',
         },
-        languages: ["en"],
+        languages: ['en'],
         reference: {
-            url: "https://www.occupationalenglishtest.org/",
-        }
-    }
+            url: 'http://www.cambridgeenglish.org/exams/advanced/',
+        },
+    },
+    {
+        id: 'oet',
+        title: {
+            en: ' Occupational English Test',
+        },
+        languages: ['en'],
+        reference: {
+            url: 'https://www.occupationalenglishtest.org/',
+        },
+    },
 ]
 
 export default languageTestProfiles

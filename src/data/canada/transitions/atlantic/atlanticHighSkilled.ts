@@ -1,26 +1,20 @@
-import Transition from "../../../../definitions/Transition";
-import {allOf, oneOf} from "../../../../definitions/auxiliary/Combination";
-import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq";
-import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq";
+import Transition from '../../../../definitions/Transition'
+import { allOf, oneOf } from '../../../../definitions/auxiliary/Combination'
+import { WorkExperiencePrereq } from '../../../../definitions/Prerequisites/WorkExperiencePrereq'
+import { OfferPrereq } from '../../../../definitions/Prerequisites/OfferPrereq'
 
-import {
-    atlanticJobOfferCommon,
-    atlanticWorkersJob
-} from './atlanticCommon'
+import { atlanticJobOfferCommon, atlanticWorkersJob } from './atlanticCommon'
 
-import {
-    alien,
-    pr
-} from '../../status'
+import { alien, pr } from '../../status'
 
 import jobClass from '../../jobClass'
 
 const atlanticHighSkilled: Transition = {
-    id: "atlantic_high_skilled",
-    regionId: "canada",
-    acquireBy: "application",
+    id: 'atlantic_high_skilled',
+    regionId: 'canada',
+    acquireBy: 'application',
     name: {
-        en: "Atlantic High-Skilled Program"
+        en: 'Atlantic High-Skilled Program',
     },
     from: alien,
     to: pr,
@@ -28,28 +22,28 @@ const atlanticHighSkilled: Transition = {
         atlanticJobOfferCommon,
         atlanticWorkersJob,
         {
-            prereqId: "work_experience",
+            prereqId: 'work_experience',
             jobNature: oneOf([
                 jobClass.jobGroups.noc0,
                 jobClass.jobGroups.nocA,
                 jobClass.jobGroups.nocB,
-            ])
+            ]),
         } as WorkExperiencePrereq,
         {
-            prereqId: "offer",
+            prereqId: 'offer',
             employer: {
-                regionId: "canada"
-            }
+                regionId: 'canada',
+            },
             // FIXME: Complete missing words
         } as OfferPrereq,
     ]),
     procedureList: [
         {
             name: {
-                en: "Application"
-            }
-        }
-    ]
+                en: 'Application',
+            },
+        },
+    ],
 }
 
 export default atlanticHighSkilled

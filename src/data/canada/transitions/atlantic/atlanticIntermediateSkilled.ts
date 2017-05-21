@@ -1,53 +1,47 @@
-import Transition from "../../../../definitions/Transition"
-import {allOf, oneOf} from "../../../../definitions/auxiliary/Combination"
-import {WorkExperiencePrereq} from "../../../../definitions/Prerequisites/WorkExperiencePrereq"
-import {OfferPrereq} from "../../../../definitions/Prerequisites/OfferPrereq"
+import Transition from '../../../../definitions/Transition'
+import { allOf, oneOf } from '../../../../definitions/auxiliary/Combination'
+import { WorkExperiencePrereq } from '../../../../definitions/Prerequisites/WorkExperiencePrereq'
+import { OfferPrereq } from '../../../../definitions/Prerequisites/OfferPrereq'
 
-import {
-    atlanticJobOfferCommon,
-    atlanticWorkersJob
-} from './atlanticCommon'
+import { atlanticJobOfferCommon, atlanticWorkersJob } from './atlanticCommon'
 
-import {
-    alien,
-    pr
-} from '../../status'
+import { alien, pr } from '../../status'
 
 import jobClass from '../../jobClass'
 
 const atlanticIntermediateSkilled: Transition = {
-    id: "atlantic_intermediate_skilled",
-    regionId: "canada",
-    acquireBy: "application",
+    id: 'atlantic_intermediate_skilled',
+    regionId: 'canada',
+    acquireBy: 'application',
     from: alien,
     to: pr,
     name: {
-        en: "Atlantic Intermediate-Skilled Program"
+        en: 'Atlantic Intermediate-Skilled Program',
     },
     prerequisiteList: allOf([
         atlanticJobOfferCommon,
         atlanticWorkersJob,
         {
-            prereqId: "work_experience",
+            prereqId: 'work_experience',
             jobNature: oneOf([
                 jobClass.jobGroups.nocC,
-            ])
+            ]),
         } as WorkExperiencePrereq,
         {
-            prereqId: "offer",
+            prereqId: 'offer',
             employer: {
-                regionId: "canada"
-            }
+                regionId: 'canada',
+            },
             // FIXME: Complete missing words
         } as OfferPrereq,
     ]),
     procedureList: [
         {
-            "name": {
-                "en": "Application"
-            }
-        }
-    ]
+            'name': {
+                'en': 'Application',
+            },
+        },
+    ],
 }
 
 export default atlanticIntermediateSkilled

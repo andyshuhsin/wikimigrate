@@ -1,15 +1,18 @@
-import BasePrereq from "./BasePrereq";
+import BasePrereq from './BasePrereq'
 import {
-    LanguageTestId, LanguageTestItem, languageTestItemValues, LanguageTestScoreSet,
-} from "../auxiliary/LanguageTest"
-import {ArithmeticComparisonOperator, Interval} from "../auxiliary/Operator"
+    LanguageTestId,
+    LanguageTestItem,
+    languageTestItemValues,
+    LanguageTestScoreSet
+} from '../auxiliary/LanguageTest'
+import { Interval } from '../auxiliary/Operator'
 
 
 export const zeroLanguagePrereqScores: LanguagePrereqScoreSet = {
-    listening: [">=", 0],
-    speaking: [">=", 0],
-    reading: [">=", 0],
-    writing: [">=", 0],
+    listening: ['>=', 0],
+    speaking: ['>=', 0],
+    reading: ['>=', 0],
+    writing: ['>=', 0],
 }
 
 export type LanguagePrereqScoreSet = {
@@ -22,7 +25,7 @@ export type LanguagePrereqResult = {
 }
 
 export interface LanguagePrereq extends BasePrereq {
-    prereqId: "language_test"
+    prereqId: 'language_test'
     result: LanguagePrereqResult
     // TODO: Add time limits
 }
@@ -30,7 +33,7 @@ export interface LanguagePrereq extends BasePrereq {
 function transformMinScores(scores: LanguageTestScoreSet): LanguagePrereqScoreSet {
     let result: any = {}
     for (const key of languageTestItemValues) {
-        result[key] = [">=", scores[key]]
+        result[key] = ['>=', scores[key]]
     }
     return result
 }
@@ -40,11 +43,11 @@ export function languagePrereqMinScore(
     scores: LanguageTestScoreSet,
 ): LanguagePrereq {
     return {
-        prereqId: "language_test",
+        prereqId: 'language_test',
         result: {
             testId,
             scores: transformMinScores(scores),
-        }
+        },
     }
 }
 

@@ -1,16 +1,16 @@
 module.exports = {
-    apps : [
+    apps: [
         {
-            name: 'chat',
-            cwd: './server',
+            name:   'chat',
+            cwd:    './server',
             script: 'server/server/chat.js',
-            watch: ['server'],
+            watch:  ['server'],
         },
         {
-            name: 'render.bundle',
-            cwd: './ssr',
+            name:   'render.bundle',
+            cwd:    './ssr',
             script: 'ssr/render.bundle.js',
-            watch: ['ssr'],
+            watch:  ['ssr'],
         },
     ],
 }

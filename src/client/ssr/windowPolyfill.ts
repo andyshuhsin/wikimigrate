@@ -1,14 +1,14 @@
 const documentPoly: Partial<Document> = {
-    title: ""
+    title: '',
 }
 
 const navigatorPoly: Partial<Navigator> = {
-    userAgent: "",
-    language: ""
+    userAgent: '',
+    language: '',
 }
 
 const locationPoly: any = {
-    pathname: "[ssr-fake-path]"
+    pathname: '[ssr-fake-path]',
 }
 
 const windowPoly: any = {
@@ -19,7 +19,7 @@ const windowPoly: any = {
     innerWidth: 500,
 
     addEventListener(key: string, callback: Function) {
-    }
+    },
 }
 
 Object.assign(global, {

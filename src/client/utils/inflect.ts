@@ -1,6 +1,6 @@
-import {LangId} from "../../definitions/auxiliary/MultiLang"
+import { LangId } from '../../definitions/auxiliary/MultiLang'
 
-const DEFAULT_LANG: LangId = "en"
+const DEFAULT_LANG: LangId = 'en'
 
 export type InflectionOption = {
     language: LangId,
@@ -10,7 +10,7 @@ export type InflectionOption = {
 
 function inflect(
     term: string,
-    options: Partial<InflectionOption>
+    options: Partial<InflectionOption>,
 ) {
     let lang: LangId
     if (options.language) {
@@ -24,7 +24,7 @@ function inflect(
     }
 
     switch (lang) {
-        case "en": {
+        case 'en': {
             let result = term
             if (options.number && options.number >= 2) {
                 result += 's'

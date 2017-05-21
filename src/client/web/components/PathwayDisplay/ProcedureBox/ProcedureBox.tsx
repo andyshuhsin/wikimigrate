@@ -1,6 +1,6 @@
 import * as React from 'react'
-import Procedure from "../../../../../definitions/auxiliary/Procedure"
-import {text} from "../../../../utils/text"
+import Procedure from '../../../../../definitions/auxiliary/Procedure'
+import { text } from '../../../../utils/text'
 
 interface Props {
     procedureList: Procedure[]
@@ -15,21 +15,21 @@ class ProcedureBox extends React.PureComponent<Props, {}> {
                         <div
                             key={text(procedure.name)}
                             style={{
-                                marginBottom: "0.5em",
+                                marginBottom: '0.5em',
                             }}
                         >
                             {index + 1}
                             {'. '}
                             {text(procedure.name)}
                             {procedure.description &&
-                                <div style={{
-                                    marginLeft: "2em"
-                                }}>
-                                    {text(procedure.description)}
-                                </div>
+                             <div style={{
+                                 marginLeft: '2em',
+                             }}>
+                                 {text(procedure.description)}
+                             </div>
                             }
                         </div>
-                    )
+                    ),
                 )}
             </div>
         )

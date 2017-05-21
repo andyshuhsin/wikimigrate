@@ -1,38 +1,38 @@
-import {MultiLangStringSet} from "../../definitions/auxiliary/MultiLang"
-import {CurrencyId} from "../../definitions/auxiliary/Money"
+import { MultiLangStringSet } from '../../definitions/auxiliary/MultiLang'
+import { CurrencyId } from '../../definitions/auxiliary/Money'
 
 type CurrencyDB = {
     [key in CurrencyId]: {
-        symbol: string
-        code: string
-        name: MultiLangStringSet
-    }
+    symbol: string
+    code: string
+    name: MultiLangStringSet
 }
+    }
 
 const currencies: CurrencyDB = {
     cad: {
-        symbol: "$",
-        code: "CAD",
+        symbol: '$',
+        code: 'CAD',
         name: {
-            en: "Canadian dollar",
-            fr: "Dollar canadien"
-        }
+            en: 'Canadian dollar',
+            fr: 'Dollar canadien',
+        },
     },
     usd: {
-        symbol: "$",
-        code: "USD",
+        symbol: '$',
+        code: 'USD',
         name: {
-            en: "United States dollar"
-        }
+            en: 'United States dollar',
+        },
     },
     aud: {
-        symbol: "$",
-        code: "AUD",
+        symbol: '$',
+        code: 'AUD',
         name: {
-            en: "Australian dollar"
-        }
+            en: 'Australian dollar',
+        },
 
-    }
+    },
 }
 
 export default currencies

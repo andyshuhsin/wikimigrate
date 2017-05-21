@@ -1,8 +1,8 @@
-import * as React from "react"
-import URLDatum from "../../../../definitions/auxiliary/URLDatum"
-import {text} from "../../../utils/text"
+import * as React from 'react'
+import URLDatum from '../../../../definitions/auxiliary/URLDatum'
+import { text } from '../../../utils/text'
 
-const ReferenceBox = (props: {referenceList: URLDatum[]}) => (
+const ReferenceBox = (props: { referenceList: URLDatum[] }) => (
     <div>
         {
             props.referenceList.map(reference => (

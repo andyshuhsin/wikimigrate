@@ -1,7 +1,7 @@
 import BasePrereq from './BasePrereq'
 
 export interface RightPrereq extends BasePrereq {
-    prereqId: "right"
+    prereqId: 'right'
     regionId: string
     rightId: string
 }

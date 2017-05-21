@@ -12,7 +12,7 @@ const Shade = (props: ShadeProps) => (
 
     <div
         style={{
-            position: "absolute",
+            position: 'absolute',
             left: 0,
             right: 0,
             top: 0,
@@ -21,10 +21,10 @@ const Shade = (props: ShadeProps) => (
 
             opacity: props.shouldShow ? 1 : 0,
             transition: `opacity ${props.duration === undefined
-                                   ? DEFAULT_DURATION
-                                   : props.duration}s`,
+                ? DEFAULT_DURATION
+                : props.duration}s`,
 
-            background: "rgba(0, 0, 0, 0.5)",
+            background: 'rgba(0, 0, 0, 0.5)',
         }}
         onClick={props.onClick}
     >

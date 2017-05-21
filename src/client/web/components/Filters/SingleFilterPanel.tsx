@@ -1,9 +1,9 @@
-import * as React from "react"
-import text from "../../../utils/text"
-import {Filter, FilterId, FilterOption, FilterState} from "../../../data"
-import {FilterOptionClickFn} from "./FilterDetailedOptionPanel"
-import design from "../../design"
-import sys from "../../sys"
+import * as React from 'react'
+import text from '../../../utils/text'
+import { Filter, FilterId, FilterOption, FilterState } from '../../../data'
+import { FilterOptionClickFn } from './FilterDetailedOptionPanel'
+import design from '../../design'
+import sys from '../../sys'
 
 interface SingleFilterPanelProps {
     filter: Filter,
@@ -11,34 +11,34 @@ interface SingleFilterPanelProps {
     filterOptionClick: FilterOptionClickFn
 }
 
-const styles= {
+const styles = {
     titleStyle: {
-        fontSize: "1em",
-        margin: "0",
+        fontSize: '1em',
+        margin: '0',
         background: design.colors.greyLight,
-        padding: "0.2em 1em"
+        padding: '0.2em 1em',
     } as React.CSSProperties,
 
     filterBodyContainerStyle: {
-        whiteSpace: "nowrap",
-        overflowX: "scroll",
+        whiteSpace: 'nowrap',
+        overflowX: 'scroll',
         padding: sys.viewport.width < design.dimensions.narrowWidth
-                 ? "0.6em 1.0em"
-                 : "1em 2em",
-        userSelect: "none",
+            ? '0.6em 1.0em'
+            : '1em 2em',
+        userSelect: 'none',
     } as React.CSSProperties,
 
     optionNormalStyle: {
-        display: "inline-block",
-        marginRight: "1em",
-        fontSize: "1em",
-        fontWeight: "bolder",
-        padding: "0.2em 0.4em",
-        borderWidth: "3px",
-        borderRadius: "3px",
-        borderStyle: "solid",
+        display: 'inline-block',
+        marginRight: '1em',
+        fontSize: '1em',
+        fontWeight: 'bolder',
+        padding: '0.2em 0.4em',
+        borderWidth: '3px',
+        borderRadius: '3px',
+        borderStyle: 'solid',
         borderColor: design.colors.greyLight,
-        cursor: "pointer",
+        cursor: 'pointer',
     } as React.CSSProperties,
 
     optionHighlightStyle: {
@@ -47,29 +47,29 @@ const styles= {
     } as React.CSSProperties,
 
     valueAdjustButtonStyle: {
-        display: "inline-block",
-        width: "1.2em",
-        height: "1.2em",
-        borderRadius: "3px",
+        display: 'inline-block',
+        width: '1.2em',
+        height: '1.2em',
+        borderRadius: '3px',
 
         backgroundColor: design.colors.greyLight,
-        lineHeight: "1.2em",
-        fontSize: "1.5em",
-        textAlign: "center",
-        cursor: "pointer",
+        lineHeight: '1.2em',
+        fontSize: '1.5em',
+        textAlign: 'center',
+        cursor: 'pointer',
     } as React.CSSProperties,
 
     valueStyle: {
-        display: "inline-block",
-        margin: "0 0.6em",
-        minWidth: "1.2em",
+        display: 'inline-block',
+        margin: '0 0.6em',
+        minWidth: '1.2em',
 
-        fontSize: "1.5em",
+        fontSize: '1.5em',
         color: design.colors.brand,
-        fontWeight: "bolder",
-        textAlign: "center",
-        verticalAlign: "bottom",
-    } as React.CSSProperties
+        fontWeight: 'bolder',
+        textAlign: 'center',
+        verticalAlign: 'bottom',
+    } as React.CSSProperties,
 }
 
 interface MultipleChoiceOptionProps {
@@ -80,12 +80,12 @@ interface MultipleChoiceOptionProps {
 
 const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
     return <span
-                style={ props.shouldHighlight
-                        ? Object.assign({}, styles.optionNormalStyle, styles.optionHighlightStyle)
-                        : styles.optionNormalStyle
-                }
-                onClick={props.onClick}
-            >
+        style={ props.shouldHighlight
+            ? Object.assign({}, styles.optionNormalStyle, styles.optionHighlightStyle)
+            : styles.optionNormalStyle
+        }
+        onClick={props.onClick}
+    >
                 {text(props.option.label)}
             </span>
 }
@@ -132,7 +132,7 @@ const FilterBody = (props: FilterContentProps) => {
     let content
 
     switch (filter.filterType) {
-        case "multiple-choice": {
+        case 'multiple-choice': {
             content = (
                 filter.options.map((option: FilterOption) =>
                     <MultipleChoiceOption
@@ -140,12 +140,12 @@ const FilterBody = (props: FilterContentProps) => {
                         shouldHighlight={filterState[filter.id] === option.id}
                         onClick={() => filterOptionClick(filter.id, option.id)}
                         key={option.id}
-                    />
+                    />,
                 )
             )
             break
         }
-        case "real": {
+        case 'real': {
             let value: number
             if (filterState[filter.id]) {
                 value = Number(filterState[filter.id])
@@ -155,7 +155,7 @@ const FilterBody = (props: FilterContentProps) => {
             }
             content = (
                 <ValueChooser
-                    value= {value}
+                    value={value}
                     onLeftClick={() => filterOptionClick(filter.id, value - 1)}
                     onRightClick={() => filterOptionClick(filter.id, value + 1)}
                 />
@@ -163,7 +163,7 @@ const FilterBody = (props: FilterContentProps) => {
             break
         }
         default: {
-            console.warn("Unknown filter type:", (filter as Filter).filterType)
+            console.warn('Unknown filter type:', (filter as Filter).filterType)
             content = <noscript />
         }
     }
@@ -176,7 +176,7 @@ const FilterBody = (props: FilterContentProps) => {
 
 }
 
-const FilterTitle = (props: {title: string}) => (
+const FilterTitle = (props: { title: string }) => (
     <h1 style={styles.titleStyle}>
         {props.title}
     </h1>
@@ -192,7 +192,7 @@ class SingleFilterPanel extends React.Component<SingleFilterPanelProps, {}> {
 
         return (
             <div>
-                <FilterTitle title={text(filter.title)} />
+                <FilterTitle title={text(filter.title)}/>
                 <FilterBody
                     filter={filter}
                     filterState={filterState}

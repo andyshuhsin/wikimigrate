@@ -2,10 +2,8 @@ import * as React from 'react'
 import PathwayBox from './PathwayBox'
 import Title from './Title'
 
-import {
-    Pathway
-} from '../../utils/definitions'
-import {text} from "../../utils/text"
+import { Pathway } from '../../utils/definitions'
+import { text } from '../../utils/text'
 
 interface PathShowcaseProps {
     paths: Pathway[]
@@ -13,10 +11,10 @@ interface PathShowcaseProps {
 }
 
 const pathShowcaseStyle = {
-    justifyContent: "space-around",
-    overflow: "scroll",
-    padding: "1em",
-    paddingBottom: "3em",
+    justifyContent: 'space-around',
+    overflow: 'scroll',
+    padding: '1em',
+    paddingBottom: '3em',
 } as React.CSSProperties
 
 
@@ -25,10 +23,10 @@ const PathShowcase = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
         <Title text={
             text({
-                en: "Mobility options for you",
-                zh_hans: "签证选项",
+                en: 'Mobility options for you',
+                zh_hans: '签证选项',
             })
-        } />
+        }/>
         {
             props.paths.map((path: Pathway) =>
                 <PathwayBox
@@ -37,7 +35,7 @@ const PathShowcase = (props: PathShowcaseProps) =>
                     onClick={
                         () => props.onClick(path)
                     }
-                />
+                />,
             )
         }
     </div>

@@ -1,9 +1,9 @@
 import BasePrereq from './BasePrereq'
 
-export type UnionType = "marriage" | "common-law-partnership"
+export type UnionType = 'marriage' | 'common-law-partnership'
 
 export interface UnionPrereq extends BasePrereq {
-    prereqId: "union"
+    prereqId: 'union'
     unionTypes: UnionType[]
     inUnion: boolean
 }

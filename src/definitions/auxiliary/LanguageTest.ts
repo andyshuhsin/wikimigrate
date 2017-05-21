@@ -1,7 +1,7 @@
-import {LangId, MultiLangStringSet} from "./MultiLang"
-import URLDatum from "./URLDatum"
+import { LangId, MultiLangStringSet } from './MultiLang'
+import URLDatum from './URLDatum'
 
-export type LanguageTestId = "clb" | "ielts" | "toefl" | "oet" | "pte-academic" | "cae"
+export type LanguageTestId = 'clb' | 'ielts' | 'toefl' | 'oet' | 'pte-academic' | 'cae'
 
 export type LanguageTestProfile = {
     id: LanguageTestId
@@ -11,9 +11,9 @@ export type LanguageTestProfile = {
 }
 
 /* TODO: Unify Single and Itemized scoring.
-   "overall" is just a shorthand for all scores.
-   It really messes up type system.
-*/
+ "overall" is just a shorthand for all scores.
+ It really messes up type system.
+ */
 
 export const zeroLanguageScores: LanguageTestScoreSet = {
     listening: 0,
@@ -22,9 +22,9 @@ export const zeroLanguageScores: LanguageTestScoreSet = {
     writing: 0,
 }
 
-export type LanguageTestItem = "listening" | "speaking" | "reading" | "writing"
+export type LanguageTestItem = 'listening' | 'speaking' | 'reading' | 'writing'
 export const languageTestItemValues: LanguageTestItem[] = [
-    "listening", "speaking", "reading", "writing"
+    'listening', 'speaking', 'reading', 'writing',
 ]
 
 export type LanguageTestScoreSet = {

@@ -1,91 +1,83 @@
-import Transition from "../../../definitions/Transition"
-import {allOf, oneOf} from "../../../definitions/auxiliary/Combination"
+import Transition from '../../../definitions/Transition'
+import { allOf, oneOf } from '../../../definitions/auxiliary/Combination'
 
-import {
-    alien,
-    pr
-} from '../status'
-import {prereqTitleDict} from "../../common/prereqTitleDict"
-import {FundPrereq} from "../../../definitions/Prerequisites/FundPrereq"
-import {money} from "../../../definitions/auxiliary/Money"
-import {
-    designatedVentureCapitalFunds,
-    designatedAngelInvestors,
-    designatedBusinessIncubators,
-} from "../fundSources"
+import { alien, pr } from '../status'
+import { FundPrereq } from '../../../definitions/Prerequisites/FundPrereq'
+import { money } from '../../../definitions/auxiliary/Money'
+import { designatedAngelInvestors, designatedBusinessIncubators, designatedVentureCapitalFunds } from '../fundSources'
 
 const startupVisa: Transition = {
-    id: "startup_visa",
-    regionId: "canada",
-    acquireBy: "application",
+    id: 'startup_visa',
+    regionId: 'canada',
+    acquireBy: 'application',
     name: {
-        en: "Startup Visa",
-        zh_hans: "创业签证",
-        zh_hant: "創業簽證",
+        en: 'Startup Visa',
+        zh_hans: '创业签证',
+        zh_hant: '創業簽證',
     },
     from: alien,
     to: pr,
     prerequisiteList: allOf([
         oneOf([
             {
-                prereqId: "fund",
-                type: "investee",
+                prereqId: 'fund',
+                type: 'investee',
                 schemes: [
                     {
-                        fund: money(200000, "cad"),
+                        fund: money(200000, 'cad'),
                         condition: {
-                            source: designatedVentureCapitalFunds
-                        }
+                            source: designatedVentureCapitalFunds,
+                        },
                     },
-                ]
+                ],
             } as FundPrereq,
             {
-                prereqId: "fund",
-                type: "investee",
+                prereqId: 'fund',
+                type: 'investee',
                 schemes: [
                     {
-                        fund: money(75000, "cad"),
+                        fund: money(75000, 'cad'),
                         condition: {
-                            source: designatedAngelInvestors
-                        }
+                            source: designatedAngelInvestors,
+                        },
                     },
-                ]
+                ],
             } as FundPrereq,
             {
-                prereqId: "fund",
-                type: "admission",
+                prereqId: 'fund',
+                type: 'admission',
                 schemes: [
                     {
                         fund: null,
                         condition: {
-                            source: designatedBusinessIncubators
-                        }
-                    }
-                ]
+                            source: designatedBusinessIncubators,
+                        },
+                    },
+                ],
             } as FundPrereq,
         ], {
             title: {
-                en: "Venture investment",
-                zh_hans: "风险投资",
-            }
-        })
+                en: 'Venture investment',
+                zh_hans: '风险投资',
+            },
+        }),
     ]),
     procedureList: [
         {
             name: {
-                en: "Apply"
-            }
-        }
+                en: 'Apply',
+            },
+        },
     ],
     referenceList: [
         {
             title: {
-                en: "Official page",
-                zh_hans: "官方主页",
+                en: 'Official page',
+                zh_hans: '官方主页',
             },
-            url: "http://www.cic.gc.ca/english/immigrate/business/start-up/",
-        }
-    ]
+            url: 'http://www.cic.gc.ca/english/immigrate/business/start-up/',
+        },
+    ],
 }
 
 export default startupVisa

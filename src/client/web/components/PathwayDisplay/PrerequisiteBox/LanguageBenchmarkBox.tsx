@@ -1,64 +1,60 @@
 import * as React from 'react'
-import text from "../../../../utils/text"
+import text from '../../../../utils/text'
 
 import data from '../../../../../data'
 
-import {
-    LanguagePrereq,
-} from "../../../../../definitions/Prerequisites/LanguagePrereq"
+import { LanguagePrereq } from '../../../../../definitions/Prerequisites/LanguagePrereq'
 
-import {
-    LanguageTestItem,
-} from "../../../../../definitions/auxiliary/LanguageTest"
+import { LanguageTestItem } from '../../../../../definitions/auxiliary/LanguageTest'
 
 const langRequirementKeyOrder: string[] = [
-        "listening",
-        "speaking",
-        "reading",
-        "writing",
+    'listening',
+    'speaking',
+    'reading',
+    'writing',
 ]
 
 const testNameStyle = {
-    fontSize: "1em",
+    fontSize: '1em',
     margin: 0,
 } as React.CSSProperties
 
-const LanguageTestItemBox = (props: {testItemKey: LanguageTestItem, score: number}) => (
+const LanguageTestItemBox = (props: { testItemKey: LanguageTestItem, score: number }) => (
     <div
         style={{
-            display: "inline-block",
-            marginRight: "0.8em",
+            display: 'inline-block',
+            marginRight: '0.8em',
         }}
     >
         <span style={{
-            marginRight: "0.1em",
+            marginRight: '0.1em',
         }}>
             {text(data.common.languageBenchmarkItemNames[props.testItemKey])}
         </span>
         <span style={{
-            fontWeight: "bolder",
+            fontWeight: 'bolder',
         }}>
             {props.score}
         </span>
     </div>
 )
 
-const LanguageBenchmarkBox = (props: {prereq: LanguagePrereq}) => {
+const LanguageBenchmarkBox = (props: { prereq: LanguagePrereq }) => {
     const prereq = props.prereq
     const test = data.common.languageTestProfiles
-                    .filter(test => test.id === prereq.result.testId)[0]
+                     .filter(test => test.id === prereq.result.testId)[0]
     return (
         <div>
             <h5 style={testNameStyle}>
-                {text(test.title)} {" "}
+                {text(test.title)} {' '}
             </h5>
             {langRequirementKeyOrder.map(
-                  (testItemKey: LanguageTestItem) =>
-                  <LanguageTestItemBox
-                      testItemKey={testItemKey}
-                      score={prereq.result.scores[testItemKey][1]}
-                      key={testItemKey}
-                  />
+                (testItemKey: LanguageTestItem) =>
+                    <LanguageTestItemBox
+                        testItemKey={testItemKey}
+                        score={prereq.result.scores[testItemKey][1]}
+                        key={testItemKey}
+                    />,
             )}
         </div>
     )

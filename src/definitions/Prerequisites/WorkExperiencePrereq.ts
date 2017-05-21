@@ -3,11 +3,11 @@ import BasePrereq from './BasePrereq'
 import { JobGroup, JobType } from '../auxiliary/JobClassification'
 import Duration from '../auxiliary/Duration'
 import { Combination } from '../auxiliary/Combination'
-import {Interval} from "../auxiliary/Operator"
-import {RegionId} from "../auxiliary/Region"
+import { Interval } from '../auxiliary/Operator'
+import { RegionId } from '../auxiliary/Region'
 
 export interface WorkExperiencePrereq extends BasePrereq {
-    prereqId: "work_experience"
+    prereqId: 'work_experience'
     duration?: Interval<Duration>
     withinLast?: Duration
     workHoursPerWeek?: Duration

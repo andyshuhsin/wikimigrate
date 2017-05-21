@@ -1,41 +1,38 @@
-import Transition from "../../../definitions/Transition"
-import {allOf} from "../../../definitions/auxiliary/Combination"
+import Transition from '../../../definitions/Transition'
+import { allOf } from '../../../definitions/auxiliary/Combination'
 
-import {
-    alien,
-    pr,
-} from '../status'
+import { alien, pr } from '../status'
 
 const quebecSkilled: Transition = {
-    id: "quebec_selected_skilled_workers",
-    regionId: "canada",
-    acquireBy: "application",
+    id: 'quebec_selected_skilled_workers',
+    regionId: 'canada',
+    acquireBy: 'application',
     name: {
-        en: "Quebec-selected Skilled Workers"
+        en: 'Quebec-selected Skilled Workers',
     },
     prerequisiteList: allOf([]),
     from: alien,
     to: pr,
     procedureList: [
         {
-            "name": {
-                "en": "Apply to Quebec government"
-            }
+            'name': {
+                'en': 'Apply to Quebec government',
+            },
         },
         {
-            "name": {
-                "en": "Apply to CIC"
-            }
-        }
+            'name': {
+                'en': 'Apply to CIC',
+            },
+        },
     ],
     referenceList: [
         {
-            url: "http://www.cic.gc.ca/english/immigrate/quebec/index.asp",
+            url: 'http://www.cic.gc.ca/english/immigrate/quebec/index.asp',
             title: {
-                en: "Official Website"
-            }
-        }
-    ]
+                en: 'Official Website',
+            },
+        },
+    ],
 }
 
 export default quebecSkilled

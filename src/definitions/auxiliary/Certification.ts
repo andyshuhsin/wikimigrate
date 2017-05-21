@@ -1,10 +1,10 @@
 import URLDatum from './URLDatum'
-import {MultiLangStringSet} from "./MultiLang"
+import { MultiLangStringSet } from './MultiLang'
 
-export type CertificationId = "eca"
+export type CertificationId = 'eca'
 
 export interface Certification {
-    type: "certification",
+    type: 'certification',
     id: CertificationId
     title: MultiLangStringSet
     titleShort?: MultiLangStringSet

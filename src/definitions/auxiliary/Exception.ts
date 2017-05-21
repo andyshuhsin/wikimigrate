@@ -1,4 +1,4 @@
-import Status from "../Qualities/Status"
+import Status from '../Qualities/Status'
 
 export interface Effect {
     property: string | 'DQ' // disqualified

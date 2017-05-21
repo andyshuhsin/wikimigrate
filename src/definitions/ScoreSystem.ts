@@ -1,8 +1,8 @@
-import {Combination} from "./auxiliary/Combination"
-import {Prerequisite} from "./Prerequisites/index"
-import {MultiLangStringSet} from "./auxiliary/MultiLang"
-import URLDatum from "./auxiliary/URLDatum"
-export type ScoreSystemId = "crs"
+import { Combination } from './auxiliary/Combination'
+import { Prerequisite } from './Prerequisites/index'
+import { MultiLangStringSet } from './auxiliary/MultiLang'
+import URLDatum from './auxiliary/URLDatum'
+export type ScoreSystemId = 'crs'
 
 export interface ScoreHistoryEntry {
     lowestScore: number

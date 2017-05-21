@@ -1,5 +1,5 @@
 import reducer, { VisaPlannerState } from './reducer'
 export {
-    VisaPlannerState
+    VisaPlannerState,
 }
 export default reducer

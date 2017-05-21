@@ -1,16 +1,16 @@
-const path = require("path")
-const webpack = require('webpack')
-const CopyWebpackPlugin = require("copy-webpack-plugin")
+const path              = require('path')
+const webpack           = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     target: 'node',
 
     entry: {
-        render: path.join(__dirname, "./render.ssr.tsx"),
+        render: path.join(__dirname, './render.ssr.tsx'),
     },
 
     output: {
-        path: path.resolve(__dirname, "../../../.built/ssr"),
+        path:     path.resolve(__dirname, '../../../.built/ssr'),
         filename: '[name].bundle.js',
     },
 
@@ -27,14 +27,14 @@ module.exports = {
                 test:    /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
                     'url-loader?limit=10240&name=[sha1:hash:hex:32].[ext]',
-                    'image-webpack-loader'
-                ]
+                    'image-webpack-loader',
+                ],
             },
             {
-                test: /\.css$/,
-                loaders: ['style-loader', 'css-loader']
-            }
-        ]
+                test:    /\.css$/,
+                loaders: ['style-loader', 'css-loader'],
+            },
+        ],
     },
 
     plugins: [

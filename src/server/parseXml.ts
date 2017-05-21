@@ -1,4 +1,4 @@
-import {parseString} from "xml2js"
+import { parseString } from 'xml2js'
 
 function deArray(obj: any): void {
     for (const key in obj) {
@@ -21,6 +21,6 @@ export function parseXml<T>(s: string, shouldDearray: boolean): Promise<T> {
                 }
                 resolve(result.xml)
             }
-        });
+        })
     })
 }

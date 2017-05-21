@@ -1,10 +1,10 @@
 import * as React from 'react'
-import {CertificationPrereq} from "../../../../../definitions/Prerequisites/CertificationPrereq"
-import {LangId} from "../../../../../definitions/auxiliary/MultiLang"
-import {text} from "../../../../utils/text"
+import { CertificationPrereq } from '../../../../../definitions/Prerequisites/CertificationPrereq'
+import { LangId } from '../../../../../definitions/auxiliary/MultiLang'
+import { text } from '../../../../utils/text'
 
-const CertificationBox = (props: {prereq: CertificationPrereq, lang: LangId}) => {
-    if (props.lang === "zh_hans") {
+const CertificationBox = (props: { prereq: CertificationPrereq, lang: LangId }) => {
+    if (props.lang === 'zh_hans') {
         return (
             <div>
                 您有以下证书<br />

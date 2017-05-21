@@ -1,9 +1,9 @@
 const design = {
     colors: {
-        brand: "#FF5722",
-        brandLighter: "#FFCCBC",
-        greyLight: "#EBEBEB",
-        greyDark: "#444",
+        brand: '#FF5722',
+        brandLighter: '#FFCCBC',
+        greyLight: '#EBEBEB',
+        greyDark: '#444',
     },
 
     dimensions: {
@@ -11,7 +11,7 @@ const design = {
     },
 
     durations: {
-        slide: 0.2
+        slide: 0.2,
     },
 }
 

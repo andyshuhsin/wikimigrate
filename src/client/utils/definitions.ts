@@ -1,4 +1,4 @@
-import Transition from "../../definitions/Transition"
+import Transition from '../../definitions/Transition'
 
 export interface Pathway {
     transitions: Transition[]
