@@ -1,23 +1,44 @@
-##
-# You should look at the following URL's in order to grasp a solid understanding
-# of Nginx configuration files in order to fully unleash the power of Nginx.
-# http://wiki.nginx.org/Pitfalls
-# http://wiki.nginx.org/QuickStart
-# http://wiki.nginx.org/Configuration
-#
-# Generally, you will want to move this file somewhere, and start with a clean
-# file but keep this around for reference. Or just disable in sites-enabled.
-#
-# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
-##
-
-# Default server configuration
-#
 server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
-	server_name thegoodmove.org www.thegoodmove.org stage.thegoodmove.org;
+	server_name wikimigrate.org www.wikimigrate.org en.wikimigrate.org zh.wikimigrate.org thegoodmove.org stage.thegoodmove.org;
 	return 301 https://$server_name$request_uri;
+}
+
+server {
+	server_name wikimigrate.org;
+	set $lang "";
+	ssl_certificate /etc/letsencrypt/live/wikimigrate.org/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/wikimigrate.org/privkey.pem;
+
+	include snippets/shared.conf;
+}
+
+server {
+	server_name www.wikimigrate.org;
+	set $lang "";
+	ssl_certificate /etc/letsencrypt/live/www.wikimigrate.org/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/www.wikimigrate.org/privkey.pem;
+
+	include snippets/shared.conf;
+}
+
+server {
+	server_name en.wikimigrate.org;
+	set $lang en;
+	ssl_certificate /etc/letsencrypt/live/en.wikimigrate.org/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/en.wikimigrate.org/privkey.pem;
+
+	include snippets/shared.conf;
+}
+
+server {
+	server_name zh.wikimigrate.org;
+	set $lang zh-hans;
+	ssl_certificate /etc/letsencrypt/live/zh.wikimigrate.org/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/zh.wikimigrate.org/privkey.pem;
+
+	include snippets/shared.conf;
 }
 
 server {
