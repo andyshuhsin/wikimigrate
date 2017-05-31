@@ -25,28 +25,18 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | b
 
 ## 2. Install `Node.js` (the backend JS engine)
 ```
-nvm install 6.10
+nvm install 8
 ```
 
-## 3. Install `yarn` (package manager)
-```
-brew install yarn
-```
-
-// It requires `homebrew`. If you don't have it, install it by running
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-## 4. Clone the codebase to your machine  
+## 3. Clone the codebase to your machine  
 ```
 git clone git@github.com:andyshuhsin/visaplanner.git
 ```
 
-## 5. Install necessary packages 
+## 4. Install necessary packages 
 ```
 cd src/fe
-yarn install
+npm install
 ```
 
 ## 6. Build & Run server
