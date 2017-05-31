@@ -39,5 +39,5 @@ cp yarn.lock ../../.built/server
 cd ${root}
 
 rsync -azP .built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/
-ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && yarn install && cd .."
+ssh ${WKM_DEPLOY_USER}@${server} "cd /var/www/wkm/server && npm install && cd .."
 cd ${root}
