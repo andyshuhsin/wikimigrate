@@ -1,4 +1,5 @@
-Visa Planner
-============
+WikiMigrate
+===========
 
-Plan visa routes for some desired rights.
+The immigration planner.
+The codebase is licensed under AGPL (see LICENSE).

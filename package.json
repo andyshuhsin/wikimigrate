@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Make immigration easy again",
     "author": "Andy Shu",
-    "license": "ISC",
+    "license": "AGPL-3.0",
     "scripts": {
         "start": "sh tools/dev/dev.sh nossr",
         "start:ssr": "sh tools/dev/dev.sh ssr",
