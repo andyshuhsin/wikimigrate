@@ -35,7 +35,6 @@ cd src/server
 tsc
 cp pm2.config.js ../../.built
 cp package.json ../../.built/server
-cp yarn.lock ../../.built/server
 cd ${root}
 
 rsync -azP .built/* ${WKM_DEPLOY_USER}@${server}:/var/www/wkm/
