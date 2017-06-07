@@ -82,7 +82,7 @@ async function renderFullPage(html: string, preloadedState: VisaPlannerState) {
             </script>
             ${html}
         `)
-        .replace(/<!--title-->[\s\S]*?<!--\/title-->/, title)
+        .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)
         .replace('<!--css-->', css)
 }
 
