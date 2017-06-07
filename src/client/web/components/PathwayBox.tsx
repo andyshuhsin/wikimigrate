@@ -1,17 +1,19 @@
 import * as React from 'react'
 import text from '../../utils/text'
 
-import { Pathway } from '../../utils/definitions'
+import { Pathway, PathwayDescriptor } from '../../utils/definitions'
 
 import data from '../../../data'
 import design from '../design'
+import { formPath } from '../../utils/urlpath'
 
 interface PathShowcaseProps {
     path: Pathway
-    onClick: (event: React.MouseEvent<any>) => void
+    onClick: () => void
 }
 
 const boxStyle = {
+    display: "block",
     marginBottom: '0.625em',
 
     maxHeight: '200px',
@@ -40,8 +42,17 @@ class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
         const targetRegion = data.getRegionById(transitions[0].regionId)
+        const path: PathwayDescriptor = {
+            transitionIds: transitions.map(transition => transition.id)
+        }
+        const url = formPath(path)
         return (
-            <div style={boxStyle} onClick={this.props.onClick}>
+            <a
+                style={boxStyle}
+                onClick={(event) => this.onClick(event)}
+                target="_blank"
+                href={url}
+            >
                 <div>
                     <h2 style={countryNameStyle}>
                         {targetRegion && text(targetRegion.name)}
@@ -50,8 +61,13 @@ class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
                         {text(transitions[0].name)}
                     </h1>
                 </div>
-            </div>
+            </a>
         )
+    }
+
+    onClick(event: React.MouseEvent<HTMLAnchorElement>) {
+        event.preventDefault()
+        this.props.onClick()
     }
 }
 
