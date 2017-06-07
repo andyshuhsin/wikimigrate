@@ -2,6 +2,14 @@ root=$(pwd)
 
 if [ $1 == "prod" ]
 then
+    currentBranch=$(git rev-parse --abbrev-ref HEAD)
+    expectedBranch="master"
+    if [ $currentBranch != $expectedBranch ]
+    then
+        echo "Aborted deployment to production because current branch is not ${expectedBranch}"
+        echo "If you're confident, comment out the next line in deploy.sh"
+        exit 1
+    fi
     server="tokyo1"
 elif [ $1 == "stage" ]
 then
