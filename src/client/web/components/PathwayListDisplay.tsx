@@ -18,7 +18,7 @@ const pathShowcaseStyle = {
 
 
 // Ensure the last box is aligned to the left
-const PathShowcase = (props: PathShowcaseProps) =>
+const PathwayListDisplay = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
         <Title text={
             text({
@@ -39,4 +39,4 @@ const PathShowcase = (props: PathShowcaseProps) =>
         }
     </div>
 
-export default PathShowcase
+export default PathwayListDisplay
