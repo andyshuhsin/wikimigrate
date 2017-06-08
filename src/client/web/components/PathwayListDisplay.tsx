@@ -4,9 +4,12 @@ import Title from './Title'
 
 import { Pathway } from '../../utils/definitions'
 import { text } from '../../utils/text'
+import { Credits } from './Credits'
+import { LangId } from '../../../definitions/auxiliary/MultiLang'
 
 interface PathShowcaseProps {
     paths: Pathway[]
+    lang: LangId
     onClick: (event: any) => void
 }
 
@@ -37,6 +40,7 @@ const PathwayListDisplay = (props: PathShowcaseProps) =>
                 />,
             )
         }
+        <Credits lang={props.lang} />
     </div>
 
 export default PathwayListDisplay

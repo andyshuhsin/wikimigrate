@@ -12,7 +12,7 @@ interface PathShowcaseProps {
     onClick: () => void
 }
 
-const boxStyle = {
+export const pathwayBoxStyle = {
     display: "block",
     marginBottom: '0.625em',
 
@@ -48,7 +48,7 @@ class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
         const url = formPath(path)
         return (
             <a
-                style={boxStyle}
+                style={pathwayBoxStyle}
                 onClick={(event) => this.onClick(event)}
                 target="_blank"
                 href={url}

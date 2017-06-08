@@ -149,6 +149,7 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
                 <PathwayListDisplay
                     paths={calcSuitablePaths(user, allTransitions)}
                     onClick={onPathwayBoxClick}
+                    lang={lang}
                 />
                 <PathwayDisplay
                     user={user}
