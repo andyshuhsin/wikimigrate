@@ -5,7 +5,8 @@ import design from '../../design'
 
 const style = {
     marginBottom: '0.4em',
-    padding: '0.2em 0',
+    padding: '0.3em',
+    textAlign: 'center',
     fontFamily: 'monospace',
     fontWeight: 'bolder',
     background: design.colors.brandLighter,
