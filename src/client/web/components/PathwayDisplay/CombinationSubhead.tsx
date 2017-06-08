@@ -15,8 +15,8 @@ const style = {
 const CombinationSubhead = (props: { combo: Combination<any> }) => (
     props.combo.meta && props.combo.meta.title
         ? <div style={style}>
-        {text(props.combo.meta.title)}
-    </div>
+              {text(props.combo.meta.title)}
+          </div>
         : <noscript />
 )
 

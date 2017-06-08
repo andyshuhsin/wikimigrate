@@ -76,12 +76,12 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                                         <div style={
                                             this.props.level === 0
                                                 ? {
-                                                marginTop: '0.5em',
-                                                fontVariant: 'small-caps',
-                                            }
+                                                    marginTop: '0.5em',
+                                                    fontVariant: 'small-caps',
+                                                }
                                                 : {
-                                                fontVariant: 'small-caps',
-                                            }
+                                                    fontVariant: 'small-caps',
+                                                }
                                         }>
                                             {text(operators[combo.combinator].name)}
                                         </div>
