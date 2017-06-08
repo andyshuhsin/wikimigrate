@@ -5,7 +5,8 @@ import { pathwayBoxStyle } from './PathwayBox'
 const style = Object.assign({}, pathwayBoxStyle, {
     background: "none",
     border: "1px solid",
-}) as React.CSSProperties
+    cursor: "initial",
+} as React.CSSProperties)
 
 const anchorStyle = {
     display: "inline-block",
