@@ -19,7 +19,6 @@ const WorkExperienceBox = (props: { prereq: WorkExperiencePrereq, lang: LangId }
             zh_hans: '过去',
         }),
     }
-    // TODO: Fix type cast at prereq.jobTypes as any
     return (
         <div>
             {texts.workExperiences}
