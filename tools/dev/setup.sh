@@ -22,8 +22,9 @@ export NVM_DIR="$HOME/.nvm"
 
 echo
 echo "Installing node"
-nvm install 8
-nvm use 8
+nodever=8.1
+nvm install ${nodever}
+nvm use ${nodever}
 
 echo "Install necessary packages"
 function npmi () {
