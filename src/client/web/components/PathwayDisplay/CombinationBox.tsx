@@ -12,6 +12,7 @@ import { LangId } from '../../../../definitions/auxiliary/MultiLang'
 const embeddedCombinationBoxStyle = {
     margin: '0.8em 0',
     background: 'rgba(0, 0, 0, 0.05)',
+    paddingBottom: '0.2em',
 }
 
 function isPrerequisite(input: any): boolean {
@@ -49,11 +50,11 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                 {
                     combo.combinator === 'or' && combo.operands.length >= 3
                         ? <span style={{fontVariant: 'small-caps'}}>
-                        {text({
-                            en: 'One of',
-                            zh_hans: '至少满足一项：',
-                        })}
-                    </span>
+                              {text({
+                                  en: 'One of',
+                                  zh_hans: '至少满足一项：',
+                              })}
+                          </span>
                         : ''
                 }
                 <div style={branchStyle[combo.combinator]}>
@@ -75,12 +76,12 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                                         <div style={
                                             this.props.level === 0
                                                 ? {
-                                                marginTop: '0.5em',
-                                                fontVariant: 'small-caps',
-                                            }
+                                                    marginTop: '0.5em',
+                                                    fontVariant: 'small-caps',
+                                                }
                                                 : {
-                                                fontVariant: 'small-caps',
-                                            }
+                                                    fontVariant: 'small-caps',
+                                                }
                                         }>
                                             {text(operators[combo.combinator].name)}
                                         </div>

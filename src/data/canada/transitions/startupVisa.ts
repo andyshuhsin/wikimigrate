@@ -7,7 +7,7 @@ import { money } from '../../../definitions/auxiliary/Money'
 import { designatedAngelInvestors, designatedBusinessIncubators, designatedVentureCapitalFunds } from '../fundSources'
 
 const startupVisa: Transition = {
-    id: 'startup_visa',
+    id: 'startup_visa_ca',
     regionId: 'canada',
     acquireBy: 'application',
     name: {

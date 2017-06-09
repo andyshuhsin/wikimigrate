@@ -4,22 +4,24 @@ import Title from './Title'
 
 import { Pathway } from '../../utils/definitions'
 import { text } from '../../utils/text'
+import { Credits } from './Credits'
+import { LangId } from '../../../definitions/auxiliary/MultiLang'
 
 interface PathShowcaseProps {
     paths: Pathway[]
+    lang: LangId
     onClick: (event: any) => void
 }
 
 const pathShowcaseStyle = {
     justifyContent: 'space-around',
     overflow: 'scroll',
-    padding: '1em',
-    paddingBottom: '3em',
+    padding: '0 1em 3em',
 } as React.CSSProperties
 
 
 // Ensure the last box is aligned to the left
-const PathShowcase = (props: PathShowcaseProps) =>
+const PathwayListDisplay = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
         <Title text={
             text({
@@ -38,6 +40,7 @@ const PathShowcase = (props: PathShowcaseProps) =>
                 />,
             )
         }
+        <Credits lang={props.lang} />
     </div>
 
-export default PathShowcase
+export default PathwayListDisplay

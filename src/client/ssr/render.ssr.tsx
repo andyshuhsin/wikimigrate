@@ -76,7 +76,7 @@ async function renderFullPage(html: string, preloadedState: VisaPlannerState) {
     const title = getDocumentTitle(pathwayOnDisplay, preloadedState.ui.lang)
     const css = await getCss(['normalize.css', 'global.css'])
     return template
-        .replace(/<!--Inject-->[\s\S]*?<!--\/Inject-->/, `
+        .replace(/<!--SSR-Inject-->[\s\S]*?<!--\/SSR-Inject-->/, `
             <script>
                 window.__WKM_PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
             </script>

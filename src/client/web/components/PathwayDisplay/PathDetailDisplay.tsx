@@ -60,7 +60,7 @@ interface Props {
     lang: LangId
 }
 
-class PathDetailDisplay extends React.PureComponent<Props, {}> {
+class PathwayDisplay extends React.PureComponent<Props, {}> {
 
     render() {
         if (this.props.pathOnDisplay) {
@@ -97,4 +97,4 @@ class PathDetailDisplay extends React.PureComponent<Props, {}> {
 
 }
 
-export default PathDetailDisplay
+export default PathwayDisplay

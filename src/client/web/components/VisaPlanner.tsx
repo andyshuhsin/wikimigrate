@@ -4,7 +4,7 @@ import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 
 import TopBar from './TopBar'
-import PathShowcase from './PathShowcase'
+import PathwayListDisplay from './PathwayListDisplay'
 import FilterBar from './Filters/FilterBar'
 import PathwayDisplay from './PathwayDisplay'
 import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
@@ -146,9 +146,10 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
                     brandName={text(data.app.brandName)}
                     version={data.app.version}
                 />
-                <PathShowcase
+                <PathwayListDisplay
                     paths={calcSuitablePaths(user, allTransitions)}
                     onClick={onPathwayBoxClick}
+                    lang={lang}
                 />
                 <PathwayDisplay
                     user={user}

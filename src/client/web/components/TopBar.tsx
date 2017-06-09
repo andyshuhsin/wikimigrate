@@ -10,11 +10,12 @@ const barStyle = {
 
 const logoStyle = {
     maxWidth: '3em',
+    verticalAlign: "middle",
 } as React.CSSProperties
 
 const nameStyle = {
     fontSize: '1.2em',
-    marginLeft: '0.3em',
+    marginLeft: '0.1em',
 } as React.CSSProperties
 
 interface TopBarProps {
@@ -25,13 +26,16 @@ interface TopBarProps {
 class TopBar extends React.PureComponent<TopBarProps, {}> {
     render() {
         return (
-            <div style={barStyle}>
+            <header style={barStyle}>
                 <img style={logoStyle}
                      src={require('../../assets/logo.svg')}/>
-                <span style={nameStyle}>
+                <a
+                    style={nameStyle}
+                    href="/"
+                >
                     {this.props.brandName + ' ' + this.props.version}
-                </span>
-            </div>
+                </a>
+            </header>
         )
     }
 }
