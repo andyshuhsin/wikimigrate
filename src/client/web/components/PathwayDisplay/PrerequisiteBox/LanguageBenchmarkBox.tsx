@@ -15,7 +15,7 @@ const testItems: LanguageTestItem[] = [
 ]
 
 const tableHeadStyle: React.CSSProperties = {
-    fontSize: '1em',
+    fontSize: '0.9em',
     padding: 0,
     fontWeight: 100,
 }
@@ -67,9 +67,9 @@ function LanguageBenchmarkBox(props: { prereq: LanguagePrereq }) {
             </tbody>
             {test &&
                 <tfoot><tr><td style={tableHeadStyle}>
-                    (<a href={test.reference.url}>
+                    ( <a href={test.reference.url} target="_blank">
                         {text(test.title)}
-                    </a>)
+                    </a> )
                 </td></tr></tfoot>
             }
         </table>
