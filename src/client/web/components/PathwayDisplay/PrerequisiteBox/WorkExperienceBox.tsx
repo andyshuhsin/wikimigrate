@@ -26,8 +26,8 @@ const WorkExperienceBox = (props: { prereq: WorkExperiencePrereq, lang: LangId }
                 {
                     prereq.withinLast &&
                     `${texts.withinLast}
-                 ${prereq.withinLast.value}
-                 ${inflect(text(units[prereq.withinLast.unit].name), {number: prereq.withinLast.value})}, `
+                     ${prereq.withinLast.value}
+                     ${inflect(text(units[prereq.withinLast.unit].name), {number: prereq.withinLast.value})}, `
                 }
                 {
                     prereq.duration

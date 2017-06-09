@@ -1,4 +1,5 @@
 import { LangId } from '../../definitions/auxiliary/MultiLang'
+import { currentLang } from './text'
 
 const DEFAULT_LANG: LangId = 'en'
 
@@ -11,16 +12,16 @@ export type InflectionOption = {
 function inflect(
     term: string,
     options: Partial<InflectionOption>,
-) {
+): string {
     let lang: LangId
     if (options.language) {
         lang = options.language
     }
-    // else if (store) {
-    //     lang = store.getState().ui.lang
-    // }
+    else if (currentLang) {
+        lang = currentLang
+    }
     else {
-        return DEFAULT_LANG
+        lang = DEFAULT_LANG
     }
 
     switch (lang) {

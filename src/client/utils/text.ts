@@ -1,6 +1,6 @@
 import { LangId, MultiLangStringSet } from '../../definitions/auxiliary/MultiLang'
 
-let currentLang: LangId = 'en'
+export let currentLang: LangId = 'en'
 
 const fallbackLangList: LangId[] = ['en', 'fr', 'zh_hans']
 
