@@ -39,6 +39,30 @@ interface Props {
     lang: LangId
 }
 
+const OneOfText = () => (
+        <span style={{fontVariant: 'small-caps'}}>
+            {text({
+                en: 'One of',
+                zh_hans: '至少满足一项：',
+            })}
+        </span>
+)
+
+const CombinatorText = (props: {text: string, isTopLevel: boolean}) => (
+    <div style={
+        props.isTopLevel
+            ? {
+                marginTop: '0.5em',
+                fontVariant: 'small-caps',
+            }
+            : {
+                fontVariant: 'small-caps',
+            }
+    }>
+        {props.text}
+    </div>
+
+)
 
 class CombinationBox extends React.PureComponent<Props, {}> {
 
@@ -49,13 +73,8 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                 <CombinationSubhead combo={combo}/>
                 {
                     combo.combinator === 'or' && combo.operands.length >= 3
-                        ? <span style={{fontVariant: 'small-caps'}}>
-                              {text({
-                                  en: 'One of',
-                                  zh_hans: '至少满足一项：',
-                              })}
-                          </span>
-                        : ''
+                    &&
+                    <OneOfText />
                 }
                 <div style={branchStyle[combo.combinator]}>
                     {combo.operands.map(
@@ -70,22 +89,12 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                                     lang={this.props.lang}
                                 />
                                 {
-                                    combo.operands.length === 2
-                                    && index === 0
-                                    && (
-                                        <div style={
-                                            this.props.level === 0
-                                                ? {
-                                                    marginTop: '0.5em',
-                                                    fontVariant: 'small-caps',
-                                                }
-                                                : {
-                                                    fontVariant: 'small-caps',
-                                                }
-                                        }>
-                                            {text(operators[combo.combinator].name)}
-                                        </div>
-                                    )
+                                    combo.operands.length === 2 && index === 0
+                                    &&
+                                    <CombinatorText
+                                        text={text(operators[combo.combinator].name)}
+                                        isTopLevel={this.props.level === 0}
+                                    />
                                 }
                             </div>
                         ),
