@@ -12,7 +12,7 @@ interface PathShowcaseProps {
     onClick: () => void
 }
 
-export const pathwayBoxStyle = {
+export const pathwayBoxStyle: React.CSSProperties = {
     display: "block",
     marginBottom: '0.625em',
 
@@ -25,7 +25,8 @@ export const pathwayBoxStyle = {
     wordWrap: 'break-work',
     overflow: 'hidden',
     cursor: 'pointer',
-} as React.CSSProperties
+    textDecoration: 'none',
+}
 
 const countryNameStyle = {
     font: 'normal 1.2em sans-serif',

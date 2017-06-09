@@ -8,12 +8,11 @@ const style = Object.assign({}, pathwayBoxStyle, {
     cursor: "initial",
 } as React.CSSProperties)
 
-const anchorStyle = {
+const anchorStyle: React.CSSProperties = {
     display: "inline-block",
     padding: "0.2em",
     fontWeight: "bolder",
-    textDecoration: "underline",
-} as React.CSSProperties
+}
 
 export const Credits = (props: {lang: LangId}) => {
     switch (props.lang) {
