@@ -10,10 +10,6 @@ import { LangId } from '../../../../../definitions/auxiliary/MultiLang'
 const WorkExperienceBox = (props: { prereq: WorkExperiencePrereq, lang: LangId }) => {
     const prereq = props.prereq
     const texts = {
-        workExperiences: text({
-            en: 'Work experience:',
-            zh_hans: '工作经验：',
-        }),
         withinLast: text({
             en: 'With in the last',
             zh_hans: '过去',
@@ -21,7 +17,6 @@ const WorkExperienceBox = (props: { prereq: WorkExperiencePrereq, lang: LangId }
     }
     return (
         <div>
-            {texts.workExperiences}
             <div style={{marginBottom: '0.5em'}}>
                 {
                     prereq.withinLast &&
