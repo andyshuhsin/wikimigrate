@@ -14,13 +14,16 @@ const transitionNameStyle = {
     margin: 0,
 }
 
-const sectionTitleStyle = {
+const sectionTitleStyle: React.CSSProperties = {
     margin: '0.5em',
     marginLeft: 0,
 
+    paddingBottom: '0.2em',
+    borderBottom: "1px solid",
+
     fontWeight: 'lighter',
     fontSize: '1.4em',
-} as React.CSSProperties
+}
 
 const flagStyle = {
     marginLeft: '0.3em',
