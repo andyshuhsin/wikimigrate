@@ -77,28 +77,26 @@ class CombinationBox extends React.PureComponent<Props, {}> {
                     <OneOfText />
                 }
                 <div style={branchStyle[combo.combinator]}>
-                    {combo.operands.map(
-                        (operand: any, index: number) => (
-                            <div
-                                style={operandViewStyle}
-                                key={JSON.stringify(operand) /* FIXME: Excessive? */}
-                            >
-                                <this.OperandView
-                                    operand={operand}
-                                    level={this.props.level + 1}
-                                    lang={this.props.lang}
+                    {combo.operands.map((operand, index) => (
+                        <div
+                            style={operandViewStyle}
+                            key={JSON.stringify(operand) /* FIXME: Excessive? */}
+                        >
+                            <this.OperandView
+                                operand={operand}
+                                level={this.props.level + 1}
+                                lang={this.props.lang}
+                            />
+                            {
+                                combo.operands.length === 2 && index === 0
+                                &&
+                                <CombinatorText
+                                    text={text(operators[combo.combinator].name)}
+                                    isTopLevel={this.props.level === 0}
                                 />
-                                {
-                                    combo.operands.length === 2 && index === 0
-                                    &&
-                                    <CombinatorText
-                                        text={text(operators[combo.combinator].name)}
-                                        isTopLevel={this.props.level === 0}
-                                    />
-                                }
-                            </div>
-                        ),
-                    )}
+                            }
+                        </div>
+                    ))}
                 </div>
             </div>
         )
