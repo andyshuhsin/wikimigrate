@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { LangId } from '../../../definitions/auxiliary/MultiLang'
-import { pathwayBoxStyle } from './PathwayBox'
+import { pathwayBoxStyle } from './PathwaySummaryBox'
 
 const style = Object.assign({}, pathwayBoxStyle, {
     background: "none",

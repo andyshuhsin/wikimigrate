@@ -1,5 +1,5 @@
 import * as React from 'react'
-import PathwayBox from './PathwayBox'
+import PathwaySummaryBox from './PathwaySummaryBox'
 import Title from './Title'
 
 import { Pathway } from '../../utils/definitions'
@@ -31,7 +31,7 @@ const PathwayListDisplay = (props: PathShowcaseProps) =>
         }/>
         {
             props.paths.map((path: Pathway) =>
-                <PathwayBox
+                <PathwaySummaryBox
                     path={path}
                     key={path.transitions.map(transition => transition.id).join('')}
                     onClick={

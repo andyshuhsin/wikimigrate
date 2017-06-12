@@ -39,7 +39,7 @@ const pathNameStyle = {
     margin: 0,
 } as React.CSSProperties
 
-class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
+class PathwaySummaryBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
         const targetRegion = data.getRegionById(transitions[0].regionId)
@@ -72,4 +72,4 @@ class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
     }
 }
 
-export default PathwayBox
+export default PathwaySummaryBox
