@@ -25,8 +25,8 @@ const PathwayListDisplay = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
         <Title text={
             text({
-                en: 'Mobility options for you',
-                zh_hans: '签证选项',
+                en: `Found ${props.paths.length} mobility options for you`,
+                zh_hans: `找到了${props.paths.length}种可能适合你的签证`,
             })
         }/>
         {
