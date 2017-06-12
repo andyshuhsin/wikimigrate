@@ -65,7 +65,7 @@ class PathwayDisplay extends React.PureComponent<Props, {}> {
     render() {
         if (this.props.pathOnDisplay) {
             return (
-                <div style={style}>
+                <article style={style}>
 
                     {
                         this.props.pathOnDisplay.transitions.map(
@@ -87,7 +87,7 @@ class PathwayDisplay extends React.PureComponent<Props, {}> {
                         />
                     </div>
 
-                </div>
+                </article>
             )
         }
         else {
