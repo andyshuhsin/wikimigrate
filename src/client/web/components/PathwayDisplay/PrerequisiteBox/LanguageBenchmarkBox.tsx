@@ -15,13 +15,13 @@ const testItems: LanguageTestItem[] = [
 ]
 
 const tableHeadStyle: React.CSSProperties = {
-    fontSize: '0.9em',
     padding: 0,
     fontWeight: 100,
 }
 
 const tableStyle: React.CSSProperties = {
     borderCollapse: 'collapse',
+    margin: '0.5em 0',
 }
 
 const cellStyle: React.CSSProperties = {
@@ -56,6 +56,13 @@ function LanguageBenchmarkBox(props: { prereq: LanguagePrereq }) {
                      .find(test => test.id === prereq.result.testId)
     return (
         <table style={tableStyle}>
+            {test &&
+                 <thead><tr><th style={tableHeadStyle}>
+                     <a href={test.reference.url} target="_blank">
+                         {text(test.title)}
+                     </a>
+                 </th></tr></thead>
+            }
             <tbody style={{display: 'table'}}>
                 {testItems.map(testItemKey =>
                     <LanguageTestItemRow
@@ -65,13 +72,6 @@ function LanguageBenchmarkBox(props: { prereq: LanguagePrereq }) {
                     />,
                 )}
             </tbody>
-            {test &&
-                <tfoot><tr><td style={tableHeadStyle}>
-                    ( <a href={test.reference.url} target="_blank">
-                        {text(test.title)}
-                    </a> )
-                </td></tr></tfoot>
-            }
         </table>
     )
 }
