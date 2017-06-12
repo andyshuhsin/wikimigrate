@@ -147,11 +147,12 @@ const FilterBody = (props: FilterContentProps) => {
         }
         case 'real': {
             let value: number
-            if (filterState[filter.id]) {
-                value = Number(filterState[filter.id])
+            const valueInState = filterState[filter.id]
+            if (valueInState === null) {
+                value = filter.defaultValue
             }
             else {
-                value = filter.defaultValue
+                value = Number(valueInState)
             }
             content = (
                 <ValueChooser
