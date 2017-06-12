@@ -92,15 +92,21 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
 
 interface ValueChooserProps {
     value: number
-    onLeftClick(): void
-    onRightClick(): void
+    onLeftClick(value: number): void
+    onRightClick(value: number): void
+    min?: number
+    max?: number
 }
 
 const ValueChooser = (props: ValueChooserProps) => (
     <div>
         <span
             style={styles.valueAdjustButtonStyle}
-            onClick={props.onLeftClick}
+            onClick={() => {
+                if (typeof props.min === "undefined" || props.value - 1 >= props.min) {
+                    props.onLeftClick(props.value - 1)
+                }
+            }}
         >
             &ndash;
         </span>
@@ -109,7 +115,11 @@ const ValueChooser = (props: ValueChooserProps) => (
         </span>
         <span
             style={styles.valueAdjustButtonStyle}
-            onClick={props.onRightClick}
+            onClick={() => {
+                if (typeof props.max === "undefined" || props.value - 1 >= props.max) {
+                    props.onRightClick(props.value + 1)
+                }
+            }}
         >
             &#43;
         </span>
@@ -157,8 +167,10 @@ const FilterBody = (props: FilterContentProps) => {
             content = (
                 <ValueChooser
                     value={value}
-                    onLeftClick={() => filterOptionClick(filter.id, value - 1)}
-                    onRightClick={() => filterOptionClick(filter.id, value + 1)}
+                    onLeftClick={value => filterOptionClick(filter.id, value)}
+                    onRightClick={value => filterOptionClick(filter.id, value)}
+                    min={filter.min}
+                    max={filter.max}
                 />
             )
             break
