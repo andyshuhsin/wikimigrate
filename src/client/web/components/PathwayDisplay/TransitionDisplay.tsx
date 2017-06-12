@@ -15,8 +15,7 @@ const transitionNameStyle = {
 }
 
 const sectionTitleStyle: React.CSSProperties = {
-    margin: '0.5em',
-    marginLeft: 0,
+    margin: '0.5em 0',
 
     paddingBottom: '0.2em',
     borderBottom: "1px solid",
