@@ -7,16 +7,24 @@ export function getDocumentTitle(
     pathwayOnDisplay: PathwayDescriptor | null,
     lang: LangId,
 ): string {
+    const brandName = text(data.app.brandName, lang)
     if (!pathwayOnDisplay) {
-        return text(data.app.brandName, lang)
+        return brandName
     }
     const transition = data.allTransitions.find(
         transition => transition.id === pathwayOnDisplay.transitionIds[0],
     )
     if (transition) {
-        return `${text(transition.name, lang)} – ${text(data.app.brandName, lang)}`
+        const transitionName = text(transition.name, lang)
+        const region = data.getRegionById(transition.regionId)
+        if (region) {
+            return `${transitionName} [${text(region.name)}] – ${brandName}`
+        }
+        else {
+            return `${transitionName} – ${brandName}`
+        }
     }
     else {
-        return text(data.app.brandName, lang)
+        return brandName
     }
 }
