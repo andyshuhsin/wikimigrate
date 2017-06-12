@@ -12,6 +12,9 @@ export type RegionId =
     | 'australia'
     | 'new_zealand'
     | 'canada_atlantic_provinces'
+    | 'uk'
+    | 'ireland'
+    | 'usa'
 
 export interface Region {
     id: RegionId

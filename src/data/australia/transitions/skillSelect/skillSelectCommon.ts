@@ -64,8 +64,8 @@ export const competentEnglish = oneOf([
         } as RightPrereq,
         {
             prereqId: 'right',
-            regionId: 'new_zealand',
-            rightId: 'ireland',
+            regionId: 'ireland',
+            rightId: 'citizen',
         } as RightPrereq,
     ], {
         title: {
