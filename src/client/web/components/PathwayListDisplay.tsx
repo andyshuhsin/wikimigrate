@@ -7,28 +7,32 @@ import { text } from '../../utils/text'
 import { Credits } from './Credits'
 import { LangId } from '../../../definitions/auxiliary/MultiLang'
 
-interface PathShowcaseProps {
-    paths: Pathway[]
-    lang: LangId
-    onClick: (event: any) => void
-}
-
 const pathShowcaseStyle = {
     justifyContent: 'space-around',
     overflow: 'scroll',
     padding: '0 1em 3em',
 } as React.CSSProperties
 
+interface PathShowcaseProps {
+    paths: Pathway[]
+    lang: LangId
+    onClick: (event: any) => void
+    onFilterTextClick: () => void
+}
 
-// Ensure the last box is aligned to the left
 const PathwayListDisplay = (props: PathShowcaseProps) =>
     <div style={pathShowcaseStyle}>
-        <Title text={
-            text({
-                en: `Found ${props.paths.length} mobility options for you`,
-                zh_hans: `找到了${props.paths.length}种可能适合你的签证`,
-            })
-        }/>
+        <Title
+            text={text({
+                    en: `Found ${props.paths.length} mobility options for you`,
+                    zh_hans: `找到了${props.paths.length}种可能适合你的签证`,
+            })}
+            filterText={text({
+                    en: 'filter',
+                    zh_hans: '筛选',
+            })}
+            onFilterTextClick={props.onFilterTextClick}
+        />
         {
             props.paths.map((path: Pathway) =>
                 <PathwaySummaryBox

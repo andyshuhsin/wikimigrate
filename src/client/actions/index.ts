@@ -139,6 +139,10 @@ interface SetLang {
     }
 }
 
+interface TitleFilterTextClick {
+    type: 'TITLE_FILTER_TEXT_CLICK',
+}
+
 
 export type Action =
     OptionClickAction
@@ -151,6 +155,7 @@ export type Action =
     | KeyDown
     | UrlPathChange
     | SetLang
+    | TitleFilterTextClick
 
 export function filterOptionClickAction(filterId: FilterId, value: OptionId | number): OptionClickAction {
     const action = {
@@ -243,5 +248,11 @@ export function setLangAction(langId: LangId): SetLang {
         payload: {
             langId,
         },
+    }
+}
+
+export function titleFilterTextClickAction(): TitleFilterTextClick {
+    return {
+        type: 'TITLE_FILTER_TEXT_CLICK',
     }
 }
