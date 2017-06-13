@@ -154,7 +154,7 @@ const FundBox = (props: { prereq: FundPrereq, lang: LangId }) => {
             return (
                 <div>
                     被
-                    <a href={source.reference.url}>
+                    <a href={source.reference.url} target="_blank">
                         {text(source.name)}
                     </a>
                     录取
@@ -165,7 +165,7 @@ const FundBox = (props: { prereq: FundPrereq, lang: LangId }) => {
             return (
                 <div>
                     You are admitted by {' '}
-                    <a href={source.reference.url}>
+                    <a href={source.reference.url} target="_blank">
                         {text(source.name)}
                     </a>
                 </div>
