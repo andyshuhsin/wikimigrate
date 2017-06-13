@@ -2,6 +2,7 @@ const design = {
     colors: {
         brand: '#FF5722',
         brandLighter: '#FFCCBC',
+        brandLightest: '#fce2d3',
         greyLight: '#EBEBEB',
         greyDark: '#444',
     },

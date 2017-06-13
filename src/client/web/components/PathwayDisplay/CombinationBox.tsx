@@ -70,7 +70,7 @@ class CombinationBox extends React.PureComponent<Props, {}> {
         const combo = this.props.combo
         return (
             <div style={this.props.level > 0 ? embeddedCombinationBoxStyle : {}}>
-                <CombinationSubhead combo={combo}/>
+                <CombinationSubhead combo={combo} level={this.props.level} />
                 {
                     combo.combinator === 'or' && combo.operands.length >= 3
                     &&
