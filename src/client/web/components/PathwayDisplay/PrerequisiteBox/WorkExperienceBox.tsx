@@ -26,11 +26,11 @@ const WorkExperienceBox = (props: { prereq: WorkExperiencePrereq, lang: LangId }
                 }
                 {
                     prereq.duration
-                        ? `you have worked ${prereq.duration[1].value} ${inflect(
+                        ? `You have worked ${prereq.duration[1].value} ${inflect(
                             text(prereq.duration[1].unit),
                             {number: prereq.duration[1].value})} in:`
                         : text({
-                            en: 'you have worked in',
+                            en: 'You have worked in',
                             zh_hans: '你在以下职业有工作经验'
                         })
                 }
