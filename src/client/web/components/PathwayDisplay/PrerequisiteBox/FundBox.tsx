@@ -21,7 +21,7 @@ function stringifyCondition(condition: Partial<FundPrereqCondition>) {
                         zh_hans: '从',
                     })
                 }
-                <a href={condition.source.reference.url}>
+                <a href={condition.source.reference.url} target="_blank">
                     {text(condition.source.name)}
                 </a>
             </span>
