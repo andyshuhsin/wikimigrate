@@ -7,56 +7,72 @@ import { LanguagePrereq } from '../../../../../definitions/Prerequisites/Languag
 
 import { LanguageTestItem } from '../../../../../definitions/auxiliary/LanguageTest'
 
-const langRequirementKeyOrder: string[] = [
+const testItems: LanguageTestItem[] = [
     'listening',
     'speaking',
     'reading',
     'writing',
 ]
 
-const testNameStyle = {
-    fontSize: '1em',
-    margin: 0,
-} as React.CSSProperties
+const tableHeadStyle: React.CSSProperties = {
+    padding: 0,
+    fontWeight: 100,
+}
 
-const LanguageTestItemBox = (props: { testItemKey: LanguageTestItem, score: number }) => (
-    <div
+const tableStyle: React.CSSProperties = {
+    borderCollapse: 'collapse',
+    margin: '0.5em 0',
+}
+
+const cellStyle: React.CSSProperties = {
+    padding: '0.2em',
+    paddingLeft: 0,
+}
+
+const LanguageTestItemRow = (props: { testItemKey: LanguageTestItem, score: number }) => (
+    <tr
         style={{
-            display: 'inline-block',
             marginRight: '0.8em',
+            marginBottom: '2em',
         }}
     >
-        <span style={{
-            marginRight: '0.1em',
+        <td style={{
+            ...cellStyle,
         }}>
             {text(data.common.languageBenchmarkItemNames[props.testItemKey])}
-        </span>
-        <span style={{
-            fontWeight: 'bolder',
+        </td>
+        <td style={{
+            ...cellStyle,
+            textAlign: 'center',
         }}>
             {props.score}
-        </span>
-    </div>
+        </td>
+    </tr>
 )
 
-const LanguageBenchmarkBox = (props: { prereq: LanguagePrereq }) => {
+function LanguageBenchmarkBox(props: { prereq: LanguagePrereq }) {
     const prereq = props.prereq
     const test = data.common.languageTestProfiles
-                     .filter(test => test.id === prereq.result.testId)[0]
+                     .find(test => test.id === prereq.result.testId)
     return (
-        <div>
-            <h5 style={testNameStyle}>
-                {text(test.title)} {' '}
-            </h5>
-            {langRequirementKeyOrder.map(
-                (testItemKey: LanguageTestItem) =>
-                    <LanguageTestItemBox
+        <table style={tableStyle}>
+            {test &&
+                 <thead><tr><th style={tableHeadStyle}>
+                     <a href={test.reference.url} target="_blank">
+                         {text(test.title)}
+                     </a>
+                 </th></tr></thead>
+            }
+            <tbody style={{display: 'table'}}>
+                {testItems.map(testItemKey =>
+                    <LanguageTestItemRow
                         testItemKey={testItemKey}
                         score={prereq.result.scores[testItemKey][1]}
                         key={testItemKey}
                     />,
-            )}
-        </div>
+                )}
+            </tbody>
+        </table>
     )
 }
 

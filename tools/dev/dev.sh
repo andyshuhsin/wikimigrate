@@ -17,7 +17,7 @@ then
     cd ${root}
 else
     cd src/client/web
-    node_modules/.bin/webpack-dev-server
+    node_modules/.bin/webpack-dev-server &
     cd ${root}
 fi
 

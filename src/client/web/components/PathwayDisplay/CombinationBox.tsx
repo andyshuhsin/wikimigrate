@@ -39,6 +39,30 @@ interface Props {
     lang: LangId
 }
 
+const OneOfText = () => (
+        <span style={{fontVariant: 'small-caps'}}>
+            {text({
+                en: 'One of',
+                zh_hans: '至少满足一项：',
+            })}
+        </span>
+)
+
+const CombinatorText = (props: {text: string, isTopLevel: boolean}) => (
+    <div style={
+        props.isTopLevel
+            ? {
+                marginTop: '0.5em',
+                fontVariant: 'small-caps',
+            }
+            : {
+                fontVariant: 'small-caps',
+            }
+    }>
+        {props.text}
+    </div>
+
+)
 
 class CombinationBox extends React.PureComponent<Props, {}> {
 
@@ -46,50 +70,33 @@ class CombinationBox extends React.PureComponent<Props, {}> {
         const combo = this.props.combo
         return (
             <div style={this.props.level > 0 ? embeddedCombinationBoxStyle : {}}>
-                <CombinationSubhead combo={combo}/>
+                <CombinationSubhead combo={combo} level={this.props.level} />
                 {
                     combo.combinator === 'or' && combo.operands.length >= 3
-                        ? <span style={{fontVariant: 'small-caps'}}>
-                              {text({
-                                  en: 'One of',
-                                  zh_hans: '至少满足一项：',
-                              })}
-                          </span>
-                        : ''
+                    &&
+                    <OneOfText />
                 }
                 <div style={branchStyle[combo.combinator]}>
-                    {combo.operands.map(
-                        (operand: any, index: number) => (
-                            <div
-                                style={operandViewStyle}
-                                key={JSON.stringify(operand) /* FIXME: Excessive? */}
-                            >
-                                <this.OperandView
-                                    operand={operand}
-                                    level={this.props.level + 1}
-                                    lang={this.props.lang}
+                    {combo.operands.map((operand, index) => (
+                        <div
+                            style={operandViewStyle}
+                            key={JSON.stringify(operand) /* FIXME: Excessive? */}
+                        >
+                            <this.OperandView
+                                operand={operand}
+                                level={this.props.level + 1}
+                                lang={this.props.lang}
+                            />
+                            {
+                                combo.operands.length === 2 && index === 0
+                                &&
+                                <CombinatorText
+                                    text={text(operators[combo.combinator].name)}
+                                    isTopLevel={this.props.level === 0}
                                 />
-                                {
-                                    combo.operands.length === 2
-                                    && index === 0
-                                    && (
-                                        <div style={
-                                            this.props.level === 0
-                                                ? {
-                                                    marginTop: '0.5em',
-                                                    fontVariant: 'small-caps',
-                                                }
-                                                : {
-                                                    fontVariant: 'small-caps',
-                                                }
-                                        }>
-                                            {text(operators[combo.combinator].name)}
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        ),
-                    )}
+                            }
+                        </div>
+                    ))}
                 </div>
             </div>
         )

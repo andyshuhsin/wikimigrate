@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { LangId } from '../../../definitions/auxiliary/MultiLang'
-import { pathwayBoxStyle } from './PathwayBox'
+import { pathwayBoxStyle } from './PathwaySummaryBox'
 
 const style = Object.assign({}, pathwayBoxStyle, {
     background: "none",
@@ -8,12 +8,11 @@ const style = Object.assign({}, pathwayBoxStyle, {
     cursor: "initial",
 } as React.CSSProperties)
 
-const anchorStyle = {
+const anchorStyle: React.CSSProperties = {
     display: "inline-block",
     padding: "0.2em",
     fontWeight: "bolder",
-    textDecoration: "underline",
-} as React.CSSProperties
+}
 
 export const Credits = (props: {lang: LangId}) => {
     switch (props.lang) {

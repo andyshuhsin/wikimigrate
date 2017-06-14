@@ -31,6 +31,8 @@ export interface MultipleChoiceFilter extends BaseFilter {
 export interface RealValueFilter extends BaseFilter {
     filterType: 'real',
     defaultValue: number
+    min?: number
+    max?: number
 }
 
 export type Filter =
@@ -200,6 +202,7 @@ export const filterSets: Filter[] = [
             zh_hans: '工作经验（年）',
         },
         defaultValue: 1,
+        min: 0,
     },
     {
         id: 'work_experience_region',
@@ -265,6 +268,7 @@ export const filterSets: Filter[] = [
             zh_hans: '年龄',
         },
         defaultValue: DEFAULT_AGE,
+        min: 0,
     },
     {
         id: 'english',

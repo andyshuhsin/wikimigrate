@@ -95,6 +95,9 @@ export const noc72: JobGroup = {
         zh_hans: '工业、电器和建筑工种',
     },
     parentGroup: nocB,
+    reference: {
+        url: 'http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314245&CPV=72&CST=01012016&CLV=2&MLV=4'
+    }
 }
 
 export const noc73: JobGroup = {
@@ -106,6 +109,9 @@ export const noc73: JobGroup = {
         zh_hans: '维修和设备操作工种',
     },
     parentGroup: nocB,
+    reference: {
+        url: 'http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314245&CPV=73&CST=01012016&CLV=2&MLV=4'
+    }
 }
 
 export const noc82: JobGroup = {
@@ -117,6 +123,9 @@ export const noc82: JobGroup = {
         zh_hans: '监督和自然资源、农业和相关生产领域的技术工作',
     },
     parentGroup: nocB,
+    reference: {
+        url: 'http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314245&CPV=82&CST=01012016&CLV=2&MLV=4'
+    }
 }
 
 export const noc92: JobGroup = {
@@ -128,6 +137,9 @@ export const noc92: JobGroup = {
         zh_hans: '加工、制造和基础设施的监督和中央控制操作员',
     },
     parentGroup: nocB,
+    reference: {
+        url: 'http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314245&CPV=92&CST=01012016&CLV=2&MLV=4'
+    }
 }
 
 export const noc632: JobGroup = {
@@ -139,6 +151,9 @@ export const noc632: JobGroup = {
         zh_hans: '厨师',
     },
     parentGroup: nocB,
+    reference: {
+        url: 'http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314246&CPV=632&CST=01012016&CLV=3&MLV=4'
+    }
 }
 
 export const noc633: JobGroup = {
@@ -150,6 +165,9 @@ export const noc633: JobGroup = {
         zh_hans: '屠宰师和烘焙师',
     },
     parentGroup: nocB,
+    reference: {
+        url: 'http://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=314243&CVD=314246&CPV=633&CST=01012016&CLV=3&MLV=4'
+    }
 }
 
 export const noc2016: JobClassification = {

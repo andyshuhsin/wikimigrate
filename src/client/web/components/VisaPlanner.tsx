@@ -24,7 +24,8 @@ import {
     pathBoxClickAction,
     pathViewCloseButtonClickAction,
     shadeClickAction,
-    urlpathChangeAction
+    urlpathChangeAction,
+    titleFilterTextClickAction,
 } from '../../actions'
 import { setTextLang, text } from '../../utils/text'
 import { LangId } from '../../../definitions/auxiliary/MultiLang'
@@ -60,6 +61,7 @@ interface PropTypes {
     filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
     onUrlpathChange: (path: string) => void
+    onTitleFilterTextClick(): void
 }
 
 const allTransitions = data.allTransitions
@@ -150,6 +152,7 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
                     paths={calcSuitablePaths(user, allTransitions)}
                     onClick={onPathwayBoxClick}
                     lang={lang}
+                    onFilterTextClick={this.props.onTitleFilterTextClick}
                 />
                 <PathwayDisplay
                     user={user}
@@ -205,6 +208,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
         onUrlpathChange(path: string) {
             dispatch(urlpathChangeAction(path))
         },
+        onTitleFilterTextClick() {
+            dispatch(titleFilterTextClickAction())
+        }
     }
 }
 

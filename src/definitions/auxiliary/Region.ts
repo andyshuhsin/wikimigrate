@@ -1,6 +1,6 @@
 import Status from '../Qualities/Status'
 import Transition from '../Transition'
-import URLDatum from './/URLDatum'
+import URLDatum from './URLDatum'
 import { MultiLangStringSet } from './MultiLang'
 import { JobClassification } from './JobClassification'
 import { FundSourceGroup } from './Money'
@@ -12,6 +12,9 @@ export type RegionId =
     | 'australia'
     | 'new_zealand'
     | 'canada_atlantic_provinces'
+    | 'uk'
+    | 'ireland'
+    | 'usa'
 
 export interface Region {
     id: RegionId

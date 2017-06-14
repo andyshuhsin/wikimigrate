@@ -13,10 +13,11 @@ const logoStyle = {
     verticalAlign: "middle",
 } as React.CSSProperties
 
-const nameStyle = {
+const nameStyle: React.CSSProperties = {
     fontSize: '1.2em',
     marginLeft: '0.1em',
-} as React.CSSProperties
+    textDecoration: 'none',
+}
 
 interface TopBarProps {
     brandName: string

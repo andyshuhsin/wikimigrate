@@ -3,18 +3,23 @@ import { Combination } from '../../../../definitions/auxiliary/Combination'
 import { text } from '../../../utils/text'
 import design from '../../design'
 
-const style = {
+const topLevelStyle: React.CSSProperties = {
     marginBottom: '0.4em',
     padding: '0.3em',
     textAlign: 'center',
     fontFamily: 'monospace',
     fontWeight: 'bolder',
     background: design.colors.brandLighter,
-} as React.CSSProperties
+}
 
-const CombinationSubhead = (props: { combo: Combination<any> }) => (
+const subLevelStyle: React.CSSProperties = {
+    ...topLevelStyle,
+    background: design.colors.brandLightest,
+}
+
+const CombinationSubhead = (props: { combo: Combination<any>, level: number }) => (
     props.combo.meta && props.combo.meta.title
-        ? <div style={style}>
+        ? <div style={props.level <= 1 ? topLevelStyle : subLevelStyle}>
               {text(props.combo.meta.title)}
           </div>
         : <noscript />

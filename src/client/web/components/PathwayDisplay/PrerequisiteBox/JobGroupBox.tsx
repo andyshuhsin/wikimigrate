@@ -15,24 +15,23 @@ function getParentClass(jobGroup: JobGroup): JobClassification | null {
     return null
 }
 
-const jobClassStyle = {
-    textDecoration: 'none',
-    fontWeight: 'bolder',
-} as React.CSSProperties
-
 const JobGroupBox = (props: { jobGroup: JobGroup }) => {
     const jobGroup = props.jobGroup
     const parentClass = getParentClass(jobGroup)
     return (
-        <div>
-            <a style={jobClassStyle} href={jobGroup.reference && jobGroup.reference.url}>
-                {parentClass && text(parentClass.titleShort)}
-                {'-'}
-                {jobGroup.specification}
-            </a>
+        <a
+            href={jobGroup.reference && jobGroup.reference.url}
+            target="_blank"
+            style={{fontWeight: 'bolder'}}
+        >
+            {parentClass && text(parentClass.titleShort)}
+            {'-'}
+            {jobGroup.specification}
             {' '}
-            {text(props.jobGroup.description)}
-        </div>
+            <span style={{fontWeight: 'lighter'}}>
+                {text(props.jobGroup.description)}
+            </span>
+        </a>
     )
 }
 

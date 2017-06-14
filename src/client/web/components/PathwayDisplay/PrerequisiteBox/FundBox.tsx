@@ -5,12 +5,17 @@ import { text } from '../../../../utils/text'
 import { LangId } from '../../../../../definitions/auxiliary/MultiLang'
 import { data } from '../../../../../data'
 
-function stringifyCondition(condition: Partial<FundPrereqCondition>) {
+function FundCondition(props: {condition: Partial<FundPrereqCondition>}) {
+    const { condition } = props
     if (condition.familyMember) {
-        return text({
-            en: ` if you have ${condition.familyMember} family members`,
-            zh_hans: `${condition.familyMember}人家庭——`,
-        })
+        return (
+            <span>
+                {text({
+                    en: ` if you have ${condition.familyMember} family members`,
+                    zh_hans: `${condition.familyMember}人家庭——`,
+                })}
+            </span>
+        )
     }
     else if (condition.source) {
         return (
@@ -21,7 +26,7 @@ function stringifyCondition(condition: Partial<FundPrereqCondition>) {
                         zh_hans: '从',
                     })
                 }
-                <a href={condition.source.reference.url}>
+                <a href={condition.source.reference.url} target="_blank">
                     {text(condition.source.name)}
                 </a>
             </span>
@@ -29,7 +34,7 @@ function stringifyCondition(condition: Partial<FundPrereqCondition>) {
     }
     else {
         console.warn('Unimplemented: FundPreq scheme condition', condition)
-        return ''
+        return null
     }
 }
 
@@ -48,7 +53,8 @@ const FundSchemeBox = (props: SchemeBoxProps) => {
         return (
             <div>
                 {
-                    props.schemeCondition && stringifyCondition(props.schemeCondition)
+                    props.schemeCondition &&
+                    <FundCondition condition={props.schemeCondition} />
                 }
                 {props.texts.front}
                 {props.currencyCode}
@@ -67,7 +73,8 @@ const FundSchemeBox = (props: SchemeBoxProps) => {
                 {props.fundValue}
                 {' '}
                 {
-                    props.schemeCondition && stringifyCondition(props.schemeCondition)
+                    props.schemeCondition &&
+                    <FundCondition condition={props.schemeCondition} />
                 }
             </div>
         )
@@ -147,7 +154,7 @@ const FundBox = (props: { prereq: FundPrereq, lang: LangId }) => {
             return (
                 <div>
                     被
-                    <a href={source.reference.url}>
+                    <a href={source.reference.url} target="_blank">
                         {text(source.name)}
                     </a>
                     录取
@@ -158,7 +165,7 @@ const FundBox = (props: { prereq: FundPrereq, lang: LangId }) => {
             return (
                 <div>
                     You are admitted by {' '}
-                    <a href={source.reference.url}>
+                    <a href={source.reference.url} target="_blank">
                         {text(source.name)}
                     </a>
                 </div>

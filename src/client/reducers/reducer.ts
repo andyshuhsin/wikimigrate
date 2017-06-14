@@ -254,6 +254,11 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case 'TITLE_FILTER_TEXT_CLICK': {
+            newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
+            return newState
+        }
+
         case 'SHADE_CLICK': {
             newState.ui.shouldDetailedFilterPanelExpand = false
             return newState

@@ -12,7 +12,7 @@ interface PathShowcaseProps {
     onClick: () => void
 }
 
-export const pathwayBoxStyle = {
+export const pathwayBoxStyle: React.CSSProperties = {
     display: "block",
     marginBottom: '0.625em',
 
@@ -25,7 +25,8 @@ export const pathwayBoxStyle = {
     wordWrap: 'break-work',
     overflow: 'hidden',
     cursor: 'pointer',
-} as React.CSSProperties
+    textDecoration: 'none',
+}
 
 const countryNameStyle = {
     font: 'normal 1.2em sans-serif',
@@ -38,7 +39,7 @@ const pathNameStyle = {
     margin: 0,
 } as React.CSSProperties
 
-class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
+class PathwaySummaryBox extends React.PureComponent<PathShowcaseProps, {}> {
     render() {
         const transitions = this.props.path.transitions
         const targetRegion = data.getRegionById(transitions[0].regionId)
@@ -71,4 +72,4 @@ class PathwayBox extends React.PureComponent<PathShowcaseProps, {}> {
     }
 }
 
-export default PathwayBox
+export default PathwaySummaryBox

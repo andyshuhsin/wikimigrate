@@ -4,8 +4,9 @@ import { below50, competentEnglish } from './skillSelectCommon'
 
 import jobClass from '../../jobClass'
 import Transition from '../../../../definitions/Transition'
-import { allOf } from '../../../../definitions/auxiliary/Combination'
+import { allOf, identity } from '../../../../definitions/auxiliary/Combination'
 import { WorkExperiencePrereq } from '../../../../definitions/Prerequisites/WorkExperiencePrereq'
+import { prereqTitleDict } from '../../../common/prereqTitleDict'
 
 const skilledIndependent: Transition = {
     id: 'skilled_independent',
@@ -20,12 +21,16 @@ const skilledIndependent: Transition = {
     prerequisiteList: allOf([
         competentEnglish,
         below50,
-        {
-            prereqId: 'work_experience',
-            jobNature: allOf([
-                jobClass.jobGroups.sol,
-            ]),
-        } as WorkExperiencePrereq,
+        identity([
+            {
+                prereqId: 'work_experience',
+                jobNature: allOf([
+                    jobClass.jobGroups.sol,
+                ]),
+            } as WorkExperiencePrereq,
+        ], {
+            title: prereqTitleDict.work_experience
+        })
     ]),
     procedureList: [
         {

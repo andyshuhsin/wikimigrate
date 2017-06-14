@@ -1,8 +1,9 @@
-import { oneOf } from '../../../../definitions/auxiliary/Combination'
+import { identity, oneOf } from '../../../../definitions/auxiliary/Combination'
 import { RightPrereq } from '../../../../definitions/Prerequisites/RightPrereq'
 import { languagePrereqMinScore } from '../../../../definitions/Prerequisites/LanguagePrereq'
 import { duration } from '../../../../definitions/auxiliary/Duration'
 import AgePrereq from '../../../../definitions/Prerequisites/AgePrereq'
+import { prereqTitleDict } from '../../../common/prereqTitleDict'
 
 // English requirements; see http://www.border.gov.au/Lega/Lega/Form/Immi-FAQs/how-can-i-prove-i-have-competent-english
 
@@ -64,8 +65,8 @@ export const competentEnglish = oneOf([
         } as RightPrereq,
         {
             prereqId: 'right',
-            regionId: 'new_zealand',
-            rightId: 'ireland',
+            regionId: 'ireland',
+            rightId: 'citizen',
         } as RightPrereq,
     ], {
         title: {
@@ -79,7 +80,9 @@ export const competentEnglish = oneOf([
     },
 })
 
-export const below50 = {
+export const below50 = identity([{
     prereqId: 'age',
     value: ['<', duration(50, 'year')],
-} as AgePrereq
+} as AgePrereq], {
+    title: prereqTitleDict.age
+})
