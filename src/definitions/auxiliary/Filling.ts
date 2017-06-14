@@ -1,8 +1,7 @@
 import { MultiLangStringSet } from './MultiLang'
 
-interface Procedure {
+export interface Procedure {
+    id: string
     name: MultiLangStringSet
     description?: MultiLangStringSet
 }
-
-export default Procedure

@@ -30,21 +30,25 @@ const skilledNominated: Transition = {
     ]),
     procedureList: [
         {
+            id: 'nomination',
             name: {
                 en: 'Be nominated by an Australian state or territory government agency',
             },
         },
         {
+            id: 'skill_assessment',
             name: {
                 en: 'Obtain a suitable skills assessment for that occupation',
             },
         },
         {
+            id: 'apply',
             name: {
                 en: 'Submit Expression of Interest',
             },
         },
         {
+            id: 'wait',
             name: {
                 en: 'Wait',
             },

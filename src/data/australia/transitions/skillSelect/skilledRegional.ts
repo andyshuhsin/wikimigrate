@@ -30,16 +30,19 @@ const skilledRegional: Transition = {
     ]),
     procedureList: [
         {
+            id: 'nominate',
             name: {
                 en: 'Be nominated by an Australian State or Territory government agency or sponsored by an eligible relative living in a designated area',
             },
         },
         {
+            id: 'apply',
             name: {
                 en: 'Submit Expression of Interest',
             },
         },
         {
+            id: 'wait',
             name: {
                 en: 'Wait',
             },

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Procedure from '../../../../../definitions/auxiliary/Procedure'
+import { Procedure } from '../../../../../definitions/auxiliary/Filling'
 import { text } from '../../../../utils/text'
 
 interface Props {

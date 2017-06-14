@@ -1,6 +1,6 @@
 import { MultiLangStringSet } from './auxiliary/MultiLang'
 import { Combination } from './auxiliary/Combination'
-import Procedure from './auxiliary/Procedure'
+import { Procedure } from './auxiliary/Filling'
 import Exception from './auxiliary/Exception'
 import URLDatum from './auxiliary/URLDatum'
 

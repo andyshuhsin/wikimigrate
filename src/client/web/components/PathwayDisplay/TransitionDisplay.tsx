@@ -4,6 +4,8 @@ import text from '../../../utils/text'
 import CombinationBox from './CombinationBox'
 import ReferenceBox from './ReferenceBox'
 import ScoreBox from './ScoreBox'
+import ProcedureBox from './ProcedureBox/ProcedureBox'
+
 import Transition from '../../../../definitions/Transition'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { calcScore } from '../../../utils/calcScore'
@@ -105,14 +107,12 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                     </section>
                 }
 
-                {/* TODO: Implement procedural guides
                  <section>
                  <h3 style={sectionTitleStyle}>Application</h3>
                  {
                  <ProcedureBox procedureList={transition.procedureList} />
                  }
                  </section>
-                 */}
 
                 {
                     transition.referenceList &&

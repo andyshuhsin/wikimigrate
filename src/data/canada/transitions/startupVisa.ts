@@ -64,6 +64,7 @@ const startupVisa: Transition = {
     ]),
     procedureList: [
         {
+            id: 'apply',
             name: {
                 en: 'Apply',
             },
