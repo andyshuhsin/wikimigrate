@@ -103,7 +103,7 @@ const DocumentRequirementBox = (props: {requirement: DocumentRequirement}) => {
                      zh_hans: '以下人士需要递交： '
                  })}
                  {props.requirement.parties.map(party =>
-                    <span>
+                    <span key={party}>
                         {text(partyTextTable[party]) + ' '}
                     </span>
                  )}
