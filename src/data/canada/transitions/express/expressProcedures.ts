@@ -6,12 +6,13 @@ export const candidacy: Procedure[] = [
         id: 'check_eligibility',
         name: {
             en: 'Check eligibility',
-            zh_hans: '确认有权申请',
+            zh_hans: '确认符合申请资格',
         },
-        description: {
-            en: 'Go to http://www.cic.gc.ca/ctc-vac/ee-start.asp and check your eligibility',
-            zh_hans: '访问http://www.cic.gc.ca/ctc-vac/ee-start.asp，确认您有权申请',
-        },
+        instruction: {
+            link: {
+                url: 'http://www.cic.gc.ca/ctc-vac/ee-start.asp'
+            }
+        }
     },
     {
         id: 'create_profile',
@@ -30,8 +31,6 @@ export const application: Procedure[] = [
             en: 'Fill out the online form',
             zh_hans: '填写申请表',
         },
-        description: {
-        }
     },
     {
         id: 'prepare_documents',

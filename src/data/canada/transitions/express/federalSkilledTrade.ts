@@ -10,6 +10,7 @@ import { prereqTitleDict } from '../../../common/prereqTitleDict'
 import { alien, expressEntryCandidate } from '../../status'
 
 import jobClass from '../../jobClass'
+import { expressProcedures } from './expressProcedures'
 
 const federalSkilledTrade: Transition = {
     id: 'federal_skilled_trade',
@@ -78,8 +79,7 @@ const federalSkilledTrade: Transition = {
 
     ]),
 
-    procedureList: [
-    ],
+    procedureList: expressProcedures,
 
     referenceList: [
         {
