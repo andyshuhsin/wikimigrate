@@ -71,7 +71,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                  </h2>*/}
 
                 <section>
-                    <h3 style={sectionTitleStyle}>
+                    <h3 style={sectionTitleStyle} id='prerequisites'>
                         {
                             text({
                                 en: 'Prerequisites',
@@ -91,7 +91,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 {
                     transition.scoreSystem &&
                     <section>
-                        <h3 style={sectionTitleStyle}>
+                        <h3 style={sectionTitleStyle} id='scoring'>
                             {
                                 text({
                                     en: 'Scoring(Experimental)',
@@ -108,16 +108,21 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 }
 
                  <section>
-                 <h3 style={sectionTitleStyle}>Application</h3>
-                 {
-                 <ProcedureBox procedureList={transition.procedureList} />
-                 }
+                     <h3 style={sectionTitleStyle} id='application'>
+                         {text({
+                             en: 'Application',
+                             zh_hans: '申请方法',
+                         })}
+                     </h3>
+                     {
+                         <ProcedureBox procedureList={transition.procedureList} />
+                     }
                  </section>
 
                 {
                     transition.referenceList &&
                     <section>
-                        <h3 style={sectionTitleStyle}>
+                        <h3 style={sectionTitleStyle} id='references'>
                             {text({
                                 en: 'References',
                                 zh_hans: '参考资料',
