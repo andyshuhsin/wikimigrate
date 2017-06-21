@@ -8,9 +8,17 @@ interface ShadeProps {
     onClick?: () => void
 }
 
-const Shade = (props: ShadeProps) => (
+const Shade = (props: ShadeProps) => {
 
-    <div
+    let duration
+    if (typeof props.duration === 'undefined') {
+        duration = DEFAULT_DURATION
+    }
+    else {
+        duration = props.duration
+    }
+
+    return <div
         style={{
             position: 'absolute',
             left: 0,
@@ -20,9 +28,7 @@ const Shade = (props: ShadeProps) => (
             zIndex: props.shouldShow ? 0 : -1,
 
             opacity: props.shouldShow ? 1 : 0,
-            transition: `opacity ${props.duration === undefined
-                ? DEFAULT_DURATION
-                : props.duration}s`,
+            transition: `opacity ${duration}s, z-index ${duration}s`,
 
             background: 'rgba(0, 0, 0, 0.5)',
         }}
@@ -30,6 +36,6 @@ const Shade = (props: ShadeProps) => (
     >
 
     </div>
-)
+}
 
 export default Shade
