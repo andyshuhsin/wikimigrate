@@ -33,10 +33,12 @@ class FilterDetailedOptionPanel extends React.PureComponent<OptionDisplayProps, 
             transition: `transform ${design.durations.slide}s`,
             overflowY: 'scroll',
             maxHeight: '80vh',
+            height: firstRender ? 'initial' : '0',
         } as React.CSSProperties
 
         const styleExpanded = {
             transform: `translateY(0)`,
+            height: 'initial',
         }
 
         return (
