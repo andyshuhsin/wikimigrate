@@ -943,16 +943,16 @@ const crs: ScoreSystem = {
     },
     history: [
         {
+            lowestScore: 415,
+            date: [2017, 5, 17],
+        },
+        {
             lowestScore: 423,
-            date: [2017, 4, 12],
+            date: [2017, 5, 4],
         },
         {
-            lowestScore: 431,
-            date: [2017, 4, 5],
-        },
-        {
-            lowestScore: 441,
-            date: [2017, 3, 24],
+            lowestScore: 415,
+            date: [2017, 4, 19],
         },
     ],
     reference: {
