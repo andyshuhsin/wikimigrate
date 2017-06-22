@@ -188,22 +188,21 @@ class PaperworkBox extends React.PureComponent<Props, {}> {
 
         return (
             <div>
-                <section>
-                    <h4>
-                        {text({
-                            en: 'Processing Time',
-                            zh_hans: '处理时间',
-                        })}
-                    </h4>
-                    {this.props.paperwork.processingTime &&
-                     this.props.paperwork.processingTime.statements.map(statement =>
-                         <ProcessingTimeBox
-                             statement={statement}
-                             key={statement.percentage}
-                         />
-                     )
-                    }
-                </section>
+                {this.props.paperwork.processingTime &&
+                    <section>
+                        <h4>
+                            {text({
+                                en: 'Processing Time',
+                                zh_hans: '处理时间',
+                            })}
+                        </h4>
+                        {this.props.paperwork.processingTime.statements.map(statement =>
+                        <ProcessingTimeBox
+                            statement={statement}
+                            key={statement.percentage}
+                        />)}
+                    </section>
+                }
 
                 <section>
                     <h4>
