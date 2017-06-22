@@ -389,7 +389,19 @@ const startupVisa: Transition = {
                     format: 'copy',
                 }
             ]
-        }
+        },
+        {
+            id: 'mail',
+            name: {
+                en: 'Mail the Application'
+            }
+        },
+        {
+            id: 'wait',
+            name: {
+                en: 'Wait for results'
+            }
+        },
     ],
     referenceList: [
         {
