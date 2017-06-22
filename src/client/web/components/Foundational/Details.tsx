@@ -15,7 +15,7 @@ const style: React.CSSProperties = {
 }
 
 const titleStyle: React.CSSProperties = {
-    margin: '1em 0',
+    margin: '0.5em 0',
     cursor: 'pointer',
 }
 
@@ -64,8 +64,8 @@ export class Details extends React.Component<DetailsProps, DetailsState> {
 
                 <div
                     style={this.state.isExpanded
-                        ? { height: 'auto' }
-                        : { height: 0 }
+                        ? { }
+                        : { display: 'none' }
                     }
                 >
                     {this.props.children}
