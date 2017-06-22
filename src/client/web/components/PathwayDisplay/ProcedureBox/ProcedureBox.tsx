@@ -5,6 +5,7 @@ import { Details } from '../../Foundational/Details'
 import { DocumentRequirement, DocumentRequirementFormat, Party } from '../../../../../definitions/auxiliary/Document'
 import { MultiLangStringSet } from '../../../../../definitions/auxiliary/MultiLang'
 import { Mapping } from '../../../../../definitions/auxiliary/Mapping'
+import design from '../../../design'
 
 interface Props {
     procedureList: Procedure[]
@@ -20,6 +21,19 @@ const requirementTitleStyle: React.CSSProperties = {
     margin: '0.2em 0',
 }
 
+const labelStyle: React.CSSProperties = {
+    margin: '0.5em',
+    padding: '1px 0.5em',
+    background: design.colors.greyMedium,
+    color: design.colors.greyLight,
+
+    // FIXME: autoprefixer
+    userSelect: 'none',
+    webkitUserSelect: 'none',
+    mozUserSelect: 'none',
+    msUserSelect: 'none',
+}
+
 const formatTextTable: {[key in DocumentRequirementFormat]: MultiLangStringSet} = {
     original: {
         en: 'Original',
@@ -30,15 +44,6 @@ const formatTextTable: {[key in DocumentRequirementFormat]: MultiLangStringSet} 
         zh_hans: '复印版'
     }
 }
-
-/**
- *
- * formatTextTable
- | 'spouse'
- | 'dependent_child'
- | 'dependent_child_18+'
- | 'dependent_child_18-'
- */
 
 const partyTextTable: Mapping<Party, MultiLangStringSet> = {
     principal: {
@@ -63,41 +68,45 @@ const partyTextTable: Mapping<Party, MultiLangStringSet> = {
     }
 }
 
-
 const DocumentRequirementBox = (props: {requirement: DocumentRequirement}) => {
 
     return (
         <section style={documentRequirementBoxStyle}>
             <h6 style={requirementTitleStyle}>
-                {text(props.requirement.document.title)}
+                <a href={props.requirement.document.url} target='_blank'>
+                    {text(props.requirement.document.title)}
+                </a>
+                {props.requirement.ifApplicable &&
+
+                 <span style={labelStyle}>
+                     {
+                         text({
+                             en: 'if applicable',
+                             zh_hans: '如适用',
+                         })
+                     }
+                 </span>
+                }
             </h6>
 
-            {text(props.requirement.description)}
+            <p>
+                {text(props.requirement.description)}
+            </p>
 
-            {props.requirement.ifApplicable &&
-             <div style={{}}>
-                 {
-                     text({
-                         en: '(If applicable)',
-                         zh_hans: '(如适用)',
-                     })
-                 }
-             </div>
-            }
 
             {props.requirement.format &&
-             <div>
+             <p>
                  {text({
                      en: 'Format:',
                      zh_hans: '版本：'
                  })}
                  {' '}
                  {text(formatTextTable[props.requirement.format])}
-             </div>
+             </p>
             }
 
             {props.requirement.parties &&
-             <div>
+             <p>
                  {text({
                      en: 'Required for: ',
                      zh_hans: '以下人士需要递交： '
@@ -107,7 +116,7 @@ const DocumentRequirementBox = (props: {requirement: DocumentRequirement}) => {
                         {'・' + text(partyTextTable[party])}
                     </span>
                  )}
-             </div>
+             </p>
             }
 
         </section>

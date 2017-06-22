@@ -1,7 +1,9 @@
 import { MultiLangStringSet } from './MultiLang'
+import { URI } from './URLDatum'
 export interface Document {
     id: string
     title: MultiLangStringSet
+    url?: URI
 }
 
 export type DocumentRequirementFormat = 'original' | 'copy'
@@ -16,7 +18,7 @@ export type Party =
 export interface DocumentRequirement {
     document: Document
     description?: MultiLangStringSet
-    format: DocumentRequirementFormat
+    format?: DocumentRequirementFormat
     ifApplicable?: true | undefined
     parties?: Party[]
 }
