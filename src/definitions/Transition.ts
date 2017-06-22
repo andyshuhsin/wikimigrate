@@ -1,6 +1,6 @@
 import { MultiLangStringSet } from './auxiliary/MultiLang'
 import { Combination } from './auxiliary/Combination'
-import { Procedure } from './auxiliary/Filling'
+import { Paperwork } from './auxiliary/Paperwork'
 import Exception from './auxiliary/Exception'
 import URLDatum from './auxiliary/URLDatum'
 
@@ -23,7 +23,7 @@ interface Transition {
         date?: Date
     }
     prerequisiteList: Combination<Prerequisite>
-    procedureList: Procedure[]
+    paperwork: Paperwork
     scoreSystem?: ScoreSystem
     exceptionList?: Array<Exception>
     referenceList?: URLDatum[]

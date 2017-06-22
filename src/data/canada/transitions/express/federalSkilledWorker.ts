@@ -135,7 +135,9 @@ const federalSkilledWorker: Transition = {
                 title: prereqTitleDict.fund,
             }),
     ]),
-    procedureList: expressProcedures,
+    paperwork: {
+        procedureList: expressProcedures,
+    },
     referenceList: [
         {
             url: 'http://www.cic.gc.ca/english/immigrate/skilled/apply-who.asp',

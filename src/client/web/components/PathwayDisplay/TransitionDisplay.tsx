@@ -53,9 +53,8 @@ interface Props {
 
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
-        const {
-            transition, lang,
-        } = this.props
+        const transition = this.props.transition
+        const lang = this.props.lang
         return (
             <div>
                 <h1 style={transitionNameStyle}>
@@ -115,7 +114,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                          })}
                      </h3>
                      {
-                         <ProcedureBox procedureList={transition.procedureList} />
+                         <ProcedureBox procedureList={transition.paperwork.procedureList} />
                      }
                  </section>
 

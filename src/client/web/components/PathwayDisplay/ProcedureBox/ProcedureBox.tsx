@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Procedure } from '../../../../../definitions/auxiliary/Filling'
+import { Procedure } from '../../../../../definitions/auxiliary/Paperwork'
 import { text } from '../../../../utils/text'
 import { Details } from '../../Foundational/Details'
 import { DocumentRequirement, DocumentRequirementFormat, Party } from '../../../../../definitions/auxiliary/Document'

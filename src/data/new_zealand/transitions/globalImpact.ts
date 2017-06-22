@@ -31,7 +31,9 @@ export const globalImpactVisa: Transition = {
             } as FundPrereq,
         ]),
     ]),
-    procedureList: [],
+    paperwork: {
+        procedureList: [],
+    },
     referenceList: [
         {
             url: 'https://www.immigration.govt.nz/new-zealand-visas/options/start-a-business-or-invest/i-want-to-invest-or-do-business-in-nz/the-global-impact-visa',

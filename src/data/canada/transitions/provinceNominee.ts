@@ -1,5 +1,5 @@
-import { Transition } from '../../../definitions'
-
+/**
+import Transition from '../../../definitions/Transition'
 const provinceNominee: Transition = {
     id: 'provincial_nominees',
     regionId: 'canada',
@@ -7,18 +7,20 @@ const provinceNominee: Transition = {
     name: {
         en: 'Provincial Nominee Program',
     },
-    procedureList: [
-        {
-            name: {
-                en: 'Apply to a province or territory for a nomination',
+    paperwork: {
+        procedureList: [
+            {
+                name: {
+                    en: 'Apply to a province or territory for a nomination',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Apply to CIC to become a permanent resident',
+            {
+                name: {
+                    en: 'Apply to CIC to become a permanent resident',
+                },
             },
-        },
-    ],
+        ],
+    },
     referenceList: {
         en: {
             Homepage: 'http://www.cic.gc.ca/english/immigrate/provincial/index.asp',
@@ -27,3 +29,4 @@ const provinceNominee: Transition = {
 }
 
 export default provinceNominee
+ */

@@ -1,4 +1,4 @@
-import { Procedure } from '../../../../definitions/auxiliary/Filling'
+import { Procedure } from '../../../../definitions/auxiliary/Paperwork'
 
 // @see http://www.cic.gc.ca/english/immigrate/skilled/candidate.asp
 export const candidacy: Procedure[] = [

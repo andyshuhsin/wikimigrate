@@ -32,26 +32,40 @@ const skilledIndependent: Transition = {
             title: prereqTitleDict.work_experience
         })
     ]),
-    procedureList: [
-        {
-            id: 'skill_assessment',
-            name: {
-                en: 'Obtain a suitable skills assessment for that occupation',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'skill_assessment',
+                name: {
+                    en: 'Obtain a suitable skills assessment for that occupation',
+                },
             },
-        },
-        {
-            id: 'apply',
-            name: {
-                en: 'Submit Expression of Interest',
+            {
+                id: 'apply',
+                name: {
+                    en: 'Submit Expression of Interest',
+                },
             },
-        },
-        {
-            id: 'wait',
-            name: {
-                en: 'Wait',
+            {
+                id: 'wait',
+                name: {
+                    en: 'Wait for invitation',
+                },
             },
-        },
-    ],
+            {
+                id: 'document',
+                name: {
+                    en: 'Prepare documents'
+                }
+            },
+            {
+                id: 'apply',
+                name: {
+                    en: 'Apply for visa'
+                }
+            }
+        ],
+    },
     referenceList: [
         {
             url: 'https://www.border.gov.au/Trav/Visa-1/189-',

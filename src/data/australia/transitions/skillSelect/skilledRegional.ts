@@ -28,26 +28,28 @@ const skilledRegional: Transition = {
             ]),
         } as WorkExperiencePrereq,
     ]),
-    procedureList: [
-        {
-            id: 'nominate',
-            name: {
-                en: 'Be nominated by an Australian State or Territory government agency or sponsored by an eligible relative living in a designated area',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'nominate',
+                name: {
+                    en: 'Be nominated by an Australian State or Territory government agency or sponsored by an eligible relative living in a designated area',
+                },
             },
-        },
-        {
-            id: 'apply',
-            name: {
-                en: 'Submit Expression of Interest',
+            {
+                id: 'apply',
+                name: {
+                    en: 'Submit Expression of Interest',
+                },
             },
-        },
-        {
-            id: 'wait',
-            name: {
-                en: 'Wait',
+            {
+                id: 'wait',
+                name: {
+                    en: 'Wait',
+                },
             },
-        },
-    ],
+        ],
+    },
     referenceList: [
         {
             url: 'https://www.border.gov.au/Trav/Visa-1/489-',

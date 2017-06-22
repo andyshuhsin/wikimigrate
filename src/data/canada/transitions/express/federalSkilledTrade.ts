@@ -79,7 +79,9 @@ const federalSkilledTrade: Transition = {
 
     ]),
 
-    procedureList: expressProcedures,
+    paperwork: {
+        procedureList: expressProcedures,
+    },
 
     referenceList: [
         {

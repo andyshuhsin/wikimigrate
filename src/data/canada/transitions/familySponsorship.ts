@@ -1,4 +1,6 @@
-import { allOf, oneOf, Transition } from '../../../definitions'
+/**
+import Transition from '../../../definitions/Transition'
+import { allOf, oneOf } from '../../../definitions/auxiliary/Combination'
 
 import { alien, pr } from '../status'
 
@@ -37,13 +39,10 @@ const familySponsorship: Transition = {
             },
         ]),
     ]),
-    procedureList: [
-        {
-            'name': {
-                'en': 'Application',
-            },
-        },
-    ],
+    paperwork: {
+        procedureList: [],
+    },
 }
 
 export default familySponsorship
+*/

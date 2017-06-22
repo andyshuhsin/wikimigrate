@@ -1,3 +1,4 @@
+/**
 import Transition from '../../../definitions/Transition'
 import { allOf } from '../../../definitions/auxiliary/Combination'
 
@@ -13,18 +14,20 @@ const quebecSkilled: Transition = {
     prerequisiteList: allOf([]),
     from: alien,
     to: pr,
-    procedureList: [
-        {
-            'name': {
-                'en': 'Apply to Quebec government',
+    paperwork: {
+        procedureList: [
+            {
+                'name': {
+                    'en': 'Apply to Quebec government',
+                },
             },
-        },
-        {
-            'name': {
-                'en': 'Apply to CIC',
+            {
+                'name': {
+                    'en': 'Apply to CIC',
+                },
             },
-        },
-    ],
+        ],
+    },
     referenceList: [
         {
             url: 'http://www.cic.gc.ca/english/immigrate/quebec/index.asp',
@@ -36,3 +39,4 @@ const quebecSkilled: Transition = {
 }
 
 export default quebecSkilled
+ */

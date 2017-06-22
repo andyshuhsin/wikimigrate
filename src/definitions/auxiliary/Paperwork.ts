@@ -1,8 +1,8 @@
 import { MultiLangStringSet } from './MultiLang'
 import { Money } from './Money'
-import { Combination } from './Combination'
 import { DocumentRequirement } from './Document'
 import URLDatum from './URLDatum'
+import { Duration } from './Duration'
 
 export interface Procedure {
     id: string
@@ -13,4 +13,15 @@ export interface Procedure {
     }
     cost?: Money
     documentRequirements?: DocumentRequirement[]
+}
+
+export interface ProcessingTimeStatement {
+    duration: Duration
+}
+
+export interface Paperwork {
+    procedureList: Procedure[]
+    processingTime?: {
+
+    }
 }

@@ -33,7 +33,9 @@ export const silverFern: Transition = {
             } as AgePrereq,
         ]),
     ]),
-    procedureList: [],
+    paperwork: {
+        procedureList: [],
+    },
     referenceList: [
         {
             url: 'https://www.immigration.govt.nz/new-zealand-visas/apply-for-a-visa/about-visa/silver-fern-job-search-work-visa',

@@ -13,23 +13,28 @@ const employerNominationGeneral: Transition = {
     from: null,
     to: visa186holder,
     prerequisiteList: allOf([]),
-    procedureList: [
-        {
-            name: {
-                en: 'Nomination by an approved Australian employer',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'nominate',
+                name: {
+                    en: 'Nomination by an approved Australian employer',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Apply',
+            {
+                id: 'apply',
+                name: {
+                    en: 'Apply',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Wait',
+            {
+                id: 'wait',
+                name: {
+                    en: 'Wait',
+                },
             },
-        },
-    ],
+        ],
+    },
     referenceList: [
         {
             url: 'http://www.border.gov.au/Trav/Visa-1/186-',
