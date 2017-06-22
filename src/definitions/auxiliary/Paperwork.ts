@@ -17,11 +17,10 @@ export interface Procedure {
 
 export interface ProcessingTimeStatement {
     duration: Duration
+    percentage: number
 }
 
 export interface Paperwork {
     procedureList: Procedure[]
-    processingTime?: {
-
-    }
+    processingTime?: ProcessingTimeStatement[]
 }

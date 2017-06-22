@@ -7,6 +7,7 @@ import Transition from '../../../../definitions/Transition'
 import { allOf, identity } from '../../../../definitions/auxiliary/Combination'
 import { WorkExperiencePrereq } from '../../../../definitions/Prerequisites/WorkExperiencePrereq'
 import { prereqTitleDict } from '../../../common/prereqTitleDict'
+import { duration } from '../../../../definitions/auxiliary/Duration'
 
 const skilledIndependent: Transition = {
     id: 'skilled_independent',
@@ -33,6 +34,16 @@ const skilledIndependent: Transition = {
         })
     ]),
     paperwork: {
+        processingTime: [
+            {
+                percentage: 75,
+                duration: duration(4, 'month')
+            },
+            {
+                percentage: 90,
+                duration: duration(7, 'month')
+            }
+        ],
         procedureList: [
             {
                 id: 'skill_assessment',
@@ -41,7 +52,7 @@ const skilledIndependent: Transition = {
                 },
             },
             {
-                id: 'apply',
+                id: 'eoi',
                 name: {
                     en: 'Submit Expression of Interest',
                 },

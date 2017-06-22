@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Paperwork, Procedure } from '../../../../definitions/auxiliary/Paperwork'
-import { text } from '../../../utils/text'
+import { Paperwork, Procedure, ProcessingTimeStatement } from '../../../../definitions/auxiliary/Paperwork'
+import { text, textDuration } from '../../../utils/text'
 import { Details } from '../Foundational/Details'
 import { DocumentRequirement, DocumentRequirementFormat, Party } from '../../../../definitions/auxiliary/Document'
 import { MultiLangStringSet } from '../../../../definitions/auxiliary/MultiLang'
@@ -159,6 +159,26 @@ const ProcedureBox = (props: {
     </li>
 )
 
+const ProcessingTimeBox = (props: {statement: ProcessingTimeStatement}) => (
+    <div>
+        {props.statement.percentage}%
+        {text({
+            en: 'applicants',
+            zh_hans: '的申请人',
+        })}
+        : {' '}
+        {text({
+            en: 'within',
+            zh_hans: ''
+        })}
+        {textDuration(props.statement.duration)}
+        {text({
+            en: '',
+            zh_hans: '之内'
+        })}
+    </div>
+)
+
 class PaperworkBox extends React.PureComponent<Props, {}> {
     render() {
         const documentRequirementTitle = text({
@@ -167,15 +187,42 @@ class PaperworkBox extends React.PureComponent<Props, {}> {
         })
 
         return (
-            <ol>
-                {this.props.paperwork.procedureList.map(procedure =>
-                    <ProcedureBox
-                        procedure={procedure}
-                        documentRequirementTitle={documentRequirementTitle}
-                        key={procedure.id}
-                    />
-                )}
-            </ol>
+            <div>
+                <section>
+                    <h4>
+                        {text({
+                            en: 'Processing Time',
+                            zh_hans: '处理时间',
+                        })}
+                    </h4>
+                    {this.props.paperwork.processingTime &&
+                     this.props.paperwork.processingTime.map(statement =>
+                         <ProcessingTimeBox
+                             statement={statement}
+                             key={statement.percentage}
+                         />
+                     )
+                    }
+                </section>
+
+                <section>
+                    <h4>
+                        {text({
+                            en: 'Procedures',
+                            zh_hans: '申请步骤',
+                        })}
+                    </h4>
+                    <ol>
+                        {this.props.paperwork.procedureList.map(procedure =>
+                            <ProcedureBox
+                                procedure={procedure}
+                                documentRequirementTitle={documentRequirementTitle}
+                                key={procedure.id}
+                            />
+                        )}
+                    </ol>
+                </section>
+            </div>
         )
     }
 }
