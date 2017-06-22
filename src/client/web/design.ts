@@ -4,6 +4,7 @@ const design = {
         brandLighter: '#FFCCBC',
         brandLightest: '#fce2d3',
         greyLight: '#EBEBEB',
+        greyMedium: '#AAA',
         greyDark: '#444',
     },
 

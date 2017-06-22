@@ -8,6 +8,18 @@ const WebpackMd5Hash      = require('webpack-md5-hash')
 
 const isProd = process.env.NODE_ENV === 'production'
 
+const optimizationPlugins = [
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ['external', 'manifest'],
+    }),
+    new WebpackMd5Hash(),
+    new ManifestPlugin(),
+    new ChunkManifestPlugin({
+        filename:         'chunk-manifest.json',
+        manifestVariable: 'webpackManifest',
+    }),
+]
+
 module.exports = {
     entry: {
         app:      path.join(__dirname, 'render.client.tsx'),
@@ -21,7 +33,7 @@ module.exports = {
 
     output: {
         path:       path.resolve(__dirname, '../../../.built/web'),
-        filename:   '[name].[chunkhash].js',
+        filename:   isProd ? '[name].[chunkhash].js' : '[name].js',
         publicPath: '/',
     },
 
@@ -59,15 +71,7 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['external', 'manifest'],
-        }),
-        new WebpackMd5Hash(),
-        new ManifestPlugin(),
-        new ChunkManifestPlugin({
-            filename:         'chunk-manifest.json',
-            manifestVariable: 'webpackManifest',
-        }),
+        ...(isProd ? optimizationPlugins : []),
         new CopyWebpackPlugin([
             {from: 'about.html', to: '.'},
             {from: '../assets/favicon*', to: '.', flatten: true},

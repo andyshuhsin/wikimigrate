@@ -4,6 +4,8 @@ import text from '../../../utils/text'
 import CombinationBox from './CombinationBox'
 import ReferenceBox from './ReferenceBox'
 import ScoreBox from './ScoreBox'
+import PaperworkBox from './PaperworkBox'
+
 import Transition from '../../../../definitions/Transition'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { calcScore } from '../../../utils/calcScore'
@@ -51,9 +53,8 @@ interface Props {
 
 class TransitionDisplay extends React.PureComponent<Props, {}> {
     render() {
-        const {
-            transition, lang,
-        } = this.props
+        const transition = this.props.transition
+        const lang = this.props.lang
         return (
             <div>
                 <h1 style={transitionNameStyle}>
@@ -69,7 +70,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                  </h2>*/}
 
                 <section>
-                    <h3 style={sectionTitleStyle}>
+                    <h3 style={sectionTitleStyle} id='prerequisites'>
                         {
                             text({
                                 en: 'Prerequisites',
@@ -89,7 +90,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                 {
                     transition.scoreSystem &&
                     <section>
-                        <h3 style={sectionTitleStyle}>
+                        <h3 style={sectionTitleStyle} id='scoring'>
                             {
                                 text({
                                     en: 'Scoring(Experimental)',
@@ -105,19 +106,22 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                     </section>
                 }
 
-                {/* TODO: Implement procedural guides
                  <section>
-                 <h3 style={sectionTitleStyle}>Application</h3>
-                 {
-                 <ProcedureBox procedureList={transition.procedureList} />
-                 }
+                     <h3 style={sectionTitleStyle} id='application'>
+                         {text({
+                             en: 'Application',
+                             zh_hans: '申请方法',
+                         })}
+                     </h3>
+                     {
+                         <PaperworkBox paperwork={transition.paperwork} />
+                     }
                  </section>
-                 */}
 
                 {
                     transition.referenceList &&
                     <section>
-                        <h3 style={sectionTitleStyle}>
+                        <h3 style={sectionTitleStyle} id='references'>
                             {text({
                                 en: 'References',
                                 zh_hans: '参考资料',

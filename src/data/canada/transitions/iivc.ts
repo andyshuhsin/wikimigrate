@@ -18,7 +18,9 @@ const iivc: Transition = {
         },
     },
     prerequisiteList: allOf([]),
-    procedureList: [],
+    paperwork: {
+        procedureList: [],
+    },
 }
 
 export default iivc

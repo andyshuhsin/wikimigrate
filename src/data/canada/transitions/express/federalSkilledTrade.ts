@@ -10,6 +10,7 @@ import { prereqTitleDict } from '../../../common/prereqTitleDict'
 import { alien, expressEntryCandidate } from '../../status'
 
 import jobClass from '../../jobClass'
+import { expressProcedures } from './expressProcedures'
 
 const federalSkilledTrade: Transition = {
     id: 'federal_skilled_trade',
@@ -78,30 +79,9 @@ const federalSkilledTrade: Transition = {
 
     ]),
 
-    procedureList: [
-        {
-            name: {
-                en: 'Check eligiblility',
-                zh_hans: '确认有权申请',
-            },
-            description: {
-                en: 'Go to http://www.cic.gc.ca/ctc-vac/ee-start.asp and check your eligibility',
-                zh_hans: '访问http://www.cic.gc.ca/ctc-vac/ee-start.asp，确认您有权申请',
-            },
-        },
-        {
-            name: {
-                en: 'Create Express Entry Profile',
-                zh_hans: '设立Express Entry档案',
-            },
-        },
-        {
-            name: {
-                en: 'Wait for invitation',
-                zh_hans: '等待邀请',
-            },
-        },
-    ],
+    paperwork: {
+        procedureList: expressProcedures,
+    },
 
     referenceList: [
         {

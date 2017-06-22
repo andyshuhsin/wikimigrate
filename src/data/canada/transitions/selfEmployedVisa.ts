@@ -51,7 +51,9 @@ const selfEmployedVisa: Transition = {
             } as WorkExperiencePrereq,
         ]),
     ]),
-    procedureList: [],
+    paperwork: {
+        procedureList: [],
+    }
 }
 
 export default selfEmployedVisa

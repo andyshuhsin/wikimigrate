@@ -28,28 +28,34 @@ const skilledNominated: Transition = {
             ]),
         } as WorkExperiencePrereq,
     ]),
-    procedureList: [
-        {
-            name: {
-                en: 'Be nominated by an Australian state or territory government agency',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'nomination',
+                name: {
+                    en: 'Be nominated by an Australian state or territory government agency',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Obtain a suitable skills assessment for that occupation',
+            {
+                id: 'skill_assessment',
+                name: {
+                    en: 'Obtain a suitable skills assessment for that occupation',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Submit Expression of Interest',
+            {
+                id: 'apply',
+                name: {
+                    en: 'Submit Expression of Interest',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Wait',
+            {
+                id: 'wait',
+                name: {
+                    en: 'Wait',
+                },
             },
-        },
-    ],
+        ],
+    },
     referenceList: [
         {
             url: 'https://www.border.gov.au/Trav/Visa-1/190-',

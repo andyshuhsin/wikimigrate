@@ -29,23 +29,28 @@ const temporaryWorkSkilled: Transition = {
             jobNature: identity([jobClass.jobGroups.sol]),
         } as WorkExperiencePrereq,
     ]),
-    procedureList: [
-        {
-            name: {
-                en: 'Nominated by a state or territory government or Australian agency',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'nominate',
+                name: {
+                    en: 'Nominated by a state or territory government or Australian agency',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Submit Expression of Interest',
+            {
+                id: 'eoi',
+                name: {
+                    en: 'Submit Expression of Interest',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Wait',
+            {
+                id: 'wait',
+                name: {
+                    en: 'Wait',
+                },
             },
-        },
-    ],
+        ],
+    },
     referenceList: [
         {
             url: 'http://www.border.gov.au/Trav/Visa-1/457-',

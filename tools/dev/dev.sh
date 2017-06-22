@@ -17,7 +17,7 @@ then
     cd ${root}
 else
     cd src/client/web
-    node_modules/.bin/webpack-dev-server &
+    node --max_old_space_size=4096 node_modules/.bin/webpack-dev-server &
     cd ${root}
 fi
 

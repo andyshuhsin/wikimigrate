@@ -63,18 +63,22 @@ const businessTalent: Transition = {
         }),
 
     ]),
-    procedureList: [
-        {
-            name: {
-                en: 'Submit Expression of Interest',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'eoi',
+                name: {
+                    en: 'Submit Expression of Interest',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Wait',
+            {
+                id: 'wait',
+                name: {
+                    en: 'Wait',
+                },
             },
-        },
-    ],
+        ],
+    },
     referenceList: [
         {
             url: 'https://www.border.gov.au/Trav/Visa-1/132-',
