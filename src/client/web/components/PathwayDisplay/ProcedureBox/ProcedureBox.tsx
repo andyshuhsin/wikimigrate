@@ -78,8 +78,8 @@ const DocumentRequirementBox = (props: {requirement: DocumentRequirement}) => {
              <div style={{}}>
                  {
                      text({
-                         en: 'If applicable',
-                         zh_hans: '如适用',
+                         en: '(If applicable)',
+                         zh_hans: '(如适用)',
                      })
                  }
              </div>
@@ -88,8 +88,8 @@ const DocumentRequirementBox = (props: {requirement: DocumentRequirement}) => {
             {props.requirement.format &&
              <div>
                  {text({
-                     en: 'format:',
-                     zh_hans: '版本'
+                     en: 'Format:',
+                     zh_hans: '版本：'
                  })}
                  {' '}
                  {text(formatTextTable[props.requirement.format])}
@@ -104,7 +104,7 @@ const DocumentRequirementBox = (props: {requirement: DocumentRequirement}) => {
                  })}
                  {props.requirement.parties.map(party =>
                     <span key={party}>
-                        {text(partyTextTable[party]) + ' '}
+                        {'・' + text(partyTextTable[party])}
                     </span>
                  )}
              </div>
