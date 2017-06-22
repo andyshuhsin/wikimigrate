@@ -2,11 +2,12 @@ import { Combination } from './auxiliary/Combination'
 import { Prerequisite } from './Prerequisites/index'
 import { MultiLangStringSet } from './auxiliary/MultiLang'
 import URLDatum from './auxiliary/URLDatum'
+import { SafeDate } from './auxiliary/SafeDate'
 export type ScoreSystemId = 'crs'
 
 export interface ScoreHistoryEntry {
     lowestScore: number
-    date: [number, number, number]
+    date: SafeDate
 }
 
 export type ScoreHistory = ScoreHistoryEntry[]
