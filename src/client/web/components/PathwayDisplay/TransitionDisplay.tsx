@@ -4,7 +4,7 @@ import text from '../../../utils/text'
 import CombinationBox from './CombinationBox'
 import ReferenceBox from './ReferenceBox'
 import ScoreBox from './ScoreBox'
-import ProcedureBox from './ProcedureBox/ProcedureBox'
+import PaperworkBox from './PaperworkBox'
 
 import Transition from '../../../../definitions/Transition'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
@@ -114,7 +114,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                          })}
                      </h3>
                      {
-                         <ProcedureBox procedureList={transition.paperwork.procedureList} />
+                         <PaperworkBox paperwork={transition.paperwork} />
                      }
                  </section>
 

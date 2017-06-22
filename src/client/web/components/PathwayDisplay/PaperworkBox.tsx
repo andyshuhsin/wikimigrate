@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { Procedure } from '../../../../../definitions/auxiliary/Paperwork'
-import { text } from '../../../../utils/text'
-import { Details } from '../../Foundational/Details'
-import { DocumentRequirement, DocumentRequirementFormat, Party } from '../../../../../definitions/auxiliary/Document'
-import { MultiLangStringSet } from '../../../../../definitions/auxiliary/MultiLang'
-import { Mapping } from '../../../../../definitions/auxiliary/Mapping'
-import design from '../../../design'
+import { Paperwork, Procedure } from '../../../../definitions/auxiliary/Paperwork'
+import { text } from '../../../utils/text'
+import { Details } from '../Foundational/Details'
+import { DocumentRequirement, DocumentRequirementFormat, Party } from '../../../../definitions/auxiliary/Document'
+import { MultiLangStringSet } from '../../../../definitions/auxiliary/MultiLang'
+import { Mapping } from '../../../../definitions/auxiliary/Mapping'
+import design from '../../design'
 
 interface Props {
-    procedureList: Procedure[]
+    paperwork: Paperwork
 }
 
 const documentRequirementBoxStyle: React.CSSProperties = {
@@ -29,9 +29,9 @@ const labelStyle: React.CSSProperties = {
 
     // FIXME: autoprefixer
     userSelect: 'none',
-    webkitUserSelect: 'none',
-    mozUserSelect: 'none',
-    msUserSelect: 'none',
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    SsUserSelect: 'none',
 }
 
 const formatTextTable: {[key in DocumentRequirementFormat]: MultiLangStringSet} = {
@@ -123,7 +123,43 @@ const DocumentRequirementBox = (props: {requirement: DocumentRequirement}) => {
     )
 }
 
-class ProcedureBox extends React.PureComponent<Props, {}> {
+const ProcedureBox = (props: {
+    procedure: Procedure,
+    documentRequirementTitle: string,
+}) => (
+    <li
+        key={text(props.procedure.name)}
+        style={{
+            marginBottom: '0.5em',
+        }}
+    >
+        {text(props.procedure.name)}
+        {props.procedure.instruction &&
+         <div style={{
+             marginLeft: '2em',
+         }}>
+             {text(props.procedure.instruction.text)} {' '}
+             {props.procedure.instruction.link &&
+              <a href={props.procedure.instruction.link.url} target='_blank'>
+                  {props.procedure.instruction.link.url}
+              </a>
+             }
+             {props.procedure.documentRequirements &&
+              <Details summary={props.documentRequirementTitle}>
+                  {props.procedure.documentRequirements.map(req =>
+                      <DocumentRequirementBox
+                          requirement={req}
+                          key={JSON.stringify(req)}
+                      />
+                  )}
+              </Details>
+             }
+         </div>
+        }
+    </li>
+)
+
+class PaperworkBox extends React.PureComponent<Props, {}> {
     render() {
         const documentRequirementTitle = text({
             en: 'List of Required Documents',
@@ -131,46 +167,17 @@ class ProcedureBox extends React.PureComponent<Props, {}> {
         })
 
         return (
-            <div>
-                {this.props.procedureList.map(
-                    (procedure: Procedure, index: number) => (
-                        <div
-                            key={text(procedure.name)}
-                            style={{
-                                marginBottom: '0.5em',
-                            }}
-                        >
-                            {index + 1}
-                            {'. '}
-                            {text(procedure.name)}
-                            {procedure.instruction &&
-                             <div style={{
-                                 marginLeft: '2em',
-                             }}>
-                                 {text(procedure.instruction.text)} {' '}
-                                 {procedure.instruction.link &&
-                                  <a href={procedure.instruction.link.url} target='_blank'>
-                                      {procedure.instruction.link.url}
-                                  </a>
-                                 }
-                                 {procedure.documentRequirements &&
-                                  <Details summary={documentRequirementTitle}>
-                                      {procedure.documentRequirements.map(req =>
-                                          <DocumentRequirementBox
-                                              requirement={req}
-                                              key={JSON.stringify(req)}
-                                          />
-                                      )}
-                                  </Details>
-                                 }
-                             </div>
-                            }
-                        </div>
-                    ),
+            <ol>
+                {this.props.paperwork.procedureList.map(procedure =>
+                    <ProcedureBox
+                        procedure={procedure}
+                        documentRequirementTitle={documentRequirementTitle}
+                        key={procedure.id}
+                    />
                 )}
-            </div>
+            </ol>
         )
     }
 }
 
-export default ProcedureBox
+export default PaperworkBox
