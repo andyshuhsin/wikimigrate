@@ -6,6 +6,7 @@ const DEFAULT_LANG: LangId = 'en'
 export type InflectionOption = {
     language: LangId,
     number: number,
+    allowCountWord?: boolean
 }
 
 
@@ -31,6 +32,14 @@ function inflect(
                 result += 's'
             }
             return result
+        }
+        case 'zh_hans': {
+            if (term === '月') {
+                return '个月'
+            }
+            else {
+                return term
+            }
         }
         default: {
             return term

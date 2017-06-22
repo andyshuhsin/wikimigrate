@@ -1,4 +1,6 @@
 import { LangId, MultiLangStringSet } from '../../definitions/auxiliary/MultiLang'
+import { Duration, durationUnitProfiles } from '../../definitions/auxiliary/Duration'
+import inflect from './inflect'
 
 export let currentLang: LangId = 'en'
 
@@ -15,13 +17,13 @@ export function text(s?: MultiLangStringSet | string | null, langArg = currentLa
     }
     else {
         const translation = s[langArg]
-        if (translation) {
+        if (typeof translation === 'string') {
             return translation
         }
         else {
             for (let lang of fallbackLangList) {
                 let translation = s[lang]
-                if (translation) {
+                if (typeof translation === 'string') {
                     return translation
                 }
             }
@@ -29,6 +31,15 @@ export function text(s?: MultiLangStringSet | string | null, langArg = currentLa
     }
     console.warn('Cannot convert to text: ', s)
     return ''
+}
+
+export function textDuration(duration: Duration): string {
+    const value = duration.value
+    const unit = inflect(text(durationUnitProfiles[duration.unit].name.normal), {
+        number: value,
+        language: currentLang,
+    })
+    return `${value} ${unit}`
 }
 
 export function setTextLang(langArg: LangId) {
