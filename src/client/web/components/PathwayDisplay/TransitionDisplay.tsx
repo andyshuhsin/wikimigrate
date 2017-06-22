@@ -93,8 +93,8 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                         <h3 style={sectionTitleStyle} id='scoring'>
                             {
                                 text({
-                                    en: 'Scoring(Experimental)',
-                                    zh_hans: '分数(功能测试中)',
+                                    en: 'Scoring',
+                                    zh_hans: '分数',
                                 })
                             }
                         </h3>
