@@ -3,6 +3,7 @@ import { Money } from './Money'
 import { DocumentRequirement } from './Document'
 import URLDatum from './URLDatum'
 import { Duration } from './Duration'
+import { SafeDate } from './SafeDate'
 
 export interface Procedure {
     id: string
@@ -22,5 +23,9 @@ export interface ProcessingTimeStatement {
 
 export interface Paperwork {
     procedureList: Procedure[]
-    processingTime?: ProcessingTimeStatement[]
+    processingTime?: {
+        statements: ProcessingTimeStatement[]
+        source: URLDatum
+        updated: SafeDate
+    }
 }

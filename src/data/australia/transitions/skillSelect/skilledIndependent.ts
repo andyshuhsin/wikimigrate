@@ -34,16 +34,23 @@ const skilledIndependent: Transition = {
         })
     ]),
     paperwork: {
-        processingTime: [
-            {
-                percentage: 75,
-                duration: duration(4, 'month')
+        processingTime: {
+            statements: [
+                {
+                    percentage: 75,
+                    duration: duration(4, 'month')
+                },
+                {
+                    percentage: 90,
+                    duration: duration(7, 'month')
+                }
+            ],
+            source: {
+                title: 'Official website',
+                url: 'https://www.border.gov.au/Trav/Visa-1/189-'
             },
-            {
-                percentage: 90,
-                duration: duration(7, 'month')
-            }
-        ],
+            updated: [2017, 6, 14]
+        },
         procedureList: [
             {
                 id: 'skill_assessment',

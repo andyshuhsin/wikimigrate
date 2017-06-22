@@ -196,7 +196,7 @@ class PaperworkBox extends React.PureComponent<Props, {}> {
                         })}
                     </h4>
                     {this.props.paperwork.processingTime &&
-                     this.props.paperwork.processingTime.map(statement =>
+                     this.props.paperwork.processingTime.statements.map(statement =>
                          <ProcessingTimeBox
                              statement={statement}
                              key={statement.percentage}
