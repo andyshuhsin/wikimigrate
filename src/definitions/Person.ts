@@ -4,11 +4,12 @@ import { BirthQuality } from './Qualities/Birth'
 import { LanguageTestResult } from './auxiliary/LanguageTest'
 import { EducationQuality } from './Qualities/EducationExperience'
 import { WorkExperienceQuality } from './Qualities/WorkExperience'
+import { RightId } from './Prerequisites/RightPrereq'
 
 export interface Person {
     status: {
-        [key in RegionId]: string[]
-        },
+        [key in RegionId]: RightId[]
+    },
     birth: BirthQuality
     inUnion?: boolean
     spouse?: Person
