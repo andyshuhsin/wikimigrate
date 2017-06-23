@@ -8,7 +8,8 @@
         "start": "sh tools/dev/dev.sh nossr",
         "start:ssr": "sh tools/dev/dev.sh ssr",
         "deploy:production": "sh tools/deploy/deploy.sh prod",
-        "stage": "sh tools/deploy/deploy.sh stage"
+        "stage": "sh tools/deploy/deploy.sh stage",
+        "test": "sh test/test.sh"
     },
     "devDependencies": {
         "@types/node": "^7.0.18",
