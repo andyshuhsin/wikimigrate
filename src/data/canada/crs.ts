@@ -11,7 +11,7 @@ import { Interval } from '../../definitions/auxiliary/Operator'
 import { WorkExperiencePrereq } from '../../definitions/Prerequisites/WorkExperiencePrereq'
 import { CertificationPrereq } from '../../definitions/Prerequisites/CertificationPrereq'
 import { OfferPrereq } from '../../definitions/Prerequisites/OfferPrereq'
-import { noc0, noc00, nocA, nocB } from './jobClass/noc2016/index'
+import { noc0, noc00, nocA, nocB } from './jobClass/noc2016'
 import { NominationPrereq } from '../../definitions/Prerequisites/NominationPrereq'
 import { languageTestItemValues } from '../../definitions/auxiliary/LanguageTest'
 
