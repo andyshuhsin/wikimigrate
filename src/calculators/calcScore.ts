@@ -1,5 +1,5 @@
-import { Person } from '../../definitions/Person'
-import { ScoreSystem } from '../../definitions/ScoreSystem'
+import { Person } from '../definitions/Person'
+import { ScoreSystem } from '../definitions/ScoreSystem'
 import { satisfyPrerequisiteCombination } from './prerequisiteOperations'
 
 interface BatchScores {

@@ -8,7 +8,7 @@ import PaperworkBox from './PaperworkBox'
 
 import Transition from '../../../../definitions/Transition'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
-import { calcScore } from '../../../utils/calcScore'
+import { calcScore } from '../../../../calculators/calcScore'
 import { Person } from '../../../../definitions/Person'
 import { LangId } from '../../../../definitions/auxiliary/MultiLang'
 

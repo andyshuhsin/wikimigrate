@@ -1,7 +1,7 @@
-import { Person } from '../../definitions/Person'
-import { Pathway } from './definitions'
-import Transition from '../../definitions/Transition'
-import { RightPrereq } from '../../definitions/Prerequisites/RightPrereq'
+import { Person } from '../definitions/Person'
+import { Pathway } from '../client/utils/definitions'
+import Transition from '../definitions/Transition'
+import { RightPrereq } from '../definitions/Prerequisites/RightPrereq'
 import { satisfyPrerequisiteCombination } from './prerequisiteOperations'
 
 // Applicability of a program when user didn't specify a condition;
