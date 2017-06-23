@@ -1,13 +1,13 @@
 import { Person } from '../../src/definitions/Person'
 
-export type Spec<SecondParamType> = [
+export type Spec<FirstParamType, SecondParamType, ReturnType> = [
     string,
-    Person,
+    FirstParamType,
     SecondParamType,
-    boolean
+    ReturnType
 ]
 
-export function evaluate<T>(specs: Spec<T>[], f: (person: Person, prereq: T) => boolean) {
+export function evaluate<A, B, R>(specs: Spec<A, B, R>[], f: (a: A, b: B) => R) {
     for (const spec of specs) {
         const result = f(spec[1], spec[2])
         if (result === spec[3]) {

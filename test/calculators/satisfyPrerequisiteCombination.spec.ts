@@ -25,7 +25,7 @@ const simpleCanadian: Person = {
     },
 }
 
-const specs: Spec<Prerequisite | Combination<Prerequisite>>[] = [
+const specs: Spec<Person, Prerequisite | Combination<Prerequisite>, Boolean>[] = [
 
     [
         "Single age prerequisite - positive",
