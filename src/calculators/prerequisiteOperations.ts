@@ -90,6 +90,20 @@ function satisfyLanguageResultRequirement(
     }
 
     for (let actualResult of actualResults) {
+
+        if (expectedResult.language) {
+            if (actualResult.language) {
+                if (actualResult.language !== expectedResult.language) {
+                    return false
+                }
+            }
+            else {
+                if (!fallback) {
+                    return false
+                }
+            }
+        }
+
         if (expectedResult.testId !== actualResult.testId) {
             actualResult = clone(actualResult)
             const test = languageTestProfiles.find(test => test.id === expectedResult.testId)
@@ -102,6 +116,7 @@ function satisfyLanguageResultRequirement(
                 return false
             }
         }
+
         const actualScores = actualResult.scores
         const expectedScores = expectedResult.scores
         if (satisfyAllLanguageScoresRequirement(actualScores, expectedScores)) {
@@ -177,7 +192,7 @@ function satisfyWorkPrereq(
         return durationMatch(prereq.duration, work.duration)
     }
     else {
-        return fallback
+        return true
     }
 }
 
@@ -193,20 +208,20 @@ function satisfyEducationPrereq(
             return false
         }
     }
-    else if (prereq.region && education.regionId) {
-        if (!regionMatch(education.regionId, prereq.region)) {
+    if (prereq.region && education.regionId) {
+        if (!regionMatch(prereq.region, education.regionId)) {
             return false
         }
     }
-    else if (prereq.duration && education.duration) {
+    if (prereq.duration && education.duration) {
         if (!durationMatch(prereq.duration, education.duration)) {
             return false
         }
     }
-    else if (prereq.certification) {
+    if (prereq.certification) {
         console.info('[Unimplemented] Checking prereq.certification')
     }
-    return fallback
+    return true
 }
 
 function satisfyPrerequisite(

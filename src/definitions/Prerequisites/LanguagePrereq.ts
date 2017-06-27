@@ -6,6 +6,7 @@ import {
     LanguageTestScoreSet
 } from '../auxiliary/LanguageTest'
 import { Interval } from '../auxiliary/Operator'
+import { LangId } from '../auxiliary/MultiLang'
 
 
 export const zeroLanguagePrereqScores: LanguagePrereqScoreSet = {
@@ -22,6 +23,7 @@ export type LanguagePrereqScoreSet = {
 export type LanguagePrereqResult = {
     testId: LanguageTestId
     scores: LanguagePrereqScoreSet
+    language?: LangId
 }
 
 export interface LanguagePrereq extends BasePrereq {
