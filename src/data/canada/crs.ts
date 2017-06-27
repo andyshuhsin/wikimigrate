@@ -322,7 +322,7 @@ const clbScores: ClbScore[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
 
 type LanguageTable = {
     [clbScore in ClbScore]?: [MarriedScore, SingleScore]
-    }
+}
 
 const languageTableFirst: LanguageTable = {
     4: [6, 6],
