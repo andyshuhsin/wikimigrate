@@ -19,9 +19,10 @@ export interface Person {
     workExperiences?: WorkExperienceQuality[]
 }
 
-export function getInitialStatus(): StatusSet {
-    return {
+export function getInitialStatus(origin?: RegionId): StatusSet {
+    const initial: StatusSet = {
         world: ['alien'],
+        atlantis: ['alien'],
         canada: ['alien'],
         australia: ['alien'],
         canada_atlantic_provinces: ['alien'],
@@ -29,6 +30,14 @@ export function getInitialStatus(): StatusSet {
         uk: ['alien'],
         ireland: ['alien'],
         usa: ['alien'],
+    }
+
+    if (origin) {
+        initial[origin] = ['citizen']
+        return initial
+    }
+    else {
+        return initial
     }
 }
 

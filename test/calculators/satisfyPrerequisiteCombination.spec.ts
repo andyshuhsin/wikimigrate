@@ -1,5 +1,5 @@
 import { satisfyPrerequisiteCombination } from '../../src/calculators/prerequisiteOperations'
-import { Person } from '../../src/definitions/Person'
+import { getInitialStatus, Person } from '../../src/definitions/Person'
 import { allOf, Combination, oneOf } from '../../src/definitions/auxiliary/Combination'
 import AgePrereq from '../../src/definitions/Prerequisites/AgePrereq'
 import { duration } from '../../src/definitions/auxiliary/Duration'
@@ -12,16 +12,7 @@ const simpleCanadian: Person = {
             year: 1980,
         },
     },
-    status: {
-        world: [ 'alien', ],
-        canada: [ 'citizen', ],
-        australia: [ 'alien', ],
-        canada_atlantic_provinces: [ 'alien', ],
-        new_zealand: [ 'alien', ],
-        uk: [ 'alien', ],
-        usa: [ 'alien', ],
-        ireland: [ 'alien', ],
-    },
+    status: getInitialStatus('canada'),
 }
 
 const specs: Spec<[Person, Prerequisite | Combination<Prerequisite>], Boolean>[] = [

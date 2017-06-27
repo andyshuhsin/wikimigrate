@@ -39,6 +39,7 @@ const flagSources: {[key in RegionId]: Package | null} = {
     australia: require('../../../assets/flags/australia.svg'),
     new_zealand: require('../../../assets/flags/new_zealand.svg'),
     world: null,
+    atlantis: null,
     canada_atlantic_provinces: null,
     usa: null,
     ireland: null,

@@ -1,4 +1,4 @@
-import { Person } from '../../src/definitions/Person'
+import { getInitialStatus, Person } from '../../src/definitions/Person'
 import {
     LanguagePrereq, LanguagePrereqScoreSet,
     zeroLanguagePrereqScores,
@@ -13,16 +13,7 @@ const person: Person = {
             year: 1980,
         },
     },
-    status: {
-        world: [ 'alien', ],
-        canada: [ 'citizen', ],
-        australia: [ 'alien', ],
-        canada_atlantic_provinces: [ 'alien', ],
-        new_zealand: [ 'alien', ],
-        uk: [ 'alien', ],
-        usa: [ 'alien', ],
-        ireland: [ 'alien', ],
-    },
+    status: getInitialStatus('canada'),
     languageTests: [
         {
             testId: 'clb',
