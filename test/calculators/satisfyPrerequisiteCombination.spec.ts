@@ -1,9 +1,8 @@
 import { satisfyPrerequisiteCombination } from '../../src/calculators/prerequisiteOperations'
 import { Person } from '../../src/definitions/Person'
-import { allOf, Combination } from '../../src/definitions/auxiliary/Combination'
+import { allOf, Combination, oneOf } from '../../src/definitions/auxiliary/Combination'
 import AgePrereq from '../../src/definitions/Prerequisites/AgePrereq'
 import { duration } from '../../src/definitions/auxiliary/Duration'
-import { RightPrereq } from '../../src/definitions/Prerequisites/RightPrereq'
 import { evaluate, Spec } from './evaluator'
 import { Prerequisite } from '../../src/definitions/Prerequisites'
 
@@ -61,10 +60,9 @@ const specs: Spec<[Person, Prerequisite | Combination<Prerequisite>], Boolean>[]
                     value: ["<", duration(100, "year")],
                 } as AgePrereq,
                 {
-                    prereqId: 'right',
-                    regionId: 'canada',
-                    rightId: 'work'
-                } as RightPrereq,
+                    prereqId: 'age',
+                    value: [">", duration(5, "year")],
+                } as AgePrereq,
             ]),
         ],
         true
@@ -74,16 +72,15 @@ const specs: Spec<[Person, Prerequisite | Combination<Prerequisite>], Boolean>[]
         "Combination test - negative",
         [
             simpleCanadian,
-            allOf([
+            oneOf([
                 {
                     prereqId: 'age',
                     value: [">", duration(100, "year")],
                 } as AgePrereq,
                 {
-                    prereqId: 'right',
-                    regionId: 'canada',
-                    rightId: 'work'
-                } as RightPrereq,
+                    prereqId: 'age',
+                    value: ["<", duration(5, "year")],
+                } as AgePrereq,
             ]),
         ],
         false
