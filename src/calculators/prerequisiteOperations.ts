@@ -2,9 +2,10 @@ import { isPrerequisite, Prerequisite } from '../definitions/Prerequisites'
 import { Duration } from '../definitions/auxiliary/Duration'
 import { Combination, isCombination } from '../definitions/auxiliary/Combination'
 import {
+    EquivalencyTable,
     languageTestItemValues,
     LanguageTestResult,
-    LanguageTestScoreSet
+    LanguageTestScoreSet,
 } from '../definitions/auxiliary/LanguageTest'
 import {
     LanguagePrereq,
@@ -19,6 +20,7 @@ import { EducationQuality, getEducationStageRank } from '../definitions/Qualitie
 import { EducationPrereq } from '../definitions/Prerequisites/EducationPrereq'
 import { Person } from '../definitions/Person'
 import { clone } from '../client/utils/clone'
+import languageTestProfiles from '../data/common/languageTestProfiles'
 
 const warningFlags: any = {}
 
@@ -44,6 +46,29 @@ function getCriticalDate(duration: Duration, today = new Date()) {
     }
 }
 
+export function convertLanguageTestScores(
+    scores: LanguagePrereqScoreSet,
+    equivalencyTable: EquivalencyTable | undefined
+): LanguagePrereqScoreSet {
+    if (!equivalencyTable) {
+        return scores
+    }
+    const result = clone(scores)
+    for (const item of languageTestItemValues) {
+        let highest = 0
+        const score = scores[item]
+        for (const row of equivalencyTable[item]) {
+            const sourceScore = row[0]
+            const convertedScore = row[1]
+            if (compare(result[item][0], result[item][1], sourceScore) && convertedScore > highest) {
+                highest = convertedScore
+            }
+        }
+        result[item] = [score[0], highest]
+    }
+    return result
+}
+
 function satisfyAllLanguageScoresRequirement(
     actualScores: LanguageTestScoreSet,
     expectedScores: LanguagePrereqScoreSet,
@@ -66,8 +91,21 @@ function satisfyLanguageResultRequirement(
     }
 
     for (const actualResult of actualResults) {
+        let expectation = expectedResult
+        if (expectedResult.testId !== actualResult.testId) {
+            const test = languageTestProfiles.find(test => test.id === expectedResult.testId)
+            if (test && test.equivalency && test.equivalency[actualResult.testId]) {
+                const equivalencyTable = test.equivalency[actualResult.testId]
+                expectation = clone(expectedResult)
+                expectation.testId = actualResult.testId
+                expectation.scores = convertLanguageTestScores(expectation.scores, equivalencyTable)
+            }
+            else {
+                return false
+            }
+        }
         const actualScores = actualResult.scores
-        const expectedScores = expectedResult.scores
+        const expectedScores = expectation.scores
         if (satisfyAllLanguageScoresRequirement(actualScores, expectedScores)) {
             return true
         }
