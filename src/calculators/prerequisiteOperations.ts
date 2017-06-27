@@ -47,24 +47,23 @@ function getCriticalDate(duration: Duration, today = new Date()) {
 }
 
 export function convertLanguageTestScores(
-    scores: LanguagePrereqScoreSet,
+    scores: LanguageTestScoreSet,
     equivalencyTable: EquivalencyTable | undefined
-): LanguagePrereqScoreSet {
+): LanguageTestScoreSet {
     if (!equivalencyTable) {
         return scores
     }
     const result = clone(scores)
     for (const item of languageTestItemValues) {
         let highest = 0
-        const score = scores[item]
         for (const row of equivalencyTable[item]) {
             const sourceScore = row[0]
             const convertedScore = row[1]
-            if (compare(result[item][0], result[item][1], sourceScore) && convertedScore > highest) {
+            if (result[item] >= sourceScore && convertedScore > highest) {
                 highest = convertedScore
             }
         }
-        result[item] = [score[0], highest]
+        result[item] = highest
     }
     return result
 }
@@ -90,22 +89,21 @@ function satisfyLanguageResultRequirement(
         return fallback
     }
 
-    for (const actualResult of actualResults) {
-        let expectation = expectedResult
+    for (let actualResult of actualResults) {
         if (expectedResult.testId !== actualResult.testId) {
+            actualResult = clone(actualResult)
             const test = languageTestProfiles.find(test => test.id === expectedResult.testId)
             if (test && test.equivalency && test.equivalency[actualResult.testId]) {
                 const equivalencyTable = test.equivalency[actualResult.testId]
-                expectation = clone(expectedResult)
-                expectation.testId = actualResult.testId
-                expectation.scores = convertLanguageTestScores(expectation.scores, equivalencyTable)
+                actualResult.testId = expectedResult.testId
+                actualResult.scores = convertLanguageTestScores(actualResult.scores, equivalencyTable)
             }
             else {
                 return false
             }
         }
         const actualScores = actualResult.scores
-        const expectedScores = expectation.scores
+        const expectedScores = expectedResult.scores
         if (satisfyAllLanguageScoresRequirement(actualScores, expectedScores)) {
             return true
         }
