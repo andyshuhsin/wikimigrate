@@ -10,5 +10,5 @@ fi
 for spec in $(find . -name ${glob})
 do
     echo "\nTesting ${spec}"
-    ts-node ${spec}
+    ts-node --fast ${spec}
 done
