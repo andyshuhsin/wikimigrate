@@ -14,6 +14,9 @@ import { OfferPrereq } from '../../definitions/Prerequisites/OfferPrereq'
 import { noc0, noc00, nocA, nocB } from './jobClass/noc2016'
 import { NominationPrereq } from '../../definitions/Prerequisites/NominationPrereq'
 import { languageTestItemValues } from '../../definitions/auxiliary/LanguageTest'
+import SiblingPrereq from '../../definitions/Prerequisites/SiblingPrereq'
+import { RightPrereq } from '../../definitions/Prerequisites/RightPrereq'
+import { ResidencePrereq } from '../../definitions/Prerequisites/ResidencePrereq'
 
 type MarriedScore = number
 type SingleScore = number
@@ -826,7 +829,90 @@ const transferabilityConditions: ScoreCondition[] = [
 const additionalPointsTable: ScoreCondition[] = [
     {
         score: 15,
-        batch: 'additional',
+        batch: 'additional:sibling',
+        prerequisites: identity([
+            {
+                prereqId: 'sibling',
+                siblingPrerequisites: allOf([
+                    identity([
+                        {
+                            prereqId: 'residence',
+                            regionId: 'canada',
+                            currently: true,
+                        } as ResidencePrereq
+                    ]),
+                    oneOf([
+                        {
+                            prereqId: 'right',
+                            regionId: 'canada',
+                            rightId: 'citizen',
+                        } as RightPrereq,
+                        {
+                            prereqId: 'right',
+                            regionId: 'canada',
+                            rightId: 'permanent',
+                        } as RightPrereq,
+                    ])
+                ])
+            } as SiblingPrereq
+        ])
+    },
+    {
+        score: 15,
+        batch: 'additional:french',
+        prerequisites: identity([
+            {
+                prereqId: 'language_test',
+                result: {
+                    testId: 'clb',
+                    language: 'fr',
+                    scores: {
+                        listening: ['>=', 7],
+                        speaking: ['>=', 7],
+                        reading: ['>=', 7],
+                        writing: ['>=', 7],
+                    }
+                }
+            } as LanguagePrereq
+        ])
+    },
+    {
+        score: 30,
+        batch: 'additional:french',
+        prerequisites: allOf([
+            {
+                prereqId: 'language_test',
+                result: {
+                    testId: 'clb',
+                    language: 'fr',
+                    scores: {
+                        listening: ['>=', 7],
+                        speaking: ['>=', 7],
+                        reading: ['>=', 7],
+                        writing: ['>=', 7],
+                    }
+                }
+            } as LanguagePrereq,
+            {
+                prereqId: 'language_test',
+                result: {
+                    testId: 'clb',
+                    language: 'en',
+                    scores: {
+                        listening: ['>=', 5],
+                        speaking: ['>=', 5],
+                        reading: ['>=', 5],
+                        writing: ['>=', 5],
+                    }
+                }
+            } as LanguagePrereq,
+        ], {
+            surjective: true
+        })
+    },
+    {
+        score: 15,
+        batch: 'additional:canada-education',
         prerequisites: allOf([
             {
                 prereqId: 'education',
@@ -844,7 +930,7 @@ const additionalPointsTable: ScoreCondition[] = [
     },
     {
         score: 30,
-        batch: 'additional',
+        batch: 'additional:canada-education',
         prerequisites: identity([
             {
                 prereqId: 'education',
@@ -856,7 +942,7 @@ const additionalPointsTable: ScoreCondition[] = [
     },
     {
         score: 200,
-        batch: 'additional',
+        batch: 'additional:job-offer',
         prerequisites: identity([
             {
                 prereqId: 'offer',
@@ -869,7 +955,7 @@ const additionalPointsTable: ScoreCondition[] = [
     },
     {
         score: 50,
-        batch: 'additional',
+        batch: 'additional:job-offer',
         prerequisites: oneOf([
             {
                 prereqId: 'offer',
@@ -896,7 +982,7 @@ const additionalPointsTable: ScoreCondition[] = [
     },
     {
         score: 600,
-        batch: 'additional',
+        batch: 'additional:provincial-nomination',
         prerequisites: identity([
             {
                 prereqId: 'nomination',

@@ -6,8 +6,10 @@ export interface ResidencePrereq extends BasePrereq {
     prereqId: 'residence'
     regionId: RegionId | undefined
 
-    duration: Duration,
+    duration?: Duration
     validPeriod?: Duration  // x months in recent y year et cetera
+
+    currently?: boolean
 }
 
 export default ResidencePrereq

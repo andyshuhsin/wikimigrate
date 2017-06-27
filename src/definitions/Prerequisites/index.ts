@@ -11,6 +11,7 @@ import ResidencePrereq from './ResidencePrereq'
 import UnionPrereq from './UnionPrereq'
 import SpousePrereq from './SpousePrereq'
 import NominationPrereq from './NominationPrereq'
+import SiblingPrereq from './SiblingPrereq'
 
 export type Prerequisite =
     AgePrereq
@@ -26,6 +27,7 @@ export type Prerequisite =
     | UnionPrereq
     | SpousePrereq
     | NominationPrereq
+    | SiblingPrereq
 
 export function isPrerequisite(arg: any): boolean {
     return !!arg['prereqId']
