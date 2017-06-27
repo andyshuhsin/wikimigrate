@@ -8,7 +8,6 @@ import { ScoreSystem } from '../ScoreSystem'
 
 export type RegionId =
     'world'
-    | 'atlantis' // for testing
     | 'canada'
     | 'australia'
     | 'new_zealand'
@@ -16,6 +15,7 @@ export type RegionId =
     | 'uk'
     | 'ireland'
     | 'usa'
+    | 'utopia' // for testing
 
 export interface Region {
     id: RegionId

@@ -6,7 +6,15 @@ export const languageTestItemValues: LanguageTestItem[] = [
     'listening', 'speaking', 'reading', 'writing',
 ]
 
-export type LanguageTestId = 'clb' | 'ielts' | 'toefl' | 'oet' | 'pte-academic' | 'cae'
+export type LanguageTestId =
+    'clb'
+    | 'celpip'
+    | 'tef'
+    | 'ielts'
+    | 'toefl'
+    | 'oet'
+    | 'pte-academic'
+    | 'cae'
 
 type SourceScore = number
 type TargetScore = number

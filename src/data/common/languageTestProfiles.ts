@@ -49,10 +49,106 @@ const languageTestProfiles: LanguageTestProfile[] = [
                     [4.0, 4],
                 ]
             },
+            celpip: {
+                reading: [
+                    [10, 10],
+                    [9, 9],
+                    [8, 8],
+                    [7, 7],
+                    [6, 6],
+                    [5, 5],
+                    [4, 4],
+                ],
+                writing: [
+                    [10, 10],
+                    [9, 9],
+                    [8, 8],
+                    [7, 7],
+                    [6, 6],
+                    [5, 5],
+                    [4, 4],
+                ],
+                listening: [
+                    [10, 10],
+                    [9, 9],
+                    [8, 8],
+                    [7, 7],
+                    [6, 6],
+                    [5, 5],
+                    [4, 4],
+                ],
+                speaking: [
+                    [10, 10],
+                    [9, 9],
+                    [8, 8],
+                    [7, 7],
+                    [6, 6],
+                    [5, 5],
+                    [4, 4],
+                ],
+            },
+            tef: {
+                reading: [
+                    [263, 10],
+                    [248, 9],
+                    [233, 8],
+                    [207, 7],
+                    [181, 6],
+                    [151, 5],
+                    [121, 4],
+                ],
+                writing: [
+                    [393, 10],
+                    [371, 9],
+                    [349, 8],
+                    [310, 7],
+                    [271, 6],
+                    [226, 5],
+                    [181, 4],
+                ],
+                listening: [
+                    [316, 10],
+                    [298, 9],
+                    [280, 8],
+                    [249, 7],
+                    [217, 6],
+                    [181, 5],
+                    [145, 4],
+                ],
+                speaking: [
+                    [393, 10],
+                    [371, 9],
+                    [349, 8],
+                    [310, 7],
+                    [271, 6],
+                    [226, 5],
+                    [181, 4],
+                ]
+            }
         },
         reference: {
             url: 'http://www.language.ca/index.cfm?Repertoire_No=2137991327',
         },
+    },
+    {
+        id: 'celpip',
+        title: {
+            en: 'Canadian English Language Proficiency Index Program',
+        },
+        languages: ['en'],
+        reference: {
+            url: 'https://www.celpip.ca/',
+        }
+    },
+    {
+        id: 'tef',
+        title: {
+            fr: `Test d'évaluation de français`,
+        },
+        languages: ['fr'],
+        reference: {
+            url: 'http://www.fiaf.org/frenchclasses/frenchexam-tef.shtml',
+        }
     },
     {
         id: 'ielts',

@@ -22,7 +22,6 @@ export interface Person {
 export function getInitialStatus(origin?: RegionId): StatusSet {
     const initial: StatusSet = {
         world: ['alien'],
-        atlantis: ['alien'],
         canada: ['alien'],
         australia: ['alien'],
         canada_atlantic_provinces: ['alien'],
@@ -30,6 +29,7 @@ export function getInitialStatus(origin?: RegionId): StatusSet {
         uk: ['alien'],
         ireland: ['alien'],
         usa: ['alien'],
+        utopia: ['alien'],
     }
 
     if (origin) {
