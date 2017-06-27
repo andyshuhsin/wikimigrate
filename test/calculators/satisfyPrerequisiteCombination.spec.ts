@@ -25,59 +25,67 @@ const simpleCanadian: Person = {
     },
 }
 
-const specs: Spec<Person, Prerequisite | Combination<Prerequisite>, Boolean>[] = [
+const specs: Spec<[Person, Prerequisite | Combination<Prerequisite>], Boolean>[] = [
 
     [
         "Single age prerequisite - positive",
-        simpleCanadian,
-        {
-            prereqId: 'age',
-            value: ["<", duration(100, "year")],
-        } as AgePrereq,
+        [
+            simpleCanadian,
+            {
+                prereqId: 'age',
+                value: ["<", duration(100, "year")],
+            } as AgePrereq,
+        ],
         true
     ],
 
     [
         "Single age test - negative",
-        simpleCanadian,
-        {
-            prereqId: 'age',
-            value: [">", duration(100, "year")],
-        } as AgePrereq,
+        [
+            simpleCanadian,
+            {
+                prereqId: 'age',
+                value: [">", duration(100, "year")],
+            } as AgePrereq,
+        ],
         false
     ],
 
     [
         "Combination prerequisite - positive",
-        simpleCanadian,
-        allOf([
-            {
-                prereqId: 'age',
-                value: ["<", duration(100, "year")],
-            } as AgePrereq,
-            {
-                prereqId: 'right',
-                regionId: 'canada',
-                rightId: 'work'
-            } as RightPrereq,
-        ]),
+        [
+            simpleCanadian,
+            allOf([
+                {
+                    prereqId: 'age',
+                    value: ["<", duration(100, "year")],
+                } as AgePrereq,
+                {
+                    prereqId: 'right',
+                    regionId: 'canada',
+                    rightId: 'work'
+                } as RightPrereq,
+            ]),
+        ],
         true
     ],
 
     [
         "Combination test - negative",
-        simpleCanadian,
-        allOf([
-            {
-                prereqId: 'age',
-                value: [">", duration(100, "year")],
-            } as AgePrereq,
-            {
-                prereqId: 'right',
-                regionId: 'canada',
-                rightId: 'work'
-            } as RightPrereq,
-        ]),
+        [
+            simpleCanadian,
+            allOf([
+                {
+                    prereqId: 'age',
+                    value: [">", duration(100, "year")],
+                } as AgePrereq,
+                {
+                    prereqId: 'right',
+                    regionId: 'canada',
+                    rightId: 'work'
+                } as RightPrereq,
+            ]),
+        ],
         false
     ],
 ]

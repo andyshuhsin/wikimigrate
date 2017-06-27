@@ -83,17 +83,21 @@ const prerequisitesDual = [
     } as LanguagePrereq,
 ]
 
-const specs: Spec<Person, Prerequisite[], Boolean>[] = [
+const specs: Spec<[Person, Prerequisite[]], Boolean>[] = [
     [
         'Bijective: single',
-        person,
-        prerequisitesSingle,
+        [
+            person,
+            prerequisitesSingle,
+        ],
         true,
     ],
     [
         'Bijective: dual',
-        person,
-        prerequisitesDual,
+        [
+            person,
+            prerequisitesDual,
+        ],
         false,
     ],
 ]
