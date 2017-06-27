@@ -29,8 +29,7 @@ export function calcScore(person: Person, system: ScoreSystem): number {
                 }
             }
         }
-        const groupScore = sumBatchScores(batchScores)
-        score += groupScore < conditionGroup.maxScore ? groupScore : conditionGroup.maxScore
+        score += Math.min(sumBatchScores(batchScores), conditionGroup.maxScore)
     }
     return score
 }
