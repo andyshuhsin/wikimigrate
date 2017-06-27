@@ -3,6 +3,7 @@ import { languageTestItemValues } from '../../../definitions/auxiliary/LanguageT
 import { allOf } from '../../../definitions/auxiliary/Combination'
 import { LanguagePrereq, zeroLanguagePrereqScores } from '../../../definitions/Prerequisites/LanguagePrereq'
 import { UnionPrereq } from '../../../definitions/Prerequisites/UnionPrereq'
+import { permutateFlatten } from '../../../calculators/prerequisiteOperations'
 
 type MarriedScore = number
 type SingleScore = number
@@ -23,8 +24,6 @@ const scoreTableFirstLanguage: LanguageTable = {
     8: [22, 23],
     9: [29, 31],
     10: [32, 34],
-    11: [32, 34],
-    12: [32, 34],
 }
 
 const scoreTableSecondLanguage: LanguageTable = {
@@ -34,49 +33,63 @@ const scoreTableSecondLanguage: LanguageTable = {
     8: [3, 3],
     9: [6, 6],
     10: [6, 6],
-    11: [6, 6],
-    12: [6, 6],
 }
 
-function makeSingularScoreConditions(
-    clbScore: number,
-    crsScore: number,
-    isMarried: boolean,
-): ScoreCondition[] {
-    return languageTestItemValues.map(itemKey => ({
-        score: crsScore,
-        batch: itemKey + '-singular',
-        prerequisites: allOf([
-            {
-                prereqId: 'language_test',
-                result: {
-                    testId: 'clb',
-                    scores: {
-                        ...zeroLanguagePrereqScores,
-                        [itemKey]: ['>=', clbScore],
-                    },
-                },
-            } as LanguagePrereq,
-            {
-                prereqId: 'union',
-                unionTypes: ['marriage', 'common-law-partnership'],
-                inUnion: isMarried,
-            } as UnionPrereq,
-        ]),
-    } as ScoreCondition))
+function duplicate<T>(thing: T, times: number): T[] {
+    const result: T[] = []
+    for (let i = 0; i < times; i += 1) {
+        result.push(thing)
+    }
+    return result
 }
+
+function getPossibleScoreCombinations<Score>(
+    scores: Score[],
+    testSubjetNumber: number
+): Score[][] {
+    return permutateFlatten(duplicate(scores, testSubjetNumber))
+}
+
+const plus = (a: number, b: number) => a + b
 
 function getConditionsForFirstLanguage(tableFirst: LanguageTable): ScoreCondition[] {
+    const possibleScoreCombinations = getPossibleScoreCombinations(
+        Object.keys(tableFirst) as ClbScore[],
+        languageTestItemValues.length
+    )
 
     const result: ScoreCondition[] = []
-    for (const firstScore of clbScores) {
-        const scores = tableFirst[firstScore]
-        if (scores) {
-            result.push(...makeSingularScoreConditions(+firstScore, scores[0], true))
-            result.push(...makeSingularScoreConditions(+firstScore, scores[1], false))
+    for (const isMarried of [true, false]) {
+        for (const examScores of possibleScoreCombinations) {
+            const index = isMarried ? 0 : 1
+            const crsScore = examScores
+                .map(score => (tableFirst[score] as [number, number])[index])
+                .reduce(plus, 0)
+            result.push({
+                score: crsScore,
+                batch: 'first-language',
+                prerequisites: allOf([
+                    {
+                        prereqId: 'language_test',
+                        result: {
+                            testId: 'clb',
+                            scores: {
+                                listening: [">=", +examScores[0]],
+                                speaking: [">=", +examScores[1]],
+                                writing: [">=", +examScores[2]],
+                                reading: [">=", +examScores[3]],
+                            }
+                        }
+                    } as LanguagePrereq,
+                    {
+                        prereqId: 'union',
+                        unionTypes: ['marriage', 'common-law-partnership'],
+                        inUnion: isMarried,
+                    } as UnionPrereq,
+                ])
+            })
         }
     }
-
     return result
 }
 

@@ -325,7 +325,7 @@ function allDifferent(arg: any[]): boolean {
  *           [ 3, 5, 6 ],
  *           [ 3, 5, 7 ] ]
  */
-function permutateFlatten(a: any[][]): any[] {
+export function permutateFlatten(a: any[][]): any[] {
     if (typeof a[1] === 'undefined') {
         return a[0].map(node => [node])
     }
