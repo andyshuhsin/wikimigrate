@@ -228,10 +228,7 @@ function satisfyPrerequisite(
         }
 
         case 'union': {
-            // Undefined union status is considered unmarried;
-            // Otherwise, one can claim both single and married score
-            // in systems
-            return !!person.inUnion === prereq.inUnion
+            return !!person.spouse === prereq.inUnion
         }
 
         case 'spouse': {

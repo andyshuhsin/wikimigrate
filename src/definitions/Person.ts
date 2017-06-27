@@ -13,8 +13,7 @@ export type StatusSet = {
 export interface Person {
     status: StatusSet,
     birth: BirthQuality
-    inUnion?: boolean
-    spouse?: Person
+    spouse?: Person | null
     education?: EducationQuality[],
     languageTests?: LanguageTestResult[]
     workExperiences?: WorkExperienceQuality[]
@@ -44,7 +43,6 @@ export function getInitialPerson(age: number): Person {
         status: getInitialStatus(),
         education: undefined,
         languageTests: undefined,
-        inUnion: undefined,
         spouse: undefined,
 
     }
