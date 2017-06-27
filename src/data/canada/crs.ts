@@ -324,7 +324,7 @@ type LanguageTable = {
     [clbScore in ClbScore]?: [MarriedScore, SingleScore]
 }
 
-const languageTableFirst: LanguageTable = {
+const scoreTableFirstLanguage: LanguageTable = {
     4: [6, 6],
     5: [6, 6],
     6: [8, 9],
@@ -336,7 +336,7 @@ const languageTableFirst: LanguageTable = {
     12: [32, 34],
 }
 
-const languageTableSecond: LanguageTable = {
+const scoreTableSecondLanguage: LanguageTable = {
     5: [1, 1],
     6: [1, 1],
     7: [3, 3],
@@ -348,16 +348,16 @@ const languageTableSecond: LanguageTable = {
 }
 
 
-function getConditionsFromFirstLanguageTables(tableFirst: LanguageTable,): ScoreCondition[] {
+function getConditionsForFirstLanguage(tableFirst: LanguageTable): ScoreCondition[] {
 
-    function makeSingleScoreConditions(
+    function makeSingularScoreConditions(
         clbScore: number,
         crsScore: number,
         isMarried: boolean,
     ): ScoreCondition[] {
         return languageTestItemValues.map(itemKey => ({
             score: crsScore,
-            batch: itemKey + '-1',
+            batch: itemKey + '-singular',
             prerequisites: allOf([
                 {
                     prereqId: 'language_test',
@@ -379,20 +379,18 @@ function getConditionsFromFirstLanguageTables(tableFirst: LanguageTable,): Score
     }
 
     const result: ScoreCondition[] = []
-    // One language
     for (const firstScore of clbScores) {
-
         const scores = tableFirst[firstScore]
         if (scores) {
-            result.push(...makeSingleScoreConditions(+firstScore, scores[0], false))
-            result.push(...makeSingleScoreConditions(+firstScore, scores[1], true))
+            result.push(...makeSingularScoreConditions(+firstScore, scores[0], true))
+            result.push(...makeSingularScoreConditions(+firstScore, scores[1], false))
         }
     }
 
     return result
 }
 
-function getConditionsFromSecondLanguageTables(
+function getConditionsForBothLanguages(
     tableFirst: LanguageTable,
     tableSecond: LanguageTable,
 ): ScoreCondition[] {
@@ -405,7 +403,7 @@ function getConditionsFromSecondLanguageTables(
     ): ScoreCondition[] {
         return languageTestItemValues.map(itemKey => ({
             score: crsScore,
-            batch: itemKey + '-2',
+            batch: itemKey + '-dual',
             prerequisites: allOf([
                 allOf([
                     {
@@ -446,8 +444,8 @@ function getConditionsFromSecondLanguageTables(
             for (const secondScore of clbScores) {
                 const scores2 = tableSecond[secondScore]
                 if (scores2) {
-                    result.push(...makeDualScoresConditions(+firstScore, +secondScore, scores2[0], false))
-                    result.push(...makeDualScoresConditions(+firstScore, +secondScore, scores2[1], true))
+                    result.push(...makeDualScoresConditions(+firstScore, +secondScore, scores2[0], true))
+                    result.push(...makeDualScoresConditions(+firstScore, +secondScore, scores2[1], false))
                 }
             }
         }
@@ -926,11 +924,11 @@ const crs: ScoreSystem = {
         },
         languageOne: {
             maxScore: Infinity,
-            conditions: getConditionsFromFirstLanguageTables(languageTableFirst),
+            conditions: getConditionsForFirstLanguage(scoreTableFirstLanguage),
         },
         languageTwo: {
             maxScore: Infinity,
-            conditions: getConditionsFromSecondLanguageTables(languageTableFirst, languageTableSecond),
+            conditions: getConditionsForBothLanguages(scoreTableFirstLanguage, scoreTableSecondLanguage),
         },
         transferable: {
             maxScore: 100,
