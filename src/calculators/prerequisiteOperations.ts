@@ -289,16 +289,6 @@ function satisfyPrerequisite(
             return satisfyPrerequisite(person.spouse, prereq, fallback)
         }
 
-        case 'offer': {
-            // TODO: Implement offer
-            return false
-        }
-
-        case 'nomination': {
-            // TODO: Implement nomination
-            return false
-        }
-
         default: {
             if (!warningFlags[prereq.prereqId]) {
                 console.warn('Unimplemented prereqId', prereq.prereqId, 'found in', prereq)
