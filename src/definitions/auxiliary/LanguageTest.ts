@@ -10,11 +10,6 @@ export type LanguageTestProfile = {
     reference: URLDatum
 }
 
-/* TODO: Unify Single and Itemized scoring.
- "overall" is just a shorthand for all scores.
- It really messes up type system.
- */
-
 export const zeroLanguageScores: LanguageTestScoreSet = {
     listening: 0,
     speaking: 0,
