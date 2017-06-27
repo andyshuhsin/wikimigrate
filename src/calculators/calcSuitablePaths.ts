@@ -4,10 +4,8 @@ import Transition from '../definitions/Transition'
 import { RightPrereq } from '../definitions/Prerequisites/RightPrereq'
 import { satisfyPrerequisiteCombination } from './prerequisiteOperations'
 
-// Applicability of a program when user didn't specify a condition;
-// Set to true for maximal coverage
 export function canApply(person: Person, transition: Transition): boolean {
-    return satisfyPrerequisiteCombination(person, transition.prerequisiteList)
+    return satisfyPrerequisiteCombination(person, transition.prerequisiteList, true)
 }
 
 const suitabilityCache: any = {}

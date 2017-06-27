@@ -20,7 +20,7 @@ export function calcScore(person: Person, system: ScoreSystem): number {
         const conditionGroup = system.conditionGroups[key]
         const batchScores: BatchScores = {}
         for (const condition of conditionGroup.conditions) {
-            if (satisfyPrerequisiteCombination(person, condition.prerequisites)) {
+            if (satisfyPrerequisiteCombination(person, condition.prerequisites, false)) {
                 const batch = condition.batch
                 const higherThanBatchHighest = condition.score > batchScores[batch]
                 const newBatch = typeof batchScores[batch] === 'undefined'

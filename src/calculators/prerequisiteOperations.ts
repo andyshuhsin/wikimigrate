@@ -20,8 +20,6 @@ import { EducationPrereq } from '../definitions/Prerequisites/EducationPrereq'
 import { Person } from '../definitions/Person'
 import { clone } from '../client/utils/clone'
 
-const DEFAULT_RESULT = true
-
 const warningFlags: any = {}
 
 function getCriticalDate(duration: Duration, today = new Date()) {
@@ -61,9 +59,10 @@ function satisfyAllLanguageScoresRequirement(
 function satisfyLanguageResultRequirement(
     actualResults: LanguageTestResult[] | undefined,
     expectedResult: LanguagePrereqResult,
+    fallback: boolean,
 ): boolean {
     if (!actualResults) {
-        return DEFAULT_RESULT
+        return fallback
     }
 
     for (const actualResult of actualResults) {
@@ -118,6 +117,7 @@ export function durationMatch(demand: Interval<Duration>, actual: Duration): boo
 function satisfyWorkPrereq(
     work: WorkExperienceQuality,
     prereq: WorkExperiencePrereq,
+    fallback: boolean,
 ): boolean {
 
     // TODO: Implement other requirements
@@ -135,19 +135,20 @@ function satisfyWorkPrereq(
         return false
     }
     else if (!work.duration) {
-        return DEFAULT_RESULT
+        return fallback
     }
     else if (prereq.duration) {
         return durationMatch(prereq.duration, work.duration)
     }
     else {
-        return DEFAULT_RESULT
+        return fallback
     }
 }
 
 function satisfyEducationPrereq(
     education: EducationQuality,
     prereq: EducationPrereq,
+    fallback: boolean
 ): boolean {
     if (prereq.stage && education.stage) {
         const rankActual = getEducationStageRank(education.stage)
@@ -169,10 +170,14 @@ function satisfyEducationPrereq(
     else if (prereq.certification) {
         console.info('[Unimplemented] Checking prereq.certification')
     }
-    return DEFAULT_RESULT
+    return fallback
 }
 
-function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
+function satisfyPrerequisite(
+    person: Person,
+    prereq: Prerequisite,
+    fallback: boolean
+): boolean {
 
     switch (prereq.prereqId) {
 
@@ -185,24 +190,24 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
                 // Notice d1 < d2 means d1 happens before d2
                 return compare(prereq.value[0], criticalDate, date)
             }
-            return DEFAULT_RESULT
+            return fallback
         }
 
         case 'language_test': {
             const actualResults = person.languageTests
             const expectedResult = prereq.result
-            return satisfyLanguageResultRequirement(actualResults, expectedResult)
+            return satisfyLanguageResultRequirement(actualResults, expectedResult, fallback)
         }
 
         // TODO: Similar shape of code in work_experience and education
         case 'work_experience': {
             const actualWorks = person.workExperiences
             if (typeof actualWorks === 'undefined') {
-                return DEFAULT_RESULT
+                return fallback
             }
             else {
                 for (const work of actualWorks) {
-                    if (satisfyWorkPrereq(work, prereq)) {
+                    if (satisfyWorkPrereq(work, prereq, fallback)) {
                         return true
                     }
                 }
@@ -212,10 +217,10 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
 
         case 'education': {
             if (typeof person.education === 'undefined') {
-                return DEFAULT_RESULT
+                return fallback
             }
             for (const education of person.education) {
-                if (satisfyEducationPrereq(education, prereq)) {
+                if (satisfyEducationPrereq(education, prereq, fallback)) {
                     return true
                 }
             }
@@ -231,9 +236,9 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
 
         case 'spouse': {
             if (!person.spouse) {
-                return DEFAULT_RESULT
+                return fallback
             }
-            return satisfyPrerequisite(person.spouse, prereq)
+            return satisfyPrerequisite(person.spouse, prereq, fallback)
         }
 
         case 'offer': {
@@ -251,7 +256,7 @@ function satisfyPrerequisite(person: Person, prereq: Prerequisite): boolean {
                 console.warn('Unimplemented prereqId', prereq.prereqId, 'found in', prereq)
                 warningFlags[prereq.prereqId] = true
             }
-            return DEFAULT_RESULT
+            return fallback
         }
     }
 }
@@ -334,6 +339,7 @@ function existSurjection<A, B>(
 export function satisfyBijectivePrerequisiteCombination(
     person: Person,
     prerequisites: Prerequisite[],
+    fallback: boolean
 ): boolean {
     switch (prerequisites[0].prereqId) {
         case 'language_test': {
@@ -342,7 +348,7 @@ export function satisfyBijectivePrerequisiteCombination(
                     console.warn('languageTests is empty')
                     warningFlags['ltie'] = true
                 }
-                return DEFAULT_RESULT
+                return fallback
             }
             else {
                 return existSurjection(
@@ -351,14 +357,14 @@ export function satisfyBijectivePrerequisiteCombination(
                     (prerequisite: LanguagePrereq, languageTest: LanguageTestResult) => {
                         const hypotheticalPerson = clone(person)
                         hypotheticalPerson.languageTests = [languageTest]
-                        return satisfyPrerequisite(hypotheticalPerson, prerequisite)
+                        return satisfyPrerequisite(hypotheticalPerson, prerequisite, fallback)
                     },
                 )
             }
         }
         case 'education': {
             if (!person.education) {
-                return DEFAULT_RESULT
+                return fallback
             }
             return existSurjection(
                 prerequisites,
@@ -366,13 +372,13 @@ export function satisfyBijectivePrerequisiteCombination(
                 (prerequisite: EducationPrereq, education: EducationQuality) => {
                     const hypotheticalPerson = clone(person)
                     hypotheticalPerson.education = [education]
-                    return satisfyPrerequisite(hypotheticalPerson, prerequisite)
+                    return satisfyPrerequisite(hypotheticalPerson, prerequisite, fallback)
                 },
             )
         }
         default: {
             console.warn('[Unimplmented] Cannot handle surjective prerequisites of type', prerequisites[0].prereqId)
-            return DEFAULT_RESULT
+            return fallback
         }
     }
 }
@@ -380,11 +386,12 @@ export function satisfyBijectivePrerequisiteCombination(
 export function satisfyPrerequisiteCombination(
     person: Person,
     arg: Prerequisite | Combination<Prerequisite>,
+    fallback: boolean
 ): boolean {
 
     if (isPrerequisite(arg)) {
         const prereq = arg as Prerequisite
-        return satisfyPrerequisite(person, prereq)
+        return satisfyPrerequisite(person, prereq, fallback)
     }
     else if (isCombination(arg)) {
         const prereqCombo = arg as Combination<Prerequisite>
@@ -392,17 +399,21 @@ export function satisfyPrerequisiteCombination(
         switch (prereqCombo.combinator) {
             case 'and': {
                 if (prereqCombo.meta && prereqCombo.meta.surjective) {
-                    return satisfyBijectivePrerequisiteCombination(person, (prereqCombo.operands as Prerequisite[]))
+                    return satisfyBijectivePrerequisiteCombination(
+                        person,
+                        (prereqCombo.operands as Prerequisite[]),
+                        fallback,
+                    )
                 }
                 else {
                     return prereqCombo.operands.map(
-                        operand => satisfyPrerequisiteCombination(person, operand),
+                        operand => satisfyPrerequisiteCombination(person, operand, fallback),
                     ).every(isTrue)
                 }
             }
             case 'or': {
                 return prereqCombo.operands.map(
-                    operand => satisfyPrerequisiteCombination(person, operand),
+                    operand => satisfyPrerequisiteCombination(person, operand, fallback),
                 ).some(isTrue)
             }
             default: {
