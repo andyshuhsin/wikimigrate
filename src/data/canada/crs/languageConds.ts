@@ -38,35 +38,35 @@ const scoreTableSecondLanguage: LanguageTable = {
     12: [6, 6],
 }
 
-function getConditionsForFirstLanguage(tableFirst: LanguageTable): ScoreCondition[] {
-
-    function makeSingularScoreConditions(
-        clbScore: number,
-        crsScore: number,
-        isMarried: boolean,
-    ): ScoreCondition[] {
-        return languageTestItemValues.map(itemKey => ({
-            score: crsScore,
-            batch: itemKey + '-singular',
-            prerequisites: allOf([
-                {
-                    prereqId: 'language_test',
-                    result: {
-                        testId: 'clb',
-                        scores: {
-                            ...zeroLanguagePrereqScores,
-                            [itemKey]: ['>=', clbScore],
-                        },
+function makeSingularScoreConditions(
+    clbScore: number,
+    crsScore: number,
+    isMarried: boolean,
+): ScoreCondition[] {
+    return languageTestItemValues.map(itemKey => ({
+        score: crsScore,
+        batch: itemKey + '-singular',
+        prerequisites: allOf([
+            {
+                prereqId: 'language_test',
+                result: {
+                    testId: 'clb',
+                    scores: {
+                        ...zeroLanguagePrereqScores,
+                        [itemKey]: ['>=', clbScore],
                     },
-                } as LanguagePrereq,
-                {
-                    prereqId: 'union',
-                    unionTypes: ['marriage', 'common-law-partnership'],
-                    inUnion: isMarried,
-                } as UnionPrereq,
-            ]),
-        } as ScoreCondition))
-    }
+                },
+            } as LanguagePrereq,
+            {
+                prereqId: 'union',
+                unionTypes: ['marriage', 'common-law-partnership'],
+                inUnion: isMarried,
+            } as UnionPrereq,
+        ]),
+    } as ScoreCondition))
+}
+
+function getConditionsForFirstLanguage(tableFirst: LanguageTable): ScoreCondition[] {
 
     const result: ScoreCondition[] = []
     for (const firstScore of clbScores) {
@@ -80,53 +80,51 @@ function getConditionsForFirstLanguage(tableFirst: LanguageTable): ScoreConditio
     return result
 }
 
-
+function makeDualScoresConditions(
+    clbScore1: number,
+    clbScore2: number,
+    crsScore: number,
+    isMarried: boolean,
+): ScoreCondition[] {
+    return languageTestItemValues.map(itemKey => ({
+        score: crsScore,
+        batch: itemKey + '-dual',
+        prerequisites: allOf([
+            allOf([
+                {
+                    prereqId: 'language_test',
+                    result: {
+                        testId: 'clb',
+                        scores: {
+                            ...zeroLanguagePrereqScores,
+                            [itemKey]: ['>=', clbScore1],
+                        },
+                    },
+                } as LanguagePrereq,
+                {
+                    prereqId: 'language_test',
+                    result: {
+                        testId: 'clb',
+                        scores: {
+                            ...zeroLanguagePrereqScores,
+                            [itemKey]: ['>=', clbScore2],
+                        },
+                    },
+                } as LanguagePrereq,
+            ], {surjective: true}),
+            {
+                prereqId: 'union',
+                unionTypes: ['marriage', 'common-law-partnership'],
+                inUnion: isMarried,
+            } as UnionPrereq,
+        ]),
+    }))
+}
 
 function getConditionsForBothLanguages(
     tableFirst: LanguageTable,
     tableSecond: LanguageTable,
 ): ScoreCondition[] {
-
-    function makeDualScoresConditions(
-        clbScore1: number,
-        clbScore2: number,
-        crsScore: number,
-        isMarried: boolean,
-    ): ScoreCondition[] {
-        return languageTestItemValues.map(itemKey => ({
-            score: crsScore,
-            batch: itemKey + '-dual',
-            prerequisites: allOf([
-                allOf([
-                    {
-                        prereqId: 'language_test',
-                        result: {
-                            testId: 'clb',
-                            scores: {
-                                ...zeroLanguagePrereqScores,
-                                [itemKey]: ['>=', clbScore1],
-                            },
-                        },
-                    } as LanguagePrereq,
-                    {
-                        prereqId: 'language_test',
-                        result: {
-                            testId: 'clb',
-                            scores: {
-                                ...zeroLanguagePrereqScores,
-                                [itemKey]: ['>=', clbScore2],
-                            },
-                        },
-                    } as LanguagePrereq,
-                ], {surjective: true}),
-                {
-                    prereqId: 'union',
-                    unionTypes: ['marriage', 'common-law-partnership'],
-                    inUnion: isMarried,
-                } as UnionPrereq,
-            ]),
-        }))
-    }
 
     const result: ScoreCondition[] = []
 
