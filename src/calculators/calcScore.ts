@@ -29,7 +29,7 @@ export function calcScore(person: Person, system: ScoreSystem): number {
                 }
             }
         }
-        console.info(key, batchScores, `total:${sumBatchScores(batchScores)}`)
+        // console.info(key, batchScores, `total:${sumBatchScores(batchScores)}`)
         score += Math.min(sumBatchScores(batchScores), conditionGroup.maxScore)
     }
     return score

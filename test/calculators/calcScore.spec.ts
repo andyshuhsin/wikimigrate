@@ -6,8 +6,6 @@ import { calcScore } from '../../src/calculators/calcScore'
 import { EducationQuality } from '../../src/definitions/Qualities/EducationExperience'
 import { duration } from '../../src/definitions/auxiliary/Duration'
 import { WorkExperienceQuality } from '../../src/definitions/Qualities/WorkExperience'
-import { convertLanguageTestScores } from '../../src/calculators/prerequisiteOperations'
-import languageTestProfiles from '../../src/data/common/languageTestProfiles'
 
 const alice: Person = {
     birth: {
@@ -126,7 +124,6 @@ const ulysses: Person = {
     ]
 }
 
-
 const spec: Spec<[Person, ScoreSystem], number>[] = [
     [
         "bob",
@@ -134,7 +131,7 @@ const spec: Spec<[Person, ScoreSystem], number>[] = [
             bob,
             crs
         ],
-        361,
+        336,
     ],
     [
         "ulysses",

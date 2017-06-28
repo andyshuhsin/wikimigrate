@@ -15,6 +15,7 @@ export interface Person {
     birth: BirthQuality
     spouse?: Person | null
     education?: EducationQuality[],
+    // Order matters — should generally rank by descending strength
     languageTests?: LanguageTestResult[]
     workExperiences?: WorkExperienceQuality[]
 }

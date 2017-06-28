@@ -1,7 +1,7 @@
 import { ScoreSystem } from '../../../definitions/ScoreSystem'
 import { ageConditions } from './ageConds'
 import { educationConditions } from './educationConds'
-import { dualLanguagesScore, singularLanguageScore } from './languageConds'
+import { languageConditions } from './languageConds'
 import { transferabilityConditions } from './transferabilityConds'
 import { additionalPointsConditions } from './additionalConds'
 
@@ -20,13 +20,9 @@ const crs: ScoreSystem = {
             maxScore: Infinity,
             conditions: educationConditions,
         },
-        languageOne: {
+        language: {
             maxScore: Infinity,
-            conditions: singularLanguageScore,
-        },
-        languageTwo: {
-            maxScore: Infinity,
-            conditions: dualLanguagesScore,
+            conditions: languageConditions,
         },
         transferable: {
             maxScore: 100,

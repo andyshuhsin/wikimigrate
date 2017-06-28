@@ -81,14 +81,10 @@ function satisfyAllLanguageScoresRequirement(
 }
 
 function satisfyLanguageResultRequirement(
-    actualResults: LanguageTestResult[] | undefined,
+    actualResults: LanguageTestResult[],
     expectedResult: LanguagePrereqResult,
     fallback: boolean,
 ): boolean {
-    if (!actualResults) {
-        return fallback
-    }
-
     for (let actualResult of actualResults) {
 
         if (expectedResult.language) {
@@ -245,7 +241,19 @@ function satisfyPrerequisite(
         }
 
         case 'language_test': {
-            const actualResults = person.languageTests
+            let actualResults = person.languageTests
+            if (!actualResults) {
+                return fallback
+            }
+            else if (typeof prereq.targetLanguageCategory === 'number') {
+                const target = actualResults[prereq.targetLanguageCategory]
+                if (!target) {
+                    return false
+                }
+                else {
+                    actualResults = [target]
+                }
+            }
             const expectedResult = prereq.result
             return satisfyLanguageResultRequirement(actualResults, expectedResult, fallback)
         }
