@@ -6,11 +6,13 @@ import { calcScore } from '../../src/calculators/calcScore'
 import { EducationQuality } from '../../src/definitions/Qualities/EducationExperience'
 import { duration } from '../../src/definitions/auxiliary/Duration'
 import { WorkExperienceQuality } from '../../src/definitions/Qualities/WorkExperience'
+import { convertLanguageTestScores } from '../../src/calculators/prerequisiteOperations'
+import languageTestProfiles from '../../src/data/common/languageTestProfiles'
 
 const alice: Person = {
     birth: {
         date: {
-            year: (new Date()).getFullYear() - 22,
+            year: (new Date()).getFullYear() - 25,
         },
     },
     status: getInitialStatus('usa'),
@@ -18,8 +20,14 @@ const alice: Person = {
     education: [
         {
             qualityId: 'education',
-            stage: 'bachelor',
-            duration: duration(4, 'year'),
+            stage: 'diploma',
+            duration: duration(3, 'year'),
+            regionId: 'canada',
+        } as EducationQuality,
+        {
+            qualityId: 'education',
+            stage: 'diploma',
+            duration: duration(2, 'year'),
             regionId: 'canada',
         } as EducationQuality
     ],
@@ -27,10 +35,10 @@ const alice: Person = {
         {
             testId: 'ielts',
             scores: {
-                speaking: 7,
-                listening: 7,
-                reading: 7,
-                writing: 7,
+                speaking: 9,
+                listening: 5.5,
+                reading: 8.5,
+                writing: 7.0,
             },
         },
     ],
@@ -124,23 +132,33 @@ const ulysses: Person = {
     ]
 }
 
+// console.info(convertLanguageTestScores(alice.languageTests[0].scores, languageTestProfiles[0].equivalency.ielts))
+
 const spec: Spec<[Person, ScoreSystem], number>[] = [
     [
-        "bob",
+        "alice",
         [
-            bob,
+            alice,
             crs
         ],
-        336,
+        479,
     ],
-    [
-        "ulysses",
-        [
-            ulysses,
-            crs
-        ],
-        361,
-    ],
+    // [
+    //     "bob",
+    //     [
+    //         bob,
+    //         crs
+    //     ],
+    //     336,
+    // ],
+    // [
+    //     "ulysses",
+    //     [
+    //         ulysses,
+    //         crs
+    //     ],
+    //     361,
+    // ],
 ]
 
 evaluate(spec, calcScore)
