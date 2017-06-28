@@ -4,6 +4,7 @@ import { educationConditions } from './educationConds'
 import { languageConditions } from './languageConds'
 import { transferabilityConditions } from './transferabilityConds'
 import { additionalPointsConditions } from './additionalConds'
+import { canadaWorkConditions } from './canadaWorkConds'
 
 const crs: ScoreSystem = {
     scoreSystemId: 'crs',
@@ -23,6 +24,10 @@ const crs: ScoreSystem = {
         language: {
             maxScore: Infinity,
             conditions: languageConditions,
+        },
+        canadaWork: {
+            maxScore: Infinity,
+            conditions: canadaWorkConditions,
         },
         transferable: {
             maxScore: 100,
