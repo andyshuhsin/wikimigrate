@@ -1,7 +1,13 @@
 import BasePrereq from './BasePrereq'
 import { RegionId } from '../auxiliary/Region'
 
-export type RightId = 'alien' | 'citizen' | 'permanent' | 'work'
+export type RightId =
+    'alien'
+    | 'citizen'
+    | 'permanent'
+    | 'work'
+    | 'study'
+    | 'train'
 
 export interface RightPrereq extends BasePrereq {
     prereqId: 'right'

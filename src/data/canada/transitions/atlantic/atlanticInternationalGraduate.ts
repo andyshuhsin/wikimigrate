@@ -52,13 +52,16 @@ const atlanticInternationalGraduate: Transition = {
             } as RightPrereq,
         ]),
     ]),
-    procedureList: [
-        {
-            'name': {
-                'en': 'Application',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'application',
+                'name': {
+                    'en': 'Application',
+                },
             },
-        },
-    ],
+        ],
+    }
 }
 
 export default atlanticInternationalGraduate
