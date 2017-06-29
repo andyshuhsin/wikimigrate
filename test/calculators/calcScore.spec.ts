@@ -161,4 +161,4 @@ const spec: Spec<[Person, ScoreSystem], number>[] = [
     ],
 ]
 
-evaluate(spec, calcScore)
+evaluate(spec, (person, spec) => calcScore(spec, person).score)

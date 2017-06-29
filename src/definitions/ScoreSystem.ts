@@ -1,5 +1,5 @@
 import { Combination } from './auxiliary/Combination'
-import { Prerequisite } from './Prerequisites/index'
+import { Prerequisite } from './Prerequisites'
 import { MultiLangStringSet } from './auxiliary/MultiLang'
 import URLDatum from './auxiliary/URLDatum'
 import { SafeDate } from './auxiliary/SafeDate'
@@ -20,16 +20,18 @@ export interface ScoreCondition {
     batch: string
 }
 
+export type ConditionGroupSet = {
+    [key: string]: {
+        maxScore: number
+        conditions: ScoreCondition[]
+    }
+}
+
 export interface ScoreSystem {
     scoreSystemId: ScoreSystemId
     name: MultiLangStringSet
     initialScore: number
-    conditionGroups: {
-        [key: string]: {
-            maxScore: number
-            conditions: ScoreCondition[]
-        }
-    }
+    conditionGroups: ConditionGroupSet
     history: ScoreHistory
     reference: URLDatum
 }

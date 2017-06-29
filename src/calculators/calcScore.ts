@@ -2,8 +2,8 @@ import { Person } from '../definitions/Person'
 import { ScoreSystem } from '../definitions/ScoreSystem'
 import { satisfyPrerequisiteCombination } from './prerequisiteOperations'
 
-interface BatchScores {
-    [key: string]: number
+export interface BatchScores {
+    [batch: string]: number
 }
 
 function sumBatchScores(batchScores: BatchScores) {
@@ -14,8 +14,23 @@ function sumBatchScores(batchScores: BatchScores) {
     return sum
 }
 
+export interface ScoreDetails {
+    score: number
+    groups: {
+        [group: string]: {
+            score: number,
+            batches: BatchScores
+        }
+    }
+}
+
 // FIXME: Poor handling of multiple language tests
-export function calcScore(person: Person, system: ScoreSystem): number {
+export function calcScore(person: Person, system: ScoreSystem): ScoreDetails {
+    const details: ScoreDetails = {
+        score: 0,
+        groups: {}
+    }
+
     let score = system.initialScore
     for (const key in system.conditionGroups) {
         const conditionGroup = system.conditionGroups[key]
@@ -30,10 +45,14 @@ export function calcScore(person: Person, system: ScoreSystem): number {
                 }
             }
         }
-        // console.info(key, batchScores, `total:${sumBatchScores(batchScores)}`)
-        score += Math.min(sumBatchScores(batchScores), conditionGroup.maxScore)
+        const groupScore = Math.min(sumBatchScores(batchScores), conditionGroup.maxScore)
+        details.groups[key] = {
+            score: groupScore,
+            batches: batchScores
+        }
+        score += groupScore
     }
-    return score
-}
 
-export default calcScore
+    details.score = score
+    return details
+}

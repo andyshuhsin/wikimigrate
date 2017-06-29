@@ -100,7 +100,7 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                             }
                         </h3>
                         <ScoreBox
-                            score={calcScore(this.props.user, transition.scoreSystem)}
+                            scoreDetails={calcScore(this.props.user, transition.scoreSystem)}
                             history={transition.scoreSystem.history}
                             name={text(transition.scoreSystem.name)}
                         />
