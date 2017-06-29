@@ -15,6 +15,7 @@ export type RegionId =
     | 'uk'
     | 'ireland'
     | 'usa'
+    | 'utopia' // for testing
 
 export interface Region {
     id: RegionId

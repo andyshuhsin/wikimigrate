@@ -8,7 +8,7 @@ import PaperworkBox from './PaperworkBox'
 
 import Transition from '../../../../definitions/Transition'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
-import { calcScore } from '../../../utils/calcScore'
+import { calcScore } from '../../../../calculators/calcScore'
 import { Person } from '../../../../definitions/Person'
 import { LangId } from '../../../../definitions/auxiliary/MultiLang'
 
@@ -43,6 +43,7 @@ const flagSources: {[key in RegionId]: Package | null} = {
     usa: null,
     ireland: null,
     uk: null,
+    utopia: null,
 }
 
 interface Props {
@@ -93,13 +94,13 @@ class TransitionDisplay extends React.PureComponent<Props, {}> {
                         <h3 style={sectionTitleStyle} id='scoring'>
                             {
                                 text({
-                                    en: 'Scoring(Experimental)',
-                                    zh_hans: '分数(功能测试中)',
+                                    en: 'Scoring',
+                                    zh_hans: '分数',
                                 })
                             }
                         </h3>
                         <ScoreBox
-                            score={calcScore(this.props.user, transition.scoreSystem)}
+                            scoreDetails={calcScore(this.props.user, transition.scoreSystem)}
                             history={transition.scoreSystem.history}
                             name={text(transition.scoreSystem.name)}
                         />

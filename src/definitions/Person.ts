@@ -4,17 +4,42 @@ import { BirthQuality } from './Qualities/Birth'
 import { LanguageTestResult } from './auxiliary/LanguageTest'
 import { EducationQuality } from './Qualities/EducationExperience'
 import { WorkExperienceQuality } from './Qualities/WorkExperience'
+import { RightId } from './Prerequisites/RightPrereq'
+
+export type StatusSet = {
+    [key in RegionId]: RightId[]
+}
 
 export interface Person {
-    status: {
-        [key in RegionId]: string[]
-        },
+    status: StatusSet,
     birth: BirthQuality
-    inUnion?: boolean
-    spouse?: Person
+    spouse?: Person | null
     education?: EducationQuality[],
+    // Order matters — should generally rank by descending strength
     languageTests?: LanguageTestResult[]
     workExperiences?: WorkExperienceQuality[]
+}
+
+export function getInitialStatus(origin?: RegionId): StatusSet {
+    const initial: StatusSet = {
+        world: ['alien'],
+        canada: ['alien'],
+        australia: ['alien'],
+        canada_atlantic_provinces: ['alien'],
+        new_zealand: ['alien'],
+        uk: ['alien'],
+        ireland: ['alien'],
+        usa: ['alien'],
+        utopia: ['alien'],
+    }
+
+    if (origin) {
+        initial[origin] = ['citizen']
+        return initial
+    }
+    else {
+        return initial
+    }
 }
 
 export function getInitialPerson(age: number): Person {
@@ -25,20 +50,9 @@ export function getInitialPerson(age: number): Person {
             },
             region: undefined,
         },
-        status: {
-            // TODO: Should this part be automated?
-            world: ['alien'],
-            canada: ['alien'],
-            australia: ['alien'],
-            canada_atlantic_provinces: ['alien'],
-            new_zealand: ['alien'],
-            uk: ['alien'],
-            ireland: ['alien'],
-            usa: ['alien'],
-        },
+        status: getInitialStatus(),
         education: undefined,
         languageTests: undefined,
-        inUnion: undefined,
         spouse: undefined,
 
     }

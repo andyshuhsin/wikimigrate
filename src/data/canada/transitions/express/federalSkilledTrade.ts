@@ -11,6 +11,7 @@ import { alien, expressEntryCandidate } from '../../status'
 
 import jobClass from '../../jobClass'
 import { expressProcedures } from './expressProcedures'
+import crs from '../../crs'
 
 const federalSkilledTrade: Transition = {
     id: 'federal_skilled_trade',
@@ -22,6 +23,7 @@ const federalSkilledTrade: Transition = {
     },
     from: alien,
     to: expressEntryCandidate,
+    scoreSystem: crs,
     prerequisiteList: allOf([
 
         // Language Requirements

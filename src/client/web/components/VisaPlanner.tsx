@@ -13,7 +13,7 @@ import sys from '../sys'
 
 import { Pathway, PathwayDescriptor } from '../../utils/definitions'
 
-import calcSuitablePaths from '../../utils/calcSuitablePaths'
+import { calcSuitablePaths } from '../../../calculators/calcSuitablePaths'
 
 import { VisaPlannerState } from '../../reducers'
 

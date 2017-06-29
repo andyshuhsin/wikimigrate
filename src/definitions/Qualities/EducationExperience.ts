@@ -5,6 +5,7 @@ import { RegionId } from '../auxiliary/Region'
 export type EducationStage =
     'primary'
     | 'secondary'
+    | 'diploma'
     | 'bachelor'
     | 'master'
     | 'phd'
@@ -34,22 +35,29 @@ export const educationStageProfiles: EducationStageProfiles = {
             zh_hans: '中学',
         },
     },
-    bachelor: {
+    diploma: {
         rank: 3,
+        name: {
+            en: 'Diploma',
+            zh_hans: '证书课程',
+        }
+    },
+    bachelor: {
+        rank: 4,
         name: {
             en: 'Bachelor',
             zh_hans: '本科',
         },
     },
     master: {
-        rank: 4,
+        rank: 5,
         name: {
             en: 'master',
             zh_hans: '硕士',
         },
     },
     phd: {
-        rank: 5,
+        rank: 6,
         name: {
             en: 'PhD',
             zh_hans: '博士',

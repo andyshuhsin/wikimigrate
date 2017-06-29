@@ -7,10 +7,10 @@ import {
 } from '../../definitions/Qualities/EducationExperience'
 import { stripIndents } from 'common-tags'
 import { text } from '../../client/utils/text'
-import { data } from '../../data/index'
+import { data } from '../../data'
 import { WechatChatbotUser } from '../middlewares/wechat'
 import { Pathway } from '../../client/utils/definitions'
-import { calcSuitablePaths } from '../../client/utils/calcSuitablePaths'
+import { calcSuitablePaths } from '../../calculators/calcSuitablePaths'
 import Transition from '../../definitions/Transition'
 import { PATHWAY_KW_SIMPLE } from '../../data/constants'
 

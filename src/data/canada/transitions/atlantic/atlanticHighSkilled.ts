@@ -37,13 +37,16 @@ const atlanticHighSkilled: Transition = {
             // FIXME: Complete missing words
         } as OfferPrereq,
     ]),
-    procedureList: [
-        {
-            name: {
-                en: 'Application',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'application',
+                name: {
+                    en: 'Application',
+                },
             },
-        },
-    ],
+        ],
+    }
 }
 
 export default atlanticHighSkilled

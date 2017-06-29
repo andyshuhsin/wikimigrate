@@ -6,6 +6,7 @@ import {
     LanguageTestScoreSet
 } from '../auxiliary/LanguageTest'
 import { Interval } from '../auxiliary/Operator'
+import { LangId } from '../auxiliary/MultiLang'
 
 
 export const zeroLanguagePrereqScores: LanguagePrereqScoreSet = {
@@ -22,11 +23,18 @@ export type LanguagePrereqScoreSet = {
 export type LanguagePrereqResult = {
     testId: LanguageTestId
     scores: LanguagePrereqScoreSet
+    language?: LangId
 }
 
 export interface LanguagePrereq extends BasePrereq {
     prereqId: 'language_test'
     result: LanguagePrereqResult
+
+    /* A hack, to handle complex dual-language scoring from Canada.
+       0 means only the first language in Person's languageTest can satisfy,
+       1 means only the second, etc. */
+    targetLanguageCategory?: number
+
     // TODO: Add time limits
 }
 

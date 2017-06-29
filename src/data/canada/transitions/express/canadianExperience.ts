@@ -81,30 +81,37 @@ const canadianExperience: Transition = {
             title: prereqTitleDict.language_test,
         }),
     ]),
-    procedureList: [
-        {
-            name: {
-                en: 'Check eligibility',
-                zh_hans: '确认有权申请',
+    paperwork: {
+        procedureList: [
+            {
+                id: 'eligibility',
+                name: {
+                    en: 'Check eligibility',
+                    zh_hans: '确认有权申请',
+                },
+                instruction: {
+                    text: {
+                        en: 'Go to http://www.cic.gc.ca/ctc-vac/ee-start.asp and check your eligibility',
+                        zh_hans: '访问http://www.cic.gc.ca/ctc-vac/ee-start.asp，确认您有权申请',
+                    }
+                },
             },
-            description: {
-                en: 'Go to http://www.cic.gc.ca/ctc-vac/ee-start.asp and check your eligibility',
-                zh_hans: '访问http://www.cic.gc.ca/ctc-vac/ee-start.asp，确认您有权申请',
+            {
+                id: 'profile',
+                name: {
+                    en: 'Create Express Entry Profile',
+                    zh_hans: '设立Express Entry档案',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Create Express Entry Profile',
-                zh_hans: '设立Express Entry档案',
+            {
+                id: 'wait',
+                name: {
+                    en: 'Wait for invitation',
+                    zh_hans: '等待邀请',
+                },
             },
-        },
-        {
-            name: {
-                en: 'Wait for invitation',
-                zh_hans: '等待邀请',
-            },
-        },
-    ],
+        ],
+    }
 }
 
 export default canadianExperience

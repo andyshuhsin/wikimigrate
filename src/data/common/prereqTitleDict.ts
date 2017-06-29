@@ -58,6 +58,10 @@ export const prereqTitleDict: PrereqTitleDict = {
         en: 'Nomination',
         zh_hans: '提名',
     },
+    sibling: {
+        en: 'Sibling',
+        zh_hans: '兄弟姐妹',
+    }
 }
 
 export default prereqTitleDict
