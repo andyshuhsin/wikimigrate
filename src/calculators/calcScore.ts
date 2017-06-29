@@ -14,6 +14,7 @@ function sumBatchScores(batchScores: BatchScores) {
     return sum
 }
 
+// FIXME: Poor handling of multiple language tests
 export function calcScore(person: Person, system: ScoreSystem): number {
     let score = system.initialScore
     for (const key in system.conditionGroups) {
