@@ -12,12 +12,17 @@ export interface ScoreHistoryEntry {
 
 export type ScoreHistory = ScoreHistoryEntry[]
 
+// The only batch in condition group, say batch `age` in group `age`
+// Should be hidden in tables
+export const onlyInParentGroup = 'Only_Batch_in_Parent_Group'
+type OnlyInParentGroup = typeof onlyInParentGroup
+
 export interface ScoreCondition {
     score: number
     prerequisites: Combination<Prerequisite>
     // Only the highest score among applicable conditions
     // of the same batch would be added
-    batch: string
+    batch: string | OnlyInParentGroup
 }
 
 export type ConditionGroupSet = {

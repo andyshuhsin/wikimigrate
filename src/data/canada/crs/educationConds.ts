@@ -1,7 +1,7 @@
 import { Interval } from '../../../definitions/auxiliary/Operator'
 import { EducationStage } from '../../../definitions/Qualities/EducationExperience'
 import { Duration, duration } from '../../../definitions/auxiliary/Duration'
-import { ScoreCondition } from '../../../definitions/ScoreSystem'
+import { onlyInParentGroup, ScoreCondition } from '../../../definitions/ScoreSystem'
 import { allOf, Combination, identity } from '../../../definitions/auxiliary/Combination'
 import { EducationPrereq } from '../../../definitions/Prerequisites/EducationPrereq'
 import { UnionPrereq } from '../../../definitions/Prerequisites/UnionPrereq'
@@ -154,7 +154,7 @@ function getConditionsFromEducationTable(
     ): ScoreCondition {
         return {
             score: score,
-            batch: 'union',
+            batch: onlyInParentGroup,
             prerequisites: allOf([
                 singleOrDualDegreePrerequisites(
                     educationStage, minDuration, educationStageSecond, minDurationSecond,

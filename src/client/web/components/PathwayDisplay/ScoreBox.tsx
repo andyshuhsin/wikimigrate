@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ScoreHistory, ScoreHistoryEntry } from '../../../../definitions/ScoreSystem'
+import { onlyInParentGroup, ScoreHistory, ScoreHistoryEntry } from '../../../../definitions/ScoreSystem'
 import { text } from '../../../utils/text'
 import { BatchScores, ScoreDetails } from '../../../../calculators/calcScore'
 import { MultiLangStringSet } from '../../../../definitions/auxiliary/MultiLang'
@@ -70,6 +70,44 @@ const LabelTexts: {[key: string]: MultiLangStringSet} = {
         en: 'Secondary language: Reading',
         zh_hans: '第二语言：阅读',
     },
+    union: {
+        en: 'Union status',
+        zh_hans: '婚姻状况',
+    },
+    'spouse-bonus': {
+        en: 'Spouse bonus',
+        zh_hans: '配偶加分',
+    },
+    'transferability:language+education': {
+        en: 'Language + Education',
+    },
+    'transferability:canada_work+education': {
+        en: 'Canada work experience + Education'
+    },
+    'transferability:work+education': {
+        en: 'Work experience + Education'
+    },
+    'transferability:foreign_work+canada_work': {
+        en: 'Foreign work experience + Canada work experience'
+    },
+    'transferability:language+certification': {
+        en: 'Language + Trade certification'
+    },
+    'additional:sibling': {
+        en: 'Sibling'
+    },
+    'additional:french': {
+        en: 'French'
+    },
+    'additional:canada-education': {
+        en: 'Canadian education'
+    },
+    'additional:job-offer': {
+        en: 'Job offer'
+    },
+    'additional:provincial-nomination': {
+        en: 'Provincial or territorial nomination'
+    }
 }
 
 const Row = (props: { text: string, score: number, level: number }) => (
@@ -101,7 +139,6 @@ const HistoryEntry = (props: { entry: ScoreHistoryEntry }) => (
 class ScoreBox extends React.PureComponent<PropTypes, {}> {
     render() {
         const scoreDetails = this.props.scoreDetails
-        console.info(scoreDetails)
         return (
             <div>
                 <div style={{fontSize: '1.2em'}}>
@@ -129,11 +166,13 @@ class ScoreBox extends React.PureComponent<PropTypes, {}> {
                             const conditionGroup = scoreDetails.groups[group]
 
                             let batchesForDisplay: BatchScores
-                            if (Object.keys(conditionGroup.batches).length > 1) {
-                                batchesForDisplay = conditionGroup.batches
+                            if (Object.keys(conditionGroup.batches).length === 1
+                                && Object.keys(conditionGroup.batches)[0] === onlyInParentGroup
+                            ) {
+                                batchesForDisplay = {}
                             }
                             else {
-                                batchesForDisplay = {}
+                                batchesForDisplay = conditionGroup.batches
                             }
 
                             return [

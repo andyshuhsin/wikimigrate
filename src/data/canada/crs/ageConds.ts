@@ -1,4 +1,4 @@
-import { ScoreCondition } from '../../../definitions/ScoreSystem'
+import { onlyInParentGroup, ScoreCondition } from '../../../definitions/ScoreSystem'
 import { allOf } from '../../../definitions/auxiliary/Combination'
 import { UnionPrereq } from '../../../definitions/Prerequisites/UnionPrereq'
 import { duration } from '../../../definitions/auxiliary/Duration'
@@ -50,7 +50,7 @@ function getConditionsFromAgeTable(table: AgeTable): ScoreCondition[] {
     ): ScoreCondition {
         return {
             score: score,
-            batch: 'age',
+            batch: onlyInParentGroup,
             prerequisites: allOf([
                 {
                     prereqId: 'union',
