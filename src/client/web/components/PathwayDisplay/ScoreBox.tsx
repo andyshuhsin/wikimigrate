@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ScoreHistory, ScoreHistoryEntry } from '../../../../definitions/ScoreSystem'
 import design from '../../design'
+import { text } from '../../../utils/text'
 
 interface PropTypes {
     score: number
@@ -35,23 +36,29 @@ class ScoreBox extends React.PureComponent<PropTypes, {}> {
                     {this.props.name}
                 </div>
                 <div>
-                    Your score:
+                    {
+                        text({
+                            en: 'Your score: ',
+                            zh_hans: '分数： ',
+                        })
+                    }
                     <span style={scoreStyle}>{this.props.score}</span>
                     <br />
-                    <span style={commentStyle}>
-                        For a more precise score, please describe your self in filter panel.
-                    </span>
                 </div>
 
                 <div>
-                    Previous lowest score for entry:
                     {
-                        this.props.history.map(
-                            entry =>
-                                <HistoryEntry
-                                    key={entry.date.join()}
-                                    entry={entry}
-                                />,
+                        text({
+                            en: 'Previous lowest scores for entry: ',
+                            zh_hans: '过往分数线： ',
+                        })
+                    }
+                    {
+                        this.props.history.map(entry =>
+                            <HistoryEntry
+                                key={entry.date.join()}
+                                entry={entry}
+                            />
                         )
                     }
                 </div>
