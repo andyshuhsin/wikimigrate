@@ -143,22 +143,22 @@ const spec: Spec<[Person, ScoreSystem], number>[] = [
         ],
         479,
     ],
-    // [
-    //     "bob",
-    //     [
-    //         bob,
-    //         crs
-    //     ],
-    //     336,
-    // ],
-    // [
-    //     "ulysses",
-    //     [
-    //         ulysses,
-    //         crs
-    //     ],
-    //     361,
-    // ],
+    [
+        "bob",
+        [
+            bob,
+            crs
+        ],
+        336,
+    ],
+    [
+        "ulysses",
+        [
+            ulysses,
+            crs
+        ],
+        361,
+    ],
 ]
 
 evaluate(spec, calcScore)
