@@ -7,7 +7,11 @@ import sys from '../../sys'
 import { SpecifierListOperator } from '../../../actions/SpecifierActions'
 import { Person } from '../../../../definitions/Person'
 import languageBenchmarkItemNames from '../../../../data/common/languageTestItemNames'
-import { languageTestItemValues, LanguageTestResult } from '../../../../definitions/auxiliary/LanguageTest'
+import {
+    LanguageTestId, languageTestItemValues,
+    LanguageTestResult,
+} from '../../../../definitions/auxiliary/LanguageTest'
+import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 
 const styles = {
     titleStyle: {
@@ -68,12 +72,16 @@ const styles = {
         textAlign: 'center',
         verticalAlign: 'bottom',
     } as React.CSSProperties,
+
+    dropdownSelect: {
+        border: '1px solid black'
+    } as React.CSSProperties
 }
 
 interface MultipleChoiceOptionProps {
     shouldHighlight: boolean
     option: SpecifierChoice
-    onClick: () => any
+    onAction: () => any
 }
 
 const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
@@ -82,7 +90,7 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
             ? Object.assign({}, styles.optionNormalStyle, styles.optionHighlightStyle)
             : styles.optionNormalStyle
         }
-        onClick={props.onClick}
+        onClick={props.onAction}
     >
                 {text(props.option.label)}
             </span>
@@ -139,9 +147,17 @@ const SpecifierTitle = (props: { title: string }) => (
     </h1>
 )
 
+function getScoreOptions(format: [number, number, number]): number[] {
+    const results = []
+    for (let value = format[0]; value <= format[1]; value += format[2]) {
+        results.push(value)
+    }
+    return results
+}
+
 interface SpecifierContentProps {
     specifier: Specifier
-    onClick: (
+    onAction: (
         specifierId: SpecifierId,
         value: string | number,
         index?: number,
@@ -150,20 +166,84 @@ interface SpecifierContentProps {
     person: Person
 }
 
-const LanguageBody = (props: {test: LanguageTestResult}) => (
-    <div>
-        {languageTestItemValues.map(item => (
-            <span key={item}>
-                {item}
-            </span>
-        ))}
-    </div>
-)
+const LanguageBody = (props: {
+    test: LanguageTestResult,
+    index: number,
+    onTestChange(newTest: LanguageTestId): void
+    onRemove(index: number): void
+}) => {
+    const profile = languageTestProfiles.find(test => test.id === props.test.testId)
+    if (!profile) {
+        console.warn("Unknown test id", props.test.testId)
+        return null
+    }
+    return (
+        <div style={{
+            position: 'relative',
+            padding: '0.5em',
+            borderBottom: '1px black dashed',
+            margin: '0.5em 0',
+        }}>
+            <div style={{
+                position: 'absolute',
+                right: 0,
+                top: 0,
+            }}>
+                <IconButton
+                    icon='–'
+                    onClick={() => props.onRemove(props.index)}
+                />
+            </div>
+
+            <select
+                defaultValue={profile.abbreviation}
+                style={styles.dropdownSelect}
+                onChange={(event) => props.onTestChange(event.target.key)}
+            >
+                {languageTestProfiles.map(profile =>
+                    <option key={profile.abbreviation}>
+                        {profile.abbreviation}
+                    </option>
+                )}
+            </select>
+
+            <table>
+                <thead>
+                    <tr>
+                        {languageTestItemValues.map(item => (
+                            <th key={item}>
+                                {item}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {languageTestItemValues.map(item => (
+                            <td key={item}>
+                                <select
+                                    defaultValue={props.test.scores[item].toString()}
+                                    style={styles.dropdownSelect}
+                                >
+                                    {getScoreOptions(profile.itemScoreFormat).map(score => (
+                                        <option key={score} >
+                                            {score}
+                                        </option>
+                                    ))}
+                                </select>
+                            </td>
+                        ))}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    )
+}
 
 const SpecifierBody = (props: SpecifierContentProps) => {
     const {
         specifier,
-        onClick,
+        onAction,
         person,
     } = props
 
@@ -175,7 +255,15 @@ const SpecifierBody = (props: SpecifierContentProps) => {
             switch(specifier.id) {
                 case 'language': {
                     existingItems = person.languageTests.map((test, index) =>
-                        <LanguageBody test={test} key={test.testId + index} />
+                        <LanguageBody
+                            key={test.testId + index}
+                            test={test}
+                            onTestChange={() => {}}
+                            onRemove={index => {
+                                onAction(specifier.id, 0, index, 'REMOVE')
+                            }}
+                            index={index}
+                        />
                     )
                 }
             }
@@ -186,7 +274,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
                     <IconButton
                         icon="+"
                         onClick={() => {
-                            onClick(specifier.id, 0, 0, 'NEW')
+                            onAction(specifier.id, 0, 0, 'NEW')
                         }}
                     />
                 </div>
@@ -199,7 +287,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
                     <MultipleChoiceOption
                         option={option}
                         shouldHighlight={true}
-                        onClick={() => onClick(specifier.id, option.id)}
+                        onAction={() => onAction(specifier.id, option.id)}
                         key={option.id}
                     />,
                 )
@@ -212,8 +300,8 @@ const SpecifierBody = (props: SpecifierContentProps) => {
             content = (
                 <ValueChooser
                     value={value}
-                    onLeftClick={value => onClick(specifier.id, value)}
-                    onRightClick={value => onClick(specifier.id, value)}
+                    onLeftClick={value => onAction(specifier.id, value)}
+                    onRightClick={value => onAction(specifier.id, value)}
                     min={specifier.min}
                     max={specifier.max}
                 />
@@ -252,7 +340,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
                 <SpecifierTitle title={text(specifier.title)}/>
                 <SpecifierBody
                     specifier={specifier}
-                    onClick={specifierOptionClick}
+                    onAction={specifierOptionClick}
                     person={this.props.person}
                 />
             </div>

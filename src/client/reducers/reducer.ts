@@ -73,6 +73,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                                     reading: 6,
                                 }
                             })
+                            break
+                        }
+                        case 'REMOVE': {
+                            newState.user.languageTests.splice(action.payload.index, 1)
                         }
                     }
                     break

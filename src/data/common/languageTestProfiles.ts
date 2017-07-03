@@ -3,6 +3,7 @@ import { LanguageTestProfile } from '../../definitions/auxiliary/LanguageTest'
 const languageTestProfiles: LanguageTestProfile[] = [
     {
         id: 'clb',
+        abbreviation: 'CLB',
         title: {
             en: 'Canadian Language Benchmark',
             fr: 'Niveaux de compétence linguistique canadiens',
@@ -133,6 +134,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
     },
     {
         id: 'celpip',
+        abbreviation: 'CELPIP',
         title: {
             en: 'Canadian English Language Proficiency Index Program',
         },
@@ -144,6 +146,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
     },
     {
         id: 'tef',
+        abbreviation: 'TEF',
         title: {
             fr: `Test d'évaluation de français`,
         },
@@ -155,6 +158,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
     },
     {
         id: 'ielts',
+        abbreviation: 'IELTS',
         title: {
             en: 'International English Language Testing System',
         },
@@ -166,6 +170,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
     },
     {
         id: 'toefl',
+        abbreviation: 'TOEFL',
         title: {
             en: 'Test of English as a Foreign Language',
         },
@@ -177,6 +182,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
     },
     {
         id: 'pte-academic',
+        abbreviation: 'PTE',
         title: {
             en: 'Pearson Test of English',
         },
@@ -188,6 +194,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
     },
     {
         id: 'cae',
+        abbreviation: 'CAE',
         title: {
             en: 'Cambridge English: Advanced',
         },

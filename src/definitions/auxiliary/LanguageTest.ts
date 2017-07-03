@@ -25,6 +25,7 @@ export type EquivalencyTable = {
 
 export type LanguageTestProfile = {
     id: LanguageTestId
+    abbreviation: string
     title: MultiLangStringSet
     languages: LangId[]
     itemScoreFormat: [number /* lowest */, number /* highest */, number /* increment */]

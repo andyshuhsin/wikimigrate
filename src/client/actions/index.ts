@@ -66,6 +66,7 @@ export type Action =
     | SetLang
     | TitleFilterTextClick
 
+
 export function specifierPanelRenderAction(height: number): FilterPanelRender {
     return {
         type: 'FILTER_PANEL_RENDER',
