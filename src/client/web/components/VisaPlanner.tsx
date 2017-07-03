@@ -5,9 +5,9 @@ import { connect, Dispatch } from 'react-redux'
 
 import TopBar from './TopBar'
 import PathwayListDisplay from './PathwayListDisplay'
-import FilterBar from './Filters/FilterBar'
+import FilterBar from './Specifiers/SpecifierBar'
 import PathwayDisplay from './PathwayDisplay'
-import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
+import SpecifierPanel from './Specifiers/SpecifierPanel'
 import Shade from './Shade'
 import sys from '../sys'
 
@@ -172,7 +172,7 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
                             : 0
                     }
                 />
-                <FilterDetailedOptionPanel />
+                <SpecifierPanel />
             </div>
         )
     }
@@ -183,8 +183,8 @@ function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
         user: state.user,
         lang: state.ui.lang,
         pathwayOnDisplay: state.ui.pathwayOnDisplay,
-        filterPanelHeight: state.ui.filterPanelHeight,
-        shouldDetailedFilterPanelExpand: state.ui.shouldDetailedFilterPanelExpand,
+        filterPanelHeight: state.ui.specifierPanelHeight,
+        shouldDetailedFilterPanelExpand: state.ui.shouldSpecifierPanelExpand,
     }
 }
 

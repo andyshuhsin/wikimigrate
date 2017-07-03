@@ -27,17 +27,11 @@ export type LanguageTestProfile = {
     id: LanguageTestId
     title: MultiLangStringSet
     languages: LangId[]
+    itemScoreFormat: [number /* lowest */, number /* highest */, number /* increment */]
     equivalency?: {
         [source in LanguageTestId]?: EquivalencyTable
     }
     reference: URLDatum
-}
-
-export const zeroLanguageScores: LanguageTestScoreSet = {
-    listening: 0,
-    speaking: 0,
-    reading: 0,
-    writing: 0,
 }
 
 export type LanguageTestScoreSet = {
@@ -49,5 +43,3 @@ export interface LanguageTestResult {
     scores: LanguageTestScoreSet
     language?: LangId
 }
-
-export default LanguageTestResult

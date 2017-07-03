@@ -1,5 +1,8 @@
 import { Action } from '../actions'
-import { DEFAULT_AGE, FilterId, FilterState, languageAssumptionSet, LanguageFilterId } from '../data'
+import {
+    DEFAULT_AGE,
+    SpecifierId,
+} from '../data'
 import { PathwayDescriptor } from '../utils/definitions'
 import { getInitialPerson, Person } from '../../definitions/Person'
 import { clone } from '../utils/clone'
@@ -13,7 +16,6 @@ import { PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE } from '../../data/constants'
 import { TransitionId } from '../../definitions/Transition'
 
 const ESC_KEY_CODE = 27
-const F_KEY_CODE = 70
 
 type SIMPLE_PATHWAY_SEGMENTS = ['', PATHWAY_KW_SIMPLE, TransitionId]
 type COMPOSITE_PATHWAY_SEGMENTS = ['', PATHWAY_KW_COMPOSITE, string /* "id1+id2+id3..." */]
@@ -25,10 +27,9 @@ export interface VisaPlannerState {
     ui: {
         lang: LangId
         query: string
-        expandedFilterId: FilterId | null
-        filterState: FilterState
-        shouldDetailedFilterPanelExpand: boolean
-        filterPanelHeight: number | null
+        expandedFilterId: SpecifierId | null
+        shouldSpecifierPanelExpand: boolean
+        specifierPanelHeight: number | null
         pathwayOnDisplay: PathwayDescriptor | null
     }
 }
@@ -38,72 +39,11 @@ export const INITIAL_STATE: VisaPlannerState = {
     ui: {
         lang: data.app.lang,
         query: '',
-        shouldDetailedFilterPanelExpand: false,
-        filterState: {
-            work_experience_duration: null,
-            work_experience_region: null,
-            english: null,
-            french: null,
-            education_level: null,
-            education_region: null,
-            age: null,
-            app_lang: null,
-        },
-        filterPanelHeight: null,
+        shouldSpecifierPanelExpand: false,
+        specifierPanelHeight: null,
         expandedFilterId: null,
         pathwayOnDisplay: null,
     },
-}
-
-function calcUserLanguageTests(
-    language: 'english' | 'french',
-    newLevel: LanguageFilterId | 'reset',
-    currentLanguageTests: LanguageTestResult[] | undefined,
-): LanguageTestResult[] | undefined {
-    let langId: LangId
-    if (language === 'english') {
-        langId = 'en'
-    }
-    else if (language === 'french') {
-        langId = 'fr'
-    }
-    else {
-        console.warn('Unknown prereqId as language: ', language)
-        return undefined
-    }
-
-    if (currentLanguageTests) {
-        let res = currentLanguageTests.filter(test => test.language !== langId)
-        if (newLevel === 'reset') {
-            return res
-        }
-        else {
-            const assumptions = languageAssumptionSet[langId]
-            if (assumptions) {
-                return res.concat(assumptions[newLevel])
-            }
-            else {
-                console.warn(langId, 'doesn\'t have languageAssumptions')
-                return res
-            }
-        }
-    }
-    else {
-        if (newLevel === 'reset') {
-            return undefined
-        }
-        else {
-            const assumptions = languageAssumptionSet[langId]
-            if (assumptions) {
-                return assumptions[newLevel]
-            }
-            else {
-                console.warn(langId, 'doesn\'t have languageAssumptions')
-                return undefined
-            }
-        }
-    }
-
 }
 
 function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
@@ -113,126 +53,42 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         case 'KEY_DOWN': {
             if (action.payload.keyCode === ESC_KEY_CODE) {
                 newState.ui.pathwayOnDisplay = null
-                newState.ui.shouldDetailedFilterPanelExpand = false
+                newState.ui.shouldSpecifierPanelExpand = false
                 return newState
             }
-            // else if (action.payload.keyCode === F_KEY_CODE) {
-            //     newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
-            //     return newState
-            // }
             return state
         }
 
-        case 'FILTER_OPTION_CLICK': {
-            // Person data
-            switch (action.payload.filterId) {
-                case 'english': {
-                    let newLevel: LanguageFilterId | 'reset' = action.payload.value
-                    if (newLevel === newState.ui.filterState[action.payload.filterId]) {
-                        newLevel = 'reset'
+        case 'SPECIFIER_CLICK': {
+            switch (action.payload.specifier) {
+                case 'language': {
+                    switch (action.payload.operator) {
+                        case 'NEW': {
+                            newState.user.languageTests.push({
+                                testId: 'ielts',
+                                scores: {
+                                    listening: 6,
+                                    speaking: 6,
+                                    writing: 6,
+                                    reading: 6,
+                                }
+                            })
+                        }
                     }
-                    newState.user.languageTests = calcUserLanguageTests(
-                        'english',
-                        newLevel,
-                        state.user.languageTests,
-                    )
-                    break
-                }
-                case 'french': {
-                    let newLevel: LanguageFilterId | 'reset' = action.payload.value
-                    if (newLevel === newState.ui.filterState[action.payload.filterId]) {
-                        newLevel = 'reset'
-                    }
-                    newState.user.languageTests = calcUserLanguageTests(
-                        'french',
-                        newLevel,
-                        state.user.languageTests,
-                    )
                     break
                 }
                 case 'age': {
-                    const date = new Date()
-                    const age = Number(action.payload.value)
-                    newState.user.birth.date = {
-                        year: date.getFullYear() - age,
-                    }
                     break
                 }
-                case 'education_level': {
-                    const education = newState.user.education
-                    if (education && education[0]) {
-                        education[0].stage = action.payload.value
-                    }
-                    else {
-                        newState.user.education = [
-                            {
-                                qualityId: 'education',
-                                stage: action.payload.value,
-                            } as EducationQuality,
-                        ]
-                    }
+                case 'education': {
                     break
                 }
-                case 'education_region': {
-                    const education = newState.user.education
-                    if (education && education[0]) {
-                        education[0].regionId = action.payload.value
-                    }
-                    else {
-                        newState.user.education = [
-                            {
-                                qualityId: 'education',
-                                regionId: action.payload.value,
-                            } as EducationQuality,
-                        ]
-                    }
-                    break
-                }
-                case 'work_experience_duration': {
-                    const works = newState.user.workExperiences
-                    if (works && works[0]) {
-                        works[0].duration = duration(action.payload.value, 'year')
-                    }
-                    else {
-                        newState.user.workExperiences = [
-                            {
-                                qualityId: 'work_experience',
-                                duration: duration(action.payload.value, 'year'),
-                            } as WorkExperienceQuality,
-                        ]
-                    }
-                    break
-                }
-                case 'work_experience_region': {
-                    const works = newState.user.workExperiences
-                    if (works && works[0]) {
-                        works[0].regionId = action.payload.value
-                    }
-                    else {
-                        newState.user.workExperiences = [
-                            {
-                                qualityId: 'work_experience',
-                                region: action.payload.value,
-                            } as WorkExperienceQuality,
-                        ]
-                    }
-                    break
-                }
-                case 'app_lang': {
-                    newState.ui.lang = action.payload.value || data.app.lang
+                case 'work_experience': {
                     break
                 }
                 default: {
                     console.warn('Unexpected filterId:', (action.payload as any).filterId)
                 }
-            }
-
-            // UI
-            if (state.ui.filterState[action.payload.filterId] === action.payload.value) {
-                newState.ui.filterState[action.payload.filterId] = null
-            }
-            else {
-                newState.ui.filterState[action.payload.filterId] = action.payload.value
             }
             return newState
         }
@@ -250,26 +106,22 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case 'FILTER_BAR_CLICK': {
-            newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
+            newState.ui.shouldSpecifierPanelExpand = !newState.ui.shouldSpecifierPanelExpand
             return newState
         }
 
         case 'TITLE_FILTER_TEXT_CLICK': {
-            newState.ui.shouldDetailedFilterPanelExpand = !newState.ui.shouldDetailedFilterPanelExpand
+            newState.ui.shouldSpecifierPanelExpand = !newState.ui.shouldSpecifierPanelExpand
             return newState
         }
 
         case 'SHADE_CLICK': {
-            newState.ui.shouldDetailedFilterPanelExpand = false
+            newState.ui.shouldSpecifierPanelExpand = false
             return newState
         }
 
-        case 'FILTER_SELECT': {
-            return state
-        }
-
         case 'FILTER_PANEL_RENDER': {
-            newState.ui.filterPanelHeight = action.payload.height
+            newState.ui.specifierPanelHeight = action.payload.height
             return newState
         }
 

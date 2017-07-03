@@ -1,159 +1,51 @@
 import { LangId, MultiLangStringSet } from '../../definitions/auxiliary/MultiLang'
-import { LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
 import { RegionId } from '../../definitions/auxiliary/Region'
+import { EducationStage } from '../../definitions/Qualities/EducationExperience'
 
-export type FilterId =
-    'work_experience_duration'
-    | 'work_experience_region'
-    | 'education_level'
-    | 'education_region'
+export type SpecifierId =
+    'work_experience'
+    | 'education'
     | 'age'
-    | 'english'
-    | 'french'
-    | 'app_lang'
+    | 'language'
+    | 'location'
+    | 'duration'
 
-export type FilterOption = {
+export type SpecifierChoice = {
     id: OptionId
     label: MultiLangStringSet
 }
 
-export interface BaseFilter {
-    id: FilterId
-    filterType: string
+export type SpecifierType = 'multiple-choice' | 'integer' | 'list'
+
+export interface BaseSpecifier {
+    id: SpecifierId
+    type: SpecifierType
     title: MultiLangStringSet
 }
 
-export interface MultipleChoiceFilter extends BaseFilter {
-    filterType: 'multiple-choice'
-    options: FilterOption[]
+export interface MultipleChoiceSpecifier extends BaseSpecifier {
+    type: 'multiple-choice'
+    options: SpecifierChoice[]
 }
 
-export interface RealValueFilter extends BaseFilter {
-    filterType: 'real',
+export interface IntegerSpecifier extends BaseSpecifier {
+    type: 'integer'
     defaultValue: number
     min?: number
     max?: number
 }
 
-export type Filter =
-    MultipleChoiceFilter
-    | RealValueFilter
+export interface ListSpecifier extends BaseSpecifier {
+    type: 'list'
+    items: Specifier[]
+}
+
+export type Specifier =
+    ListSpecifier
+    | MultipleChoiceSpecifier
+    | IntegerSpecifier
 
 export type OptionId = string
-
-export type LanguageFilterId = 'proficient' | 'good' | 'not_good'
-
-export type LanguageFilterAssumptions = {
-    [key in LanguageFilterId]: LanguageTestResult[]
-    }
-
-const englishTestAssumptions: LanguageFilterAssumptions = {
-    proficient: [
-        {
-            testId: 'clb',
-            language: 'en',
-            scores: {
-                listening: 11,
-                speaking: 11,
-                reading: 11,
-                writing: 11,
-            },
-        },
-        // {
-        //     testId: "ielts",
-        //     language: "en",
-        //     scores: {
-        //         listening: 8,
-        //         speaking: 8,
-        //         reading: 8,
-        //         writing: 8,
-        //     }
-        // },
-        // {
-        //     testId: "toefl",
-        //     language: "en",
-        //     scores: {
-        //         listening: 28,
-        //         speaking: 28,
-        //         reading: 28,
-        //         writing: 28,
-        //     }
-        // },
-    ] as LanguageTestResult[],
-    good: [
-        {
-            testId: 'clb',
-            language: 'en',
-            scores: {
-                listening: 9,
-                speaking: 7,
-                reading: 9,
-                writing: 9,
-            },
-        },
-    ] as LanguageTestResult[],
-    not_good: [
-        {
-            testId: 'clb',
-            language: 'en',
-            scores: {
-                listening: 0,
-                speaking: 0,
-                reading: 0,
-                writing: 0,
-            },
-        },
-    ] as LanguageTestResult[],
-}
-
-const frenchTestAssumptions: LanguageFilterAssumptions = {
-    proficient: [
-        {
-            testId: 'clb',
-            language: 'fr',
-            scores: {
-                listening: 11,
-                speaking: 11,
-                reading: 11,
-                writing: 11,
-            },
-        },
-    ] as LanguageTestResult[],
-    good: [
-        {
-            testId: 'clb',
-            language: 'fr',
-            scores: {
-                listening: 9,
-                speaking: 9,
-                reading: 9,
-                writing: 9,
-            },
-        },
-    ] as LanguageTestResult[],
-    not_good: [
-        {
-            testId: 'clb',
-            language: 'fr',
-            scores: {
-                listening: 0,
-                speaking: 0,
-                reading: 0,
-                writing: 0,
-            },
-        },
-    ] as LanguageTestResult[],
-
-}
-
-type LanguageAssumptionSet = {
-    [key in LangId]?: LanguageFilterAssumptions
-    }
-
-export const languageAssumptionSet: LanguageAssumptionSet = {
-    en: englishTestAssumptions,
-    fr: frenchTestAssumptions,
-}
 
 interface RegionOption {
     id: RegionId,
@@ -193,76 +85,94 @@ const RegionOptions: RegionOption[] = [
 
 export const DEFAULT_AGE = 35
 
-export const filterSets: Filter[] = [
+interface EducationOption {
+    id: EducationStage,
+    label: MultiLangStringSet
+}
+
+export const educationOptions: EducationOption[] = [
     {
-        id: 'work_experience_duration',
-        filterType: 'real',
-        title: {
-            en: 'Work experience in years',
-            zh_hans: '工作经验（年）',
+        id: 'secondary',
+        label: {
+            en: 'Secondary',
+            zh_hans: '高中',
         },
-        defaultValue: 1,
-        min: 0,
     },
     {
-        id: 'work_experience_region',
-        filterType: 'multiple-choice',
-        title: {
-            en: 'Work experience: Where?',
-            zh_hans: '工作经验：地点',
+        id: 'bachelor',
+        label: {
+            en: 'Bachelor',
+            zh_hans: '本科',
         },
-        options: RegionOptions,
     },
     {
-        id: 'education_level',
-        filterType: 'multiple-choice',
+        id: 'master',
+        label: {
+            en: 'Master',
+            zh_hans: '硕士',
+        },
+    },
+    {
+        id: 'phd',
+        label: {
+            en: 'PhD',
+            zh_hans: '博士',
+        },
+    },
+]
+
+const durationItem: IntegerSpecifier = {
+    id: 'duration',
+    type: 'integer',
+    title: {
+        en: 'Duration'
+    },
+    defaultValue: 1,
+    min: 0,
+}
+
+const locationItem: MultipleChoiceSpecifier = {
+    id: 'location',
+    type: 'multiple-choice',
+    title: {
+        en: 'Location',
+        zh_hans: '地点',
+    },
+    options: RegionOptions
+}
+
+export const specifiers: Specifier[] = [
+    {
+        id: 'work_experience',
+        type: 'list',
         title: {
-            en: 'Education: Highest Level',
+            en: 'Work experience',
+            zh_hans: '工作经验',
+        },
+        items: [durationItem, locationItem],
+    },
+    {
+        id: 'education',
+        type: 'list',
+        title: {
+            en: 'Education',
             zh_hans: '最高学历',
         },
-        options: [
-            {
-                id: 'secondary',
-                label: {
-                    en: 'Secondary',
-                    zh_hans: '高中',
-                },
-            },
-            {
-                id: 'bachelor',
-                label: {
-                    en: 'Bachelor',
-                    zh_hans: '本科',
-                },
-            },
-            {
-                id: 'master',
-                label: {
-                    en: 'Master',
-                    zh_hans: '硕士',
-                },
-            },
-            {
-                id: 'phd',
-                label: {
-                    en: 'PhD',
-                    zh_hans: '博士',
-                },
-            },
-        ],
+        items: [durationItem, locationItem],
+        options: educationOptions,
     },
     {
-        id: 'education_region',
-        filterType: 'multiple-choice',
+        id: 'language',
+        type: 'list',
         title: {
-            en: 'Highest education: Where?',
-            zh_hans: '最高学历取得地',
+            en: 'Language',
+            zh_hans: '工作经验',
         },
-        options: RegionOptions,
+        items: [durationItem, locationItem],
     },
     {
         id: 'age',
-        filterType: 'real',
+        type: 'integer',
         title: {
             en: 'Age',
             zh_hans: '年龄',
@@ -270,92 +180,4 @@ export const filterSets: Filter[] = [
         defaultValue: DEFAULT_AGE,
         min: 0,
     },
-    {
-        id: 'english',
-        filterType: 'multiple-choice',
-        title: {
-            en: 'English',
-            zh_hans: '英语能力',
-        },
-        options: [
-            {
-                id: 'not_good',
-                label: {
-                    en: 'Not good',
-                    zh_hans: '不行',
-                },
-            },
-            {
-                id: 'good',
-                label: {
-                    en: 'Good',
-                    zh_hans: '挺好',
-                },
-            },
-            {
-                id: 'proficient',
-                label: {
-                    en: 'Proficient',
-                    zh_hans: '流利',
-                },
-            },
-        ],
-    },
-    {
-        id: 'french',
-        filterType: 'multiple-choice',
-        title: {
-            en: 'French',
-            zh_hans: '法语能力',
-        },
-        options: [
-            {
-                id: 'not_good',
-                label: {
-                    en: 'Not good',
-                    zh_hans: '不行',
-                },
-            },
-            {
-                id: 'good',
-                label: {
-                    en: 'Good',
-                    zh_hans: '挺好',
-                },
-            },
-            {
-                id: 'proficient',
-                label: {
-                    en: 'Proficient',
-                    zh_hans: '流利',
-                },
-            },
-        ],
-    },
-    {
-        id: 'app_lang',
-        filterType: 'multiple-choice',
-        title: {
-            en: 'Choose App Language',
-            zh_hans: '选择语言',
-        },
-        options: [
-            {
-                id: 'en',
-                label: {
-                    en: 'English',
-                },
-            },
-            {
-                id: 'zh_hans',
-                label: {
-                    zh_hans: '简体中文',
-                },
-            },
-        ],
-    },
 ]
-
-export type FilterState = {
-    [filterId in FilterId]: OptionId | number | null
-}

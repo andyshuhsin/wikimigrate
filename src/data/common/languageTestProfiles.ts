@@ -8,6 +8,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
             fr: 'Niveaux de compétence linguistique canadiens',
             zh_hans: '加拿大语言标准',
         },
+        itemScoreFormat: [4, 12, 1],
         languages: ['en', 'fr'],
         equivalency: {
             /** @see http://www.cic.gc.ca/english/resources/tools/language/charts.asp */
@@ -136,6 +137,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
             en: 'Canadian English Language Proficiency Index Program',
         },
         languages: ['en'],
+        itemScoreFormat: [4, 12, 1],
         reference: {
             url: 'https://www.celpip.ca/',
         }
@@ -145,6 +147,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
         title: {
             fr: `Test d'évaluation de français`,
         },
+        itemScoreFormat: [0, 450, 1],
         languages: ['fr'],
         reference: {
             url: 'http://www.fiaf.org/frenchclasses/frenchexam-tef.shtml',
@@ -155,6 +158,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
         title: {
             en: 'International English Language Testing System',
         },
+        itemScoreFormat: [4, 9, 0.5],
         languages: ['en'],
         reference: {
             url: 'https://www.ielts.org/',
@@ -165,6 +169,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
         title: {
             en: 'Test of English as a Foreign Language',
         },
+        itemScoreFormat: [0, 30, 1],
         languages: ['en'],
         reference: {
             url: 'https://www.ets.org/toefl',
@@ -175,6 +180,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
         title: {
             en: 'Pearson Test of English',
         },
+        itemScoreFormat: [10, 90, 1],
         languages: ['en'],
         reference: {
             url: 'http://pearsonpte.com/',
@@ -185,11 +191,17 @@ const languageTestProfiles: LanguageTestProfile[] = [
         title: {
             en: 'Cambridge English: Advanced',
         },
+        /**
+            Score range is complex.
+            @see http://www.cambridgeenglish.org/images/210434-converting-practice-test-scores-to-cambridge-english-scale-scores.pdf
+        */
+        itemScoreFormat: [0, 100, 1],
         languages: ['en'],
         reference: {
             url: 'http://www.cambridgeenglish.org/exams/advanced/',
         },
     },
+    /* disabled due to letter-based scoring not implemented
     {
         id: 'oet',
         title: {
@@ -200,6 +212,7 @@ const languageTestProfiles: LanguageTestProfile[] = [
             url: 'https://www.occupationalenglishtest.org/',
         },
     },
+    */
 ]
 
 export default languageTestProfiles

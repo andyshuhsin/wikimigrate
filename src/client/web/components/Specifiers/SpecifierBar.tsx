@@ -7,7 +7,7 @@ interface FilterBarProps {
     offset?: number | null
 }
 
-const FilterBar = (props: FilterBarProps) => (
+const SpecifierBar = (props: FilterBarProps) => (
     <div
         style={{
             position: 'absolute',
@@ -24,8 +24,8 @@ const FilterBar = (props: FilterBarProps) => (
     >
         {
             text({
-                en: 'Filters & Settings',
-                zh_hans: '筛选设置',
+                en: 'Specify conditions',
+                zh_hans: '设置个人条件',
             })
         }
         <img
@@ -33,10 +33,10 @@ const FilterBar = (props: FilterBarProps) => (
                 width: '1.3em',
                 verticalAlign: 'middle',
                 transform: props.offset ? 'rotate(0deg)' : 'rotate(180deg)',
-            } as React.CSSProperties}
+            }}
             src={require('../../../assets/angle-down.svg')}
         />
     </div>
 )
 
-export default FilterBar
+export default SpecifierBar
