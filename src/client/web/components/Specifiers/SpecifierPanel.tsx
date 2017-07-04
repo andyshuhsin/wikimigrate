@@ -4,13 +4,13 @@ import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
-    languageTestChangeAction, specifierClickAction,
+    languageTestChangeAction, languageTestScoreChangeAction, specifierClickAction,
     SpecifierListOperator,
 } from '../../../actions/SpecifierActions'
 import { SingleSpecifierPanel } from './SingleSpecifierPanel'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
-import { LanguageTestId } from '../../../../definitions/auxiliary/LanguageTest'
+import { LanguageTestId, LanguageTestItem } from '../../../../definitions/auxiliary/LanguageTest'
 
 
 export type SpecifierOptionClickFn =
@@ -28,6 +28,7 @@ interface OptionDisplayProps {
     specifierOptionClick: SpecifierOptionClickFn
     specifierPanelRender: SpecifierPanelRenderFn
     languageTestSelect(index: number, test: LanguageTestId): void
+    languageItemSelect(index: number, item: LanguageTestItem, score: number): void
     user: Person
 }
 
@@ -76,6 +77,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                         specifierOptionClick={this.props.specifierOptionClick}
                         person={this.props.user}
                         languageTestSelect={this.props.languageTestSelect}
+                        languageScoreSelect={this.props.languageItemSelect}
                     />
                 )}
             </div>
@@ -105,6 +107,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         },
         languageTestSelect(index: number, test: LanguageTestId): void {
             dispatch(languageTestChangeAction(index, test))
+        },
+        languageItemSelect(index: number, item: LanguageTestItem, score: number): void {
+            dispatch(languageTestScoreChangeAction(index, item, score))
         },
         specifierPanelRender(height: number): void {
             dispatch(specifierPanelRenderAction(height))

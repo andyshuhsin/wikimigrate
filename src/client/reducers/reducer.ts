@@ -153,6 +153,12 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case 'Language_Test_Score_Change': {
+            newState.user.languageTests[action.payload.index]
+                .scores[action.payload.item] = action.payload.score
+            return newState
+        }
+
         case 'PATH_BOX_CLICK': {
             newState.ui.pathwayOnDisplay = {
                 transitionIds: action.payload.pathway.transitions.map(transition => transition.id),

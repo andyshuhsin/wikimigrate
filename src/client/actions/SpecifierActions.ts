@@ -1,7 +1,7 @@
 import { SpecifierId } from '../data'
 import { Duration } from '../../definitions/auxiliary/Duration'
 import { RegionId } from '../../definitions/auxiliary/Region'
-import { LanguageTestId, LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
+import { LanguageTestId, LanguageTestItem, LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
 
 interface BaseOptionClickAction<Payload> {
     type: 'SPECIFIER_CLICK'
@@ -60,12 +60,22 @@ export interface LanguageTestChangeAction {
     }
 }
 
+export interface LanguageTestScoreChangeAction {
+    type: 'Language_Test_Score_Change'
+    payload: {
+        index: number
+        item: LanguageTestItem
+        score: number
+    }
+}
+
 export type SpecifierAction =
     | BaseOptionClickAction<OptionClickPayload_Education>
     | BaseOptionClickAction<OptionClickPayload_WorkExperience>
     | BaseOptionClickAction<OptionClickPayload_Language>
     | BaseOptionClickAction<OptionClickPayload_Age>
     | LanguageTestChangeAction
+    | LanguageTestScoreChangeAction
 
 export function languageTestChangeAction(
     index: number,
@@ -76,6 +86,21 @@ export function languageTestChangeAction(
         payload: {
             index,
             test,
+        }
+    }
+}
+
+export function languageTestScoreChangeAction(
+    index: number,
+    item: LanguageTestItem,
+    score: number,
+): LanguageTestScoreChangeAction {
+    return {
+        type: 'Language_Test_Score_Change',
+        payload: {
+            index,
+            item,
+            score,
         }
     }
 }

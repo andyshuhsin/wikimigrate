@@ -8,7 +8,7 @@ import { languageTestChangeAction, SpecifierListOperator } from '../../../action
 import { Person } from '../../../../definitions/Person'
 import languageBenchmarkItemNames from '../../../../data/common/languageTestItemNames'
 import {
-    LanguageTestId, languageTestItemValues,
+    LanguageTestId, LanguageTestItem, languageTestItemValues,
     LanguageTestResult,
 } from '../../../../definitions/auxiliary/LanguageTest'
 import languageTestProfiles from '../../../../data/common/languageTestProfiles'
@@ -159,6 +159,7 @@ const LanguageSpecifierBody = (props: {
     test: LanguageTestResult,
     index: number,
     onTestChange(index: number, newTest: string): void
+    onScoreChange(index: number, item: LanguageTestItem, newScore: number): void
     onRemove(index: number): void
 }) => {
     const profile = languageTestProfiles.find(test => test.id === props.test.testId)
@@ -216,11 +217,18 @@ const LanguageSpecifierBody = (props: {
                         {languageTestItemValues.map(item => (
                             <td key={item}>
                                 <select
-                                    defaultValue={props.test.scores[item].toString()}
+                                    value={props.test.scores[item].toString()}
                                     style={styles.dropdownSelect}
+                                    onChange={event => {
+                                        props.onScoreChange(
+                                            props.index,
+                                            item,
+                                            Number(event.target.value)
+                                        )
+                                    }}
                                 >
                                     {getScoreOptions(profile.itemScoreFormat).map(score => (
-                                        <option key={score} >
+                                        <option key={score}>
                                             {score}
                                         </option>
                                     ))}
@@ -243,6 +251,7 @@ interface SpecifierContentProps {
         operator?: SpecifierListOperator
     ) => any
     languageTestSelect(index: number, test: LanguageTestId): void
+    languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
     person: Person
 }
 
@@ -252,6 +261,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
         onAction,
         person,
         languageTestSelect,
+        languageScoreSelect,
     } = props
 
     let content
@@ -266,6 +276,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
                             key={test.testId + index}
                             test={test}
                             onTestChange={languageTestSelect}
+                            onScoreChange={languageScoreSelect}
                             onRemove={index => {
                                 onAction(specifier.id, 0, index, 'REMOVE')
                             }}
@@ -333,6 +344,7 @@ interface SingleSpecifierPanelProps {
     specifier: Specifier,
     specifierOptionClick: SpecifierOptionClickFn
     languageTestSelect(index: number, test: LanguageTestId): void
+    languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
     person: Person
 }
 
@@ -342,6 +354,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
             specifier,
             specifierOptionClick,
             languageTestSelect,
+            languageScoreSelect,
         } = this.props
 
         return (
@@ -349,9 +362,10 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
                 <SpecifierTitle title={text(specifier.title)}/>
                 <SpecifierBody
                     specifier={specifier}
-                    onAction={specifierOptionClick}
                     person={this.props.person}
+                    onAction={specifierOptionClick}
                     languageTestSelect={languageTestSelect}
+                    languageScoreSelect={languageScoreSelect}
                 />
             </div>
         )
