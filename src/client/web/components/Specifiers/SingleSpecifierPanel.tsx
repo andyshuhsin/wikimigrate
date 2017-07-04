@@ -141,12 +141,6 @@ const ValueChooser = (props: ValueChooserProps) => (
     </div>
 )
 
-const SpecifierTitle = (props: { title: string }) => (
-    <h1 style={styles.titleStyle}>
-        {props.title}
-    </h1>
-)
-
 function getScoreOptions(format: [number, number, number]): string[] {
     const results = []
     for (let value = format[0]; value <= format[1]; value += format[2]) {
