@@ -4,6 +4,7 @@ import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
+    educationAddAction,
     languageTestAddAction,
     languageTestChangeAction, languageTestRemoveAction, languageTestScoreChangeAction, specifierClickAction,
     SpecifierListOperator,
@@ -79,6 +80,8 @@ export interface SpecifierCallbacks {
     languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
     languageTestRemove(index: number): void
     languageTestAdd(): void
+
+    educationAdd(): void
 }
 
 interface OptionDisplayProps extends SpecifierCallbacks {
@@ -118,7 +121,11 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             languageTestSelect,
             languageScoreSelect,
             languageTestRemove,
+
+            educationAdd,
         } = this.props
+
+        const languageTests = this.props.user.languageTests ? this.props.user.languageTests : []
 
         return (
             <aside
@@ -144,7 +151,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
 
                     <div style={styles.specifierBodyContainerStyle}>
                         {
-                            this.props.user.languageTests.map((test, index) =>
+                            languageTests.map((test, index) =>
                                 <LanguageSpecifierBody
                                     key={test.testId + index}
                                     test={test}
@@ -156,12 +163,25 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                                 />
                             )
                         }
-                        {
-                            <IconButton
-                                icon="+"
-                                onClick={languageTestAdd}
-                            />
-                        }
+                        <IconButton
+                            icon="+"
+                            onClick={languageTestAdd}
+                        />
+                    </div>
+                </section>
+
+                <section>
+                    <h1 style={styles.titleStyle}>
+                        {text({
+                            en: 'Education',
+                            zh_hans: '学历',
+                        })}
+                    </h1>
+                    <div style={styles.specifierBodyContainerStyle}>
+                        <IconButton
+                            icon="+"
+                            onClick={educationAdd}
+                        />
                     </div>
                 </section>
 
@@ -201,6 +221,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         },
         languageScoreSelect(index: number, item: LanguageTestItem, score: number): void {
             dispatch(languageTestScoreChangeAction(index, item, score))
+        },
+        educationAdd(): void {
+            dispatch(educationAddAction())
         },
         specifierPanelRender(height: number): void {
             dispatch(specifierPanelRenderAction(height))
