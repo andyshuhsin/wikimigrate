@@ -55,6 +55,14 @@ interface OptionClickPayload_Language extends OptionClickPayload_List {
 export interface LanguageTestAddAction {
     type: 'LANGUAGE_TEST_ADD'
 }
+
+export interface LanguageTestRemoveAction {
+    type: 'LANGUAGE_TEST_REMOVE',
+    payload: {
+        index: number
+    }
+}
+
 export interface LanguageTestChangeAction {
     type: 'LANGUAGE_TEST_CHANGE'
     payload: {
@@ -78,6 +86,7 @@ export type SpecifierAction =
     | BaseOptionClickAction<OptionClickPayload_Language>
     | BaseOptionClickAction<OptionClickPayload_Age>
     | LanguageTestAddAction
+    | LanguageTestRemoveAction
     | LanguageTestChangeAction
     | LanguageTestScoreChangeAction
 
@@ -112,6 +121,15 @@ export function languageTestScoreChangeAction(
 export function languageTestAddAction(): LanguageTestAddAction {
     return {
         type: 'LANGUAGE_TEST_ADD',
+    }
+}
+
+export function languageTestRemoveAction(index: number): LanguageTestRemoveAction {
+    return {
+        type: 'LANGUAGE_TEST_REMOVE',
+        payload: {
+            index
+        }
     }
 }
 

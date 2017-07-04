@@ -5,7 +5,7 @@ import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
     languageTestAddAction,
-    languageTestChangeAction, languageTestScoreChangeAction, specifierClickAction,
+    languageTestChangeAction, languageTestRemoveAction, languageTestScoreChangeAction, specifierClickAction,
     SpecifierListOperator,
 } from '../../../actions/SpecifierActions'
 import { SingleSpecifierPanel } from './SingleSpecifierPanel'
@@ -25,7 +25,8 @@ export type SpecifierPanelRenderFn = (height: number) => void
 
 export interface SpecifierCallbacks {
     languageTestSelect(index: number, test: LanguageTestId): void
-    languageItemSelect(index: number, item: LanguageTestItem, score: number): void
+    languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
+    languageTestRemove(index: number): void
     languageTestAdd(): void
 }
 
@@ -83,7 +84,8 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                         person={this.props.user}
                         languageTestAdd={this.props.languageTestAdd}
                         languageTestSelect={this.props.languageTestSelect}
-                        languageScoreSelect={this.props.languageItemSelect}
+                        languageScoreSelect={this.props.languageScoreSelect}
+                        languageTestRemove={this.props.languageTestRemove}
                     />
                 )}
             </div>
@@ -117,7 +119,10 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         languageTestAdd(): void {
             dispatch(languageTestAddAction())
         },
-        languageItemSelect(index: number, item: LanguageTestItem, score: number): void {
+        languageTestRemove(index: number): void {
+            dispatch(languageTestRemoveAction(index))
+        },
+        languageScoreSelect(index: number, item: LanguageTestItem, score: number): void {
             dispatch(languageTestScoreChangeAction(index, item, score))
         },
         specifierPanelRender(height: number): void {

@@ -120,11 +120,6 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         case 'SPECIFIER_CLICK': {
             switch (action.payload.specifier) {
                 case 'language': {
-                    switch (action.payload.operator) {
-                        case 'REMOVE': {
-                            newState.user.languageTests.splice(action.payload.index, 1)
-                        }
-                    }
                     break
                 }
                 case 'age': {
@@ -154,6 +149,11 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                     break
                 }
             }
+            return newState
+        }
+
+        case 'LANGUAGE_TEST_REMOVE': {
+            newState.user.languageTests.splice(action.payload.index, 1)
             return newState
         }
 

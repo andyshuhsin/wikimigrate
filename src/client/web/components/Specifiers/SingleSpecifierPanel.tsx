@@ -1,7 +1,7 @@
 import * as React from 'react'
 import text from '../../../utils/text'
 import { Specifier, SpecifierId, SpecifierChoice } from '../../../data'
-import { SpecifierOptionClickFn } from './SpecifierPanel'
+import { SpecifierCallbacks, SpecifierOptionClickFn } from './SpecifierPanel'
 import design from '../../design'
 import sys from '../../sys'
 import { languageTestChangeAction, SpecifierListOperator } from '../../../actions/SpecifierActions'
@@ -242,12 +242,9 @@ const LanguageSpecifierBody = (props: {
     )
 }
 
-interface SingleSpecifierPanelProps {
+interface SingleSpecifierPanelProps extends SpecifierCallbacks {
     specifier: Specifier,
     specifierOptionClick: SpecifierOptionClickFn
-    languageTestSelect(index: number, test: LanguageTestId): void
-    languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
-    languageTestAdd(): void
     person: Person
 }
 
@@ -257,6 +254,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
             specifier,
             specifierOptionClick: onAction,
             languageTestSelect,
+            languageTestRemove,
             languageScoreSelect,
             languageTestAdd,
             person,
@@ -277,9 +275,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
                                 onTestAdd={languageTestAdd}
                                 onTestChange={languageTestSelect}
                                 onScoreChange={languageScoreSelect}
-                                onRemove={index => {
-                                    onAction(specifier.id, '', index, 'REMOVE')
-                                }}
+                                onRemove={languageTestRemove}
                                 index={index}
                             />
                         )
