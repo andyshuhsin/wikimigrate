@@ -6,10 +6,7 @@ import {
 import { PathwayDescriptor } from '../utils/definitions'
 import { getInitialPerson, Person } from '../../definitions/Person'
 import { clone } from '../utils/clone'
-import { duration } from '../../definitions/auxiliary/Duration'
-import { WorkExperienceQuality } from '../../definitions/Qualities/WorkExperience'
-import { EducationQuality } from '../../definitions/Qualities/EducationExperience'
-import { LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
+import { LanguageTestId, LanguageTestItem } from '../../definitions/auxiliary/LanguageTest'
 import { LangId } from '../../definitions/auxiliary/MultiLang'
 import data from '../../data/index'
 import { PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE } from '../../data/constants'
@@ -21,6 +18,57 @@ type SIMPLE_PATHWAY_SEGMENTS = ['', PATHWAY_KW_SIMPLE, TransitionId]
 type COMPOSITE_PATHWAY_SEGMENTS = ['', PATHWAY_KW_COMPOSITE, string /* "id1+id2+id3..." */]
 
 type URLPATH_SEGMENTS = SIMPLE_PATHWAY_SEGMENTS | COMPOSITE_PATHWAY_SEGMENTS
+
+type DefaultLanguageTestResults = {
+    [test in LanguageTestId]: {
+        [item in LanguageTestItem]: number
+    }
+}
+
+const defaultLanguageTestResults: DefaultLanguageTestResults = {
+    clb: {
+        listening: 7,
+        speaking: 7,
+        writing: 7,
+        reading: 7,
+    },
+    celpip: {
+        listening: 7,
+        speaking: 7,
+        writing: 7,
+        reading: 7,
+    },
+    ielts: {
+        listening: 7,
+        speaking: 7,
+        writing: 7,
+        reading: 7,
+    },
+    tef: {
+        listening: 50,
+        speaking: 50,
+        writing: 50,
+        reading: 50,
+    },
+    toefl: {
+        listening: 20,
+        speaking: 20,
+        writing: 20,
+        reading: 20,
+    },
+    'pte-academic': {
+        listening: 50,
+        speaking: 50,
+        writing: 50,
+        reading: 50,
+    },
+    cae: {
+        listening: 50,
+        speaking: 50,
+        writing: 50,
+        reading: 50,
+    },
+}
 
 export interface VisaPlannerState {
     user: Person,
@@ -93,6 +141,14 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 default: {
                     console.warn('Unexpected filterId:', (action.payload as any).filterId)
                 }
+            }
+            return newState
+        }
+
+        case 'LANGUAGE_TEST_CHANGE': {
+            newState.user.languageTests[action.payload.index] = {
+                testId: action.payload.test,
+                scores: defaultLanguageTestResults[action.payload.test]
             }
             return newState
         }

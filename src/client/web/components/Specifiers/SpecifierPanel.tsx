@@ -3,10 +3,14 @@ import { connect, Dispatch } from 'react-redux'
 import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
-import { specifierClickAction, SpecifierListOperator } from '../../../actions/SpecifierActions'
+import {
+    languageTestChangeAction, specifierClickAction,
+    SpecifierListOperator,
+} from '../../../actions/SpecifierActions'
 import { SingleSpecifierPanel } from './SingleSpecifierPanel'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
+import { LanguageTestId } from '../../../../definitions/auxiliary/LanguageTest'
 
 
 export type SpecifierOptionClickFn =
@@ -23,6 +27,7 @@ interface OptionDisplayProps {
     myHeight: number | null,
     specifierOptionClick: SpecifierOptionClickFn
     specifierPanelRender: SpecifierPanelRenderFn
+    languageTestSelect(index: number, test: LanguageTestId): void
     user: Person
 }
 
@@ -70,6 +75,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                         specifier={specifier}
                         specifierOptionClick={this.props.specifierOptionClick}
                         person={this.props.user}
+                        languageTestSelect={this.props.languageTestSelect}
                     />
                 )}
             </div>
@@ -96,6 +102,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
             dispatch(
                 specifierClickAction(specifierId, optionId, index, operator),
             )
+        },
+        languageTestSelect(index: number, test: LanguageTestId): void {
+            dispatch(languageTestChangeAction(index, test))
         },
         specifierPanelRender(height: number): void {
             dispatch(specifierPanelRenderAction(height))

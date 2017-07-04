@@ -1,7 +1,7 @@
 import { SpecifierId } from '../data'
 import { Duration } from '../../definitions/auxiliary/Duration'
 import { RegionId } from '../../definitions/auxiliary/Region'
-import { LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
+import { LanguageTestId, LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
 
 interface BaseOptionClickAction<Payload> {
     type: 'SPECIFIER_CLICK'
@@ -52,18 +52,40 @@ interface OptionClickPayload_Language extends OptionClickPayload_List {
     value: LanguageTestResult,
 }
 
-export type OptionClickAction =
+export interface LanguageTestChangeAction {
+    type: 'LANGUAGE_TEST_CHANGE'
+    payload: {
+        index: number
+        test: LanguageTestId
+    }
+}
+
+export type SpecifierAction =
     | BaseOptionClickAction<OptionClickPayload_Education>
     | BaseOptionClickAction<OptionClickPayload_WorkExperience>
     | BaseOptionClickAction<OptionClickPayload_Language>
     | BaseOptionClickAction<OptionClickPayload_Age>
+    | LanguageTestChangeAction
+
+export function languageTestChangeAction(
+    index: number,
+    test: LanguageTestId
+): LanguageTestChangeAction {
+    return {
+        type: 'LANGUAGE_TEST_CHANGE',
+        payload: {
+            index,
+            test,
+        }
+    }
+}
 
 export function specifierClickAction(
     specifier: SpecifierId,
     value: any,
     index?: number,
     operator?: SpecifierListOperator
-): OptionClickAction {
+): SpecifierAction {
     return {
         type: 'SPECIFIER_CLICK',
         payload: {
@@ -72,6 +94,6 @@ export function specifierClickAction(
             index,
             operator,
         },
-    } as OptionClickAction
+    } as SpecifierAction
 }
 

@@ -1,7 +1,7 @@
 import { SpecifierId } from '../data'
 import { Pathway } from '../utils/definitions'
 import { LangId } from '../../definitions/auxiliary/MultiLang'
-import { OptionClickAction } from './SpecifierActions'
+import { SpecifierAction } from './SpecifierActions'
 
 export interface FilterBarClick {
     type: 'FILTER_BAR_CLICK'
@@ -55,7 +55,7 @@ interface TitleFilterTextClick {
 }
 
 export type Action =
-    OptionClickAction
+    SpecifierAction
     | FilterBarClick
     | FilterPanelRender
     | ShadeClick

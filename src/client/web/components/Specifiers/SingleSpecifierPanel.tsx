@@ -4,7 +4,7 @@ import { Specifier, SpecifierId, SpecifierChoice } from '../../../data'
 import { SpecifierOptionClickFn } from './SpecifierPanel'
 import design from '../../design'
 import sys from '../../sys'
-import { SpecifierListOperator } from '../../../actions/SpecifierActions'
+import { languageTestChangeAction, SpecifierListOperator } from '../../../actions/SpecifierActions'
 import { Person } from '../../../../definitions/Person'
 import languageBenchmarkItemNames from '../../../../data/common/languageTestItemNames'
 import {
@@ -155,21 +155,10 @@ function getScoreOptions(format: [number, number, number]): number[] {
     return results
 }
 
-interface SpecifierContentProps {
-    specifier: Specifier
-    onAction: (
-        specifierId: SpecifierId,
-        value: string | number,
-        index?: number,
-        operator?: SpecifierListOperator
-    ) => any
-    person: Person
-}
-
-const LanguageBody = (props: {
+const LanguageSpecifierBody = (props: {
     test: LanguageTestResult,
     index: number,
-    onTestChange(newTest: LanguageTestId): void
+    onTestChange(index: number, newTest: string): void
     onRemove(index: number): void
 }) => {
     const profile = languageTestProfiles.find(test => test.id === props.test.testId)
@@ -196,12 +185,17 @@ const LanguageBody = (props: {
             </div>
 
             <select
-                defaultValue={profile.abbreviation}
+                value={profile.id}
                 style={styles.dropdownSelect}
-                onChange={(event) => props.onTestChange(event.target.key)}
+                onChange={event => {
+                    props.onTestChange(props.index, event.target.value)
+                }}
             >
                 {languageTestProfiles.map(profile =>
-                    <option key={profile.abbreviation}>
+                    <option
+                        key={profile.id}
+                        value={profile.id}
+                    >
                         {profile.abbreviation}
                     </option>
                 )}
@@ -240,11 +234,24 @@ const LanguageBody = (props: {
     )
 }
 
+interface SpecifierContentProps {
+    specifier: Specifier
+    onAction: (
+        specifierId: SpecifierId,
+        value: string | number,
+        index?: number,
+        operator?: SpecifierListOperator
+    ) => any
+    languageTestSelect(index: number, test: LanguageTestId): void
+    person: Person
+}
+
 const SpecifierBody = (props: SpecifierContentProps) => {
     const {
         specifier,
         onAction,
         person,
+        languageTestSelect,
     } = props
 
     let content
@@ -255,10 +262,10 @@ const SpecifierBody = (props: SpecifierContentProps) => {
             switch(specifier.id) {
                 case 'language': {
                     existingItems = person.languageTests.map((test, index) =>
-                        <LanguageBody
+                        <LanguageSpecifierBody
                             key={test.testId + index}
                             test={test}
-                            onTestChange={() => {}}
+                            onTestChange={languageTestSelect}
                             onRemove={index => {
                                 onAction(specifier.id, 0, index, 'REMOVE')
                             }}
@@ -325,6 +332,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
 interface SingleSpecifierPanelProps {
     specifier: Specifier,
     specifierOptionClick: SpecifierOptionClickFn
+    languageTestSelect(index: number, test: LanguageTestId): void
     person: Person
 }
 
@@ -333,6 +341,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
         const {
             specifier,
             specifierOptionClick,
+            languageTestSelect,
         } = this.props
 
         return (
@@ -342,6 +351,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
                     specifier={specifier}
                     onAction={specifierOptionClick}
                     person={this.props.person}
+                    languageTestSelect={languageTestSelect}
                 />
             </div>
         )

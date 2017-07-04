@@ -12,9 +12,9 @@ export type LanguageTestId =
     | 'tef'
     | 'ielts'
     | 'toefl'
-    | 'oet'
     | 'pte-academic'
     | 'cae'
+    // | 'oet'
 
 type SourceScore = number
 type TargetScore = number
