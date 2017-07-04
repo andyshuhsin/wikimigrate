@@ -16,7 +16,7 @@ export interface Person {
     spouse?: Person | null
     education?: EducationQuality[],
     // Order matters — should generally rank by descending strength
-    languageTests: LanguageTestResult[]
+    languageTests?: LanguageTestResult[]
     workExperiences?: WorkExperienceQuality[]
 }
 
@@ -51,7 +51,7 @@ export function getInitialPerson(age: number): Person {
             region: undefined,
         },
         status: getInitialStatus(),
-        education: undefined,
+        education: [],
         languageTests: [],
         spouse: undefined,
 

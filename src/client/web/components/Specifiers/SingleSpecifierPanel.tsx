@@ -143,6 +143,10 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
             person,
         } = this.props
 
+        if (!person.languageTests) {
+            return null
+        }
+
         let specifierBody: JSX.Element | JSX.Element[]
 
         switch (specifier.type) {

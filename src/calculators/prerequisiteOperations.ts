@@ -204,8 +204,8 @@ function satisfyEducationPrereq(
             return false
         }
     }
-    if (prereq.region && education.regionId) {
-        if (!regionMatch(prereq.region, education.regionId)) {
+    if (prereq.region && education.region) {
+        if (!regionMatch(prereq.region, education.region)) {
             return false
         }
     }

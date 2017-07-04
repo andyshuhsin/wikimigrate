@@ -139,7 +139,10 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case 'LANGUAGE_TEST_ADD': {
-            const existingTests = state.user.languageTests.map(test => test.testId)
+            if (!newState.user.languageTests) {
+                newState.user.languageTests = []
+            }
+            const existingTests = newState.user.languageTests.map(test => test.testId)
             for (const test of newLanguageTestPreference) {
                 if (existingTests.indexOf(test) === -1) {
                     newState.user.languageTests.push({
@@ -153,11 +156,17 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case 'LANGUAGE_TEST_REMOVE': {
+            if (!newState.user.languageTests) {
+                newState.user.languageTests = []
+            }
             newState.user.languageTests.splice(action.payload.index, 1)
             return newState
         }
 
         case 'LANGUAGE_TEST_CHANGE': {
+            if (!newState.user.languageTests) {
+                newState.user.languageTests = []
+            }
             newState.user.languageTests[action.payload.index] = {
                 testId: action.payload.test,
                 scores: defaultLanguageTestResults[action.payload.test]
@@ -166,8 +175,23 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
         }
 
         case 'Language_Test_Score_Change': {
+            if (!newState.user.languageTests) {
+                newState.user.languageTests = []
+            }
             newState.user.languageTests[action.payload.index]
                 .scores[action.payload.item] = action.payload.score
+            return newState
+        }
+
+        case 'EDUCATION_ADD': {
+            if (!newState.user.education) {
+                newState.user.education = []
+            }
+            newState.user.education.push({
+                qualityId: 'education',
+                stage: 'bachelor',
+                region: 'world',
+            })
             return newState
         }
 

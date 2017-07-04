@@ -79,7 +79,7 @@ export function getEducationStageRank(stage: EducationStage): number {
 export interface EducationQuality {
     qualityId: 'education'
     stage: EducationStage | undefined
-    regionId: RegionId | undefined
+    region: RegionId | undefined
     duration?: Duration
     description?: MultiLangStringSet
     gradutaionDate?: Date
