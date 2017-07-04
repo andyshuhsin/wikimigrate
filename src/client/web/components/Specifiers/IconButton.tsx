@@ -17,9 +17,14 @@ const buttonStyle: React.CSSProperties = {
 export const IconButton = (props: {
     icon: string,
     onClick: () => void
+    additionalStyle?: React.CSSProperties
 }) => (
     <span
-        style={buttonStyle}
+        style={
+            props.additionalStyle
+                ? Object.assign({}, buttonStyle, props.additionalStyle)
+                : buttonStyle
+        }
         onClick={props.onClick}
     >
         {props.icon}

@@ -44,16 +44,15 @@ export const LanguageSpecifierBody = (props: {
             borderBottom: '1px black dashed',
             margin: '0.5em 0',
         }}>
-            <div style={{
-                position: 'absolute',
-                right: 0,
-                top: 0,
-            }}>
-                <IconButton
-                    icon='–'
-                    onClick={() => props.onRemove(props.index)}
-                />
-            </div>
+            <IconButton
+                icon='–'
+                onClick={() => props.onRemove(props.index)}
+                additionalStyle={{
+                    position: 'absolute',
+                    right: 0,
+                    top: 0,
+                }}
+            />
 
             <select
                 value={profile.id}
