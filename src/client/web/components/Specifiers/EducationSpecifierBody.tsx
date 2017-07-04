@@ -18,14 +18,16 @@ const activeRegionOptions: RegionId[] = [
 ]
 
 export function EducationSpecifierBody(props: {
-    edu: EducationQuality
+    edu: EducationQuality,
+    index: number,
+    onEducationRemove(index: number): void
 }) {
     return (
         <div style={specifierSharedStyles.containerStyles}>
             {JSON.stringify(props.edu)}
             <IconButton
                 icon='–'
-                onClick={() => {}}
+                onClick={() => props.onEducationRemove(props.index)}
                 additionalStyle={specifierSharedStyles.deleteButtonStyle}
             />
             <table>

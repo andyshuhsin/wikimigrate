@@ -4,7 +4,7 @@ import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
-    educationAddAction,
+    educationAddAction, educationRemoveAction,
     languageTestAddAction,
     languageTestChangeAction, languageTestRemoveAction, languageTestScoreChangeAction, specifierClickAction,
     SpecifierListOperator,
@@ -83,6 +83,7 @@ export interface SpecifierCallbacks {
     languageTestAdd(): void
 
     educationAdd(): void
+    educationRemove(index: number): void
 }
 
 interface OptionDisplayProps extends SpecifierCallbacks {
@@ -185,6 +186,8 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                                 <EducationSpecifierBody
                                     key={String(edu.stage) + String(edu.region) + String(index)}
                                     edu={edu}
+                                    index={index}
+                                    onEducationRemove={this.props.educationRemove}
                                 />
                             )
                         }
@@ -234,6 +237,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         },
         educationAdd(): void {
             dispatch(educationAddAction())
+        },
+        educationRemove(index: number): void {
+            dispatch(educationRemoveAction(index))
         },
         specifierPanelRender(height: number): void {
             dispatch(specifierPanelRenderAction(height))

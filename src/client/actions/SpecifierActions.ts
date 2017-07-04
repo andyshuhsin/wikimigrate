@@ -71,16 +71,24 @@ export interface LanguageTestChangeAction {
     }
 }
 
-export interface EducationAddAction {
-    type: 'EDUCATION_ADD'
-}
-
 export interface LanguageTestScoreChangeAction {
     type: 'Language_Test_Score_Change'
     payload: {
         index: number
         item: LanguageTestItem
         score: number
+    }
+}
+
+
+export interface EducationAddAction {
+    type: 'EDUCATION_ADD'
+}
+
+export interface EducationRemoveAction {
+    type: 'EDUCATION_REMOVE'
+    payload: {
+        index: number
     }
 }
 
@@ -96,6 +104,7 @@ export type SpecifierAction =
     | LanguageTestScoreChangeAction
 
     | EducationAddAction
+    | EducationRemoveAction
 
 export function languageTestChangeAction(
     index: number,
@@ -143,6 +152,15 @@ export function languageTestRemoveAction(index: number): LanguageTestRemoveActio
 export function educationAddAction(): EducationAddAction {
     return {
         type: 'EDUCATION_ADD'
+    }
+}
+
+export function educationRemoveAction(index: number): EducationRemoveAction {
+    return {
+        type: 'EDUCATION_REMOVE',
+        payload: {
+            index
+        }
     }
 }
 
