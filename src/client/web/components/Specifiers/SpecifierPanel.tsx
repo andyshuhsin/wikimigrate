@@ -16,6 +16,7 @@ import { text } from '../../../utils/text'
 import sys from '../../sys'
 import { LanguageSpecifierBody } from './LanguageSpecifierBody'
 import { IconButton } from './IconButton'
+import { EducationSpecifierBody } from './EducationSpecifierBody'
 
 const styles = {
     titleStyle: {
@@ -125,7 +126,8 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             educationAdd,
         } = this.props
 
-        const languageTests = this.props.user.languageTests ? this.props.user.languageTests : []
+        const languageTests = this.props.user.languageTests || []
+        const education =this.props.user.education || []
 
         return (
             <aside
@@ -178,6 +180,14 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                         })}
                     </h1>
                     <div style={styles.specifierBodyContainerStyle}>
+                        {
+                            education.map((edu, index) =>
+                                <EducationSpecifierBody
+                                    key={String(edu.stage) + String(edu.region) + String(index)}
+                                    edu={edu}
+                                />
+                            )
+                        }
                         <IconButton
                             icon="+"
                             onClick={educationAdd}
