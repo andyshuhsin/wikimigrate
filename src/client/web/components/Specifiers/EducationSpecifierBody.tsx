@@ -7,6 +7,8 @@ import {
 import { text } from '../../../utils/text'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { data } from '../../../../data'
+import { IconButton } from './IconButton'
+import { specifierSharedStyles } from './specifierSharedStyles'
 
 const activeRegionOptions: RegionId[] = [
     'australia',
@@ -19,8 +21,13 @@ export function EducationSpecifierBody(props: {
     edu: EducationQuality
 }) {
     return (
-        <div>
+        <div style={specifierSharedStyles.containerStyles}>
             {JSON.stringify(props.edu)}
+            <IconButton
+                icon='–'
+                onClick={() => {}}
+                additionalStyle={specifierSharedStyles.deleteButtonStyle}
+            />
             <table>
                 <thead><tr>
                     <td>

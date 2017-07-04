@@ -5,6 +5,7 @@ import {
 } from '../../../../definitions/auxiliary/LanguageTest'
 import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 import { IconButton } from './IconButton'
+import { specifierSharedStyles } from './specifierSharedStyles'
 
 const dropdownSelectStyle: React.CSSProperties = {
     border: '1px solid black'
@@ -38,20 +39,11 @@ export const LanguageSpecifierBody = (props: {
         return null
     }
     return (
-        <div style={{
-            position: 'relative',
-            padding: '0.5em',
-            borderBottom: '1px black dashed',
-            margin: '0.5em 0',
-        }}>
+        <div style={specifierSharedStyles.containerStyles}>
             <IconButton
                 icon='–'
                 onClick={() => props.onRemove(props.index)}
-                additionalStyle={{
-                    position: 'absolute',
-                    right: 0,
-                    top: 0,
-                }}
+                additionalStyle={specifierSharedStyles.deleteButtonStyle}
             />
 
             <select
