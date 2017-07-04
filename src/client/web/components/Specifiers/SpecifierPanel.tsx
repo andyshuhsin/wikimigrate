@@ -8,11 +8,62 @@ import {
     languageTestChangeAction, languageTestRemoveAction, languageTestScoreChangeAction, specifierClickAction,
     SpecifierListOperator,
 } from '../../../actions/SpecifierActions'
-import { SingleSpecifierPanel } from './SingleSpecifierPanel'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
 import { LanguageTestId, LanguageTestItem } from '../../../../definitions/auxiliary/LanguageTest'
+import { text } from '../../../utils/text'
+import sys from '../../sys'
+import { LanguageSpecifierBody } from './LanguageSpecifierBody'
+import { IconButton } from './IconButton'
 
+const styles = {
+    titleStyle: {
+        fontSize: '1em',
+        margin: '0',
+        background: design.colors.greyLight,
+        padding: '0.2em 1em',
+    } as React.CSSProperties,
+
+    specifierBodyContainerStyle: {
+        whiteSpace: 'nowrap',
+        overflowX: 'scroll',
+        padding: sys.viewport.width < design.dimensions.narrowWidth
+            ? '0.6em 1.0em'
+            : '1em 2em',
+        userSelect: 'none',
+    } as React.CSSProperties,
+
+    optionNormalStyle: {
+        display: 'inline-block',
+        marginRight: '1em',
+        fontSize: '1em',
+        fontWeight: 'bolder',
+        padding: '0.2em 0.4em',
+        borderWidth: '3px',
+        borderRadius: '3px',
+        borderStyle: 'solid',
+        borderColor: design.colors.greyLight,
+        cursor: 'pointer',
+    } as React.CSSProperties,
+
+    optionHighlightStyle: {
+        color: design.colors.brand,
+        borderColor: design.colors.brand,
+    } as React.CSSProperties,
+
+    valueStyle: {
+        display: 'inline-block',
+        margin: '0 0.6em',
+        minWidth: '1.2em',
+
+        fontSize: '1.5em',
+        color: design.colors.brand,
+        fontWeight: 'bolder',
+        textAlign: 'center',
+        verticalAlign: 'bottom',
+    } as React.CSSProperties,
+
+}
 
 export type SpecifierOptionClickFn =
     (specifierId: SpecifierId,
@@ -62,8 +113,15 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             height: 'initial',
         }
 
+        const {
+            languageTestAdd,
+            languageTestSelect,
+            languageScoreSelect,
+            languageTestRemove,
+        } = this.props
+
         return (
-            <div
+            <aside
                 style={
                     this.props.shouldExpand
                         ? Object.assign(style, styleExpanded)
@@ -76,19 +134,38 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                     }
                 }}
             >
-                {specifiers.map((specifier: Specifier) =>
-                    <SingleSpecifierPanel
-                        key={specifier.id}
-                        specifier={specifier}
-                        specifierOptionClick={this.props.specifierOptionClick}
-                        person={this.props.user}
-                        languageTestAdd={this.props.languageTestAdd}
-                        languageTestSelect={this.props.languageTestSelect}
-                        languageScoreSelect={this.props.languageScoreSelect}
-                        languageTestRemove={this.props.languageTestRemove}
-                    />
-                )}
-            </div>
+                <section>
+                    <h1 style={styles.titleStyle}>
+                        {text({
+                            en: 'Language',
+                            zh_hans: '语言',
+                        })}
+                    </h1>
+
+                    <div style={styles.specifierBodyContainerStyle}>
+                        {
+                            this.props.user.languageTests.map((test, index) =>
+                                <LanguageSpecifierBody
+                                    key={test.testId + index}
+                                    test={test}
+                                    onTestAdd={languageTestAdd}
+                                    onTestChange={languageTestSelect}
+                                    onScoreChange={languageScoreSelect}
+                                    onRemove={languageTestRemove}
+                                    index={index}
+                                />
+                            )
+                        }
+                        {
+                            <IconButton
+                                icon="+"
+                                onClick={languageTestAdd}
+                            />
+                        }
+                    </div>
+                </section>
+
+            </aside>
         )
     }
 }

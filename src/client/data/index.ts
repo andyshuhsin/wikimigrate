@@ -166,7 +166,7 @@ export const specifiers: Specifier[] = [
         type: 'list',
         title: {
             en: 'Language',
-            zh_hans: '工作经验',
+            zh_hans: '语言',
         },
         items: [durationItem, locationItem],
     },
