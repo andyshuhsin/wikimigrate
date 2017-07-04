@@ -147,10 +147,15 @@ const SpecifierTitle = (props: { title: string }) => (
     </h1>
 )
 
-function getScoreOptions(format: [number, number, number]): number[] {
+function getScoreOptions(format: [number, number, number]): string[] {
     const results = []
     for (let value = format[0]; value <= format[1]; value += format[2]) {
-        results.push(value)
+        if (format[2] < 1.0) {
+            results.push(value.toFixed(1))
+        }
+        else {
+            results.push(value.toString())
+        }
     }
     return results
 }
