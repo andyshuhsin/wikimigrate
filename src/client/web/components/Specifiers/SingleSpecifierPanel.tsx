@@ -248,105 +248,6 @@ const LanguageSpecifierBody = (props: {
     )
 }
 
-interface SpecifierContentProps {
-    specifier: Specifier
-    onAction: (
-        specifierId: SpecifierId,
-        value: string | number,
-        index?: number,
-        operator?: SpecifierListOperator
-    ) => any
-    languageTestSelect(index: number, test: LanguageTestId): void
-    languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
-    languageTestAdd(): void
-    person: Person
-}
-
-const SpecifierBody = (props: SpecifierContentProps) => {
-    const {
-        specifier,
-        onAction,
-        person,
-        languageTestAdd,
-        languageTestSelect,
-        languageScoreSelect,
-    } = props
-
-    let content
-
-    switch (specifier.type) {
-        case 'list': {
-            let existingItems: JSX.Element[] = []
-            switch(specifier.id) {
-                case 'language': {
-                    existingItems = person.languageTests.map((test, index) =>
-                        <LanguageSpecifierBody
-                            key={test.testId + index}
-                            test={test}
-                            onTestAdd={languageTestAdd}
-                            onTestChange={languageTestSelect}
-                            onScoreChange={languageScoreSelect}
-                            onRemove={index => {
-                                onAction(specifier.id, 0, index, 'REMOVE')
-                            }}
-                            index={index}
-                        />
-                    )
-                }
-            }
-
-            content = (
-                <div>
-                    {existingItems}
-                    <IconButton
-                        icon="+"
-                        onClick={languageTestAdd}
-                    />
-                </div>
-            )
-            break
-        }
-        case 'multiple-choice': {
-            content = (
-                specifier.options.map((option: SpecifierChoice) =>
-                    <MultipleChoiceOption
-                        option={option}
-                        shouldHighlight={true}
-                        onAction={() => onAction(specifier.id, option.id)}
-                        key={option.id}
-                    />,
-                )
-            )
-            break
-        }
-        case 'integer': {
-            let value: number
-            value = specifier.defaultValue
-            content = (
-                <ValueChooser
-                    value={value}
-                    onLeftClick={value => onAction(specifier.id, value)}
-                    onRightClick={value => onAction(specifier.id, value)}
-                    min={specifier.min}
-                    max={specifier.max}
-                />
-            )
-            break
-        }
-        default: {
-            console.warn('Unknown specifier type:', (specifier as Specifier).type)
-            content = <noscript />
-        }
-    }
-
-    return (
-        <div style={styles.specifierBodyContainerStyle}>
-            {content}
-        </div>
-    )
-
-}
-
 interface SingleSpecifierPanelProps {
     specifier: Specifier,
     specifierOptionClick: SpecifierOptionClickFn
@@ -360,23 +261,89 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
     render() {
         const {
             specifier,
-            specifierOptionClick,
+            specifierOptionClick: onAction,
             languageTestSelect,
             languageScoreSelect,
             languageTestAdd,
+            person,
         } = this.props
+
+        let specifierBody: JSX.Element | JSX.Element[]
+
+        switch (specifier.type) {
+            case 'list': {
+                let existingItems: JSX.Element[] = []
+                switch(specifier.id) {
+                    case 'language': {
+                        existingItems = person.languageTests.map((test, index) =>
+                            <LanguageSpecifierBody
+                                key={test.testId + index}
+                                test={test}
+                                onTestAdd={languageTestAdd}
+                                onTestChange={languageTestSelect}
+                                onScoreChange={languageScoreSelect}
+                                onRemove={index => {
+                                    onAction(specifier.id, '', index, 'REMOVE')
+                                }}
+                                index={index}
+                            />
+                        )
+                    }
+                }
+
+                specifierBody = (
+                    <div>
+                        {existingItems}
+                        <IconButton
+                            icon="+"
+                            onClick={languageTestAdd}
+                        />
+                    </div>
+                )
+                break
+            }
+            case 'multiple-choice': {
+                specifierBody = (
+                    specifier.options.map((option: SpecifierChoice) =>
+                        <MultipleChoiceOption
+                            option={option}
+                            shouldHighlight={true}
+                            onAction={() => onAction(specifier.id, option.id)}
+                            key={option.id}
+                        />,
+                    )
+                )
+                break
+            }
+            case 'integer': {
+                let value: number
+                value = specifier.defaultValue
+                specifierBody = (
+                    <ValueChooser
+                        value={value}
+                        onLeftClick={value => onAction(specifier.id, value.toString())}
+                        onRightClick={value => onAction(specifier.id, value.toString())}
+                        min={specifier.min}
+                        max={specifier.max}
+                    />
+                )
+                break
+            }
+            default: {
+                console.warn('Unknown specifier type:', (specifier as Specifier).type)
+                specifierBody = <noscript />
+            }
+        }
 
         return (
             <div>
-                <SpecifierTitle title={text(specifier.title)}/>
-                <SpecifierBody
-                    specifier={specifier}
-                    person={this.props.person}
-                    onAction={specifierOptionClick}
-                    languageTestSelect={languageTestSelect}
-                    languageScoreSelect={languageScoreSelect}
-                    languageTestAdd={languageTestAdd}
-                />
+                <h1 style={styles.titleStyle}>
+                    {text(specifier.title)}
+                </h1>
+
+                <div style={styles.specifierBodyContainerStyle}>
+                    {specifierBody}
+                </div>
             </div>
         )
     }
