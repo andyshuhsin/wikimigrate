@@ -121,19 +121,6 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             switch (action.payload.specifier) {
                 case 'language': {
                     switch (action.payload.operator) {
-                        case 'NEW': {
-                            const existingTests = state.user.languageTests.map(test => test.testId)
-                            for (const test of newLanguageTestPreference) {
-                                if (existingTests.indexOf(test) === -1) {
-                                    newState.user.languageTests.push({
-                                        testId: test,
-                                        scores: defaultLanguageTestResults[test]
-                                    })
-                                    break
-                                }
-                            }
-                            break
-                        }
                         case 'REMOVE': {
                             newState.user.languageTests.splice(action.payload.index, 1)
                         }
@@ -151,6 +138,20 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 }
                 default: {
                     console.warn('Unexpected filterId:', (action.payload as any).filterId)
+                }
+            }
+            return newState
+        }
+
+        case 'LANGUAGE_TEST_ADD': {
+            const existingTests = state.user.languageTests.map(test => test.testId)
+            for (const test of newLanguageTestPreference) {
+                if (existingTests.indexOf(test) === -1) {
+                    newState.user.languageTests.push({
+                        testId: test,
+                        scores: defaultLanguageTestResults[test]
+                    })
+                    break
                 }
             }
             return newState

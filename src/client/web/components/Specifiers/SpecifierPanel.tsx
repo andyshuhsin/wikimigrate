@@ -4,6 +4,7 @@ import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
+    languageTestAddAction,
     languageTestChangeAction, languageTestScoreChangeAction, specifierClickAction,
     SpecifierListOperator,
 } from '../../../actions/SpecifierActions'
@@ -22,13 +23,17 @@ export type SpecifierOptionClickFn =
 
 export type SpecifierPanelRenderFn = (height: number) => void
 
-interface OptionDisplayProps {
+export interface SpecifierCallbacks {
+    languageTestSelect(index: number, test: LanguageTestId): void
+    languageItemSelect(index: number, item: LanguageTestItem, score: number): void
+    languageTestAdd(): void
+}
+
+interface OptionDisplayProps extends SpecifierCallbacks {
     shouldExpand: boolean
     myHeight: number | null,
     specifierOptionClick: SpecifierOptionClickFn
     specifierPanelRender: SpecifierPanelRenderFn
-    languageTestSelect(index: number, test: LanguageTestId): void
-    languageItemSelect(index: number, item: LanguageTestItem, score: number): void
     user: Person
 }
 
@@ -76,6 +81,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                         specifier={specifier}
                         specifierOptionClick={this.props.specifierOptionClick}
                         person={this.props.user}
+                        languageTestAdd={this.props.languageTestAdd}
                         languageTestSelect={this.props.languageTestSelect}
                         languageScoreSelect={this.props.languageItemSelect}
                     />
@@ -107,6 +113,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         },
         languageTestSelect(index: number, test: LanguageTestId): void {
             dispatch(languageTestChangeAction(index, test))
+        },
+        languageTestAdd(): void {
+            dispatch(languageTestAddAction())
         },
         languageItemSelect(index: number, item: LanguageTestItem, score: number): void {
             dispatch(languageTestScoreChangeAction(index, item, score))

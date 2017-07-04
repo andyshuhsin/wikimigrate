@@ -158,6 +158,7 @@ function getScoreOptions(format: [number, number, number]): number[] {
 const LanguageSpecifierBody = (props: {
     test: LanguageTestResult,
     index: number,
+    onTestAdd(test: string): void
     onTestChange(index: number, newTest: string): void
     onScoreChange(index: number, item: LanguageTestItem, newScore: number): void
     onRemove(index: number): void
@@ -252,6 +253,7 @@ interface SpecifierContentProps {
     ) => any
     languageTestSelect(index: number, test: LanguageTestId): void
     languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
+    languageTestAdd(): void
     person: Person
 }
 
@@ -260,6 +262,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
         specifier,
         onAction,
         person,
+        languageTestAdd,
         languageTestSelect,
         languageScoreSelect,
     } = props
@@ -275,6 +278,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
                         <LanguageSpecifierBody
                             key={test.testId + index}
                             test={test}
+                            onTestAdd={languageTestAdd}
                             onTestChange={languageTestSelect}
                             onScoreChange={languageScoreSelect}
                             onRemove={index => {
@@ -291,9 +295,7 @@ const SpecifierBody = (props: SpecifierContentProps) => {
                     {existingItems}
                     <IconButton
                         icon="+"
-                        onClick={() => {
-                            onAction(specifier.id, 0, 0, 'NEW')
-                        }}
+                        onClick={languageTestAdd}
                     />
                 </div>
             )
@@ -345,6 +347,7 @@ interface SingleSpecifierPanelProps {
     specifierOptionClick: SpecifierOptionClickFn
     languageTestSelect(index: number, test: LanguageTestId): void
     languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
+    languageTestAdd(): void
     person: Person
 }
 
@@ -355,6 +358,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
             specifierOptionClick,
             languageTestSelect,
             languageScoreSelect,
+            languageTestAdd,
         } = this.props
 
         return (
@@ -366,6 +370,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
                     onAction={specifierOptionClick}
                     languageTestSelect={languageTestSelect}
                     languageScoreSelect={languageScoreSelect}
+                    languageTestAdd={languageTestAdd}
                 />
             </div>
         )

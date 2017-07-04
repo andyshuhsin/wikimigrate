@@ -52,6 +52,9 @@ interface OptionClickPayload_Language extends OptionClickPayload_List {
     value: LanguageTestResult,
 }
 
+export interface LanguageTestAddAction {
+    type: 'LANGUAGE_TEST_ADD'
+}
 export interface LanguageTestChangeAction {
     type: 'LANGUAGE_TEST_CHANGE'
     payload: {
@@ -74,6 +77,7 @@ export type SpecifierAction =
     | BaseOptionClickAction<OptionClickPayload_WorkExperience>
     | BaseOptionClickAction<OptionClickPayload_Language>
     | BaseOptionClickAction<OptionClickPayload_Age>
+    | LanguageTestAddAction
     | LanguageTestChangeAction
     | LanguageTestScoreChangeAction
 
@@ -102,6 +106,12 @@ export function languageTestScoreChangeAction(
             item,
             score,
         }
+    }
+}
+
+export function languageTestAddAction(): LanguageTestAddAction {
+    return {
+        type: 'LANGUAGE_TEST_ADD',
     }
 }
 
