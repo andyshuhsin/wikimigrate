@@ -52,7 +52,7 @@ export const educationStageProfiles: EducationStageProfiles = {
     master: {
         rank: 5,
         name: {
-            en: 'master',
+            en: 'Master',
             zh_hans: '硕士',
         },
     },
