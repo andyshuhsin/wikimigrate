@@ -11,6 +11,7 @@ import { LangId } from '../../definitions/auxiliary/MultiLang'
 import data from '../../data/index'
 import { PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE } from '../../data/constants'
 import { TransitionId } from '../../definitions/Transition'
+import languageTestProfiles from '../../data/common/languageTestProfiles'
 
 const ESC_KEY_CODE = 27
 
@@ -70,6 +71,15 @@ const defaultLanguageTestResults: DefaultLanguageTestResults = {
     },
 }
 
+const newLanguageTestPreference: LanguageTestId[] = [
+    'ielts',
+    'toefl',
+    'celpip',
+    'tef',
+    'pte-academic',
+    'cae',
+]
+
 export interface VisaPlannerState {
     user: Person,
     ui: {
@@ -112,15 +122,16 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 case 'language': {
                     switch (action.payload.operator) {
                         case 'NEW': {
-                            newState.user.languageTests.push({
-                                testId: 'ielts',
-                                scores: {
-                                    listening: 6,
-                                    speaking: 6,
-                                    writing: 6,
-                                    reading: 6,
+                            const existingTests = state.user.languageTests.map(test => test.testId)
+                            for (const test of newLanguageTestPreference) {
+                                if (existingTests.indexOf(test) === -1) {
+                                    newState.user.languageTests.push({
+                                        testId: test,
+                                        scores: defaultLanguageTestResults[test]
+                                    })
+                                    break
                                 }
-                            })
+                            }
                             break
                         }
                         case 'REMOVE': {
