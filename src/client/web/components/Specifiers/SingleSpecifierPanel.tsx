@@ -267,6 +267,7 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
         switch (specifier.type) {
             case 'list': {
                 let existingItems: JSX.Element[] = []
+                let addButton: JSX.Element | null = null
                 switch(specifier.id) {
                     case 'language': {
                         existingItems = person.languageTests.map((test, index) =>
@@ -282,16 +283,20 @@ export class SingleSpecifierPanel extends React.Component<SingleSpecifierPanelPr
                                 index={index}
                             />
                         )
+
+                        addButton = (
+                            <IconButton
+                                icon="+"
+                                onClick={languageTestAdd}
+                            />
+                        )
                     }
                 }
 
                 specifierBody = (
                     <div>
                         {existingItems}
-                        <IconButton
-                            icon="+"
-                            onClick={languageTestAdd}
-                        />
+                        {addButton}
                     </div>
                 )
                 break
