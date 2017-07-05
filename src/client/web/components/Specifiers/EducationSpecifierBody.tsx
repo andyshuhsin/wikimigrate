@@ -9,6 +9,7 @@ import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { data } from '../../../../data'
 import { IconButton } from './IconButton'
 import { specifierSharedStyles } from './specifierSharedStyles'
+import { EducationSpecifierCallbacks } from './SpecifierPanel'
 
 const activeRegionOptions: RegionId[] = [
     'australia',
@@ -17,18 +18,18 @@ const activeRegionOptions: RegionId[] = [
     'usa',
 ]
 
-export function EducationSpecifierBody(props: {
+interface EducationSpecifierBodyProps extends EducationSpecifierCallbacks {
     edu: EducationQuality,
     index: number,
-    onEducationStageChange(index: number, newStage: string): void
-    onEducationRemove(index: number): void
-}) {
+}
+
+export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
     return (
         <div style={specifierSharedStyles.containerStyles}>
             {JSON.stringify(props.edu)}
             <IconButton
                 icon='–'
-                onClick={() => props.onEducationRemove(props.index)}
+                onClick={() => props.educationRemove(props.index)}
                 additionalStyle={specifierSharedStyles.deleteButtonStyle}
             />
             <table>
@@ -47,7 +48,10 @@ export function EducationSpecifierBody(props: {
                         <select
                             value={props.edu.stage}
                             onChange={event =>
-                                props.onEducationStageChange(props.index, event.target.value)
+                                props.educationStageChange(
+                                    props.index,
+                                    event.target.value as EducationStage
+                                )
                             }
                         >
                             {Object.keys(educationStageProfiles).map((stage: EducationStage) =>

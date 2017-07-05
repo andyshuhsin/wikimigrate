@@ -101,6 +101,14 @@ export interface EducationStageChangeAction {
     }
 }
 
+export interface EducationRegionChangeAction {
+    type: 'EDUCATION_REGION_CHANGE'
+    payload: {
+        index: number
+        region: RegionId
+    }
+}
+
 export type SpecifierAction =
     | BaseOptionClickAction<OptionClickPayload_Education>
     | BaseOptionClickAction<OptionClickPayload_WorkExperience>
@@ -115,6 +123,7 @@ export type SpecifierAction =
     | EducationAddAction
     | EducationRemoveAction
     | EducationStageChangeAction
+    | EducationRegionChangeAction
 
 export function languageTestChangeAction(
     index: number,
@@ -174,6 +183,7 @@ export function educationRemoveAction(index: number): EducationRemoveAction {
     }
 }
 
+
 export function educationStageChangeAction(
     index: number, stage: EducationStage
 ): EducationStageChangeAction {
@@ -182,6 +192,18 @@ export function educationStageChangeAction(
         payload: {
             stage,
             index
+        }
+    }
+}
+
+export function educationRegionChangeAction(
+    index: number, region: RegionId
+): EducationRegionChangeAction {
+    return {
+        type: 'EDUCATION_REGION_CHANGE',
+        payload: {
+            index,
+            region,
         }
     }
 }

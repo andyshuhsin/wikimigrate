@@ -4,7 +4,7 @@ import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
-    educationAddAction, educationRemoveAction, educationStageChangeAction,
+    educationAddAction, educationRegionChangeAction, educationRemoveAction, educationStageChangeAction,
     languageTestAddAction,
     languageTestChangeAction, languageTestRemoveAction, languageTestScoreChangeAction, specifierClickAction,
     SpecifierListOperator,
@@ -18,6 +18,7 @@ import { LanguageSpecifierBody } from './LanguageSpecifierBody'
 import { IconButton } from './IconButton'
 import { EducationSpecifierBody } from './EducationSpecifierBody'
 import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
 
 const styles = {
     titleStyle: {
@@ -77,23 +78,30 @@ export type SpecifierOptionClickFn =
 
 export type SpecifierPanelRenderFn = (height: number) => void
 
-export interface SpecifierCallbacks {
+export interface LanguageSpecifierCallbacks {
     languageTestSelect(index: number, test: LanguageTestId): void
     languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
     languageTestRemove(index: number): void
-    languageTestAdd(): void
-
-    educationAdd(): void
-    educationRemove(index: number): void
-    educationStageChange(index: number, newStage: EducationStage): void
 }
 
-interface OptionDisplayProps extends SpecifierCallbacks {
+export interface EducationSpecifierCallbacks {
+    educationRemove(index: number): void
+    educationStageChange(index: number, newStage: EducationStage): void
+    educationRegionChange(index: number, newRegion: RegionId): void
+}
+
+interface OptionDisplayProps extends
+    LanguageSpecifierCallbacks,
+    EducationSpecifierCallbacks
+{
     shouldExpand: boolean
     myHeight: number | null,
     specifierOptionClick: SpecifierOptionClickFn
     specifierPanelRender: SpecifierPanelRenderFn
     user: Person
+
+    educationAdd(): void
+    languageTestAdd(): void
 }
 
 let firstRender = true
@@ -129,6 +137,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             educationAdd,
             educationRemove,
             educationStageChange,
+            educationRegionChange,
         } = this.props
 
         const languageTests = this.props.user.languageTests || []
@@ -162,10 +171,9 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                                 <LanguageSpecifierBody
                                     key={test.testId + index}
                                     test={test}
-                                    onTestAdd={languageTestAdd}
-                                    onTestChange={languageTestSelect}
-                                    onScoreChange={languageScoreSelect}
-                                    onRemove={languageTestRemove}
+                                    languageTestSelect={languageTestSelect}
+                                    languageScoreSelect={languageScoreSelect}
+                                    languageTestRemove={languageTestRemove}
                                     index={index}
                                 />
                             )
@@ -191,8 +199,9 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                                     key={String(edu.stage) + String(edu.region) + String(index)}
                                     edu={edu}
                                     index={index}
-                                    onEducationRemove={educationRemove}
-                                    onEducationStageChange={educationStageChange}
+                                    educationRemove={educationRemove}
+                                    educationStageChange={educationStageChange}
+                                    educationRegionChange={educationRegionChange}
                                 />
                             )
                         }
@@ -248,6 +257,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         },
         educationStageChange(index: number, newStage: EducationStage): void {
             dispatch(educationStageChangeAction(index, newStage))
+        },
+        educationRegionChange(index: number, newRegion: RegionId): void {
+            dispatch(educationRegionChangeAction(index, newRegion))
         },
         specifierPanelRender(height: number): void {
             dispatch(specifierPanelRenderAction(height))

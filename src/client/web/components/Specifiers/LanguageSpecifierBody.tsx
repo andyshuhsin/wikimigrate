@@ -1,11 +1,13 @@
 import * as React from 'react'
 import {
+    LanguageTestId,
     LanguageTestItem, languageTestItemValues,
     LanguageTestResult,
 } from '../../../../definitions/auxiliary/LanguageTest'
 import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 import { IconButton } from './IconButton'
 import { specifierSharedStyles } from './specifierSharedStyles'
+import { LanguageSpecifierCallbacks } from './SpecifierPanel'
 
 const dropdownSelectStyle: React.CSSProperties = {
     border: '1px solid black'
@@ -24,15 +26,12 @@ function getScoreOptions(format: [number, number, number]): string[] {
     return results
 }
 
-
-export const LanguageSpecifierBody = (props: {
+interface LanguageSpecifierBodyProps extends LanguageSpecifierCallbacks {
     test: LanguageTestResult,
     index: number,
-    onTestAdd(test: string): void
-    onTestChange(index: number, newTest: string): void
-    onScoreChange(index: number, item: LanguageTestItem, newScore: number): void
-    onRemove(index: number): void
-}) => {
+}
+
+export const LanguageSpecifierBody = (props: LanguageSpecifierBodyProps) => {
     const profile = languageTestProfiles.find(test => test.id === props.test.testId)
     if (!profile) {
         console.warn("Unknown test id", props.test.testId)
@@ -42,7 +41,7 @@ export const LanguageSpecifierBody = (props: {
         <div style={specifierSharedStyles.containerStyles}>
             <IconButton
                 icon='–'
-                onClick={() => props.onRemove(props.index)}
+                onClick={() => props.languageTestRemove(props.index)}
                 additionalStyle={specifierSharedStyles.deleteButtonStyle}
             />
 
@@ -50,7 +49,7 @@ export const LanguageSpecifierBody = (props: {
                 value={profile.id}
                 style={dropdownSelectStyle}
                 onChange={event => {
-                    props.onTestChange(props.index, event.target.value)
+                    props.languageTestSelect(props.index, event.target.value as LanguageTestId)
                 }}
             >
                 {languageTestProfiles.map(profile =>
@@ -81,7 +80,7 @@ export const LanguageSpecifierBody = (props: {
                                 value={props.test.scores[item].toString()}
                                 style={dropdownSelectStyle}
                                 onChange={event => {
-                                    props.onScoreChange(
+                                    props.languageScoreSelect(
                                         props.index,
                                         item,
                                         Number(event.target.value)
