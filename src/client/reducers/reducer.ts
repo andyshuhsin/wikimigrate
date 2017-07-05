@@ -210,6 +210,14 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case 'EDUCATION_REGION_CHANGE': {
+            if (!newState.user.education) {
+                return state
+            }
+            newState.user.education[action.payload.index].region = action.payload.region
+            return newState
+        }
+
         case 'PATH_BOX_CLICK': {
             newState.ui.pathwayOnDisplay = {
                 transitionIds: action.payload.pathway.transitions.map(transition => transition.id),

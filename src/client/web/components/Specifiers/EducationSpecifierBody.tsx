@@ -63,7 +63,13 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                     </td>
 
                     <td>
-                        <select value={props.edu.region}>
+                        <select
+                            value={props.edu.region}
+                            onChange={event => props.educationRegionChange(
+                                props.index,
+                                event.target.value as RegionId
+                            )}
+                        >
                             {activeRegionOptions.map((region: RegionId) => {
                                 const regionObj = data.getRegionById(region)
                                 if (regionObj) {

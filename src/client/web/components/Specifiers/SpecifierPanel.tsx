@@ -4,9 +4,15 @@ import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
-    educationAddAction, educationRegionChangeAction, educationRemoveAction, educationStageChangeAction,
+    educationAddAction,
+    educationRegionChangeAction,
+    educationRemoveAction,
+    educationStageChangeAction,
     languageTestAddAction,
-    languageTestChangeAction, languageTestRemoveAction, languageTestScoreChangeAction, specifierClickAction,
+    languageTestChangeAction,
+    languageTestRemoveAction,
+    languageTestScoreChangeAction,
+    specifierClickAction,
     SpecifierListOperator,
 } from '../../../actions/SpecifierActions'
 import design from '../../design'
@@ -90,9 +96,8 @@ export interface EducationSpecifierCallbacks {
     educationRegionChange(index: number, newRegion: RegionId): void
 }
 
-interface OptionDisplayProps extends
-    LanguageSpecifierCallbacks,
-    EducationSpecifierCallbacks
+interface OptionDisplayProps extends LanguageSpecifierCallbacks,
+                                     EducationSpecifierCallbacks
 {
     shouldExpand: boolean
     myHeight: number | null,
