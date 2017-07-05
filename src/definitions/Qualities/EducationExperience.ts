@@ -80,7 +80,7 @@ export interface EducationQuality {
     qualityId: 'education'
     stage: EducationStage | undefined
     region: RegionId | undefined
-    duration?: Duration
+    duration: Duration
     description?: MultiLangStringSet
     gradutaionDate?: Date
 }

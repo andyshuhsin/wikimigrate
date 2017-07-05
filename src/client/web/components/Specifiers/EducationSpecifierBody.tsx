@@ -10,6 +10,8 @@ import { data } from '../../../../data'
 import { IconButton } from './IconButton'
 import { specifierSharedStyles } from './specifierSharedStyles'
 import { EducationSpecifierCallbacks } from './SpecifierPanel'
+import inflect from '../../../utils/inflect'
+import { duration } from '../../../../definitions/auxiliary/Duration'
 
 const activeRegionOptions: RegionId[] = [
     'australia',
@@ -17,6 +19,8 @@ const activeRegionOptions: RegionId[] = [
     'new_zealand',
     'usa',
 ]
+
+const durationYearOptions: number[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
 interface EducationSpecifierBodyProps extends EducationSpecifierCallbacks {
     edu: EducationQuality,
@@ -39,6 +43,9 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                     </td>
                     <td>
                         Region
+                    </td>
+                    <td>
+                        Duration
                     </td>
                 </tr></thead>
 
@@ -87,6 +94,24 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                                     zh_hans: '其他地区'
                                 })}
                             </option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <select
+                            value={props.edu.duration.value}
+                            onChange={event => props.educationDurationChange(
+                                props.index,
+                                duration(+event.target.value, 'year')
+                            )}
+                        >
+                            {durationYearOptions.map((year: number) =>
+                                <option key={year} value={year}>
+                                    {year + ' ' + inflect(text({
+                                        en: 'year'
+                                    }), { number: year })}
+                                </option>
+                            )}
                         </select>
                     </td>
                 </tr></tbody>

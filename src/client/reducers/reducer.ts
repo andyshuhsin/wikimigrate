@@ -11,6 +11,7 @@ import { LangId } from '../../definitions/auxiliary/MultiLang'
 import data from '../../data/index'
 import { PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE } from '../../data/constants'
 import { TransitionId } from '../../definitions/Transition'
+import { duration } from '../../definitions/auxiliary/Duration'
 
 const ESC_KEY_CODE = 27
 
@@ -190,6 +191,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 qualityId: 'education',
                 stage: 'bachelor',
                 region: 'world',
+                duration: duration(4, 'year')
             })
             return newState
         }
@@ -215,6 +217,14 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 return state
             }
             newState.user.education[action.payload.index].region = action.payload.region
+            return newState
+        }
+
+        case 'EDUCATION_DURATION_CHANGE': {
+            if (!newState.user.education) {
+                return state
+            }
+            newState.user.education[action.payload.index].duration = action.payload.duration
             return newState
         }
 
