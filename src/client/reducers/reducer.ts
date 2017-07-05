@@ -11,7 +11,6 @@ import { LangId } from '../../definitions/auxiliary/MultiLang'
 import data from '../../data/index'
 import { PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE } from '../../data/constants'
 import { TransitionId } from '../../definitions/Transition'
-import languageTestProfiles from '../../data/common/languageTestProfiles'
 
 const ESC_KEY_CODE = 27
 
@@ -200,6 +199,14 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 return state
             }
             newState.user.education.splice(action.payload.index, 1)
+            return newState
+        }
+
+        case 'EDUCATION_STAGE_CHANGE': {
+            if (!newState.user.education) {
+                return state
+            }
+            newState.user.education[action.payload.index].stage = action.payload.stage
             return newState
         }
 

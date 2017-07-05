@@ -20,6 +20,7 @@ const activeRegionOptions: RegionId[] = [
 export function EducationSpecifierBody(props: {
     edu: EducationQuality,
     index: number,
+    onEducationStageChange(index: number, newStage: string): void
     onEducationRemove(index: number): void
 }) {
     return (
@@ -43,7 +44,12 @@ export function EducationSpecifierBody(props: {
                 <tbody><tr>
 
                     <td>
-                        <select value={props.edu.stage}>
+                        <select
+                            value={props.edu.stage}
+                            onChange={event =>
+                                props.onEducationStageChange(props.index, event.target.value)
+                            }
+                        >
                             {Object.keys(educationStageProfiles).map((stage: EducationStage) =>
                                 <option key={stage} value={stage}>
                                     {text(educationStageProfiles[stage].name)}

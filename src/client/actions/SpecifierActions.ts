@@ -2,6 +2,7 @@ import { SpecifierId } from '../data'
 import { Duration } from '../../definitions/auxiliary/Duration'
 import { RegionId } from '../../definitions/auxiliary/Region'
 import { LanguageTestId, LanguageTestItem, LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
+import { EducationStage } from '../../definitions/Qualities/EducationExperience'
 
 interface BaseOptionClickAction<Payload> {
     type: 'SPECIFIER_CLICK'
@@ -92,6 +93,14 @@ export interface EducationRemoveAction {
     }
 }
 
+export interface EducationStageChangeAction {
+    type: 'EDUCATION_STAGE_CHANGE'
+    payload: {
+        index: number
+        stage: EducationStage
+    }
+}
+
 export type SpecifierAction =
     | BaseOptionClickAction<OptionClickPayload_Education>
     | BaseOptionClickAction<OptionClickPayload_WorkExperience>
@@ -105,6 +114,7 @@ export type SpecifierAction =
 
     | EducationAddAction
     | EducationRemoveAction
+    | EducationStageChangeAction
 
 export function languageTestChangeAction(
     index: number,
@@ -159,6 +169,18 @@ export function educationRemoveAction(index: number): EducationRemoveAction {
     return {
         type: 'EDUCATION_REMOVE',
         payload: {
+            index
+        }
+    }
+}
+
+export function educationStageChangeAction(
+    index: number, stage: EducationStage
+): EducationStageChangeAction {
+    return {
+        type: 'EDUCATION_STAGE_CHANGE',
+        payload: {
+            stage,
             index
         }
     }
