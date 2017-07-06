@@ -220,6 +220,26 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case 'WORK_ADD': {
+            if (!newState.user.workExperiences) {
+                newState.user.workExperiences = []
+            }
+            newState.user.workExperiences.push({
+                qualityId: 'work_experience',
+                region: 'world',
+                duration: duration(1, 'year')
+            })
+            return newState
+        }
+
+        case 'WORK_REMOVE': {
+            if (!newState.user.workExperiences) {
+                newState.user.workExperiences = []
+            }
+            newState.user.workExperiences.splice(action.payload.index, 1)
+            return newState
+        }
+
         case 'PATH_BOX_CLICK': {
             newState.ui.pathwayOnDisplay = {
                 transitionIds: action.payload.pathway.transitions.map(transition => transition.id),

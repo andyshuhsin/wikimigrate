@@ -10,7 +10,7 @@ import {
     languageTestAddAction,
     languageTestChangeAction,
     languageTestRemoveAction,
-    languageTestScoreChangeAction,
+    languageTestScoreChangeAction, workAdd, workRemove,
 } from '../../../actions/SpecifierActions'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
@@ -24,6 +24,7 @@ import { EducationStage } from '../../../../definitions/Qualities/EducationExper
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
 import BirthYearSpecifierBody from './BirthYearSpecifierBody'
+import WorkExperienceSpecifierBody from './WorkExperienceSpecifierBody'
 
 const TitleBar = (props: {onClick(): void}) => (
     <div
@@ -120,6 +121,11 @@ export interface BirthSpecifiersCallbacks {
     birthYearChangeAction(year: number): void
 }
 
+export interface WorkSpecifiersCallbacks {
+    workAdd(): void
+    workRemove(index: number): void
+}
+
 // Not to pass to other components
 interface TopLevelSpecifierCallbacks {
     educationAdd(): void
@@ -129,7 +135,8 @@ interface TopLevelSpecifierCallbacks {
 interface CallbackProps extends TopLevelSpecifierCallbacks,
                                 LanguageSpecifierCallbacks,
                                 EducationSpecifierCallbacks,
-                                BirthSpecifiersCallbacks
+                                BirthSpecifiersCallbacks,
+                                WorkSpecifiersCallbacks
 { }
 
 interface ValueProps {
@@ -165,10 +172,14 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
         educationRegionChange,
         educationDurationChange,
         educationGraduationDateChange,
+
+        workAdd,
+        workRemove,
     } = props
 
     const languageTests = props.user.languageTests || []
     const education = props.user.education || []
+    const works = props.user.workExperiences || []
 
     const LanguageSpecifiers = () => (
         <section>
@@ -248,9 +259,35 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
         </section>
     )
 
+    const WorkSpecifiers = () => (
+        <section>
+            <h1 style={styles.titleStyle}>
+                {text({
+                    en: 'Work experience',
+                    zh_hans: '工作经验',
+                })}
+            </h1>
+            <div style={styles.specifierBodyContainerStyle}>
+                {works.map((work, index) => (
+                    <WorkExperienceSpecifierBody
+                        key={JSON.stringify(work) + String(index)}
+                        index={index}
+                        work={work}
+                        workRemove={workRemove}
+                    />
+                ))}
+                <IconButton
+                    icon="+"
+                    onClick={workAdd}
+                />
+            </div>
+        </section>
+    )
+
     return (
         <aside style={style}>
             <TitleBar onClick={() => {}}/>
+            <WorkSpecifiers />
             <LanguageSpecifiers />
             <EducationSpecifiers />
             <BirthSpecifiers />
@@ -300,7 +337,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
         },
         birthYearChangeAction(year: number): void {
             dispatch(birthYearChangeAction(year))
-        }
+        },
+        workAdd: () => dispatch(workAdd()),
+        workRemove: (index: number) => dispatch(workRemove(index)),
     }
 }
 

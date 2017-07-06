@@ -83,6 +83,17 @@ export interface BirthYearChangeAction {
     }
 }
 
+export interface WorkAddAction {
+    type: 'WORK_ADD'
+}
+
+export interface WorkRemoveAction {
+    type: 'WORK_REMOVE'
+    payload: {
+        index: number
+    }
+}
+
 export type SpecifierAction =
     | LanguageTestAddAction
     | LanguageTestRemoveAction
@@ -95,7 +106,11 @@ export type SpecifierAction =
     | EducationRegionChangeAction
     | EducationDurationChangeAction
     | EducationChangeGraduationDateAction
+
     | BirthYearChangeAction
+
+    | WorkAddAction
+    | WorkRemoveAction
 
 export function languageTestChangeAction(
     index: number,
@@ -209,6 +224,21 @@ export function birthYearChangeAction(year: number): BirthYearChangeAction {
         type: 'BIRTH_YEAR_CHANGE',
         payload: {
             year
+        }
+    }
+}
+
+export function workAdd(): WorkAddAction {
+    return {
+        type: 'WORK_ADD'
+    }
+}
+
+export function workRemove(index: number): WorkRemoveAction {
+    return {
+        type: 'WORK_REMOVE',
+        payload: {
+            index
         }
     }
 }
