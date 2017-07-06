@@ -94,6 +94,14 @@ export interface WorkRemoveAction {
     }
 }
 
+export interface WorkDurationChange {
+    type: 'WORK_DURATION_CHANGE'
+    payload: {
+        index: number
+        duration: Duration
+    }
+}
+
 export type SpecifierAction =
     | LanguageTestAddAction
     | LanguageTestRemoveAction
@@ -111,6 +119,7 @@ export type SpecifierAction =
 
     | WorkAddAction
     | WorkRemoveAction
+    | WorkDurationChange
 
 export function languageTestChangeAction(
     index: number,
@@ -239,6 +248,19 @@ export function workRemove(index: number): WorkRemoveAction {
         type: 'WORK_REMOVE',
         payload: {
             index
+        }
+    }
+}
+
+export function workDurationChangeAction(
+    index: number,
+    duration: Duration,
+): WorkDurationChange {
+    return {
+        type: 'WORK_DURATION_CHANGE',
+        payload: {
+            index,
+            duration
         }
     }
 }

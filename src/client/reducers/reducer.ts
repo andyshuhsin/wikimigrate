@@ -240,6 +240,15 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case 'WORK_DURATION_CHANGE': {
+            if (!newState.user.workExperiences) {
+                newState.user.workExperiences = []
+            }
+            newState.user.workExperiences[action.payload.index].duration =
+                action.payload.duration
+            return newState
+        }
+
         case 'PATH_BOX_CLICK': {
             newState.ui.pathwayOnDisplay = {
                 transitionIds: action.payload.pathway.transitions.map(transition => transition.id),

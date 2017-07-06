@@ -10,7 +10,7 @@ import {
     languageTestAddAction,
     languageTestChangeAction,
     languageTestRemoveAction,
-    languageTestScoreChangeAction, workAdd, workRemove,
+    languageTestScoreChangeAction, workAdd, workDurationChangeAction, workRemove,
 } from '../../../actions/SpecifierActions'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
@@ -122,14 +122,15 @@ export interface BirthSpecifiersCallbacks {
 }
 
 export interface WorkSpecifiersCallbacks {
-    workAdd(): void
     workRemove(index: number): void
+    workDurationChange(index: number, duration: Duration): void
 }
 
 // Not to pass to other components
 interface TopLevelSpecifierCallbacks {
     educationAdd(): void
     languageTestAdd(): void
+    workAdd(): void
 }
 
 interface CallbackProps extends TopLevelSpecifierCallbacks,
@@ -175,6 +176,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
 
         workAdd,
         workRemove,
+        workDurationChange
     } = props
 
     const languageTests = props.user.languageTests || []
@@ -274,6 +276,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
                         index={index}
                         work={work}
                         workRemove={workRemove}
+                        workDurationChange={workDurationChange}
                     />
                 ))}
                 <IconButton
@@ -340,6 +343,8 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
         },
         workAdd: () => dispatch(workAdd()),
         workRemove: (index: number) => dispatch(workRemove(index)),
+        workDurationChange: (index: number, duration: Duration) =>
+            dispatch(workDurationChangeAction(index, duration))
     }
 }
 
