@@ -40,9 +40,6 @@ interface EducationSpecifierBodyProps extends EducationSpecifierCallbacks {
 export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
     return (
         <div style={specifierSharedStyles.containerStyles}>
-            <div style={{overflow: 'scroll'}}>
-                {JSON.stringify(props.edu, null, 4)}
-            </div>
             <IconButton
                 icon='–'
                 onClick={() => props.educationRemove(props.index)}
