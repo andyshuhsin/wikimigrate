@@ -12,10 +12,8 @@ export const specifierSharedStyles = {
         right: 0,
         top: 0,
     } as React.CSSProperties,
-
-}
-
-export const dropdownSelectStyle: React.CSSProperties = {
-    border: '1px solid black'
+    dropdownSelectStyle: {
+        border: '1px solid black'
+    } as React.CSSProperties,
 }
 

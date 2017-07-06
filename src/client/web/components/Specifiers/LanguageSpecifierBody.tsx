@@ -6,7 +6,7 @@ import {
 } from '../../../../definitions/auxiliary/LanguageTest'
 import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 import { IconButton } from './IconButton'
-import { dropdownSelectStyle, specifierSharedStyles } from './specifierSharedStyles'
+import { specifierSharedStyles } from './specifierSharedStyles'
 import { LanguageSpecifierCallbacks } from './SpecifierPanel'
 
 function getScoreOptions(format: [number, number, number]): string[] {
@@ -43,7 +43,7 @@ export const LanguageSpecifierBody = (props: LanguageSpecifierBodyProps) => {
 
             <select
                 value={profile.id}
-                style={dropdownSelectStyle}
+                style={specifierSharedStyles.dropdownSelectStyle}
                 onChange={event => {
                     props.languageTestSelect(props.index, event.target.value as LanguageTestId)
                 }}
@@ -74,7 +74,6 @@ export const LanguageSpecifierBody = (props: LanguageSpecifierBodyProps) => {
                         <td key={item}>
                             <select
                                 value={props.test.scores[item].toString()}
-                                style={dropdownSelectStyle}
                                 onChange={event => {
                                     props.languageScoreSelect(
                                         props.index,
@@ -82,6 +81,7 @@ export const LanguageSpecifierBody = (props: LanguageSpecifierBodyProps) => {
                                         Number(event.target.value)
                                     )
                                 }}
+                                style={specifierSharedStyles.dropdownSelectStyle}
                             >
                                 {getScoreOptions(profile.itemScoreFormat).map(score => (
                                     <option key={score}>

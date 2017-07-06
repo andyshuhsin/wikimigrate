@@ -8,7 +8,7 @@ import { text } from '../../../utils/text'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { data } from '../../../../data'
 import { IconButton } from './IconButton'
-import { dropdownSelectStyle, specifierSharedStyles } from './specifierSharedStyles'
+import { specifierSharedStyles } from './specifierSharedStyles'
 import { EducationSpecifierCallbacks } from './SpecifierPanel'
 import inflect from '../../../utils/inflect'
 import { duration } from '../../../../definitions/auxiliary/Duration'
@@ -65,7 +65,7 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                                     event.target.value as EducationStage
                                 )
                             }
-                            style={dropdownSelectStyle}
+                            style={specifierSharedStyles.dropdownSelectStyle}
                         >
                             {Object.keys(educationStageProfiles).map((stage: EducationStage) =>
                                 <option key={stage} value={stage}>
@@ -82,7 +82,7 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                                 props.index,
                                 event.target.value as RegionId
                             )}
-                            style={dropdownSelectStyle}
+                            style={specifierSharedStyles.dropdownSelectStyle}
                         >
                             {activeRegionOptions.map((region: RegionId) => {
                                 const regionObj = data.getRegionById(region)
@@ -122,7 +122,7 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                                 props.index,
                                 duration(+event.target.value, 'year')
                             )}
-                            style={dropdownSelectStyle}
+                            style={specifierSharedStyles.dropdownSelectStyle}
                         >
                             {durationYearOptions.map((year: number) =>
                                 <option key={year} value={year}>
@@ -141,7 +141,7 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                                 props.index,
                                 +event.target.value
                             )}
-                            style={dropdownSelectStyle}
+                            style={specifierSharedStyles.dropdownSelectStyle}
                         >
                             {range(1980, thisYear+1).map((year: number) =>
                                 <option key={year} value={year}>
