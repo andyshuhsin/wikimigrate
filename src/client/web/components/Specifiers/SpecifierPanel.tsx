@@ -25,7 +25,34 @@ import { EducationSpecifierBody } from './EducationSpecifierBody'
 import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
-import SpecifierBar from './SpecifierBar'
+
+const TitleBar = (props: {onClick(): void}) => (
+    <div
+        style={{
+            fontSize: '1.3em',
+            padding: '0.5em 0.7em',
+            width: '100%',
+            transition: `transform ${design.durations.slide}s`,
+            background: 'white',
+            cursor: 'pointer',
+        } as React.CSSProperties}
+        onClick={props.onClick}
+    >
+        {
+            text({
+                en: 'Specify conditions',
+                zh_hans: '设置个人条件',
+            })
+        }
+        <img
+            style={{
+                width: '1.3em',
+                verticalAlign: 'middle',
+            }}
+            src={require('../../../assets/angle-down.svg')}
+        />
+    </div>
+)
 
 const styles = {
     titleStyle: {
@@ -144,7 +171,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             <aside style={style}>
                 <section>
                 </section>
-                <SpecifierBar onClick={() => {}}/>
+                <TitleBar onClick={() => {}}/>
                 <section>
                     <h1 style={styles.titleStyle}>
                         {text({
