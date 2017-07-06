@@ -115,27 +115,6 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return state
         }
 
-        case 'SPECIFIER_CLICK': {
-            switch (action.payload.specifier) {
-                case 'language': {
-                    break
-                }
-                case 'age': {
-                    break
-                }
-                case 'education': {
-                    break
-                }
-                case 'work_experience': {
-                    break
-                }
-                default: {
-                    console.warn('Unexpected filterId:', (action.payload as any).filterId)
-                }
-            }
-            return newState
-        }
-
         case 'LANGUAGE_TEST_ADD': {
             if (!newState.user.languageTests) {
                 newState.user.languageTests = []

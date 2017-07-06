@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { VisaPlannerState } from '../../../reducers'
-import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import {
     educationAddAction, educationDurationChangeAction, educationGraduationDateChangeAction,
     educationRegionChangeAction,
@@ -11,8 +10,6 @@ import {
     languageTestChangeAction,
     languageTestRemoveAction,
     languageTestScoreChangeAction,
-    specifierClickAction,
-    SpecifierListOperator,
 } from '../../../actions/SpecifierActions'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
@@ -103,13 +100,6 @@ const styles = {
 
 }
 
-export type SpecifierOptionClickFn =
-    (specifierId: SpecifierId,
-     optionId: OptionId,
-     index?: number,
-     operator?: SpecifierListOperator
-    ) => void
-
 export interface LanguageSpecifierCallbacks {
     languageTestSelect(index: number, test: LanguageTestId): void
     languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
@@ -124,16 +114,24 @@ export interface EducationSpecifierCallbacks {
     educationGraduationDateChange(index: number, year: number): void
 }
 
-interface OptionDisplayProps extends LanguageSpecifierCallbacks,
-                                     EducationSpecifierCallbacks
-{
-    shouldExpand: boolean
-    specifierOptionClick: SpecifierOptionClickFn
-    user: Person
-
+// Not to pass to other components
+interface TopLevelSpecifierCallbacks {
     educationAdd(): void
     languageTestAdd(): void
 }
+
+interface CallbackProps extends TopLevelSpecifierCallbacks,
+                                LanguageSpecifierCallbacks,
+                                EducationSpecifierCallbacks
+{ }
+
+interface ValueProps {
+    shouldExpand: boolean
+    user: Person
+}
+
+interface OptionDisplayProps extends CallbackProps, ValueProps
+{ }
 
 class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
 
@@ -234,25 +232,15 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
     }
 }
 
-function mapStateToProps(state: VisaPlannerState): Partial<OptionDisplayProps> {
+function mapStateToProps(state: VisaPlannerState): ValueProps {
     return {
         shouldExpand: state.ui.shouldSpecifierPanelExpand,
         user: state.user,
     }
 }
 
-function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps> {
+function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
     return {
-        specifierOptionClick(
-            specifierId: SpecifierId,
-            optionId: OptionId,
-            index?: number,
-            operator?: SpecifierListOperator,
-        ): void {
-            dispatch(
-                specifierClickAction(specifierId, optionId, index, operator),
-            )
-        },
         languageTestSelect(index: number, test: LanguageTestId): void {
             dispatch(languageTestChangeAction(index, test))
         },

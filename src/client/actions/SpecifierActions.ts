@@ -4,55 +4,6 @@ import { RegionId } from '../../definitions/auxiliary/Region'
 import { LanguageTestId, LanguageTestItem, LanguageTestResult } from '../../definitions/auxiliary/LanguageTest'
 import { EducationStage } from '../../definitions/Qualities/EducationExperience'
 
-interface BaseOptionClickAction<Payload> {
-    type: 'SPECIFIER_CLICK'
-    payload: Payload
-}
-
-interface BaseSpecifierActionPayload {
-    specifier: SpecifierId,
-    value: any
-}
-
-interface OptionClickPayload_Integer extends BaseSpecifierActionPayload {
-    specifier: SpecifierId,
-    value: number
-}
-
-interface OptionClickPayload_Age extends OptionClickPayload_Integer {
-    specifier: 'age'
-    value: number
-}
-
-export type SpecifierListOperator = 'NEW' | 'REMOVE' | 'MODIFY'
-
-interface OptionClickPayload_List extends BaseSpecifierActionPayload {
-    specifier: SpecifierId,
-    operator: SpecifierListOperator
-    index: number
-    value: any
-}
-
-type DurationAndLocation = {
-    duration?: Duration
-    location?: RegionId
-}
-
-interface OptionClickPayload_Education extends OptionClickPayload_List {
-    specifier: 'education'
-    value: DurationAndLocation
-}
-
-interface OptionClickPayload_WorkExperience extends OptionClickPayload_List {
-    specifier: 'work_experience',
-    value: DurationAndLocation
-}
-
-interface OptionClickPayload_Language extends OptionClickPayload_List {
-    specifier: 'language',
-    value: LanguageTestResult,
-}
-
 export interface LanguageTestAddAction {
     type: 'LANGUAGE_TEST_ADD'
 }
@@ -126,11 +77,6 @@ export interface EducationChangeGraduationDateAction {
 }
 
 export type SpecifierAction =
-    | BaseOptionClickAction<OptionClickPayload_Education>
-    | BaseOptionClickAction<OptionClickPayload_WorkExperience>
-    | BaseOptionClickAction<OptionClickPayload_Language>
-    | BaseOptionClickAction<OptionClickPayload_Age>
-
     | LanguageTestAddAction
     | LanguageTestRemoveAction
     | LanguageTestChangeAction
@@ -249,21 +195,3 @@ export function educationGraduationDateChangeAction(
         }
     }
 }
-
-export function specifierClickAction(
-    specifier: SpecifierId,
-    value: any,
-    index?: number,
-    operator?: SpecifierListOperator
-): SpecifierAction {
-    return {
-        type: 'SPECIFIER_CLICK',
-        payload: {
-            specifier,
-            value,
-            index,
-            operator,
-        },
-    } as SpecifierAction
-}
-
