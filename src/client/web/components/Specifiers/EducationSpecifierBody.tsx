@@ -143,7 +143,7 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
 
                     <td key='graduation'>
                         <select
-                            value={props.edu.graduationDate[0]}
+                            value={props.edu.graduationDate.year}
                             onChange={event => props.educationGraduationDateChange(
                                 props.index,
                                 +event.target.value

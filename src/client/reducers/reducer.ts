@@ -169,7 +169,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 stage: 'bachelor',
                 region: 'world',
                 duration: duration(4, 'year'),
-                graduationDate: [2000, 12, 31],
+                graduationDate: { year: 2000 },
             })
             return newState
         }
@@ -211,7 +211,7 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 return state
             }
             newState.user.education[action.payload.index].graduationDate =
-                [action.payload.graduateYear, 12, 31]
+                {year: action.payload.graduateYear}
             return newState
         }
 
