@@ -8,7 +8,7 @@ import { text } from '../../../utils/text'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { data } from '../../../../data'
 import { IconButton } from './IconButton'
-import { specifierSharedStyles } from './specifierSharedStyles'
+import { dropdownSelectStyle, specifierSharedStyles } from './specifierSharedStyles'
 import { EducationSpecifierCallbacks } from './SpecifierPanel'
 import inflect from '../../../utils/inflect'
 import { duration } from '../../../../definitions/auxiliary/Duration'
@@ -45,25 +45,18 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                 onClick={() => props.educationRemove(props.index)}
                 additionalStyle={specifierSharedStyles.deleteButtonStyle}
             />
-            <table>
-                <thead><tr>
+            <table><tbody>
+                <tr key='row-0'>
                     <td>
                         Stage
                     </td>
                     <td>
                         Region
                     </td>
-                    <td>
-                        Duration
-                    </td>
-                    <td>
-                        Graduate
-                    </td>
-                </tr></thead>
+                </tr>
 
-                <tbody><tr>
-
-                    <td>
+                <tr key='row-1'>
+                    <td key='stage'>
                         <select
                             value={props.edu.stage}
                             onChange={event =>
@@ -72,6 +65,7 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                                     event.target.value as EducationStage
                                 )
                             }
+                            style={dropdownSelectStyle}
                         >
                             {Object.keys(educationStageProfiles).map((stage: EducationStage) =>
                                 <option key={stage} value={stage}>
@@ -81,13 +75,14 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                         </select>
                     </td>
 
-                    <td>
+                    <td key='region'>
                         <select
                             value={props.edu.region}
                             onChange={event => props.educationRegionChange(
                                 props.index,
                                 event.target.value as RegionId
                             )}
+                            style={dropdownSelectStyle}
                         >
                             {activeRegionOptions.map((region: RegionId) => {
                                 const regionObj = data.getRegionById(region)
@@ -108,14 +103,26 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                             </option>
                         </select>
                     </td>
+                </tr>
 
+                <tr key='row-2'>
                     <td>
+                        Duration
+                    </td>
+                    <td>
+                        Graduate
+                    </td>
+                </tr>
+
+                <tr key='row-3'>
+                    <td key='duration'>
                         <select
                             value={props.edu.duration.value}
                             onChange={event => props.educationDurationChange(
                                 props.index,
                                 duration(+event.target.value, 'year')
                             )}
+                            style={dropdownSelectStyle}
                         >
                             {durationYearOptions.map((year: number) =>
                                 <option key={year} value={year}>
@@ -127,13 +134,14 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                         </select>
                     </td>
 
-                    <td>
+                    <td key='graduation'>
                         <select
                             value={props.edu.graduationDate[0]}
                             onChange={event => props.educationGraduationDateChange(
                                 props.index,
                                 +event.target.value
                             )}
+                            style={dropdownSelectStyle}
                         >
                             {range(1980, thisYear+1).map((year: number) =>
                                 <option key={year} value={year}>
@@ -142,8 +150,8 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                             )}
                         </select>
                     </td>
-                </tr></tbody>
-            </table>
+                </tr>
+            </tbody></table>
         </div>
     )
 }

@@ -1,17 +1,13 @@
 import * as React from 'react'
 import {
     LanguageTestId,
-    LanguageTestItem, languageTestItemValues,
+    languageTestItemValues,
     LanguageTestResult,
 } from '../../../../definitions/auxiliary/LanguageTest'
 import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 import { IconButton } from './IconButton'
-import { specifierSharedStyles } from './specifierSharedStyles'
+import { dropdownSelectStyle, specifierSharedStyles } from './specifierSharedStyles'
 import { LanguageSpecifierCallbacks } from './SpecifierPanel'
-
-const dropdownSelectStyle: React.CSSProperties = {
-    border: '1px solid black'
-}
 
 function getScoreOptions(format: [number, number, number]): string[] {
     const results = []

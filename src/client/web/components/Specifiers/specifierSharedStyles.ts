@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 export const specifierSharedStyles = {
     containerStyles: {
         position: 'relative',
@@ -13,3 +14,8 @@ export const specifierSharedStyles = {
     } as React.CSSProperties,
 
 }
+
+export const dropdownSelectStyle: React.CSSProperties = {
+    border: '1px solid black'
+}
+
