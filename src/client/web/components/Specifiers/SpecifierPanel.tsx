@@ -165,68 +165,72 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
         const languageTests = this.props.user.languageTests || []
         const education =this.props.user.education || []
 
+        const LanguageSpecifiers = () => (
+            <section>
+                <h1 style={styles.titleStyle}>
+                    {text({
+                        en: 'Language',
+                        zh_hans: '语言',
+                    })}
+                </h1>
+
+                <div style={styles.specifierBodyContainerStyle}>
+                    {
+                        languageTests.map((test, index) =>
+                            <LanguageSpecifierBody
+                                key={test.testId + index}
+                                test={test}
+                                languageTestSelect={languageTestSelect}
+                                languageScoreSelect={languageScoreSelect}
+                                languageTestRemove={languageTestRemove}
+                                index={index}
+                            />
+                        )
+                    }
+                    <IconButton
+                        icon="+"
+                        onClick={languageTestAdd}
+                    />
+                </div>
+            </section>
+        )
+
+        const EducationSpecifiers = () => (
+            <section>
+                <h1 style={styles.titleStyle}>
+                    {text({
+                        en: 'Education',
+                        zh_hans: '学历',
+                    })}
+                </h1>
+                <div style={styles.specifierBodyContainerStyle}>
+                    {
+                        education.map((edu, index) =>
+                            <EducationSpecifierBody
+                                key={String(edu.stage) + String(edu.region) + String(index)}
+                                edu={edu}
+                                index={index}
+                                educationRemove={educationRemove}
+                                educationStageChange={educationStageChange}
+                                educationRegionChange={educationRegionChange}
+                                educationDurationChange={educationDurationChange}
+                                educationGraduationDateChange={educationGraduationDateChange}
+                            />
+                        )
+                    }
+                    <IconButton
+                        icon="+"
+                        onClick={educationAdd}
+                    />
+                </div>
+            </section>
+        )
+
         return (
             <aside style={style}>
-                <section>
-                </section>
                 <TitleBar onClick={() => {}}/>
-                <section>
-                    <h1 style={styles.titleStyle}>
-                        {text({
-                            en: 'Language',
-                            zh_hans: '语言',
-                        })}
-                    </h1>
-
-                    <div style={styles.specifierBodyContainerStyle}>
-                        {
-                            languageTests.map((test, index) =>
-                                <LanguageSpecifierBody
-                                    key={test.testId + index}
-                                    test={test}
-                                    languageTestSelect={languageTestSelect}
-                                    languageScoreSelect={languageScoreSelect}
-                                    languageTestRemove={languageTestRemove}
-                                    index={index}
-                                />
-                            )
-                        }
-                        <IconButton
-                            icon="+"
-                            onClick={languageTestAdd}
-                        />
-                    </div>
-                </section>
-
-                <section>
-                    <h1 style={styles.titleStyle}>
-                        {text({
-                            en: 'Education',
-                            zh_hans: '学历',
-                        })}
-                    </h1>
-                    <div style={styles.specifierBodyContainerStyle}>
-                        {
-                            education.map((edu, index) =>
-                                <EducationSpecifierBody
-                                    key={String(edu.stage) + String(edu.region) + String(index)}
-                                    edu={edu}
-                                    index={index}
-                                    educationRemove={educationRemove}
-                                    educationStageChange={educationStageChange}
-                                    educationRegionChange={educationRegionChange}
-                                    educationDurationChange={educationDurationChange}
-                                    educationGraduationDateChange={educationGraduationDateChange}
-                                />
-                            )
-                        }
-                        <IconButton
-                            icon="+"
-                            onClick={educationAdd}
-                        />
-                    </div>
-                </section>
-
+                <LanguageSpecifiers />
+                <EducationSpecifiers />
             </aside>
         )
     }
