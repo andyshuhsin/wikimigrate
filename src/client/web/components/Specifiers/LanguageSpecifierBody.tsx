@@ -8,18 +8,15 @@ import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 import { IconButton } from './IconButton'
 import { specifierSharedStyles } from './specifierSharedStyles'
 import { LanguageSpecifierCallbacks } from './SpecifierPanel'
+import range from '../../../utils/range'
+
+function appendDecimal(value: number, shouldAppend: boolean): string {
+    return shouldAppend ? value.toFixed(1) : value.toString()
+}
 
 function getScoreOptions(format: [number, number, number]): string[] {
-    const results = []
-    for (let value = format[0]; value <= format[1]; value += format[2]) {
-        if (format[2] < 1.0) {
-            results.push(value.toFixed(1))
-        }
-        else {
-            results.push(value.toString())
-        }
-    }
-    return results
+    return range(format[0], format[1], format[2])
+        .map(value => appendDecimal(value, format[2] < 1.0))
 }
 
 interface LanguageSpecifierBodyProps extends LanguageSpecifierCallbacks {
@@ -73,7 +70,10 @@ export const LanguageSpecifierBody = (props: LanguageSpecifierBodyProps) => {
                     {languageTestItemValues.map(item => (
                         <td key={item}>
                             <select
-                                value={props.test.scores[item].toString()}
+                                value={appendDecimal(
+                                    props.test.scores[item],
+                                    profile.itemScoreFormat[2] < 1.0
+                                )}
                                 onChange={event => {
                                     props.languageScoreSelect(
                                         props.index,
