@@ -133,107 +133,104 @@ interface ValueProps {
 interface OptionDisplayProps extends CallbackProps, ValueProps
 { }
 
-class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
-
-    render() {
-        const style = {
-            position: 'absolute',
-            width: '100%',
-            bottom: '0',
-            background: 'white',
-            transform: this.props.shouldExpand ? `translateY(0)` : `translateY(100%)`,
-            transition: `transform ${design.durations.slide}s`,
-            overflowY: 'scroll',
-            height: '80vh',
-            maxHeight: '800px',
-        } as React.CSSProperties
-
-        const {
-            languageTestAdd,
-            languageTestSelect,
-            languageScoreSelect,
-            languageTestRemove,
-
-            educationAdd,
-            educationRemove,
-            educationStageChange,
-            educationRegionChange,
-            educationDurationChange,
-            educationGraduationDateChange,
-        } = this.props
-
-        const languageTests = this.props.user.languageTests || []
-        const education =this.props.user.education || []
-
-        const LanguageSpecifiers = () => (
-            <section>
-                <h1 style={styles.titleStyle}>
-                    {text({
-                        en: 'Language',
-                        zh_hans: '语言',
-                    })}
-                </h1>
-
-                <div style={styles.specifierBodyContainerStyle}>
-                    {
-                        languageTests.map((test, index) =>
-                            <LanguageSpecifierBody
-                                key={test.testId + index}
-                                test={test}
-                                languageTestSelect={languageTestSelect}
-                                languageScoreSelect={languageScoreSelect}
-                                languageTestRemove={languageTestRemove}
-                                index={index}
-                            />
-                        )
-                    }
-                    <IconButton
-                        icon="+"
-                        onClick={languageTestAdd}
-                    />
-                </div>
-            </section>
-        )
-
-        const EducationSpecifiers = () => (
-            <section>
-                <h1 style={styles.titleStyle}>
-                    {text({
-                        en: 'Education',
-                        zh_hans: '学历',
-                    })}
-                </h1>
-                <div style={styles.specifierBodyContainerStyle}>
-                    {
-                        education.map((edu, index) =>
-                            <EducationSpecifierBody
-                                key={String(edu.stage) + String(edu.region) + String(index)}
-                                edu={edu}
-                                index={index}
-                                educationRemove={educationRemove}
-                                educationStageChange={educationStageChange}
-                                educationRegionChange={educationRegionChange}
-                                educationDurationChange={educationDurationChange}
-                                educationGraduationDateChange={educationGraduationDateChange}
-                            />
-                        )
-                    }
-                    <IconButton
-                        icon="+"
-                        onClick={educationAdd}
-                    />
-                </div>
-            </section>
-        )
-
-        return (
-            <aside style={style}>
-                <TitleBar onClick={() => {}}/>
-                <LanguageSpecifiers />
-                <EducationSpecifiers />
-            </aside>
-        )
+const SpecifierPanel = (props: OptionDisplayProps) => {
+    const style: React.CSSProperties = {
+        position: 'absolute',
+        width: '100%',
+        bottom: '0',
+        background: 'white',
+        transform: props.shouldExpand ? `translateY(0)` : `translateY(100%)`,
+        transition: `transform ${design.durations.slide}s`,
+        overflowY: 'scroll',
+        height: '80vh',
+        maxHeight: '800px',
     }
+
+    const {
+        languageTestAdd,
+        languageTestSelect,
+        languageScoreSelect,
+        languageTestRemove,
+
+        educationAdd,
+        educationRemove,
+        educationStageChange,
+        educationRegionChange,
+        educationDurationChange,
+        educationGraduationDateChange,
+    } = props
+
+    const languageTests = props.user.languageTests || []
+    const education = props.user.education || []
+
+    const LanguageSpecifiers = () => (
+        <section>
+            <h1 style={styles.titleStyle}>
+                {text({
+                    en: 'Language',
+                    zh_hans: '语言',
+                })}
+            </h1>
+
+            <div style={styles.specifierBodyContainerStyle}>
+                {
+                    languageTests.map((test, index) =>
+                        <LanguageSpecifierBody
+                            key={test.testId + index}
+                            test={test}
+                            languageTestSelect={languageTestSelect}
+                            languageScoreSelect={languageScoreSelect}
+                            languageTestRemove={languageTestRemove}
+                            index={index}
+                        />
+                    )
+                }
+                <IconButton
+                    icon="+"
+                    onClick={languageTestAdd}
+                />
+            </div>
+        </section>
+    )
+
+    const EducationSpecifiers = () => (
+        <section>
+            <h1 style={styles.titleStyle}>
+                {text({
+                    en: 'Education',
+                    zh_hans: '学历',
+                })}
+            </h1>
+            <div style={styles.specifierBodyContainerStyle}>
+                {
+                    education.map((edu, index) =>
+                        <EducationSpecifierBody
+                            key={String(edu.stage) + String(edu.region) + String(index)}
+                            edu={edu}
+                            index={index}
+                            educationRemove={educationRemove}
+                            educationStageChange={educationStageChange}
+                            educationRegionChange={educationRegionChange}
+                            educationDurationChange={educationDurationChange}
+                            educationGraduationDateChange={educationGraduationDateChange}
+                        />
+                    )
+                }
+                <IconButton
+                    icon="+"
+                    onClick={educationAdd}
+                />
+            </div>
+        </section>
+    )
+
+    return (
+        <aside style={style}>
+            <TitleBar onClick={() => {}}/>
+            <LanguageSpecifiers />
+            <EducationSpecifiers />
+        </aside>
+    )
 }
 
 function mapStateToProps(state: VisaPlannerState): ValueProps {
