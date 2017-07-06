@@ -4,7 +4,7 @@ import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
 import { specifierPanelRenderAction } from '../../../actions'
 import {
-    educationAddAction, educationDurationChangeAction,
+    educationAddAction, educationDurationChangeAction, educationGraduationDateChangeAction,
     educationRegionChangeAction,
     educationRemoveAction,
     educationStageChangeAction,
@@ -96,6 +96,7 @@ export interface EducationSpecifierCallbacks {
     educationStageChange(index: number, newStage: EducationStage): void
     educationRegionChange(index: number, newRegion: RegionId): void
     educationDurationChange(index: number, duration: Duration): void
+    educationGraduationDateChange(index: number, year: number): void
 }
 
 interface OptionDisplayProps extends LanguageSpecifierCallbacks,
@@ -146,6 +147,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             educationStageChange,
             educationRegionChange,
             educationDurationChange,
+            educationGraduationDateChange,
         } = this.props
 
         const languageTests = this.props.user.languageTests || []
@@ -211,6 +213,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
                                     educationStageChange={educationStageChange}
                                     educationRegionChange={educationRegionChange}
                                     educationDurationChange={educationDurationChange}
+                                    educationGraduationDateChange={educationGraduationDateChange}
                                 />
                             )
                         }
@@ -272,6 +275,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         },
         educationDurationChange(index: number, newDuration: Duration): void {
             dispatch(educationDurationChangeAction(index, newDuration))
+        },
+        educationGraduationDateChange(index: number, year: number): void {
+            dispatch(educationGraduationDateChangeAction(index, year))
         },
         specifierPanelRender(height: number): void {
             dispatch(specifierPanelRenderAction(height))

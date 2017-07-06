@@ -117,6 +117,14 @@ export interface EducationDurationChangeAction {
     }
 }
 
+export interface EducationChangeGraduationDateAction {
+    type: 'EDUCATION_CHANGE_GRADUATION_DATE',
+    payload: {
+        index: number,
+        graduateYear: number
+    }
+}
+
 export type SpecifierAction =
     | BaseOptionClickAction<OptionClickPayload_Education>
     | BaseOptionClickAction<OptionClickPayload_WorkExperience>
@@ -133,6 +141,7 @@ export type SpecifierAction =
     | EducationStageChangeAction
     | EducationRegionChangeAction
     | EducationDurationChangeAction
+    | EducationChangeGraduationDateAction
 
 export function languageTestChangeAction(
     index: number,
@@ -225,6 +234,18 @@ export function educationDurationChangeAction(
         payload: {
             index,
             duration,
+        }
+    }
+}
+
+export function educationGraduationDateChangeAction(
+    index: number, graduateYear: number
+): EducationChangeGraduationDateAction {
+    return {
+        type: 'EDUCATION_CHANGE_GRADUATION_DATE',
+        payload: {
+            index,
+            graduateYear,
         }
     }
 }

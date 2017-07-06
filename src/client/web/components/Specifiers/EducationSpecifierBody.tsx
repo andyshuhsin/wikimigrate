@@ -22,6 +22,16 @@ const activeRegionOptions: RegionId[] = [
 
 const durationYearOptions: number[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
+function range(begin: number, end: number): number[] {
+    const result: number[] = []
+    for (let i = begin; i < end; i += 1) {
+        result.push(i)
+    }
+    return result
+}
+
+const thisYear = (new Date()).getFullYear()
+
 interface EducationSpecifierBodyProps extends EducationSpecifierCallbacks {
     edu: EducationQuality,
     index: number,
@@ -30,7 +40,9 @@ interface EducationSpecifierBodyProps extends EducationSpecifierCallbacks {
 export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
     return (
         <div style={specifierSharedStyles.containerStyles}>
-            {JSON.stringify(props.edu)}
+            <div style={{overflow: 'scroll'}}>
+                {JSON.stringify(props.edu, null, 4)}
+            </div>
             <IconButton
                 icon='–'
                 onClick={() => props.educationRemove(props.index)}
@@ -46,6 +58,9 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                     </td>
                     <td>
                         Duration
+                    </td>
+                    <td>
+                        Graduate
                     </td>
                 </tr></thead>
 
@@ -110,6 +125,22 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
                                     {year + ' ' + inflect(text({
                                         en: 'year'
                                     }), { number: year })}
+                                </option>
+                            )}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select
+                            value={props.edu.graduationDate[0]}
+                            onChange={event => props.educationGraduationDateChange(
+                                props.index,
+                                +event.target.value
+                            )}
+                        >
+                            {range(1980, thisYear+1).map((year: number) =>
+                                <option key={year} value={year}>
+                                    {year}
                                 </option>
                             )}
                         </select>

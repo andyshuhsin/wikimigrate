@@ -1,6 +1,7 @@
 import { MultiLangStringSet } from '../auxiliary/MultiLang'
 import Duration from '../auxiliary/Duration'
 import { RegionId } from '../auxiliary/Region'
+import { SafeDate } from '../auxiliary/SafeDate'
 
 export type EducationStage =
     'primary'
@@ -81,8 +82,8 @@ export interface EducationQuality {
     stage: EducationStage | undefined
     region: RegionId | undefined
     duration: Duration
+    graduationDate: SafeDate
     description?: MultiLangStringSet
-    gradutaionDate?: Date
 }
 
 export default EducationQuality

@@ -191,7 +191,8 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 qualityId: 'education',
                 stage: 'bachelor',
                 region: 'world',
-                duration: duration(4, 'year')
+                duration: duration(4, 'year'),
+                graduationDate: [2000, 12, 31],
             })
             return newState
         }
@@ -225,6 +226,15 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
                 return state
             }
             newState.user.education[action.payload.index].duration = action.payload.duration
+            return newState
+        }
+
+        case 'EDUCATION_CHANGE_GRADUATION_DATE': {
+            if (!newState.user.education) {
+                return state
+            }
+            newState.user.education[action.payload.index].graduationDate =
+                [action.payload.graduateYear, 12, 31]
             return newState
         }
 
