@@ -4,7 +4,7 @@ export const specifierSharedStyles = {
         position: 'relative',
         padding: '0.5em',
         borderBottom: '1px black dashed',
-        margin: '0.5em 0',
+        marginBottom: '0.5em',
     } as React.CSSProperties,
     deleteButtonStyle: {
         position: 'absolute',
