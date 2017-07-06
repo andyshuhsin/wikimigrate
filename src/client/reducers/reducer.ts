@@ -87,7 +87,6 @@ export interface VisaPlannerState {
         query: string
         expandedFilterId: SpecifierId | null
         shouldSpecifierPanelExpand: boolean
-        specifierPanelHeight: number | null
         pathwayOnDisplay: PathwayDescriptor | null
     }
 }
@@ -98,7 +97,6 @@ export const INITIAL_STATE: VisaPlannerState = {
         lang: data.app.lang,
         query: '',
         shouldSpecifierPanelExpand: false,
-        specifierPanelHeight: null,
         expandedFilterId: null,
         pathwayOnDisplay: null,
     },
@@ -262,11 +260,6 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
 
         case 'SHADE_CLICK': {
             newState.ui.shouldSpecifierPanelExpand = false
-            return newState
-        }
-
-        case 'FILTER_PANEL_RENDER': {
-            newState.ui.specifierPanelHeight = action.payload.height
             return newState
         }
 

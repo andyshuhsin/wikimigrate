@@ -22,13 +22,6 @@ export interface PathViewCloseButtonClick {
     type: 'PATH_VIEW_CLOSE_BUTTON_CLICK'
 }
 
-export interface FilterPanelRender {
-    type: 'FILTER_PANEL_RENDER',
-    payload: {
-        height: number
-    }
-}
-
 export interface KeyDown {
     type: 'KEY_DOWN',
     payload: {
@@ -57,7 +50,6 @@ interface TitleFilterTextClick {
 export type Action =
     SpecifierAction
     | FilterBarClick
-    | FilterPanelRender
     | ShadeClick
     | PathwayBoxClick
     | PathViewCloseButtonClick
@@ -65,16 +57,6 @@ export type Action =
     | UrlPathChange
     | SetLang
     | TitleFilterTextClick
-
-
-export function specifierPanelRenderAction(height: number): FilterPanelRender {
-    return {
-        type: 'FILTER_PANEL_RENDER',
-        payload: {
-            height,
-        },
-    }
-}
 
 export function filterBarClickAction(): FilterBarClick {
     return {

@@ -2,7 +2,6 @@ import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { VisaPlannerState } from '../../../reducers'
 import { Specifier, SpecifierId, specifiers, OptionId } from '../../../data'
-import { specifierPanelRenderAction } from '../../../actions'
 import {
     educationAddAction, educationDurationChangeAction, educationGraduationDateChangeAction,
     educationRegionChangeAction,
@@ -26,6 +25,7 @@ import { EducationSpecifierBody } from './EducationSpecifierBody'
 import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
+import SpecifierBar from './SpecifierBar'
 
 const styles = {
     titleStyle: {
@@ -83,8 +83,6 @@ export type SpecifierOptionClickFn =
      operator?: SpecifierListOperator
     ) => void
 
-export type SpecifierPanelRenderFn = (height: number) => void
-
 export interface LanguageSpecifierCallbacks {
     languageTestSelect(index: number, test: LanguageTestId): void
     languageScoreSelect(index: number, item: LanguageTestItem, score: number): void
@@ -103,16 +101,12 @@ interface OptionDisplayProps extends LanguageSpecifierCallbacks,
                                      EducationSpecifierCallbacks
 {
     shouldExpand: boolean
-    myHeight: number | null,
     specifierOptionClick: SpecifierOptionClickFn
-    specifierPanelRender: SpecifierPanelRenderFn
     user: Person
 
     educationAdd(): void
     languageTestAdd(): void
 }
-
-let firstRender = true
 
 class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
 
@@ -122,19 +116,11 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             width: '100%',
             bottom: '0',
             background: 'white',
-            transform: firstRender
-                ? `translateY(100vh)`
-                : `translateY(${this.props.myHeight}px)`,
+            transform: this.props.shouldExpand ? `translateY(0)` : `translateY(100%)`,
             transition: `transform ${design.durations.slide}s`,
             overflowY: 'scroll',
-            maxHeight: '80vh',
-            height: firstRender ? 'initial' : '0',
+            height: '80vh',
         } as React.CSSProperties
-
-        const styleExpanded = {
-            transform: `translateY(0)`,
-            height: 'initial',
-        }
 
         const {
             languageTestAdd,
@@ -154,19 +140,10 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
         const education =this.props.user.education || []
 
         return (
-            <aside
-                style={
-                    this.props.shouldExpand
-                        ? Object.assign(style, styleExpanded)
-                        : style
-                }
-                ref={(element: HTMLElement) => {
-                    if (firstRender && element) {
-                        this.props.specifierPanelRender(element.offsetHeight)
-                        firstRender = false
-                    }
-                }}
-            >
+            <aside style={style}>
+                <section>
+                </section>
+                <SpecifierBar onClick={() => {}}/>
                 <section>
                     <h1 style={styles.titleStyle}>
                         {text({
@@ -232,7 +209,6 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
 function mapStateToProps(state: VisaPlannerState): Partial<OptionDisplayProps> {
     return {
         shouldExpand: state.ui.shouldSpecifierPanelExpand,
-        myHeight: state.ui.specifierPanelHeight,
         user: state.user,
     }
 }
@@ -278,9 +254,6 @@ function mapDispatchToProps(dispatch: Dispatch<any>): Partial<OptionDisplayProps
         },
         educationGraduationDateChange(index: number, year: number): void {
             dispatch(educationGraduationDateChangeAction(index, year))
-        },
-        specifierPanelRender(height: number): void {
-            dispatch(specifierPanelRenderAction(height))
         },
     }
 }

@@ -5,7 +5,6 @@ import { connect, Dispatch } from 'react-redux'
 
 import TopBar from './TopBar'
 import PathwayListDisplay from './PathwayListDisplay'
-import FilterBar from './Specifiers/SpecifierBar'
 import PathwayDisplay from './PathwayDisplay'
 import SpecifierPanel from './Specifiers/SpecifierPanel'
 import Shade from './Shade'
@@ -164,14 +163,6 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
                     shouldShow={shouldDetailedFilterPanelExpand}
                     onClick={onShadeClick}
                 />
-                <FilterBar
-                    onClick={onFilterBarClick}
-                    offset={
-                        shouldDetailedFilterPanelExpand
-                            ? filterPanelHeight
-                            : 0
-                    }
-                />
                 <SpecifierPanel />
             </div>
         )
@@ -183,7 +174,6 @@ function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
         user: state.user,
         lang: state.ui.lang,
         pathwayOnDisplay: state.ui.pathwayOnDisplay,
-        filterPanelHeight: state.ui.specifierPanelHeight,
         shouldDetailedFilterPanelExpand: state.ui.shouldSpecifierPanelExpand,
     }
 }
