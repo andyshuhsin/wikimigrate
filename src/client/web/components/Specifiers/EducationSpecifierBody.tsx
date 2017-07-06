@@ -48,10 +48,18 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
             <table><tbody>
                 <tr key='row-0'>
                     <td>
-                        Stage
+                        {text({
+                            en: 'Stage',
+                            zh_hans: '阶段'
+                        })}
                     </td>
                     <td>
-                        Region
+                        {
+                            text({
+                                en: 'Location',
+                                zh_hans: '地区'
+                            })
+                        }
                     </td>
                 </tr>
 
@@ -107,10 +115,16 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
 
                 <tr key='row-2'>
                     <td>
-                        Duration
+                        {text({
+                            en: 'Duration',
+                            zh_hans: '时长',
+                        })}
                     </td>
                     <td>
-                        Graduate
+                        {text({
+                            en: 'Graduated',
+                            zh_hans: '毕业时间',
+                        })}
                     </td>
                 </tr>
 
