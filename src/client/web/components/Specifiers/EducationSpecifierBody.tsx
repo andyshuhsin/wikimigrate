@@ -12,6 +12,7 @@ import { specifierSharedStyles } from './specifierSharedStyles'
 import { EducationSpecifierCallbacks } from './SpecifierPanel'
 import inflect from '../../../utils/inflect'
 import { duration } from '../../../../definitions/auxiliary/Duration'
+import range from '../../../utils/range'
 
 const activeRegionOptions: RegionId[] = [
     'australia',
@@ -21,14 +22,6 @@ const activeRegionOptions: RegionId[] = [
 ]
 
 const durationYearOptions: number[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-
-function range(begin: number, end: number): number[] {
-    const result: number[] = []
-    for (let i = begin; i < end; i += 1) {
-        result.push(i)
-    }
-    return result
-}
 
 const thisYear = (new Date()).getFullYear()
 
