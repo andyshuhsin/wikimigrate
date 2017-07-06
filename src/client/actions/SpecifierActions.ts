@@ -76,6 +76,13 @@ export interface EducationChangeGraduationDateAction {
     }
 }
 
+export interface BirthYearChangeAction {
+    type: 'BIRTH_YEAR_CHANGE',
+    payload: {
+        year: number
+    }
+}
+
 export type SpecifierAction =
     | LanguageTestAddAction
     | LanguageTestRemoveAction
@@ -88,6 +95,7 @@ export type SpecifierAction =
     | EducationRegionChangeAction
     | EducationDurationChangeAction
     | EducationChangeGraduationDateAction
+    | BirthYearChangeAction
 
 export function languageTestChangeAction(
     index: number,
@@ -192,6 +200,15 @@ export function educationGraduationDateChangeAction(
         payload: {
             index,
             graduateYear,
+        }
+    }
+}
+
+export function birthYearChangeAction(year: number): BirthYearChangeAction {
+    return {
+        type: 'BIRTH_YEAR_CHANGE',
+        payload: {
+            year
         }
     }
 }

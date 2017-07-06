@@ -2,6 +2,7 @@ import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { VisaPlannerState } from '../../../reducers'
 import {
+    birthYearChangeAction,
     educationAddAction, educationDurationChangeAction, educationGraduationDateChangeAction,
     educationRegionChangeAction,
     educationRemoveAction,
@@ -22,6 +23,7 @@ import { EducationSpecifierBody } from './EducationSpecifierBody'
 import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
+import BirthYearSpecifierBody from './BirthYearSpecifierBody'
 
 const TitleBar = (props: {onClick(): void}) => (
     <div
@@ -114,6 +116,10 @@ export interface EducationSpecifierCallbacks {
     educationGraduationDateChange(index: number, year: number): void
 }
 
+export interface BirthSpecifiersCallbacks {
+    birthYearChangeAction(year: number): void
+}
+
 // Not to pass to other components
 interface TopLevelSpecifierCallbacks {
     educationAdd(): void
@@ -122,7 +128,8 @@ interface TopLevelSpecifierCallbacks {
 
 interface CallbackProps extends TopLevelSpecifierCallbacks,
                                 LanguageSpecifierCallbacks,
-                                EducationSpecifierCallbacks
+                                EducationSpecifierCallbacks,
+                                BirthSpecifiersCallbacks
 { }
 
 interface ValueProps {
@@ -224,14 +231,33 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
         </section>
     )
 
+    const BirthSpecifiers = () => (
+        <section>
+            <h1 style={styles.titleStyle}>
+                {text({
+                    en: 'Year of birth',
+                    zh_hans: '出生年份',
+                })}
+            </h1>
+            <div style={styles.specifierBodyContainerStyle}>
+                <BirthYearSpecifierBody
+                    year={props.user.birth.date.year}
+                    onChange={props.birthYearChangeAction}
+                />
+            </div>
+        </section>
+    )
+
     return (
         <aside style={style}>
             <TitleBar onClick={() => {}}/>
             <LanguageSpecifiers />
             <EducationSpecifiers />
+            <BirthSpecifiers />
         </aside>
     )
 }
+
 
 function mapStateToProps(state: VisaPlannerState): ValueProps {
     return {
@@ -272,6 +298,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
         educationGraduationDateChange(index: number, year: number): void {
             dispatch(educationGraduationDateChangeAction(index, year))
         },
+        birthYearChangeAction(year: number): void {
+            dispatch(birthYearChangeAction(year))
+        }
     }
 }
 
