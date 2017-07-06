@@ -4,8 +4,8 @@ import { RegionId } from '../auxiliary/Region'
 
 export interface WorkExperienceQuality {
     qualityId: 'work_experience'
-    regionId?: RegionId
-    duration?: Duration
+    region: RegionId
+    duration: Duration
     description?: MultiLangStringSet
 }
 
