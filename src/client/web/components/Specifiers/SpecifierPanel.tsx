@@ -120,6 +120,7 @@ class SpecifierPanel extends React.PureComponent<OptionDisplayProps, {}> {
             transition: `transform ${design.durations.slide}s`,
             overflowY: 'scroll',
             height: '80vh',
+            maxHeight: '800px',
         } as React.CSSProperties
 
         const {
