@@ -23,14 +23,14 @@ import { Person } from '../../../../definitions/Person'
 import { LanguageTestId, LanguageTestItem } from '../../../../definitions/auxiliary/LanguageTest'
 import { text } from '../../../utils/text'
 import sys from '../../sys'
-import { LanguageSpecifierBody } from './LanguageSpecifierBody'
+import LanguageSpecifierSegment from './LanguageSpecifierSegment'
 import { IconButton } from './IconButton'
-import { EducationSpecifierBody } from './EducationSpecifierBody'
+import EducationSpecifierSegment from './EducationSpecifierSegment'
 import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
 import { Region, RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
 import BirthYearSpecifierBody from './BirthYearSpecifierBody'
-import WorkExperienceSpecifierBody from './WorkExperienceSpecifierBody'
+import WorkSpecifierSegment from './WorkSpecifierSegment'
 import { filterBarClickAction } from '../../../actions'
 import SpouseSpecifierBody from './SpouseSpecifierBody'
 
@@ -215,7 +215,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             <div style={styles.specifierBodyContainerStyle}>
                 {
                     languageTests.map((test, index) =>
-                        <LanguageSpecifierBody
+                        <LanguageSpecifierSegment
                             key={test.testId + index}
                             test={test}
                             languageTestSelect={languageTestSelect}
@@ -244,7 +244,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             <div style={styles.specifierBodyContainerStyle}>
                 {
                     education.map((edu, index) =>
-                        <EducationSpecifierBody
+                        <EducationSpecifierSegment
                             key={String(edu.stage) + String(edu.region) + String(index)}
                             edu={edu}
                             index={index}
@@ -291,7 +291,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             </h1>
             <div style={styles.specifierBodyContainerStyle}>
                 {works.map((work, index) => (
-                    <WorkExperienceSpecifierBody
+                    <WorkSpecifierSegment
                         key={JSON.stringify(work) + String(index)}
                         index={index}
                         work={work}

@@ -26,7 +26,7 @@ const domIds = {
     region: 'work-region'
 }
 
-const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) => (
+const WorkSpecifierSegment = (props: WorkExperienceSpecifierBodyProps) => (
     <div style={specifierSharedStyles.containerStyles}>
         <IconButton
             icon='–'
@@ -108,4 +108,4 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
     </div>
 )
 
-export default WorkExperienceSpecifierBody
+export default WorkSpecifierSegment

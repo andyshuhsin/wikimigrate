@@ -24,7 +24,7 @@ interface EducationSpecifierBodyProps extends EducationSpecifierCallbacks {
     index: number,
 }
 
-export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
+function EducationSpecifierSegment(props: EducationSpecifierBodyProps) {
     return (
         <div style={specifierSharedStyles.containerStyles}>
             <IconButton
@@ -156,3 +156,5 @@ export function EducationSpecifierBody(props: EducationSpecifierBodyProps) {
         </div>
     )
 }
+
+export default EducationSpecifierSegment

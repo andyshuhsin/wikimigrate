@@ -24,7 +24,7 @@ interface LanguageSpecifierBodyProps extends LanguageSpecifierCallbacks {
     index: number,
 }
 
-export const LanguageSpecifierBody = (props: LanguageSpecifierBodyProps) => {
+const LanguageSpecifierSegment = (props: LanguageSpecifierBodyProps) => {
     const profile = languageTestProfiles.find(test => test.id === props.test.testId)
     if (!profile) {
         console.warn("Unknown test id", props.test.testId)
@@ -98,4 +98,4 @@ export const LanguageSpecifierBody = (props: LanguageSpecifierBodyProps) => {
     )
 }
 
-
+export default LanguageSpecifierSegment
