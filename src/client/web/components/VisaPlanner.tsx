@@ -57,7 +57,6 @@ interface PropTypes {
     onPathwayBoxClick: (path: Pathway) => void
     onPathViewCloseButtonClick: () => void
     onKeyDown: (keyCode: number) => void
-    filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
     onUrlpathChange: (path: string) => void
     onTitleFilterTextClick(): void
@@ -134,7 +133,6 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
             lang,
             shouldDetailedFilterPanelExpand,
             pathwayOnDisplay,
-            filterPanelHeight,
             onPathViewCloseButtonClick,
             onShadeClick,
             onFilterBarClick,
