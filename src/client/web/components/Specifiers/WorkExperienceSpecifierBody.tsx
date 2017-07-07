@@ -34,10 +34,6 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
             additionalStyle={specifierSharedStyles.deleteButtonStyle}
         />
 
-        <pre>
-            {JSON.stringify(props.work, null , 4)}
-        </pre>
-
         <label
             style={selectorGroupStyle}
             htmlFor={domIds.duration}
