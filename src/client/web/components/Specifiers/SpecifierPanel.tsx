@@ -174,7 +174,7 @@ interface OptionDisplayProps extends CallbackProps, ValueProps
 { }
 
 const SpecifierPanel = (props: OptionDisplayProps) => {
-    const style: React.CSSProperties = {
+    const containerStyle: React.CSSProperties = {
         position: 'absolute',
         width: '100%',
         bottom: '0',
@@ -336,7 +336,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
 
 
     return (
-        <aside style={style}>
+        <aside style={containerStyle}>
             <TitleBar onClick={props.onFilterBarClick}/>
             <EducationSpecifiers />
             <WorkSpecifiers />
