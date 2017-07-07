@@ -24,7 +24,6 @@ export interface ScoreDetails {
     }
 }
 
-// FIXME: Poor handling of multiple language tests
 export function calcScore(person: Person, system: ScoreSystem): ScoreDetails {
     const details: ScoreDetails = {
         score: 0,

@@ -22,13 +22,13 @@ const alice: Person = {
             qualityId: 'education',
             stage: 'diploma',
             duration: duration(3, 'year'),
-            regionId: 'canada',
+            region: 'canada',
         } as EducationQuality,
         {
             qualityId: 'education',
             stage: 'diploma',
             duration: duration(2, 'year'),
-            regionId: 'canada',
+            region: 'canada',
         } as EducationQuality
     ],
     languageTests: [
@@ -45,7 +45,7 @@ const alice: Person = {
     workExperiences: [
         {
             qualityId: 'work_experience',
-            regionId: 'canada',
+            region: 'canada',
             duration: duration(2, 'year')
         } as WorkExperienceQuality
     ]
@@ -64,13 +64,13 @@ const bob: Person = {
             qualityId: 'education',
             stage: 'bachelor',
             duration: duration(4, 'year'),
-            regionId: 'australia',
+            region: 'australia',
         } as EducationQuality,
         {
             qualityId: 'education',
             stage: 'phd',
             duration: duration(5, 'year'),
-            regionId: 'australia',
+            region: 'australia',
         } as EducationQuality,
     ],
     languageTests: [
@@ -109,7 +109,7 @@ const ulysses: Person = {
             qualityId: 'education',
             stage: 'bachelor',
             duration: duration(4, 'year'),
-            regionId: 'uk',
+            region: 'uk',
         } as EducationQuality
     ],
     languageTests: [
@@ -126,7 +126,7 @@ const ulysses: Person = {
     workExperiences: [
         {
             qualityId: 'work_experience',
-            regionId: 'usa',
+            region: 'usa',
             duration: duration(1, 'year')
         } as WorkExperienceQuality
     ]
@@ -161,4 +161,4 @@ const spec: Spec<[Person, ScoreSystem], number>[] = [
     ],
 ]
 
-evaluate(spec, (person, spec) => calcScore(spec, person).score)
+evaluate(spec, (person, spec) => calcScore(person, spec).score)
