@@ -25,6 +25,7 @@ import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
 import BirthYearSpecifierBody from './BirthYearSpecifierBody'
 import WorkExperienceSpecifierBody from './WorkExperienceSpecifierBody'
+import { filterBarClickAction } from '../../../actions'
 
 const TitleBar = (props: {onClick(): void}) => (
     <div
@@ -128,6 +129,7 @@ export interface WorkSpecifiersCallbacks {
 
 // Not to pass to other components
 interface TopLevelSpecifierCallbacks {
+    onFilterBarClick(): void
     educationAdd(): void
     languageTestAdd(): void
     workAdd(): void
@@ -289,7 +291,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
 
     return (
         <aside style={style}>
-            <TitleBar onClick={() => {}}/>
+            <TitleBar onClick={props.onFilterBarClick}/>
             <WorkSpecifiers />
             <LanguageSpecifiers />
             <EducationSpecifiers />
@@ -344,7 +346,8 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
         workAdd: () => dispatch(workAdd()),
         workRemove: (index: number) => dispatch(workRemove(index)),
         workDurationChange: (index: number, duration: Duration) =>
-            dispatch(workDurationChangeAction(index, duration))
+            dispatch(workDurationChangeAction(index, duration)),
+        onFilterBarClick: () => dispatch(filterBarClickAction())
     }
 }
 

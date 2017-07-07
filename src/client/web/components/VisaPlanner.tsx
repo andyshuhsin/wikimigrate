@@ -52,7 +52,6 @@ interface PropTypes {
     user: Person
     lang: LangId
     pathwayOnDisplay: PathwayDescriptor | null
-    onFilterBarClick: () => void
     onShadeClick: () => void
     onPathwayBoxClick: (path: Pathway) => void
     onPathViewCloseButtonClick: () => void
@@ -135,7 +134,6 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
             pathwayOnDisplay,
             onPathViewCloseButtonClick,
             onShadeClick,
-            onFilterBarClick,
             onPathwayBoxClick,
         } = this.props
 
@@ -178,9 +176,6 @@ function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
 
 function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
     return {
-        onFilterBarClick() {
-            dispatch(filterBarClickAction())
-        },
         onShadeClick() {
             dispatch(shadeClickAction())
         },
