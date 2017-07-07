@@ -3,7 +3,6 @@ import { SpecifierId } from '../data'
 import { PathwayDescriptor } from '../utils/definitions'
 import { data } from '../../data'
 import { Action } from '../actions'
-import { clone } from '../utils/clone'
 
 import { PATHWAY_KW_COMPOSITE, PATHWAY_KW_SIMPLE } from '../../data/constants'
 import { TransitionId } from '../../definitions/Transition'
@@ -31,67 +30,83 @@ export const INITIAL_UI_STATE: VisaPlannerUIState = {
 const ESC_KEY_CODE = 27
 
 function uiReducer(state = INITIAL_UI_STATE, action: Action): VisaPlannerUIState {
-    const newState = clone(state)
     switch (action.type) {
         case 'KEY_DOWN': {
             if (action.payload.keyCode === ESC_KEY_CODE) {
-                newState.pathwayOnDisplay = null
-                newState.shouldSpecifierPanelExpand = false
-                return newState
+                return {
+                    ...state,
+                    pathwayOnDisplay: null,
+                    shouldSpecifierPanelExpand: false
+                }
             }
             return state
         }
 
         case 'PATH_BOX_CLICK': {
-            newState.pathwayOnDisplay = {
-                transitionIds: action.payload.pathway.transitions.map(transition => transition.id),
+            return {
+                ...state,
+                pathwayOnDisplay: {
+                    transitionIds: action.payload.pathway.transitions.map(transition => transition.id),
+                }
             }
-            return newState
         }
 
         case 'PATH_VIEW_CLOSE_BUTTON_CLICK': {
-            newState.pathwayOnDisplay = null
-            return newState
+            return {
+                ...state,
+                pathwayOnDisplay: null
+            }
         }
 
         case 'FILTER_BAR_CLICK': {
-            newState.shouldSpecifierPanelExpand = !newState.shouldSpecifierPanelExpand
-            return newState
+            return {
+                ...state,
+                shouldSpecifierPanelExpand: !state.shouldSpecifierPanelExpand
+            }
         }
 
         case 'TITLE_FILTER_TEXT_CLICK': {
-            newState.shouldSpecifierPanelExpand = !newState.shouldSpecifierPanelExpand
-            return newState
+            return {
+                ...state,
+                shouldSpecifierPanelExpand: !state.shouldSpecifierPanelExpand
+            }
         }
 
         case 'SHADE_CLICK': {
-            newState.shouldSpecifierPanelExpand = false
-            return newState
+            return {
+                ...state,
+                shouldSpecifierPanelExpand: false
+            }
         }
 
         case 'URLPATH_CHANGE': {
             const segs = action.payload.path.split('/') as URLPATH_SEGMENTS
             if (segs[1] === PATHWAY_KW_SIMPLE) {
-                newState.pathwayOnDisplay = {
-                    transitionIds: segs[2].split('+'),
+                return {
+                    ...state,
+                    pathwayOnDisplay: {
+                        transitionIds: segs[2].split('+'),
+                    }
                 }
             }
             else {
-                newState.pathwayOnDisplay = null
+                return {
+                    ...state,
+                    pathwayOnDisplay: null
+                }
             }
-            return newState
         }
 
         case 'SET_LANG': {
-            newState.lang = action.payload.langId
-            return newState
+            return {
+                ...state,
+                lang: action.payload.langId
+            }
         }
 
         default: {
             return state
         }
-
-
     }
 }
 
