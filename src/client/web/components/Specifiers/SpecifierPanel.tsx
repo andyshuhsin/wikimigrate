@@ -73,6 +73,18 @@ const TitleBar = (props: {onClick(): void}) => (
 )
 
 const styles = {
+
+    panelStyle: {
+        position: 'absolute',
+        width: '100%',
+        bottom: '0',
+        background: 'white',
+        transition: `transform ${design.durations.slide}s`,
+        overflowY: 'scroll',
+        height: '80vh',
+        maxHeight: '800px',
+    } as React.CSSProperties,
+
     titleStyle: {
         fontSize: '1em',
         margin: '0',
@@ -174,17 +186,9 @@ interface OptionDisplayProps extends CallbackProps, ValueProps
 { }
 
 const SpecifierPanel = (props: OptionDisplayProps) => {
-    const containerStyle: React.CSSProperties = {
-        position: 'absolute',
-        width: '100%',
-        bottom: '0',
-        background: 'white',
+    const containerStyle = Object.assign({}, styles.panelStyle, {
         transform: props.shouldExpand ? `translateY(0)` : `translateY(100%)`,
-        transition: `transform ${design.durations.slide}s`,
-        overflowY: 'scroll',
-        height: '80vh',
-        maxHeight: '800px',
-    }
+    })
 
     const {
         languageTestAdd,
