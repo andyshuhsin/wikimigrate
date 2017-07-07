@@ -11,7 +11,7 @@ import { EducationStage } from '../../../../definitions/Qualities/EducationExper
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
 
-import { IconButton } from './IconButton'
+import IconButton from './IconButton'
 import WorkSpecifierSegment from './WorkSpecifierSegment'
 import LanguageSpecifierSegment from './LanguageSpecifierSegment'
 import EducationSpecifierSegment from './EducationSpecifierSegment'

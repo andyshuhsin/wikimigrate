@@ -7,7 +7,7 @@ import {
 import { LanguageSpecifierCallbacks } from './SpecifierPanel'
 import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 import { specifierSharedStyles } from './specifierSharedStyles'
-import { IconButton } from './IconButton'
+import IconButton from './IconButton'
 import range from '../../../utils/range'
 
 function appendDecimal(value: number, shouldAppend: boolean): string {

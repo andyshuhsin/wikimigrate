@@ -8,7 +8,7 @@ import {
 import { EducationSpecifierCallbacks } from './SpecifierPanel'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 
-import { IconButton } from './IconButton'
+import IconButton from './IconButton'
 
 import inflect from '../../../utils/inflect'
 import range from '../../../utils/range'

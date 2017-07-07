@@ -4,7 +4,7 @@ import { WorkExperienceQuality } from '../../../../definitions/Qualities/WorkExp
 import { WorkSpecifiersCallbacks } from './SpecifierPanel'
 import { RegionId } from '../../../../definitions/auxiliary/Region'
 
-import { IconButton } from './IconButton'
+import IconButton from './IconButton'
 
 import { text } from '../../../utils/text'
 import range from '../../../utils/range'

@@ -14,7 +14,7 @@ const buttonStyle: React.CSSProperties = {
     cursor: 'pointer',
 }
 
-export const IconButton = (props: {
+const IconButton = (props: {
     icon: string,
     onClick: () => void
     additionalStyle?: React.CSSProperties
@@ -30,3 +30,5 @@ export const IconButton = (props: {
         {props.icon}
     </span>
 )
+
+export default IconButton
