@@ -76,13 +76,17 @@ const styles = {
 
     panelStyle: {
         position: 'absolute',
-        width: '100%',
         bottom: '0',
-        background: 'white',
-        transition: `transform ${design.durations.slide}s`,
-        overflowY: 'scroll',
         height: '80vh',
         maxHeight: '800px',
+
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+
+        background: 'white',
+        transition: `transform ${design.durations.slide}s`,
+        overflowY: 'hidden',
     } as React.CSSProperties,
 
     titleStyle: {
@@ -340,11 +344,16 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
     return (
         <aside style={containerStyle}>
             <TitleBar onClick={props.onFilterBarClick}/>
-            <EducationSpecifiers />
-            <WorkSpecifiers />
-            <LanguageSpecifiers />
-            <BirthSpecifiers />
-            <SpouseSpecifiers />
+            <div style={{
+                overflowY: 'scroll',
+                flex: 1
+            }}>
+                <EducationSpecifiers />
+                <WorkSpecifiers />
+                <LanguageSpecifiers />
+                <BirthSpecifiers />
+                <SpouseSpecifiers />
+            </div>
         </aside>
     )
 }
