@@ -297,9 +297,9 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
     return (
         <aside style={style}>
             <TitleBar onClick={props.onFilterBarClick}/>
+            <EducationSpecifiers />
             <WorkSpecifiers />
             <LanguageSpecifiers />
-            <EducationSpecifiers />
             <BirthSpecifiers />
         </aside>
     )
