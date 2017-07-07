@@ -312,44 +312,40 @@ function mapStateToProps(state: VisaPlannerState): ValueProps {
 
 function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
     return {
-        languageTestSelect(index: number, test: LanguageTestId): void {
-            dispatch(languageTestChangeAction(index, test))
-        },
-        languageTestAdd(): void {
-            dispatch(languageTestAddAction())
-        },
-        languageTestRemove(index: number): void {
-            dispatch(languageTestRemoveAction(index))
-        },
-        languageScoreSelect(index: number, item: LanguageTestItem, score: number): void {
-            dispatch(languageTestScoreChangeAction(index, item, score))
-        },
-        educationAdd(): void {
-            dispatch(educationAddAction())
-        },
-        educationRemove(index: number): void {
-            dispatch(educationRemoveAction(index))
-        },
-        educationStageChange(index: number, newStage: EducationStage): void {
-            dispatch(educationStageChangeAction(index, newStage))
-        },
-        educationRegionChange(index: number, newRegion: RegionId): void {
-            dispatch(educationRegionChangeAction(index, newRegion))
-        },
-        educationDurationChange(index: number, newDuration: Duration): void {
-            dispatch(educationDurationChangeAction(index, newDuration))
-        },
-        educationGraduationDateChange(index: number, year: number): void {
-            dispatch(educationGraduationDateChangeAction(index, year))
-        },
-        birthYearChangeAction(year: number): void {
-            dispatch(birthYearChangeAction(year))
-        },
-        workAdd: () => dispatch(workAdd()),
-        workRemove: (index: number) => dispatch(workRemove(index)),
-        workDurationChange: (index: number, duration: Duration) =>
+        languageTestSelect: (index, test) =>
+            dispatch(languageTestChangeAction(index, test)),
+        languageTestAdd: () =>
+            dispatch(languageTestAddAction()),
+        languageTestRemove: index =>
+            dispatch(languageTestRemoveAction(index)),
+        languageScoreSelect: (index, item, score) =>
+            dispatch(languageTestScoreChangeAction(index, item, score)),
+
+        educationAdd: () =>
+            dispatch(educationAddAction()),
+        educationRemove: index =>
+            dispatch(educationRemoveAction(index)),
+        educationStageChange: (index, newStage) =>
+            dispatch(educationStageChangeAction(index, newStage)),
+        educationRegionChange: (index, newRegion) =>
+            dispatch(educationRegionChangeAction(index, newRegion)),
+        educationDurationChange: (index, newDuration) =>
+            dispatch(educationDurationChangeAction(index, newDuration)),
+        educationGraduationDateChange: (index, year) =>
+            dispatch(educationGraduationDateChangeAction(index, year)),
+
+        birthYearChangeAction: (year) =>
+            dispatch(birthYearChangeAction(year)),
+
+        workAdd: () =>
+            dispatch(workAdd()),
+        workRemove: index =>
+            dispatch(workRemove(index)),
+        workDurationChange: (index, duration) =>
             dispatch(workDurationChangeAction(index, duration)),
-        onFilterBarClick: () => dispatch(filterBarClickAction())
+
+        onFilterBarClick:
+            () => dispatch(filterBarClickAction())
     }
 }
 
