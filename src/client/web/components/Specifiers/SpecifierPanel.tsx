@@ -28,8 +28,9 @@ import WorkExperienceSpecifierBody from './WorkExperienceSpecifierBody'
 import { filterBarClickAction } from '../../../actions'
 
 const TitleBar = (props: {onClick(): void}) => (
-    <div
+    <a
         style={{
+            display: 'block',
             fontSize: '1.3em',
             padding: '0.5em 0.7em',
             width: '100%',
@@ -38,6 +39,7 @@ const TitleBar = (props: {onClick(): void}) => (
             cursor: 'pointer',
         } as React.CSSProperties}
         onClick={props.onClick}
+        role='button'
     >
         {
             text({
@@ -52,7 +54,7 @@ const TitleBar = (props: {onClick(): void}) => (
             }}
             src={require('../../../assets/angle-down.svg')}
         />
-    </div>
+    </a>
 )
 
 const styles = {
