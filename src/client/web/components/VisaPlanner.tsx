@@ -5,9 +5,8 @@ import { connect, Dispatch } from 'react-redux'
 
 import TopBar from './TopBar'
 import PathwayListDisplay from './PathwayListDisplay'
-import FilterBar from './Filters/FilterBar'
 import PathwayDisplay from './PathwayDisplay'
-import FilterDetailedOptionPanel from './Filters/FilterDetailedOptionPanel'
+import SpecifierPanel from './Specifiers/SpecifierPanel'
 import Shade from './Shade'
 import sys from '../sys'
 
@@ -53,12 +52,10 @@ interface PropTypes {
     user: Person
     lang: LangId
     pathwayOnDisplay: PathwayDescriptor | null
-    onFilterBarClick: () => void
     onShadeClick: () => void
     onPathwayBoxClick: (path: Pathway) => void
     onPathViewCloseButtonClick: () => void
     onKeyDown: (keyCode: number) => void
-    filterPanelHeight: number | null
     shouldDetailedFilterPanelExpand: boolean
     onUrlpathChange: (path: string) => void
     onTitleFilterTextClick(): void
@@ -135,10 +132,8 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
             lang,
             shouldDetailedFilterPanelExpand,
             pathwayOnDisplay,
-            filterPanelHeight,
             onPathViewCloseButtonClick,
             onShadeClick,
-            onFilterBarClick,
             onPathwayBoxClick,
         } = this.props
 
@@ -164,15 +159,7 @@ export class VisaPlanner extends React.Component<PropTypes, {}> {
                     shouldShow={shouldDetailedFilterPanelExpand}
                     onClick={onShadeClick}
                 />
-                <FilterBar
-                    onClick={onFilterBarClick}
-                    offset={
-                        shouldDetailedFilterPanelExpand
-                            ? filterPanelHeight
-                            : 0
-                    }
-                />
-                <FilterDetailedOptionPanel />
+                <SpecifierPanel />
             </div>
         )
     }
@@ -183,16 +170,12 @@ function mapStateToProps(state: VisaPlannerState): Partial<PropTypes> {
         user: state.user,
         lang: state.ui.lang,
         pathwayOnDisplay: state.ui.pathwayOnDisplay,
-        filterPanelHeight: state.ui.filterPanelHeight,
-        shouldDetailedFilterPanelExpand: state.ui.shouldDetailedFilterPanelExpand,
+        shouldDetailedFilterPanelExpand: state.ui.shouldSpecifierPanelExpand,
     }
 }
 
 function mapDispatchToProps(dispatch: Dispatch<any>): Partial<PropTypes> {
     return {
-        onFilterBarClick() {
-            dispatch(filterBarClickAction())
-        },
         onShadeClick() {
             dispatch(shadeClickAction())
         },

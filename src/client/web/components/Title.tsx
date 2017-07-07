@@ -15,12 +15,17 @@ const titleStyle: React.CSSProperties = {
 const anchorStyle: React.CSSProperties = {
     textDecoration: 'underline',
     float: 'right',
+    cursor: 'pointer',
 }
 
 const Title = (props: TitleProps) => (
     <div style={titleStyle}>
         {props.text}
-        <a style={anchorStyle} onClick={props.onFilterTextClick}>
+        <a
+            style={anchorStyle}
+            onClick={props.onFilterTextClick}
+            role="button"
+        >
             {props.filterText}
         </a>
     </div>

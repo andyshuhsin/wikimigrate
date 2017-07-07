@@ -12,9 +12,9 @@ export type LanguageTestId =
     | 'tef'
     | 'ielts'
     | 'toefl'
-    | 'oet'
     | 'pte-academic'
     | 'cae'
+    // | 'oet'
 
 type SourceScore = number
 type TargetScore = number
@@ -25,19 +25,14 @@ export type EquivalencyTable = {
 
 export type LanguageTestProfile = {
     id: LanguageTestId
+    abbreviation: string
     title: MultiLangStringSet
     languages: LangId[]
+    itemScoreFormat: [number /* lowest */, number /* highest */, number /* increment */]
     equivalency?: {
         [source in LanguageTestId]?: EquivalencyTable
     }
     reference: URLDatum
-}
-
-export const zeroLanguageScores: LanguageTestScoreSet = {
-    listening: 0,
-    speaking: 0,
-    reading: 0,
-    writing: 0,
 }
 
 export type LanguageTestScoreSet = {
@@ -49,5 +44,3 @@ export interface LanguageTestResult {
     scores: LanguageTestScoreSet
     language?: LangId
 }
-
-export default LanguageTestResult

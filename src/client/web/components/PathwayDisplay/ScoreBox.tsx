@@ -132,7 +132,11 @@ const HistoryEntry = (props: { entry: ScoreHistoryEntry }) => (
             {props.entry.lowestScore}
         </span>
         {'@'}
-        {props.entry.date.join('-')}
+        {[
+            props.entry.date.year,
+            props.entry.date.month,
+            props.entry.date.day,
+        ].join('-')}
     </div>
 )
 
@@ -207,7 +211,7 @@ class ScoreBox extends React.PureComponent<PropTypes, {}> {
                     {
                         this.props.history.map(entry =>
                             <HistoryEntry
-                                key={entry.date.join()}
+                                key={[entry.date.year, entry.date.month, entry.date.day].join('-')}
                                 entry={entry}
                             />
                         )

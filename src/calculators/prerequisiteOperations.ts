@@ -175,10 +175,10 @@ function satisfyWorkPrereq(
         }
     }
 
-    if (!regionMatch(prereq.region, work.regionId)) {
+    if (!regionMatch(prereq.region, work.region)) {
         return false
     }
-    else if (prereq.regionExcept && regionMatch(prereq.regionExcept, work.regionId)) {
+    else if (prereq.regionExcept && regionMatch(prereq.regionExcept, work.region)) {
         return false
     }
     else if (!work.duration) {
@@ -204,8 +204,8 @@ function satisfyEducationPrereq(
             return false
         }
     }
-    if (prereq.region && education.regionId) {
-        if (!regionMatch(prereq.region, education.regionId)) {
+    if (prereq.region && education.region) {
+        if (!regionMatch(prereq.region, education.region)) {
             return false
         }
     }

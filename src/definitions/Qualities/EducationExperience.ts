@@ -1,6 +1,7 @@
 import { MultiLangStringSet } from '../auxiliary/MultiLang'
 import Duration from '../auxiliary/Duration'
 import { RegionId } from '../auxiliary/Region'
+import { SafeDate } from '../auxiliary/SafeDate'
 
 export type EducationStage =
     'primary'
@@ -52,7 +53,7 @@ export const educationStageProfiles: EducationStageProfiles = {
     master: {
         rank: 5,
         name: {
-            en: 'master',
+            en: 'Master',
             zh_hans: '硕士',
         },
     },
@@ -79,10 +80,10 @@ export function getEducationStageRank(stage: EducationStage): number {
 export interface EducationQuality {
     qualityId: 'education'
     stage: EducationStage | undefined
-    regionId: RegionId | undefined
-    duration?: Duration
+    region: RegionId | undefined
+    duration: Duration
+    graduationDate: SafeDate
     description?: MultiLangStringSet
-    gradutaionDate?: Date
 }
 
 export default EducationQuality

@@ -49,7 +49,11 @@ const skilledIndependent: Transition = {
                 title: 'Official website',
                 url: 'https://www.border.gov.au/Trav/Visa-1/189-'
             },
-            updated: [2017, 6, 14]
+            updated: {
+                year: 2017,
+                month: 6,
+                day: 14,
+            }
         },
         procedureList: [
             {

@@ -138,7 +138,7 @@ export const wechatReduce: Reducer<WechatChatbotUser> = function (user, input) {
             const regionId = region ? region.id : 'world'
 
             if (newUser.person.education) {
-                newUser.person.education[0].regionId = regionId
+                newUser.person.education[0].region = regionId
             }
             else {
                 console.warn('Unexpected answer: ', input)

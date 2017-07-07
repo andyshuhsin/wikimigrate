@@ -51,8 +51,8 @@ export function getInitialPerson(age: number): Person {
             region: undefined,
         },
         status: getInitialStatus(),
-        education: undefined,
-        languageTests: undefined,
+        education: [],
+        languageTests: [],
         spouse: undefined,
 
     }

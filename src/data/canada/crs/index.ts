@@ -41,15 +41,15 @@ const crs: ScoreSystem = {
     history: [
         {
             lowestScore: 415,
-            date: [2017, 5, 17],
+            date: {year: 2017, month: 5, day: 17},
         },
         {
             lowestScore: 423,
-            date: [2017, 5, 4],
+            date: {year: 2017, month: 5, day: 4},
         },
         {
             lowestScore: 415,
-            date: [2017, 4, 19],
+            date: {year: 2017, month: 4, day: 19},
         },
     ],
     reference: {
