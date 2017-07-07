@@ -1,15 +1,19 @@
 import * as React from 'react'
-import { specifierSharedStyles } from './specifierSharedStyles'
+
 import { WorkExperienceQuality } from '../../../../definitions/Qualities/WorkExperience'
+import { WorkSpecifiersCallbacks } from './SpecifierPanel'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
+
 import { IconButton } from './IconButton'
+
 import { text } from '../../../utils/text'
 import range from '../../../utils/range'
 import inflect from '../../../utils/inflect'
-import { WorkSpecifiersCallbacks } from './SpecifierPanel'
 import { duration } from '../../../../definitions/auxiliary/Duration'
+
 import { activeRegionOptions } from '../../../data'
 import { data } from '../../../../data'
-import { RegionId } from '../../../../definitions/auxiliary/Region'
+import { specifierSharedStyles } from './specifierSharedStyles'
 
 interface WorkExperienceSpecifierBodyProps extends WorkSpecifiersCallbacks {
     work: WorkExperienceQuality

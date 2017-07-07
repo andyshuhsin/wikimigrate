@@ -1,18 +1,22 @@
 import * as React from 'react'
+
 import {
     EducationQuality,
     EducationStage,
     educationStageProfiles,
 } from '../../../../definitions/Qualities/EducationExperience'
-import { text } from '../../../utils/text'
-import { RegionId } from '../../../../definitions/auxiliary/Region'
-import { data } from '../../../../data'
-import { IconButton } from './IconButton'
-import { specifierSharedStyles } from './specifierSharedStyles'
 import { EducationSpecifierCallbacks } from './SpecifierPanel'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
+
+import { IconButton } from './IconButton'
+
 import inflect from '../../../utils/inflect'
-import { duration } from '../../../../definitions/auxiliary/Duration'
 import range from '../../../utils/range'
+import text from '../../../utils/text'
+import { duration } from '../../../../definitions/auxiliary/Duration'
+
+import { data } from '../../../../data'
+import { specifierSharedStyles } from './specifierSharedStyles'
 import { activeRegionOptions } from '../../../data'
 
 const durationYearOptions: number[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]

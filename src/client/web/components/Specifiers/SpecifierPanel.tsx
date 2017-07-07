@@ -1,6 +1,23 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
+
+import { Person } from '../../../../definitions/Person'
 import { VisaPlannerState } from '../../../reducers'
+import {
+    LanguageTestId,
+    LanguageTestItem,
+} from '../../../../definitions/auxiliary/LanguageTest'
+import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
+import { Duration } from '../../../../definitions/auxiliary/Duration'
+
+import { IconButton } from './IconButton'
+import WorkSpecifierSegment from './WorkSpecifierSegment'
+import LanguageSpecifierSegment from './LanguageSpecifierSegment'
+import EducationSpecifierSegment from './EducationSpecifierSegment'
+import BirthYearSpecifierBody from './BirthYearSpecifierBody'
+import SpouseSpecifierBody from './SpouseSpecifierBody'
+
 import {
     birthYearChangeAction,
     educationAddAction,
@@ -12,27 +29,18 @@ import {
     languageTestAddAction,
     languageTestChangeAction,
     languageTestRemoveAction,
-    languageTestScoreChangeAction, spouseExistenceChange,
+    languageTestScoreChangeAction,
+    spouseExistenceChange,
     workAdd,
     workDurationChangeAction,
     workRegionChangeAction,
     workRemove,
 } from '../../../actions/SpecifierActions'
-import design from '../../design'
-import { Person } from '../../../../definitions/Person'
-import { LanguageTestId, LanguageTestItem } from '../../../../definitions/auxiliary/LanguageTest'
-import { text } from '../../../utils/text'
-import sys from '../../sys'
-import LanguageSpecifierSegment from './LanguageSpecifierSegment'
-import { IconButton } from './IconButton'
-import EducationSpecifierSegment from './EducationSpecifierSegment'
-import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
-import { Region, RegionId } from '../../../../definitions/auxiliary/Region'
-import { Duration } from '../../../../definitions/auxiliary/Duration'
-import BirthYearSpecifierBody from './BirthYearSpecifierBody'
-import WorkSpecifierSegment from './WorkSpecifierSegment'
 import { filterBarClickAction } from '../../../actions'
-import SpouseSpecifierBody from './SpouseSpecifierBody'
+
+import { text } from '../../../utils/text'
+import design from '../../design'
+import sys from '../../sys'
 
 const TitleBar = (props: {onClick(): void}) => (
     <a

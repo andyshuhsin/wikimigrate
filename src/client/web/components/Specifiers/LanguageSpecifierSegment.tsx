@@ -1,13 +1,13 @@
 import * as React from 'react'
 import {
     LanguageTestId,
-    languageTestItemValues,
     LanguageTestResult,
+    languageTestItemValues,
 } from '../../../../definitions/auxiliary/LanguageTest'
-import languageTestProfiles from '../../../../data/common/languageTestProfiles'
-import { IconButton } from './IconButton'
-import { specifierSharedStyles } from './specifierSharedStyles'
 import { LanguageSpecifierCallbacks } from './SpecifierPanel'
+import languageTestProfiles from '../../../../data/common/languageTestProfiles'
+import { specifierSharedStyles } from './specifierSharedStyles'
+import { IconButton } from './IconButton'
 import range from '../../../utils/range'
 
 function appendDecimal(value: number, shouldAppend: boolean): string {
