@@ -28,7 +28,8 @@ const DropdownGroup: React.StatelessComponent<{
                 style={{
                     display: 'block',
                     border: '1px solid black',
-                    width: '100%'
+                    width: '100%',
+                    height: '2em'
                 }}
             >
                 {props.children}
