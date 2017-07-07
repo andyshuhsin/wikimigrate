@@ -47,4 +47,11 @@ export type Specifier =
 
 export type OptionId = string
 
+export const activeRegionOptions: RegionId[] = [
+    'australia',
+    'canada',
+    'new_zealand',
+    'usa',
+]
+
 export const DEFAULT_AGE = 35

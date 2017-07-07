@@ -94,11 +94,20 @@ export interface WorkRemoveAction {
     }
 }
 
-export interface WorkDurationChange {
+
+export interface WorkDurationChangeAction {
     type: 'WORK_DURATION_CHANGE'
     payload: {
         index: number
         duration: Duration
+    }
+}
+
+export interface WorkRegionChangeAction {
+    type: 'WORK_REGION_CHANGE',
+    payload: {
+        index: number,
+        region: RegionId,
     }
 }
 
@@ -119,7 +128,8 @@ export type SpecifierAction =
 
     | WorkAddAction
     | WorkRemoveAction
-    | WorkDurationChange
+    | WorkDurationChangeAction
+    | WorkRegionChangeAction
 
 export function languageTestChangeAction(
     index: number,
@@ -255,12 +265,24 @@ export function workRemove(index: number): WorkRemoveAction {
 export function workDurationChangeAction(
     index: number,
     duration: Duration,
-): WorkDurationChange {
+): WorkDurationChangeAction {
     return {
         type: 'WORK_DURATION_CHANGE',
         payload: {
             index,
             duration
+        }
+    }
+}
+
+export function workRegionChangeAction(
+    index: number, region: RegionId
+): WorkRegionChangeAction {
+    return {
+        type: 'WORK_REGION_CHANGE',
+        payload: {
+            index,
+            region,
         }
     }
 }

@@ -7,11 +7,18 @@ import range from '../../../utils/range'
 import inflect from '../../../utils/inflect'
 import { WorkSpecifiersCallbacks } from './SpecifierPanel'
 import { duration } from '../../../../definitions/auxiliary/Duration'
+import { activeRegionOptions } from '../../../data'
+import { data } from '../../../../data'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
 
 interface WorkExperienceSpecifierBodyProps extends WorkSpecifiersCallbacks {
     work: WorkExperienceQuality
     index: number
     workRemove(index: number): void
+}
+
+const selectorGroupStyle: React.CSSProperties = {
+    display: 'block',
 }
 
 const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) => (
@@ -26,7 +33,7 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
             {JSON.stringify(props.work, null , 4)}
         </pre>
 
-        <label>
+        <label style={selectorGroupStyle}>
             {
                 text({
                     en: 'Duration',
@@ -50,6 +57,41 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
                         </option>
                     )
                 }
+            </select>
+        </label>
+
+        <label style={selectorGroupStyle}>
+            {
+                text({
+                    en: 'Region',
+                    zh_hans: '地区'
+                })
+            }
+            <select
+                value={props.work.region}
+                style={specifierSharedStyles.dropdownSelectStyle}
+                onChange={event => props.workRegionChange(
+                    props.index,
+                    event.target.value as RegionId
+                )}
+            >
+                {activeRegionOptions.map((region: RegionId) => {
+                    const regionObj = data.getRegionById(region)
+                    if (regionObj) {
+                        return (
+                            <option value={region} key={region}>
+                                {text(regionObj.name)}
+                            </option>
+                        )
+                    }
+                    return null
+                })}
+                <option value={'world'}>
+                    {text({
+                        en: 'Elsewhere',
+                        zh_hans: '其他地区'
+                    })}
+                </option>
             </select>
         </label>
     </div>

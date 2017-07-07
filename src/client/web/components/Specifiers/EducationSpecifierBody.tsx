@@ -13,13 +13,7 @@ import { EducationSpecifierCallbacks } from './SpecifierPanel'
 import inflect from '../../../utils/inflect'
 import { duration } from '../../../../definitions/auxiliary/Duration'
 import range from '../../../utils/range'
-
-const activeRegionOptions: RegionId[] = [
-    'australia',
-    'canada',
-    'new_zealand',
-    'usa',
-]
+import { activeRegionOptions } from '../../../data'
 
 const durationYearOptions: number[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 

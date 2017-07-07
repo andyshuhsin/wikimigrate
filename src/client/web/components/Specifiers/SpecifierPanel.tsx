@@ -10,7 +10,7 @@ import {
     languageTestAddAction,
     languageTestChangeAction,
     languageTestRemoveAction,
-    languageTestScoreChangeAction, workAdd, workDurationChangeAction, workRemove,
+    languageTestScoreChangeAction, workAdd, workDurationChangeAction, workRegionChangeAction, workRemove,
 } from '../../../actions/SpecifierActions'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
@@ -21,7 +21,7 @@ import { LanguageSpecifierBody } from './LanguageSpecifierBody'
 import { IconButton } from './IconButton'
 import { EducationSpecifierBody } from './EducationSpecifierBody'
 import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
-import { RegionId } from '../../../../definitions/auxiliary/Region'
+import { Region, RegionId } from '../../../../definitions/auxiliary/Region'
 import { Duration } from '../../../../definitions/auxiliary/Duration'
 import BirthYearSpecifierBody from './BirthYearSpecifierBody'
 import WorkExperienceSpecifierBody from './WorkExperienceSpecifierBody'
@@ -127,6 +127,7 @@ export interface BirthSpecifiersCallbacks {
 export interface WorkSpecifiersCallbacks {
     workRemove(index: number): void
     workDurationChange(index: number, duration: Duration): void
+    workRegionChange(index: number, region: RegionId): void
 }
 
 // Not to pass to other components
@@ -180,7 +181,8 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
 
         workAdd,
         workRemove,
-        workDurationChange
+        workDurationChange,
+        workRegionChange,
     } = props
 
     const languageTests = props.user.languageTests || []
@@ -281,6 +283,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
                         work={work}
                         workRemove={workRemove}
                         workDurationChange={workDurationChange}
+                        workRegionChange={workRegionChange}
                     />
                 ))}
                 <IconButton
@@ -343,6 +346,8 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
             dispatch(workRemove(index)),
         workDurationChange: (index, duration) =>
             dispatch(workDurationChangeAction(index, duration)),
+        workRegionChange: (index, region) =>
+            dispatch(workRegionChangeAction(index, region)),
 
         onFilterBarClick:
             () => dispatch(filterBarClickAction())
