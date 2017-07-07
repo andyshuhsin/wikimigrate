@@ -18,10 +18,30 @@ import { duration } from '../../../../definitions/auxiliary/Duration'
 import { data } from '../../../../data'
 import { specifierSharedStyles } from './specifierSharedStyles'
 import { activeRegionOptions } from '../../../data'
+import DropdownGroup from './DropdownGroup'
 
 const durationYearOptions: number[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
 const thisYear = (new Date()).getFullYear()
+
+const texts = {
+    stage: {
+        en: 'Stage',
+        zh_hans: '阶段'
+    },
+    region: {
+        en: 'Location',
+        zh_hans: '地区'
+    },
+    duration: {
+        en: 'Duration',
+        zh_hans: '时长',
+    },
+    graduateDate: {
+        en: 'Graduated',
+        zh_hans: '毕业年份'
+    }
+}
 
 interface EducationSpecifierBodyProps extends EducationSpecifierCallbacks {
     edu: EducationQuality,
@@ -36,127 +56,82 @@ function EducationSpecifierSegment(props: EducationSpecifierBodyProps) {
                 onClick={() => props.educationRemove(props.index)}
                 additionalStyle={specifierSharedStyles.deleteButtonStyle}
             />
-            <table><tbody>
-                <tr key='row-0'>
-                    <td>
-                        {text({
-                            en: 'Stage',
-                            zh_hans: '阶段'
-                        })}
-                    </td>
-                    <td>
-                        {
-                            text({
-                                en: 'Location',
-                                zh_hans: '地区'
-                            })
-                        }
-                    </td>
-                </tr>
 
-                <tr key='row-1'>
-                    <td key='stage'>
-                        <select
-                            value={props.edu.stage}
-                            onChange={event =>
-                                props.educationStageChange(
-                                    props.index,
-                                    event.target.value as EducationStage
-                                )
-                            }
-                            style={specifierSharedStyles.dropdownSelectStyle}
-                        >
-                            {Object.keys(educationStageProfiles).map((stage: EducationStage) =>
-                                <option key={stage} value={stage}>
-                                    {text(educationStageProfiles[stage].name)}
-                                </option>
-                            )}
-                        </select>
-                    </td>
+            <DropdownGroup
+                title={text(texts.stage)}
+                value={props.edu.stage}
+                onChange={event =>
+                    props.educationStageChange(
+                        props.index,
+                        event.target.value as EducationStage
+                    )
+                }
+            >
+                {Object.keys(educationStageProfiles).map((stage: EducationStage) =>
+                    <option key={stage} value={stage}>
+                        {text(educationStageProfiles[stage].name)}
+                    </option>
+                )}
+            </DropdownGroup>
 
-                    <td key='region'>
-                        <select
-                            value={props.edu.region}
-                            onChange={event => props.educationRegionChange(
-                                props.index,
-                                event.target.value as RegionId
-                            )}
-                            style={specifierSharedStyles.dropdownSelectStyle}
-                        >
-                            {activeRegionOptions.map((region: RegionId) => {
-                                const regionObj = data.getRegionById(region)
-                                if (regionObj) {
-                                    return (
-                                        <option value={region} key={region}>
-                                            {text(regionObj.name)}
-                                        </option>
-                                    )
-                                }
-                                return null
-                            })}
-                            <option value={'world'}>
-                                {text({
-                                    en: 'Elsewhere',
-                                    zh_hans: '其他地区'
-                                })}
+            <DropdownGroup
+                title={text(texts.region)}
+                value={props.edu.region}
+                onChange={event => props.educationRegionChange(
+                    props.index,
+                    event.target.value as RegionId
+                )}
+            >
+                {activeRegionOptions.map((region: RegionId) => {
+                    const regionObj = data.getRegionById(region)
+                    if (regionObj) {
+                        return (
+                            <option value={region} key={region}>
+                                {text(regionObj.name)}
                             </option>
-                        </select>
-                    </td>
-                </tr>
+                        )
+                    }
+                    return null
+                })}
+                <option value={'world'}>
+                    {text({
+                        en: 'Elsewhere',
+                        zh_hans: '其他地区'
+                    })}
+                </option>
+            </DropdownGroup>
 
-                <tr key='row-2'>
-                    <td>
-                        {text({
-                            en: 'Duration',
-                            zh_hans: '时长',
-                        })}
-                    </td>
-                    <td>
-                        {text({
-                            en: 'Graduated',
-                            zh_hans: '毕业时间',
-                        })}
-                    </td>
-                </tr>
+            <DropdownGroup
+                title={text(texts.duration)}
+                value={props.edu.duration.value}
+                onChange={event => props.educationDurationChange(
+                    props.index,
+                    duration(+event.target.value, 'year')
+                )}
+            >
+                {durationYearOptions.map((year: number) =>
+                    <option key={year} value={year}>
+                        {year + ' ' + inflect(text({
+                            en: 'year'
+                        }), { number: year })}
+                    </option>
+                )}
+            </DropdownGroup>
 
-                <tr key='row-3'>
-                    <td key='duration'>
-                        <select
-                            value={props.edu.duration.value}
-                            onChange={event => props.educationDurationChange(
-                                props.index,
-                                duration(+event.target.value, 'year')
-                            )}
-                            style={specifierSharedStyles.dropdownSelectStyle}
-                        >
-                            {durationYearOptions.map((year: number) =>
-                                <option key={year} value={year}>
-                                    {year + ' ' + inflect(text({
-                                        en: 'year'
-                                    }), { number: year })}
-                                </option>
-                            )}
-                        </select>
-                    </td>
-
-                    <td key='graduation'>
-                        <select
-                            value={props.edu.graduationDate.year}
-                            onChange={event => props.educationGraduationDateChange(
-                                props.index,
-                                +event.target.value
-                            )}
-                            style={specifierSharedStyles.dropdownSelectStyle}
-                        >
-                            {range(1980, thisYear+1).map((year: number) =>
-                                <option key={year} value={year}>
-                                    {year}
-                                </option>
-                            )}
-                        </select>
-                    </td>
-                </tr>
-            </tbody></table>
+            <DropdownGroup
+                title={text(texts.graduateDate)}
+                value={props.edu.graduationDate.year}
+                onChange={event => props.educationGraduationDateChange(
+                    props.index,
+                    +event.target.value
+                )}
+            >
+                {range(1980, thisYear+1).map((year: number) =>
+                    <option key={year} value={year}>
+                        {year}
+                    </option>
+                )}
+            </DropdownGroup>
         </div>
     )
 }

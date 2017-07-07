@@ -99,11 +99,10 @@ const styles = {
     } as React.CSSProperties,
 
     specifierBodyContainerStyle: {
-        whiteSpace: 'nowrap',
         overflowX: 'scroll',
         padding: sys.viewport.width < design.dimensions.narrowWidth
             ? '0.6em 1.0em'
-            : '1em 2em',
+            : '1em',
         userSelect: 'none',
     } as React.CSSProperties,
 

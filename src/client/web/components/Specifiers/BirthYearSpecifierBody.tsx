@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { specifierSharedStyles } from './specifierSharedStyles'
 import range from '../../../utils/range'
+import DropdownGroup from './DropdownGroup'
 
 const thisYear = (new Date()).getFullYear()
 
@@ -8,8 +9,8 @@ const BirthYearSpecifiers = (props: {
     year: number,
     onChange(age: number): void
 }) => (
-    <select
-        style={specifierSharedStyles.dropdownSelectStyle}
+    <DropdownGroup
+        title=''
         value={props.year}
         onChange={event => props.onChange(Number(event.target.value))}
     >
@@ -20,7 +21,7 @@ const BirthYearSpecifiers = (props: {
                 </option>
             ))
         }
-    </select>
+    </DropdownGroup>
 )
 
 export default BirthYearSpecifiers

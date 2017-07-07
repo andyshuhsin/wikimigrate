@@ -9,6 +9,7 @@ import languageTestProfiles from '../../../../data/common/languageTestProfiles'
 import { specifierSharedStyles } from './specifierSharedStyles'
 import IconButton from './IconButton'
 import range from '../../../utils/range'
+import DropdownGroup from './DropdownGroup'
 
 function appendDecimal(value: number, shouldAppend: boolean): string {
     return shouldAppend ? value.toFixed(1) : value.toString()
@@ -38,12 +39,13 @@ const LanguageSpecifierSegment = (props: LanguageSpecifierBodyProps) => {
                 additionalStyle={specifierSharedStyles.deleteButtonStyle}
             />
 
-            <select
+            <DropdownGroup
+                title=''
                 value={profile.id}
-                style={specifierSharedStyles.dropdownSelectStyle}
                 onChange={event => {
                     props.languageTestSelect(props.index, event.target.value as LanguageTestId)
                 }}
+                standAlone={true}
             >
                 {languageTestProfiles.map(profile =>
                     <option
@@ -53,47 +55,31 @@ const LanguageSpecifierSegment = (props: LanguageSpecifierBodyProps) => {
                         {profile.abbreviation}
                     </option>
                 )}
-            </select>
+            </DropdownGroup>
 
-            <table>
-                <thead>
-                <tr>
-                    {languageTestItemValues.map(item => (
-                        <th key={item}>
-                            {item}
-                        </th>
+            {languageTestItemValues.map(item =>
+                <DropdownGroup
+                    key={item}
+                    title={item}
+                    value={appendDecimal(
+                        props.test.scores[item],
+                        profile.itemScoreFormat[2] < 1.0
+                    )}
+                    onChange={event => {
+                        props.languageScoreSelect(
+                            props.index,
+                            item,
+                            Number(event.target.value)
+                        )
+                    }}
+                >
+                    {getScoreOptions(profile.itemScoreFormat).map(score => (
+                        <option key={score}>
+                            {score}
+                        </option>
                     ))}
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    {languageTestItemValues.map(item => (
-                        <td key={item}>
-                            <select
-                                value={appendDecimal(
-                                    props.test.scores[item],
-                                    profile.itemScoreFormat[2] < 1.0
-                                )}
-                                onChange={event => {
-                                    props.languageScoreSelect(
-                                        props.index,
-                                        item,
-                                        Number(event.target.value)
-                                    )
-                                }}
-                                style={specifierSharedStyles.dropdownSelectStyle}
-                            >
-                                {getScoreOptions(profile.itemScoreFormat).map(score => (
-                                    <option key={score}>
-                                        {score}
-                                    </option>
-                                ))}
-                            </select>
-                        </td>
-                    ))}
-                </tr>
-                </tbody>
-            </table>
+                </DropdownGroup>
+            )}
         </div>
     )
 }

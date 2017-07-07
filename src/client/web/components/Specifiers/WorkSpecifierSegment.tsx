@@ -14,6 +14,7 @@ import { duration } from '../../../../definitions/auxiliary/Duration'
 import { activeRegionOptions } from '../../../data'
 import { data } from '../../../../data'
 import { specifierSharedStyles } from './specifierSharedStyles'
+import DropdownGroup from './DropdownGroup'
 
 interface WorkExperienceSpecifierBodyProps extends WorkSpecifiersCallbacks {
     work: WorkExperienceQuality
@@ -21,13 +22,15 @@ interface WorkExperienceSpecifierBodyProps extends WorkSpecifiersCallbacks {
     workRemove(index: number): void
 }
 
-const selectorGroupStyle: React.CSSProperties = {
-    display: 'block',
-}
-
-const domIds = {
-    duration: 'work-duration',
-    region: 'work-region'
+const texts = {
+    duration: {
+        en: 'Duration',
+        zh_hans: '时长'
+    },
+    region: {
+        en: 'Region',
+        zh_hans: '地区'
+    }
 }
 
 const WorkSpecifierSegment = (props: WorkExperienceSpecifierBodyProps) => (
@@ -38,22 +41,9 @@ const WorkSpecifierSegment = (props: WorkExperienceSpecifierBodyProps) => (
             additionalStyle={specifierSharedStyles.deleteButtonStyle}
         />
 
-        <label
-            style={selectorGroupStyle}
-            htmlFor={domIds.duration}
-        >
-            {
-                text({
-                    en: 'Duration',
-                    zh_hans: '时长'
-                })
-            }
-        </label>
-
-        <select
-            id={domIds.duration}
+        <DropdownGroup
+            title={text(texts.duration)}
             value={props.work.duration.value}
-            style={specifierSharedStyles.dropdownSelectStyle}
             onChange={event => props.workDurationChange(
                 props.index,
                 duration(Number(event.target.value), 'year')
@@ -68,24 +58,11 @@ const WorkSpecifierSegment = (props: WorkExperienceSpecifierBodyProps) => (
                     </option>
                 )
             }
-        </select>
+        </DropdownGroup>
 
-        <label
-            style={selectorGroupStyle}
-            htmlFor={domIds.region}
-        >
-            {
-                text({
-                    en: 'Region',
-                    zh_hans: '地区'
-                })
-            }
-        </label>
-
-        <select
-            id={domIds.region}
+        <DropdownGroup
+            title={text(texts.region)}
             value={props.work.region}
-            style={specifierSharedStyles.dropdownSelectStyle}
             onChange={event => props.workRegionChange(
                 props.index,
                 event.target.value as RegionId
@@ -108,7 +85,8 @@ const WorkSpecifierSegment = (props: WorkExperienceSpecifierBodyProps) => (
                     zh_hans: '其他地区'
                 })}
             </option>
-        </select>
+        </DropdownGroup>
+
     </div>
 )
 
