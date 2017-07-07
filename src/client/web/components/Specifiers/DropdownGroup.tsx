@@ -9,8 +9,9 @@ const DropdownGroup: React.StatelessComponent<{
     return (
         <label style={{
             display: props.standAlone ? 'block' : 'inline-block',
-            width: '40%',
             margin: '0.2em',
+            width: '40%',
+            maxWidth: '8em',
         }}>
             {props.title &&
                 <span style={{
