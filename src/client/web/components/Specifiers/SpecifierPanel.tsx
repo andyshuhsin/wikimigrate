@@ -333,8 +333,6 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
         </section>
     )
 
-
-
     return (
         <aside style={containerStyle}>
             <TitleBar onClick={props.onFilterBarClick}/>
