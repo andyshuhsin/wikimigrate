@@ -52,6 +52,8 @@ const TitleBar = (props: {onClick(): void}) => (
             transition: `transform ${design.durations.slide}s`,
             background: 'white',
             cursor: 'pointer',
+            zIndex: 1,
+            boxShadow: '2px 2px 10px #999'
         } as React.CSSProperties}
         onClick={props.onClick}
         role='button'
@@ -346,7 +348,8 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             <TitleBar onClick={props.onFilterBarClick}/>
             <div style={{
                 overflowY: 'scroll',
-                flex: 1
+                flex: 1,
+                paddingTop: '10px',
             }}>
                 <EducationSpecifiers />
                 <WorkSpecifiers />
