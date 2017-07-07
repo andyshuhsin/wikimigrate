@@ -391,4 +391,6 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecifierPanel)
+const ConnectedSpecifierPanel = connect(mapStateToProps, mapDispatchToProps)(SpecifierPanel)
+
+export default ConnectedSpecifierPanel
