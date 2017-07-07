@@ -21,6 +21,11 @@ const selectorGroupStyle: React.CSSProperties = {
     display: 'block',
 }
 
+const domIds = {
+    duration: 'work-duration',
+    region: 'work-region'
+}
+
 const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) => (
     <div style={specifierSharedStyles.containerStyles}>
         <IconButton
@@ -33,67 +38,77 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
             {JSON.stringify(props.work, null , 4)}
         </pre>
 
-        <label style={selectorGroupStyle}>
+        <label
+            style={selectorGroupStyle}
+            htmlFor={domIds.duration}
+        >
             {
                 text({
                     en: 'Duration',
                     zh_hans: '时长'
                 })
             }
-            <select
-                value={props.work.duration.value}
-                style={specifierSharedStyles.dropdownSelectStyle}
-                onChange={event => props.workDurationChange(
-                    props.index,
-                    duration(Number(event.target.value), 'year')
-                )}
-            >
-                {
-                    range(1, 30).map(year =>
-                        <option value={year} key={year}>
-                            {year + ' ' + inflect(text({
-                                en: 'year'
-                            }), { number: year })}
-                        </option>
-                    )
-                }
-            </select>
         </label>
 
-        <label style={selectorGroupStyle}>
+        <select
+            id={domIds.duration}
+            value={props.work.duration.value}
+            style={specifierSharedStyles.dropdownSelectStyle}
+            onChange={event => props.workDurationChange(
+                props.index,
+                duration(Number(event.target.value), 'year')
+            )}
+        >
+            {
+                range(1, 30).map(year =>
+                    <option value={year} key={year}>
+                        {year + ' ' + inflect(text({
+                            en: 'year'
+                        }), { number: year })}
+                    </option>
+                )
+            }
+        </select>
+
+        <label
+            style={selectorGroupStyle}
+            htmlFor={domIds.region}
+        >
             {
                 text({
                     en: 'Region',
                     zh_hans: '地区'
                 })
             }
-            <select
-                value={props.work.region}
-                style={specifierSharedStyles.dropdownSelectStyle}
-                onChange={event => props.workRegionChange(
-                    props.index,
-                    event.target.value as RegionId
-                )}
-            >
-                {activeRegionOptions.map((region: RegionId) => {
-                    const regionObj = data.getRegionById(region)
-                    if (regionObj) {
-                        return (
-                            <option value={region} key={region}>
-                                {text(regionObj.name)}
-                            </option>
-                        )
-                    }
-                    return null
-                })}
-                <option value={'world'}>
-                    {text({
-                        en: 'Elsewhere',
-                        zh_hans: '其他地区'
-                    })}
-                </option>
-            </select>
         </label>
+
+        <select
+            id={domIds.region}
+            value={props.work.region}
+            style={specifierSharedStyles.dropdownSelectStyle}
+            onChange={event => props.workRegionChange(
+                props.index,
+                event.target.value as RegionId
+            )}
+        >
+            {activeRegionOptions.map((region: RegionId) => {
+                const regionObj = data.getRegionById(region)
+                if (regionObj) {
+                    return (
+                        <option value={region} key={region}>
+                            {text(regionObj.name)}
+                        </option>
+                    )
+                }
+                return null
+            })}
+            <option value={'world'}>
+                {text({
+                    en: 'Elsewhere',
+                    zh_hans: '其他地区'
+                })}
+            </option>
+        </select>
     </div>
 )
 
