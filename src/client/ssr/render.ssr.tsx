@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import { ConnectedVisaPlanner } from '../web/components/VisaPlanner'
-import reducer, { VisaPlannerState } from '../reducers/reducer'
+import reducer, { VisaPlannerState } from '../reducers'
 import { setLangAction, urlpathChangeAction } from '../actions/index'
 import { getDocumentTitle } from '../utils/getDocumentTitle'
 import { LangId } from '../../definitions/auxiliary/MultiLang'

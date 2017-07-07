@@ -5,7 +5,7 @@ import { createStore, StoreEnhancer } from 'redux'
 import reducer from '../reducers'
 import VisaPlanner from './components/VisaPlanner'
 import '../utils/assign-polyfill'
-import { INITIAL_STATE, VisaPlannerState } from '../reducers/reducer'
+import { INITIAL_STATE, VisaPlannerState } from '../reducers'
 
 import '../utils/normalize.css'
 import '../utils/global.css'
