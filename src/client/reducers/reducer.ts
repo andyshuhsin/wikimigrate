@@ -258,6 +258,16 @@ function reducer(state = INITIAL_STATE, action: Action): VisaPlannerState {
             return newState
         }
 
+        case 'SPOUSE_EXISTENCE_CHANGE': {
+            if (action.payload.hasSpouse) {
+                newState.user.spouse = getInitialPerson(30)
+            }
+            else {
+                newState.user.spouse = null
+            }
+            return newState
+        }
+
         case 'PATH_BOX_CLICK': {
             newState.ui.pathwayOnDisplay = {
                 transitionIds: action.payload.pathway.transitions.map(transition => transition.id),

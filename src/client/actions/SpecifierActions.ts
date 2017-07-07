@@ -111,6 +111,13 @@ export interface WorkRegionChangeAction {
     }
 }
 
+export interface SpouseExistenceChange {
+    type: 'SPOUSE_EXISTENCE_CHANGE',
+    payload: {
+        hasSpouse: boolean
+    }
+}
+
 export type SpecifierAction =
     | LanguageTestAddAction
     | LanguageTestRemoveAction
@@ -130,6 +137,8 @@ export type SpecifierAction =
     | WorkRemoveAction
     | WorkDurationChangeAction
     | WorkRegionChangeAction
+
+    | SpouseExistenceChange
 
 export function languageTestChangeAction(
     index: number,
@@ -283,6 +292,17 @@ export function workRegionChangeAction(
         payload: {
             index,
             region,
+        }
+    }
+}
+
+export function spouseExistenceChange(
+    hasSpouse: boolean
+): SpouseExistenceChange {
+    return {
+        type: 'SPOUSE_EXISTENCE_CHANGE',
+        payload: {
+            hasSpouse
         }
     }
 }

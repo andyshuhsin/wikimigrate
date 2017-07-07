@@ -3,14 +3,20 @@ import { connect, Dispatch } from 'react-redux'
 import { VisaPlannerState } from '../../../reducers'
 import {
     birthYearChangeAction,
-    educationAddAction, educationDurationChangeAction, educationGraduationDateChangeAction,
+    educationAddAction,
+    educationDurationChangeAction,
+    educationGraduationDateChangeAction,
     educationRegionChangeAction,
     educationRemoveAction,
     educationStageChangeAction,
     languageTestAddAction,
     languageTestChangeAction,
     languageTestRemoveAction,
-    languageTestScoreChangeAction, workAdd, workDurationChangeAction, workRegionChangeAction, workRemove,
+    languageTestScoreChangeAction, spouseExistenceChange,
+    workAdd,
+    workDurationChangeAction,
+    workRegionChangeAction,
+    workRemove,
 } from '../../../actions/SpecifierActions'
 import design from '../../design'
 import { Person } from '../../../../definitions/Person'
@@ -26,6 +32,7 @@ import { Duration } from '../../../../definitions/auxiliary/Duration'
 import BirthYearSpecifierBody from './BirthYearSpecifierBody'
 import WorkExperienceSpecifierBody from './WorkExperienceSpecifierBody'
 import { filterBarClickAction } from '../../../actions'
+import SpouseSpecifierBody from './SpouseSpecifierBody'
 
 const TitleBar = (props: {onClick(): void}) => (
     <a
@@ -130,6 +137,10 @@ export interface WorkSpecifiersCallbacks {
     workRegionChange(index: number, region: RegionId): void
 }
 
+export interface SpouseSpecifiersCallbacks {
+    spouseExistenceChange(hasSpouse: boolean): void
+}
+
 // Not to pass to other components
 interface TopLevelSpecifierCallbacks {
     onFilterBarClick(): void
@@ -142,7 +153,8 @@ interface CallbackProps extends TopLevelSpecifierCallbacks,
                                 LanguageSpecifierCallbacks,
                                 EducationSpecifierCallbacks,
                                 BirthSpecifiersCallbacks,
-                                WorkSpecifiersCallbacks
+                                WorkSpecifiersCallbacks,
+                                SpouseSpecifiersCallbacks
 { }
 
 interface ValueProps {
@@ -183,6 +195,8 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
         workRemove,
         workDurationChange,
         workRegionChange,
+
+        spouseExistenceChange,
     } = props
 
     const languageTests = props.user.languageTests || []
@@ -294,6 +308,25 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
         </section>
     )
 
+    const SpouseSpecifiers = () => (
+        <section>
+            <h1 style={styles.titleStyle}>
+                {text({
+                    en: 'Spouse',
+                    zh_hans: '婚姻',
+                })}
+            </h1>
+            <div style={styles.specifierBodyContainerStyle}>
+                <SpouseSpecifierBody
+                    spouseExistenceChange={spouseExistenceChange}
+                    hasSpouseNow={props.user.spouse !== null}
+                />
+            </div>
+        </section>
+    )
+
+
+
     return (
         <aside style={style}>
             <TitleBar onClick={props.onFilterBarClick}/>
@@ -301,6 +334,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             <WorkSpecifiers />
             <LanguageSpecifiers />
             <BirthSpecifiers />
+            <SpouseSpecifiers />
         </aside>
     )
 }
@@ -348,6 +382,9 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
             dispatch(workDurationChangeAction(index, duration)),
         workRegionChange: (index, region) =>
             dispatch(workRegionChangeAction(index, region)),
+
+        spouseExistenceChange: hasSpouse =>
+            dispatch(spouseExistenceChange(hasSpouse)),
 
         onFilterBarClick:
             () => dispatch(filterBarClickAction())
