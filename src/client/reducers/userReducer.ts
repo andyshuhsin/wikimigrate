@@ -3,10 +3,12 @@ import {
     DEFAULT_AGE,
 } from '../data'
 import { getInitialPerson, Person } from '../../definitions/Person'
-import { clone } from '../utils/clone'
-import { LanguageTestId, LanguageTestItem } from '../../definitions/auxiliary/LanguageTest'
+import {
+    LanguageTestId,
+    LanguageTestItem,
+} from '../../definitions/auxiliary/LanguageTest'
 import { duration } from '../../definitions/auxiliary/Duration'
-
+import { clone } from '../utils/clone'
 
 type DefaultLanguageTestResults = {
     [test in LanguageTestId]: {
@@ -73,161 +75,189 @@ export type VisaPlannerUserState = Person
 export const INITIAL_USER_STATE: VisaPlannerUserState
     = getInitialPerson(DEFAULT_AGE)
 
-function userReducer(state = INITIAL_USER_STATE, action: Action): VisaPlannerUserState {
-    const newState = clone(state)
-    switch (action.type) {
+function shallowClone<T>(input: T[] | undefined): T[] {
+    if (input) {
+        return input.slice()
+    }
+    else {
+        return []
+    }
+}
 
+function userReducer(state = INITIAL_USER_STATE, action: Action): VisaPlannerUserState {
+
+    const languageTests = shallowClone(state.languageTests)
+    const education = shallowClone(state.education)
+    const workExperiences = shallowClone(state.workExperiences)
+
+    switch (action.type) {
         case 'LANGUAGE_TEST_ADD': {
-            if (!newState.languageTests) {
-                newState.languageTests = []
+            const existingTests = languageTests.map(test => test.testId)
+            const testToAdd = newLanguageTestPreference.find(testId =>
+                existingTests.indexOf(testId) === -1
+            )
+            if (testToAdd) {
+                languageTests.push({
+                    testId: testToAdd,
+                    scores: defaultLanguageTestResults[testToAdd]
+                })
             }
-            const existingTests = newState.languageTests.map(test => test.testId)
-            for (const test of newLanguageTestPreference) {
-                if (existingTests.indexOf(test) === -1) {
-                    newState.languageTests.push({
-                        testId: test,
-                        scores: defaultLanguageTestResults[test]
-                    })
-                    break
-                }
+            return {
+                ...state,
+                languageTests
             }
-            return newState
         }
 
         case 'LANGUAGE_TEST_REMOVE': {
-            if (!newState.languageTests) {
-                newState.languageTests = []
+            return {
+                ...state,
+                languageTests: languageTests.splice(action.payload.index, 1)
             }
-            newState.languageTests.splice(action.payload.index, 1)
-            return newState
         }
 
         case 'LANGUAGE_TEST_CHANGE': {
-            if (!newState.languageTests) {
-                newState.languageTests = []
-            }
-            newState.languageTests[action.payload.index] = {
+            languageTests[action.payload.index] = {
                 testId: action.payload.test,
                 scores: defaultLanguageTestResults[action.payload.test]
             }
-            return newState
+            return {
+                ...state,
+                languageTests
+            }
         }
 
         case 'Language_Test_Score_Change': {
-            if (!newState.languageTests) {
-                newState.languageTests = []
+            const test = clone(languageTests[action.payload.index])
+            test.scores[action.payload.item] = action.payload.score
+            languageTests[action.payload.index] = test
+            return {
+                ...state,
+                languageTests
             }
-            newState.languageTests[action.payload.index]
-                .scores[action.payload.item] = action.payload.score
-            return newState
         }
 
         case 'EDUCATION_ADD': {
-            if (!newState.education) {
-                newState.education = []
-            }
-            newState.education.push({
+            education.push({
                 qualityId: 'education',
                 stage: 'bachelor',
                 region: 'world',
                 duration: duration(4, 'year'),
                 graduationDate: { year: 2000 },
             })
-            return newState
+            return {
+                ...state,
+                education
+            }
         }
 
         case 'EDUCATION_REMOVE': {
-            if (!newState.education) {
-                return state
+            education.splice(action.payload.index, 1)
+            return {
+                ...state,
+                education
             }
-            newState.education.splice(action.payload.index, 1)
-            return newState
         }
 
         case 'EDUCATION_STAGE_CHANGE': {
-            if (!newState.education) {
-                return state
+            const newEducation = clone(education)
+            newEducation[action.payload.index].stage = action.payload.stage
+            return {
+                ...state,
+                education: newEducation
             }
-            newState.education[action.payload.index].stage = action.payload.stage
-            return newState
         }
 
         case 'EDUCATION_REGION_CHANGE': {
-            if (!newState.education) {
-                return state
+            const newEducation = clone(education)
+            newEducation[action.payload.index].region = action.payload.region
+            return {
+                ...state,
+                education: newEducation
             }
-            newState.education[action.payload.index].region = action.payload.region
-            return newState
         }
 
         case 'EDUCATION_DURATION_CHANGE': {
-            if (!newState.education) {
-                return state
+            const newEducation = clone(education)
+            newEducation[action.payload.index].duration = action.payload.duration
+            return {
+                ...state,
+                education: newEducation
             }
-            newState.education[action.payload.index].duration = action.payload.duration
-            return newState
         }
 
         case 'EDUCATION_CHANGE_GRADUATION_DATE': {
-            if (!newState.education) {
-                return state
+            const newEducation = clone(education)
+            newEducation[action.payload.index].graduationDate = {
+                year: action.payload.graduateYear
             }
-            newState.education[action.payload.index].graduationDate =
-                {year: action.payload.graduateYear}
-            return newState
+            return {
+                ...state,
+                education: newEducation
+            }
         }
 
         case 'BIRTH_YEAR_CHANGE': {
-            newState.birth.date.year = action.payload.year
-            return newState
+            const newBirth = clone(state.birth)
+            newBirth.date.year = action.payload.year
+            return {
+                ...state,
+                birth: newBirth
+            }
         }
 
         case 'WORK_ADD': {
-            if (!newState.workExperiences) {
-                newState.workExperiences = []
-            }
-            newState.workExperiences.push({
+            workExperiences.push({
                 qualityId: 'work_experience',
                 region: 'world',
                 duration: duration(1, 'year')
             })
-            return newState
+            return {
+                ...state,
+                workExperiences
+            }
         }
 
         case 'WORK_REMOVE': {
-            if (!newState.workExperiences) {
-                newState.workExperiences = []
+            workExperiences.splice(action.payload.index, 1)
+            return {
+                ...state,
+                workExperiences
             }
-            newState.workExperiences.splice(action.payload.index, 1)
-            return newState
         }
 
         case 'WORK_DURATION_CHANGE': {
-            if (!newState.workExperiences) {
-                newState.workExperiences = []
-            }
-            newState.workExperiences[action.payload.index].duration =
+            const newWorkExperiences = clone(workExperiences)
+            newWorkExperiences[action.payload.index].duration =
                 action.payload.duration
-            return newState
+            return {
+                ...state,
+                workExperiences: newWorkExperiences
+            }
         }
 
         case 'WORK_REGION_CHANGE': {
-            if (!newState.workExperiences) {
-                newState.workExperiences = []
-            }
-            newState.workExperiences[action.payload.index].region =
+            const newWorkExperiences = clone(workExperiences)
+            newWorkExperiences[action.payload.index].region =
                 action.payload.region
-            return newState
+            return {
+                ...state,
+                workExperiences: newWorkExperiences
+            }
         }
 
         case 'SPOUSE_EXISTENCE_CHANGE': {
             if (action.payload.hasSpouse) {
-                newState.spouse = getInitialPerson(30)
+                return {
+                    ...state,
+                    spouse: getInitialPerson(DEFAULT_AGE)
+                }
             }
             else {
-                newState.spouse = null
+                return {
+                    ...state,
+                    spouse: null
+                }
             }
-            return newState
         }
 
         default: {
