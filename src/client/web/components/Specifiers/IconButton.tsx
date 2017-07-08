@@ -1,5 +1,7 @@
 import * as React from 'react'
 import design from '../../design'
+import { text } from '../../../utils/text'
+import { MultiLangStringSet } from '../../../../definitions/auxiliary/MultiLang'
 
 const buttonStyle: React.CSSProperties = {
     display: 'inline-block',
@@ -14,12 +16,19 @@ const buttonStyle: React.CSSProperties = {
     cursor: 'pointer',
 }
 
-export const IconButton = (props: {
+const altText: MultiLangStringSet = {
+    en: 'Remove condition',
+    zh_hans: '删除条件'
+}
+
+const IconButton = (props: {
     icon: string,
     onClick: () => void
     additionalStyle?: React.CSSProperties
 }) => (
-    <span
+    <a
+        role='button'
+        aria-label={text(altText)}
         style={
             props.additionalStyle
                 ? Object.assign({}, buttonStyle, props.additionalStyle)
@@ -28,5 +37,7 @@ export const IconButton = (props: {
         onClick={props.onClick}
     >
         {props.icon}
-    </span>
+    </a>
 )
+
+export default IconButton

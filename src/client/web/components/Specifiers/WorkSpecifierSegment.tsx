@@ -1,15 +1,20 @@
 import * as React from 'react'
-import { specifierSharedStyles } from './specifierSharedStyles'
+
 import { WorkExperienceQuality } from '../../../../definitions/Qualities/WorkExperience'
-import { IconButton } from './IconButton'
+import { WorkSpecifiersCallbacks } from './SpecifierPanel'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
+
+import IconButton from './IconButton'
+
 import { text } from '../../../utils/text'
 import range from '../../../utils/range'
 import inflect from '../../../utils/inflect'
-import { WorkSpecifiersCallbacks } from './SpecifierPanel'
 import { duration } from '../../../../definitions/auxiliary/Duration'
+
 import { activeRegionOptions } from '../../../data'
 import { data } from '../../../../data'
-import { RegionId } from '../../../../definitions/auxiliary/Region'
+import { specifierSharedStyles } from './specifierSharedStyles'
+import DropdownGroup from './DropdownGroup'
 
 interface WorkExperienceSpecifierBodyProps extends WorkSpecifiersCallbacks {
     work: WorkExperienceQuality
@@ -17,16 +22,18 @@ interface WorkExperienceSpecifierBodyProps extends WorkSpecifiersCallbacks {
     workRemove(index: number): void
 }
 
-const selectorGroupStyle: React.CSSProperties = {
-    display: 'block',
+const texts = {
+    duration: {
+        en: 'Duration',
+        zh_hans: '时长'
+    },
+    region: {
+        en: 'Region',
+        zh_hans: '地区'
+    }
 }
 
-const domIds = {
-    duration: 'work-duration',
-    region: 'work-region'
-}
-
-const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) => (
+const WorkSpecifierSegment = (props: WorkExperienceSpecifierBodyProps) => (
     <div style={specifierSharedStyles.containerStyles}>
         <IconButton
             icon='–'
@@ -34,22 +41,9 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
             additionalStyle={specifierSharedStyles.deleteButtonStyle}
         />
 
-        <label
-            style={selectorGroupStyle}
-            htmlFor={domIds.duration}
-        >
-            {
-                text({
-                    en: 'Duration',
-                    zh_hans: '时长'
-                })
-            }
-        </label>
-
-        <select
-            id={domIds.duration}
+        <DropdownGroup
+            title={text(texts.duration)}
             value={props.work.duration.value}
-            style={specifierSharedStyles.dropdownSelectStyle}
             onChange={event => props.workDurationChange(
                 props.index,
                 duration(Number(event.target.value), 'year')
@@ -64,24 +58,11 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
                     </option>
                 )
             }
-        </select>
+        </DropdownGroup>
 
-        <label
-            style={selectorGroupStyle}
-            htmlFor={domIds.region}
-        >
-            {
-                text({
-                    en: 'Region',
-                    zh_hans: '地区'
-                })
-            }
-        </label>
-
-        <select
-            id={domIds.region}
+        <DropdownGroup
+            title={text(texts.region)}
             value={props.work.region}
-            style={specifierSharedStyles.dropdownSelectStyle}
             onChange={event => props.workRegionChange(
                 props.index,
                 event.target.value as RegionId
@@ -104,8 +85,9 @@ const WorkExperienceSpecifierBody = (props: WorkExperienceSpecifierBodyProps) =>
                     zh_hans: '其他地区'
                 })}
             </option>
-        </select>
+        </DropdownGroup>
+
     </div>
 )
 
-export default WorkExperienceSpecifierBody
+export default WorkSpecifierSegment

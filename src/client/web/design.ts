@@ -13,7 +13,7 @@ const design = {
     },
 
     durations: {
-        slide: 0.2,
+        slide: 0.5,
     },
 }
 

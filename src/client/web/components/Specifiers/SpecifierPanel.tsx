@@ -1,6 +1,23 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
+
+import { Person } from '../../../../definitions/Person'
 import { VisaPlannerState } from '../../../reducers'
+import {
+    LanguageTestId,
+    LanguageTestItem,
+} from '../../../../definitions/auxiliary/LanguageTest'
+import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
+import { RegionId } from '../../../../definitions/auxiliary/Region'
+import { Duration } from '../../../../definitions/auxiliary/Duration'
+
+import IconButton from './IconButton'
+import WorkSpecifierSegment from './WorkSpecifierSegment'
+import LanguageSpecifierSegment from './LanguageSpecifierSegment'
+import EducationSpecifierSegment from './EducationSpecifierSegment'
+import BirthYearSpecifierBody from './BirthYearSpecifierBody'
+import SpouseSpecifierBody from './SpouseSpecifierBody'
+
 import {
     birthYearChangeAction,
     educationAddAction,
@@ -12,27 +29,18 @@ import {
     languageTestAddAction,
     languageTestChangeAction,
     languageTestRemoveAction,
-    languageTestScoreChangeAction, spouseExistenceChange,
+    languageTestScoreChangeAction,
+    spouseExistenceChange,
     workAdd,
     workDurationChangeAction,
     workRegionChangeAction,
     workRemove,
 } from '../../../actions/SpecifierActions'
-import design from '../../design'
-import { Person } from '../../../../definitions/Person'
-import { LanguageTestId, LanguageTestItem } from '../../../../definitions/auxiliary/LanguageTest'
-import { text } from '../../../utils/text'
-import sys from '../../sys'
-import { LanguageSpecifierBody } from './LanguageSpecifierBody'
-import { IconButton } from './IconButton'
-import { EducationSpecifierBody } from './EducationSpecifierBody'
-import { EducationStage } from '../../../../definitions/Qualities/EducationExperience'
-import { Region, RegionId } from '../../../../definitions/auxiliary/Region'
-import { Duration } from '../../../../definitions/auxiliary/Duration'
-import BirthYearSpecifierBody from './BirthYearSpecifierBody'
-import WorkExperienceSpecifierBody from './WorkExperienceSpecifierBody'
 import { filterBarClickAction } from '../../../actions'
-import SpouseSpecifierBody from './SpouseSpecifierBody'
+
+import { text } from '../../../utils/text'
+import design from '../../design'
+import sys from '../../sys'
 
 const TitleBar = (props: {onClick(): void}) => (
     <a
@@ -44,14 +52,16 @@ const TitleBar = (props: {onClick(): void}) => (
             transition: `transform ${design.durations.slide}s`,
             background: 'white',
             cursor: 'pointer',
+            zIndex: 1,
+            boxShadow: '2px 2px 10px #999'
         } as React.CSSProperties}
         onClick={props.onClick}
         role='button'
     >
         {
             text({
-                en: 'Specify conditions',
-                zh_hans: '设置个人条件',
+                en: 'Specify details',
+                zh_hans: '个人信息设置',
             })
         }
         <img
@@ -65,6 +75,22 @@ const TitleBar = (props: {onClick(): void}) => (
 )
 
 const styles = {
+
+    panelStyle: {
+        position: 'absolute',
+        bottom: '0',
+        height: '80vh',
+        maxHeight: '800px',
+
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+
+        background: 'white',
+        transition: `transform ${design.durations.slide}s`,
+        overflowY: 'hidden',
+    } as React.CSSProperties,
+
     titleStyle: {
         fontSize: '1em',
         margin: '0',
@@ -73,11 +99,10 @@ const styles = {
     } as React.CSSProperties,
 
     specifierBodyContainerStyle: {
-        whiteSpace: 'nowrap',
         overflowX: 'scroll',
         padding: sys.viewport.width < design.dimensions.narrowWidth
             ? '0.6em 1.0em'
-            : '1em 2em',
+            : '1em',
         userSelect: 'none',
     } as React.CSSProperties,
 
@@ -166,17 +191,9 @@ interface OptionDisplayProps extends CallbackProps, ValueProps
 { }
 
 const SpecifierPanel = (props: OptionDisplayProps) => {
-    const style: React.CSSProperties = {
-        position: 'absolute',
-        width: '100%',
-        bottom: '0',
-        background: 'white',
+    const containerStyle = Object.assign({}, styles.panelStyle, {
         transform: props.shouldExpand ? `translateY(0)` : `translateY(100%)`,
-        transition: `transform ${design.durations.slide}s`,
-        overflowY: 'scroll',
-        height: '80vh',
-        maxHeight: '800px',
-    }
+    })
 
     const {
         languageTestAdd,
@@ -215,7 +232,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             <div style={styles.specifierBodyContainerStyle}>
                 {
                     languageTests.map((test, index) =>
-                        <LanguageSpecifierBody
+                        <LanguageSpecifierSegment
                             key={test.testId + index}
                             test={test}
                             languageTestSelect={languageTestSelect}
@@ -244,7 +261,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             <div style={styles.specifierBodyContainerStyle}>
                 {
                     education.map((edu, index) =>
-                        <EducationSpecifierBody
+                        <EducationSpecifierSegment
                             key={String(edu.stage) + String(edu.region) + String(index)}
                             edu={edu}
                             index={index}
@@ -291,7 +308,7 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
             </h1>
             <div style={styles.specifierBodyContainerStyle}>
                 {works.map((work, index) => (
-                    <WorkExperienceSpecifierBody
+                    <WorkSpecifierSegment
                         key={JSON.stringify(work) + String(index)}
                         index={index}
                         work={work}
@@ -325,16 +342,20 @@ const SpecifierPanel = (props: OptionDisplayProps) => {
         </section>
     )
 
-
-
     return (
-        <aside style={style}>
+        <aside style={containerStyle}>
             <TitleBar onClick={props.onFilterBarClick}/>
-            <EducationSpecifiers />
-            <WorkSpecifiers />
-            <LanguageSpecifiers />
-            <BirthSpecifiers />
-            <SpouseSpecifiers />
+            <div style={{
+                overflowY: 'scroll',
+                flex: 1,
+                paddingTop: '10px',
+            }}>
+                <EducationSpecifiers />
+                <WorkSpecifiers />
+                <LanguageSpecifiers />
+                <BirthSpecifiers />
+                <SpouseSpecifiers />
+            </div>
         </aside>
     )
 }
@@ -391,4 +412,6 @@ function mapDispatchToProps(dispatch: Dispatch<any>): CallbackProps {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecifierPanel)
+const ConnectedSpecifierPanel = connect(mapStateToProps, mapDispatchToProps)(SpecifierPanel)
+
+export default ConnectedSpecifierPanel
