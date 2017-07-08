@@ -10,6 +10,8 @@ import { specifierSharedStyles } from './specifierSharedStyles'
 import IconButton from './IconButton'
 import range from '../../../utils/range'
 import DropdownGroup from './DropdownGroup'
+import languageTestItemNames from '../../../utils/LanguageTestItemNames'
+import { text } from '../../../utils/text'
 
 function appendDecimal(value: number, shouldAppend: boolean): string {
     return shouldAppend ? value.toFixed(1) : value.toString()
@@ -60,7 +62,7 @@ const LanguageSpecifierSegment = (props: LanguageSpecifierBodyProps) => {
             {languageTestItemValues.map(item =>
                 <DropdownGroup
                     key={item}
-                    title={item}
+                    title={text(languageTestItemNames[item])}
                     value={appendDecimal(
                         props.test.scores[item],
                         profile.itemScoreFormat[2] < 1.0
