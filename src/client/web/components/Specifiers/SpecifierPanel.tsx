@@ -60,8 +60,8 @@ const TitleBar = (props: {onClick(): void}) => (
     >
         {
             text({
-                en: 'Specify conditions',
-                zh_hans: '设置个人条件',
+                en: 'Specify details',
+                zh_hans: '个人信息设置',
             })
         }
         <img
